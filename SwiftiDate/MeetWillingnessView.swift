@@ -34,13 +34,13 @@ struct MeetWillingnessView: View {
             Spacer()
 
             // 見面意願選項
-            Text("你想和 Omi 認識的朋友見面嗎？")
+            Text("你想和 SwiftiDate 認識的朋友見面嗎？")
                 .font(.title2)
                 .bold()
                 .multilineTextAlignment(.center)
                 .padding()
 
-            Text("告訴 Omi 你的見面意願，為你推薦更好的人～")
+            Text("告訴 SwiftiDate 你的見面意願，為你推薦更好的人～")
                 .foregroundColor(.gray)
                 .multilineTextAlignment(.center)
 
