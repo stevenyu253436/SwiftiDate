@@ -37,7 +37,6 @@
 		D0445C872C73CEFB0059D522 /* DrinkOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0445C862C73CEFB0059D522 /* DrinkOptionsView.swift */; };
 		D0445C892C73CF610059D522 /* VacationOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0445C882C73CF610059D522 /* VacationOptionsView.swift */; };
 		D0445C8B2C73D0760059D522 /* DietPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0445C8A2C73D0760059D522 /* DietPreferencesView.swift */; };
-		D055E98E2C8CCEF100A97DD1 /* InterestDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D055E98D2C8CCEF100A97DD1 /* InterestDetailView.swift */; };
 		D055E9922C8CCFBA00A97DD1 /* InterestSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D055E9912C8CCFBA00A97DD1 /* InterestSelectionView.swift */; };
 		D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */; };
 /* End PBXBuildFile section */
@@ -93,7 +92,6 @@
 		D0445C862C73CEFB0059D522 /* DrinkOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkOptionsView.swift; sourceTree = "<group>"; };
 		D0445C882C73CF610059D522 /* VacationOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VacationOptionsView.swift; sourceTree = "<group>"; };
 		D0445C8A2C73D0760059D522 /* DietPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietPreferencesView.swift; sourceTree = "<group>"; };
-		D055E98D2C8CCEF100A97DD1 /* InterestDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestDetailView.swift; sourceTree = "<group>"; };
 		D055E9912C8CCFBA00A97DD1 /* InterestSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestSelectionView.swift; sourceTree = "<group>"; };
 		D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetWillingnessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -174,7 +172,6 @@
 				D0445C882C73CF610059D522 /* VacationOptionsView.swift */,
 				D0445C8A2C73D0760059D522 /* DietPreferencesView.swift */,
 				D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */,
-				D055E98D2C8CCEF100A97DD1 /* InterestDetailView.swift */,
 				D055E9912C8CCFBA00A97DD1 /* InterestSelectionView.swift */,
 			);
 			path = SwiftiDate;
@@ -342,7 +339,6 @@
 				D0445C5B2C71E5850059D522 /* ProfileView.swift in Sources */,
 				D0445C872C73CEFB0059D522 /* DrinkOptionsView.swift in Sources */,
 				D0445C7B2C73C74B0059D522 /* BloodTypePickerView.swift in Sources */,
-				D055E98E2C8CCEF100A97DD1 /* InterestDetailView.swift in Sources */,
 				D0445C772C73BF590059D522 /* HeightPickerView.swift in Sources */,
 				D0445C752C73B4EF0059D522 /* LanguageSelectionView.swift in Sources */,
 				D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */,

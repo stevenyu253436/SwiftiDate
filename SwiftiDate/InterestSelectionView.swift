@@ -146,10 +146,12 @@ struct InterestSelectionView: View {
         "喜歡古希臘神話", "喜歡刺青紋身", "喜歡塗鴉", "林布蘭", "古典自由主義", "蒙娜麗莎", "喜歡超現實主義", "精神分析", "喜歡歷史", "喜歡水彩畫", "喜歡逛畫廊", "攝影初學者", "克勞德.莫奈", "藝術院校畢業", "喜歡京劇", "保羅.塞尚", "齊白石"
     ]
     
-    @State private var selectedInterests: Set<String> = []  // 追蹤被選中的興趣標籤
+    @Binding var selectedInterests: Set<String>  // 用來追蹤選中的興趣
     @State private var selectedCategories: Set<String> = ["全部"]  // 預設為 "全部"
     @State private var isExpanded = false  // 用來控制分類是否展開
 
+    @Binding var interestColors: [String: Color]
+    
     // 佈局定義，讓每行至少可以放下多個標籤
     let columns: [GridItem] = [
         GridItem(.adaptive(minimum: 80), spacing: 10)
@@ -214,83 +216,83 @@ struct InterestSelectionView: View {
                 
                 // 如果只選中 "全部"，顯示所有分類
                 if selectedCategories.contains("全部") {
-                    SectionView(sectionTitle: "工作", items: workInterests, selectedInterests: $selectedInterests, color: Color.green.opacity(1), prefix: 8)
-                    SectionView(sectionTitle: "遊戲", items: gameInterests, selectedInterests: $selectedInterests, color: Color.purple.opacity(1), prefix: 8)
-                    SectionView(sectionTitle: "車", items: carInterests, selectedInterests: $selectedInterests, color: Color.blue.opacity(1), prefix: 8)
-                    SectionView(sectionTitle: "美食", items: foodInterests, selectedInterests: $selectedInterests, color: Color.orange.opacity(1), prefix: 8)
-                    SectionView(sectionTitle: "戀愛", items: loveInterests, selectedInterests: $selectedInterests, color: Color.pink.opacity(1), prefix: 8)
-                    SectionView(sectionTitle: "愛好", items: hobbyInterests, selectedInterests: $selectedInterests, color: Color.yellow.opacity(1), prefix: 8)
-                    SectionView(sectionTitle: "明星", items: celebrityInterests, selectedInterests: $selectedInterests, color: Color.red.opacity(1), prefix: 8)
-                    SectionView(sectionTitle: "生活", items: lifeInterests, selectedInterests: $selectedInterests, color: Color.blue.opacity(1), prefix: 8)
-                    SectionView(sectionTitle: "影視", items: movieInterests, selectedInterests: $selectedInterests, color: Color.cyan.opacity(1), prefix: 8)
-                    SectionView(sectionTitle: "地方", items: placeInterests, selectedInterests: $selectedInterests, color: Color.green.opacity(1), prefix: 8)  // 加入地方的SectionView
-                    SectionView(sectionTitle: "時尚", items: fashionInterests, selectedInterests: $selectedInterests, color: Color.purple.opacity(1), prefix: 8)
-                    SectionView(sectionTitle: "讀書", items: bookInterests, selectedInterests: $selectedInterests, color: Color.gray.opacity(1), prefix: 8)  // 新增讀書的SectionView
-                    SectionView(sectionTitle: "運動", items: sportInterests, selectedInterests: $selectedInterests, color: Color.orange.opacity(1), prefix: 8)
-                    SectionView(sectionTitle: "性格", items: personalityInterests, selectedInterests: $selectedInterests, color: Color.gray.opacity(1), prefix: 8)
-                    SectionView(sectionTitle: "旅行", items: travelInterests, selectedInterests: $selectedInterests, color: Color.blue.opacity(1), prefix: 8)
-                    SectionView(sectionTitle: "動漫", items: animeInterests, selectedInterests: $selectedInterests, color: Color.pink.opacity(1), prefix: 8)
-                    SectionView(sectionTitle: "音樂", items: musicInterests, selectedInterests: $selectedInterests, color: Color.orange.opacity(1), prefix: 8)
-                    SectionView(sectionTitle: "寵物", items: petInterests, selectedInterests: $selectedInterests, color: Color.blue.opacity(1), prefix: 8)
-                    SectionView(sectionTitle: "文藝", items: artInterests, selectedInterests: $selectedInterests, color: Color.green.opacity(1), prefix: 8)
+                    SectionView(sectionTitle: "工作", items: workInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.green.opacity(1), prefix: 8)
+                    SectionView(sectionTitle: "遊戲", items: gameInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.purple.opacity(1), prefix: 8)
+                    SectionView(sectionTitle: "車", items: carInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.blue.opacity(1), prefix: 8)
+                    SectionView(sectionTitle: "美食", items: foodInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.orange.opacity(1), prefix: 8)
+                    SectionView(sectionTitle: "戀愛", items: loveInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.pink.opacity(1), prefix: 8)
+                    SectionView(sectionTitle: "愛好", items: hobbyInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.yellow.opacity(1), prefix: 8)
+                    SectionView(sectionTitle: "明星", items: celebrityInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.red.opacity(1), prefix: 8)
+                    SectionView(sectionTitle: "生活", items: lifeInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.blue.opacity(1), prefix: 8)
+                    SectionView(sectionTitle: "影視", items: movieInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.cyan.opacity(1), prefix: 8)
+                    SectionView(sectionTitle: "地方", items: placeInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.green.opacity(1), prefix: 8)  // 加入地方的SectionView
+                    SectionView(sectionTitle: "時尚", items: fashionInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.purple.opacity(1), prefix: 8)
+                    SectionView(sectionTitle: "讀書", items: bookInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.gray.opacity(1), prefix: 8)  // 新增讀書的SectionView
+                    SectionView(sectionTitle: "運動", items: sportInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.orange.opacity(1), prefix: 8)
+                    SectionView(sectionTitle: "性格", items: personalityInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.gray.opacity(1), prefix: 8)
+                    SectionView(sectionTitle: "旅行", items: travelInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.blue.opacity(1), prefix: 8)
+                    SectionView(sectionTitle: "動漫", items: animeInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.pink.opacity(1), prefix: 8)
+                    SectionView(sectionTitle: "音樂", items: musicInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.orange.opacity(1), prefix: 8)
+                    SectionView(sectionTitle: "寵物", items: petInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.blue.opacity(1), prefix: 8)
+                    SectionView(sectionTitle: "文藝", items: artInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.green.opacity(1), prefix: 8)
                 } else {
                     // 根據選中的分類顯示對應的興趣標籤
                     if selectedCategories.contains("工作") {
-                        SectionView(sectionTitle: "工作", items: workInterests, selectedInterests: $selectedInterests, color: Color.green.opacity(1), prefix: 8)
+                        SectionView(sectionTitle: "工作", items: workInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.green.opacity(1), prefix: 8)
                     }
                     if selectedCategories.contains("遊戲") {
-                        SectionView(sectionTitle: "遊戲", items: gameInterests, selectedInterests: $selectedInterests, color: Color.purple.opacity(1), prefix: 8)
+                        SectionView(sectionTitle: "遊戲", items: gameInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.purple.opacity(1), prefix: 8)
                     }
                     if selectedCategories.contains("車") {
-                        SectionView(sectionTitle: "車", items: carInterests, selectedInterests: $selectedInterests, color: Color.blue.opacity(1), prefix: 8)
+                        SectionView(sectionTitle: "車", items: carInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.blue.opacity(1), prefix: 8)
                     }
                     if selectedCategories.contains("美食") {
-                        SectionView(sectionTitle: "美食", items: foodInterests, selectedInterests: $selectedInterests, color: Color.orange.opacity(1), prefix: 8)
+                        SectionView(sectionTitle: "美食", items: foodInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.orange.opacity(1), prefix: 8)
                     }
                     if selectedCategories.contains("戀愛") {
-                        SectionView(sectionTitle: "戀愛", items: loveInterests, selectedInterests: $selectedInterests, color: Color.pink.opacity(1), prefix: 8)
+                        SectionView(sectionTitle: "戀愛", items: loveInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.pink.opacity(1), prefix: 8)
                     }
                     if selectedCategories.contains("愛好") {
-                        SectionView(sectionTitle: "愛好", items: hobbyInterests, selectedInterests: $selectedInterests, color: Color.yellow.opacity(1), prefix: 8)
+                        SectionView(sectionTitle: "愛好", items: hobbyInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.yellow.opacity(1), prefix: 8)
                     }
                     if selectedCategories.contains("明星") {
-                        SectionView(sectionTitle: "明星", items: celebrityInterests, selectedInterests: $selectedInterests, color: Color.red.opacity(1), prefix: 8)
+                        SectionView(sectionTitle: "明星", items: celebrityInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.red.opacity(1), prefix: 8)
                     }
                     if selectedCategories.contains("生活") {
-                        SectionView(sectionTitle: "生活", items: lifeInterests, selectedInterests: $selectedInterests, color: Color.blue.opacity(1), prefix: 8)
+                        SectionView(sectionTitle: "生活", items: lifeInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.blue.opacity(1), prefix: 8)
                     }
                     if selectedCategories.contains("影視") {
-                        SectionView(sectionTitle: "影視", items: movieInterests, selectedInterests: $selectedInterests, color: Color.cyan.opacity(1), prefix: 8)
+                        SectionView(sectionTitle: "影視", items: movieInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.cyan.opacity(1), prefix: 8)
                     }
                     if selectedCategories.contains("地方") {  // 加入地方的SectionView
-                        SectionView(sectionTitle: "地方", items: placeInterests, selectedInterests: $selectedInterests, color: Color.green.opacity(1), prefix: 8)
+                        SectionView(sectionTitle: "地方", items: placeInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.green.opacity(1), prefix: 8)
                     }
                     if selectedCategories.contains("時尚") {
-                        SectionView(sectionTitle: "時尚", items: fashionInterests, selectedInterests: $selectedInterests, color: Color.purple.opacity(1), prefix: 8)
+                        SectionView(sectionTitle: "時尚", items: fashionInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.purple.opacity(1), prefix: 8)
                     }
                     if selectedCategories.contains("讀書") {  // 加入讀書的SectionView
-                        SectionView(sectionTitle: "讀書", items: bookInterests, selectedInterests: $selectedInterests, color: Color.gray.opacity(1), prefix: 8)
+                        SectionView(sectionTitle: "讀書", items: bookInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.gray.opacity(1), prefix: 8)
                     }
                     if selectedCategories.contains("運動") {
-                        SectionView(sectionTitle: "運動", items: sportInterests, selectedInterests: $selectedInterests, color: Color.orange.opacity(1), prefix: 8)
+                        SectionView(sectionTitle: "運動", items: sportInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.orange.opacity(1), prefix: 8)
                     }
                     if selectedCategories.contains("性格") {
-                        SectionView(sectionTitle: "性格", items: personalityInterests, selectedInterests: $selectedInterests, color: Color.gray.opacity(1), prefix: 8)
+                        SectionView(sectionTitle: "性格", items: personalityInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.gray.opacity(1), prefix: 8)
                     }
                     if selectedCategories.contains("旅行") {
-                        SectionView(sectionTitle: "旅行", items: travelInterests, selectedInterests: $selectedInterests, color: Color.blue.opacity(1), prefix: 8)
+                        SectionView(sectionTitle: "旅行", items: travelInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.blue.opacity(1), prefix: 8)
                     }
                     if selectedCategories.contains("動漫") {
-                        SectionView(sectionTitle: "動漫", items: animeInterests, selectedInterests: $selectedInterests, color: Color.pink.opacity(1), prefix: 8)
+                        SectionView(sectionTitle: "動漫", items: animeInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.pink.opacity(1), prefix: 8)
                     }
                     if selectedCategories.contains("音樂") {
-                        SectionView(sectionTitle: "音樂", items: musicInterests, selectedInterests: $selectedInterests, color: Color.orange.opacity(1), prefix: 8)
+                        SectionView(sectionTitle: "音樂", items: musicInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.orange.opacity(1), prefix: 8)
                     }
                     if selectedCategories.contains("寵物") {
-                        SectionView(sectionTitle: "寵物", items: petInterests, selectedInterests: $selectedInterests, color: Color.blue.opacity(1), prefix: 8)
+                        SectionView(sectionTitle: "寵物", items: petInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.blue.opacity(1), prefix: 8)
                     }
                     if selectedCategories.contains("文藝") {
-                        SectionView(sectionTitle: "文藝", items: artInterests, selectedInterests: $selectedInterests, color: Color.green.opacity(1), prefix: 8)
+                        SectionView(sectionTitle: "文藝", items: artInterests, selectedInterests: $selectedInterests, interestColors: $interestColors, color: Color.green.opacity(1), prefix: 8)
                     }
                 }
 
@@ -304,6 +306,7 @@ struct SectionView: View {
     let sectionTitle: String
     let items: [String]
     @Binding var selectedInterests: Set<String>  // 被選中的標籤集合
+    @Binding var interestColors: [String: Color] // 用於保存每個興趣對應的顏色
     let color: Color
     @State private var isExpanded: Bool = false  // 控制該 section 是否展開
     let prefix: Int  // 控制顯示項目的數量
@@ -328,6 +331,7 @@ struct SectionView: View {
                                 selectedInterests.remove(item)
                             } else {
                                 selectedInterests.insert(item)
+                                interestColors[item] = color // 或者使用一個固定的顏色
                             }
                         }
                 }
@@ -355,7 +359,13 @@ struct SectionView: View {
 }
 
 struct InterestSelectionView_Previews: PreviewProvider {
+    @State static var previewSelectedInterests: Set<String> = [
+        "我喜歡Cosply", "咒術迴戰", "死神", "基本上可以做到訊息秒回", "是個理性的人", "有上進心", "我是巨蟹座"
+    ]
+    
+    @State static var previewInterestColors: [String: Color] = [:]  // 添加 previewInterestColors
+
     static var previews: some View {
-        InterestSelectionView()
+        InterestSelectionView(selectedInterests: $previewSelectedInterests, interestColors: $previewInterestColors)  // 傳遞 interestColors
     }
 }

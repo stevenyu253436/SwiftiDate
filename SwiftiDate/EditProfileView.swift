@@ -75,7 +75,8 @@ struct EditProfileView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-    let interests = ["下班後喜歡去喝一杯", "喜歡散步約會", "喜歡去寺廟", "喜歡隨意輕鬆的旅行", "探索新的城市", "去過不同國家"]
+    @State private var selectedInterests: Set<String> = []  // 用來追蹤選中的標籤
+    @State private var interestColors: [String: Color] = [:]  // 新增 interestColors 變量
     
     var body: some View {
         NavigationView {
@@ -169,9 +170,13 @@ struct EditProfileView: View {
                             }
                             .padding()
 
-                            // 在這裡插入 InterestsView
-                            InterestsView(interests: interests)
-
+                            // 在這裡插入 InterestsView，並將隨機選中的6個興趣標籤傳遞給它
+                            InterestsView(
+                                interests: Array(selectedInterests.shuffled().prefix(6)),
+                                selectedInterests: $selectedInterests,
+                                interestColors: $interestColors  // 傳遞 interestColors 作為 @Binding
+                            )
+                            
                             // 我的標籤
                             VStack(alignment: .leading) {
                                 HStack {
@@ -744,6 +749,13 @@ struct EditProfileView: View {
 
 struct EditProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        EditProfileView()
+        EditProfileView(selectedInterests: ["我喜歡Cosply", "咒術迴戰", "死神", "基本可以做到訊息秒回", "是個理性的人", "有上進心", "我是巨蟹座"])
+    }
+}
+
+extension EditProfileView {
+    init(selectedInterests: Set<String>) {
+        _selectedInterests = State(initialValue: selectedInterests)
+        _interestColors = State(initialValue: [:]) // 初始化為空字典
     }
 }
