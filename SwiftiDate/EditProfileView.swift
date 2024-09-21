@@ -93,10 +93,11 @@ struct EditProfileView: View {
                     // 編輯界面
                     ScrollView {
                         VStack(spacing: 10) {
-                            PhotoSectionView(photos: photos) // Use updated PhotoSectionView
+                            PhotoSectionView(photos: $photos) // Use updated PhotoSectionView
                                 .padding()
                                 .onAppear {
-                                    fetchPhotosFromFirebase() // Fetch photos when view appears
+                                    print("EditProfileView appeared")
+//                                    fetchPhotosFromFirebase()
                                 }
 
                             Toggle(isOn: .constant(true)) {
@@ -752,6 +753,9 @@ struct EditProfileView: View {
     
     // Fetch photos from Firebase Storage
     func fetchPhotosFromFirebase() {
+        print("Fetching photos from Firebase started")
+        photos.removeAll() // Clear existing photos before fetching
+        
         let storage = Storage.storage()
         let userID = "userID_1" // Replace this with the current user ID
         let storageRef = storage.reference().child("user_photos/\(userID)")
@@ -778,6 +782,7 @@ struct EditProfileView: View {
                     if let url = url {
                         DispatchQueue.main.async {
                             self.photos.append(url.absoluteString)
+                            print("Fetched photo URL: \(url.absoluteString)")
                         }
                     }
                 }
