@@ -10,6 +10,7 @@ import SwiftUI
 
 struct PraisePurchaseView: View {
     @Environment(\.presentationMode) var presentationMode // Environment variable to control view dismissal
+    @State private var selectedOption = "30次讚美" // Default selected option
 
     var body: some View {
         VStack {
@@ -49,9 +50,15 @@ struct PraisePurchaseView: View {
             
             // Praise options
             HStack(spacing: 10) {
-                PraiseOptionView(title: "60次讚美", price: "NT$34/次", discount: "省 52%")
-                PraiseOptionView(title: "30次讚美", price: "NT$42/次", discount: "省 40%")
-                PraiseOptionView(title: "5次讚美", price: "NT$70/次", discount: "")
+                PraiseOptionView(title: "60次讚美", price: "NT$34/次", discount: "省 52%", isSelected: selectedOption == "60次讚美") {
+                    selectedOption = "60次讚美"
+                }
+                PraiseOptionView(title: "30次讚美", price: "NT$42/次", discount: "省 40%", isSelected: selectedOption == "30次讚美") {
+                    selectedOption = "30次讚美"
+                }
+                PraiseOptionView(title: "5次讚美", price: "NT$70/次", discount: "", isSelected: selectedOption == "5次讚美") {
+                    selectedOption = "5次讚美"
+                }
             }
             .padding(.horizontal)
             
@@ -85,6 +92,8 @@ struct PraiseOptionView: View {
     var title: String
     var price: String
     var discount: String
+    var isSelected: Bool
+    var onSelect: () -> Void
     
     var body: some View {
         VStack {
@@ -105,8 +114,15 @@ struct PraiseOptionView: View {
                 .font(.subheadline)
         }
         .frame(width: 100, height: 120)
-        .background(Color.orange.opacity(0.1))
+        .background(isSelected ? Color.orange.opacity(0.3) : Color.orange.opacity(0.1))
         .cornerRadius(10)
+        .overlay(
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(isSelected ? Color.orange : Color.clear, lineWidth: 2)
+        )
+        .onTapGesture {
+            onSelect()
+        }
     }
 }
 

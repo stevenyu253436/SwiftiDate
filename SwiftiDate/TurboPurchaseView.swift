@@ -10,7 +10,8 @@ import SwiftUI
 
 struct TurboPurchaseView: View {
     @Environment(\.presentationMode) var presentationMode // Environment variable to control view dismissal
-    
+    @State private var selectedOption = "5 Turbo" // Default selected option
+
     var body: some View {
         VStack {
             // Add the "X" button
@@ -49,15 +50,21 @@ struct TurboPurchaseView: View {
             
             // Turbo options
             HStack(spacing: 10) {
-                TurboOptionView(title: "10 Turbo", price: "NT$99 /次", discount: "省 34%")
-                TurboOptionView(title: "5 Turbo", price: "NT$138 /次", discount: "省 8%")
-                TurboOptionView(title: "1 Turbo", price: "NT$150 /次", discount: "")
+                TurboOptionView(title: "10 Turbo", price: "NT$99 /次", discount: "省 34%", isSelected: selectedOption == "10 Turbo") {
+                    selectedOption = "10 Turbo"
+                }
+                TurboOptionView(title: "5 Turbo", price: "NT$138 /次", discount: "省 8%", isSelected: selectedOption == "5 Turbo") {
+                    selectedOption = "5 Turbo"
+                }
+                TurboOptionView(title: "1 Turbo", price: "NT$150 /次", discount: "", isSelected: selectedOption == "1 Turbo") {
+                    selectedOption = "1 Turbo"
+                }
             }
             .padding(.horizontal)
             
             // Purchase button
             Button(action: {
-                print("立即獲取 clicked")
+                print("立即獲取 \(selectedOption)")
                 // Handle the purchase logic here
             }) {
                 Text("立即獲取")
@@ -85,6 +92,8 @@ struct TurboOptionView: View {
     var title: String
     var price: String
     var discount: String
+    var isSelected: Bool
+    var onSelect: () -> Void
     
     var body: some View {
         VStack {
@@ -105,8 +114,15 @@ struct TurboOptionView: View {
                 .font(.subheadline)
         }
         .frame(width: 100, height: 120)
-        .background(Color.purple.opacity(0.1))
+        .background(isSelected ? Color.purple.opacity(0.3) : Color.purple.opacity(0.1))
         .cornerRadius(10)
+        .overlay(
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(isSelected ? Color.purple : Color.clear, lineWidth: 2)
+        )
+        .onTapGesture {
+            onSelect()
+        }
     }
 }
 

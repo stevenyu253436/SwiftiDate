@@ -10,6 +10,7 @@ import SwiftUI
 
 struct CrushPurchaseView: View {
     @Environment(\.presentationMode) var presentationMode // Environment variable to control view dismissal
+    @State private var selectedOption = "30 Crushes" // Default selected option
 
     var body: some View {
         VStack {
@@ -49,9 +50,15 @@ struct CrushPurchaseView: View {
             
             // Crush options
             HStack(spacing: 10) {
-                CrushOptionView(title: "60 Crushes", price: "NT$34/個", discount: "省 48%")
-                CrushOptionView(title: "30 Crushes", price: "NT$43/個", discount: "省 33%")
-                CrushOptionView(title: "5 Crushes", price: "NT$64/個", discount: "")
+                CrushOptionView(title: "60 Crushes", price: "NT$34/個", discount: "省 48%", isSelected: selectedOption == "60 Crushes") {
+                    selectedOption = "60 Crushes"
+                }
+                CrushOptionView(title: "30 Crushes", price: "NT$43/個", discount: "省 33%", isSelected: selectedOption == "30 Crushes") {
+                    selectedOption = "30 Crushes"
+                }
+                CrushOptionView(title: "5 Crushes", price: "NT$64/個", discount: "", isSelected: selectedOption == "5 Crushes") {
+                    selectedOption = "5 Crushes"
+                }
             }
             .padding(.horizontal)
             
@@ -85,6 +92,8 @@ struct CrushOptionView: View {
     var title: String
     var price: String
     var discount: String
+    var isSelected: Bool
+    var onSelect: () -> Void
     
     var body: some View {
         VStack {
@@ -105,8 +114,15 @@ struct CrushOptionView: View {
                 .font(.subheadline)
         }
         .frame(width: 100, height: 120)
-        .background(Color.green.opacity(0.1))
+        .background(isSelected ? Color.green.opacity(0.3) : Color.green.opacity(0.1))
         .cornerRadius(10)
+        .overlay(
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(isSelected ? Color.green : Color.clear, lineWidth: 2)
+        )
+        .onTapGesture {
+            onSelect()
+        }
     }
 }
 
