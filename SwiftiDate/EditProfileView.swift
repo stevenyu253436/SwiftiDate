@@ -11,7 +11,7 @@ import FirebaseStorage
 
 struct EditProfileView: View {
     @State private var selectedTab = "編輯"
-    @State private var photos = ["photo1", "photo2", "photo3", "photo4", "photo5", "photo6"]
+    @Binding var photos: [String] // Change to @Binding
     @State private var aboutMe = "能見面左右滑謝謝🙏\n一起吃日料吧🍣\n抽水煙也可以💨"
     @State private var currentPhotoIndex = 0
     
@@ -93,10 +93,11 @@ struct EditProfileView: View {
                     // 編輯界面
                     ScrollView {
                         VStack(spacing: 10) {
-                            PhotoSectionView(photos: photos) // Use updated PhotoSectionView
+                            PhotoSectionView(photos: $photos) // Use updated PhotoSectionView
                                 .padding()
                                 .onAppear {
-                                    fetchPhotosFromFirebase() // Fetch photos when view appears
+                                    print("EditProfileView appeared")
+                                    fetchPhotosFromFirebase()
                                 }
 
                             Toggle(isOn: .constant(true)) {
@@ -752,6 +753,9 @@ struct EditProfileView: View {
     
     // Fetch photos from Firebase Storage
     func fetchPhotosFromFirebase() {
+        print("Fetching photos from Firebase started")
+        photos.removeAll() // Clear existing photos before fetching
+        
         let storage = Storage.storage()
         let userID = "userID_1" // Replace this with the current user ID
         let storageRef = storage.reference().child("user_photos/\(userID)")
@@ -778,6 +782,7 @@ struct EditProfileView: View {
                     if let url = url {
                         DispatchQueue.main.async {
                             self.photos.append(url.absoluteString)
+                            print("Fetched photo URL: \(url.absoluteString)")
                         }
                     }
                 }
@@ -787,14 +792,9 @@ struct EditProfileView: View {
 }
 
 struct EditProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        EditProfileView(selectedInterests: ["我喜歡Cosply", "咒術迴戰", "死神", "基本可以做到訊息秒回", "是個理性的人", "有上進心", "我是巨蟹座"])
-    }
-}
+    @State static var previewPhotos = ["photo1", "photo2", "photo3", "photo4", "photo5", "photo6"]
 
-extension EditProfileView {
-    init(selectedInterests: Set<String>) {
-        _selectedInterests = State(initialValue: selectedInterests)
-        _interestColors = State(initialValue: [:]) // 初始化為空字典
+    static var previews: some View {
+        EditProfileView(photos: $previewPhotos)
     }
 }

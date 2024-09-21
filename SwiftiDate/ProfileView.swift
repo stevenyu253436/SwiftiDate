@@ -12,6 +12,8 @@ struct ProfileView: View {
     @State private var isShowingTurboPurchaseView = false // State variable to control the sheet presentation
     @State private var isShowingCrushPurchaseView = false // State variable to control Crush sheet presentation
     @State private var isShowingPraisePurchaseView = false // State variable to control Praise sheet presentation
+    
+    @State private var photos: [String] = [] // Initialize photos array
 
     var body: some View {
         ScrollView {
@@ -25,7 +27,7 @@ struct ProfileView: View {
                         .overlay(Circle().stroke(Color.white, lineWidth: 4))
                         .shadow(radius: 10)
 
-                    NavigationLink(destination: EditProfileView()) {
+                    NavigationLink(destination: EditProfileView(photos: $photos)) { // Pass photos to EditProfileView
                         Image(systemName: "pencil.circle.fill")
                             .resizable()
                             .frame(width: 24, height: 24)
@@ -188,7 +190,7 @@ struct ServiceItemView: View {
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ProfileView()
+            ProfileView() // Now it works since we provided a default initializer with photos
         }
     }
 }

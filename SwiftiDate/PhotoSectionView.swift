@@ -16,7 +16,7 @@ enum PhotoState {
 }
 
 struct PhotoSectionView: View {
-    @State var photos: [String]
+    @Binding var photos: [String] // Change to @Binding
     @State private var showImagePicker = false // 控制顯示照片選擇器
     @State private var selectedImage: UIImage? // 保存選中的圖片
 
@@ -25,29 +25,24 @@ struct PhotoSectionView: View {
         HStack(spacing: 10) {
             ForEach(photos.prefix(3), id: \.self) { photo in
                 if let url = URL(string: photo) {
-                    
-                    // Using AsyncImage to load the image from the URL
-                    AsyncImage(url: url) { image in
-                        image
-                            .resizable()
-                            .frame(width: 100, height: 133)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                            .overlay(
-                                Button(action: {
-                                    removePhoto(photo: photo)
-                                }) {
-                                    Image(systemName: "xmark.circle.fill")
-                                        .foregroundColor(.white)
-                                        .background(Color.red)
-                                        .clipShape(Circle())
-                                }
-                                .offset(x: -5, y: -5), alignment: .topTrailing
-                            )
-                    } placeholder: {
-                        PlaceholderView() // Show placeholder while the image is loading
-                            .frame(width: 100, height: 133)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                    }
+                    AsyncImageView(url: url, placeholder: Image(systemName: "photo")) // 使用自定義的 AsyncImageView
+                        .frame(width: 100, height: 133)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .overlay(
+                            Button(action: {
+                                removePhoto(photo: photo)
+                            }) {
+                                Image(systemName: "xmark.circle.fill")
+                                    .foregroundColor(.white)
+                                    .background(Color.red)
+                                    .clipShape(Circle())
+                            }
+                            .offset(x: -5, y: -5), alignment: .topTrailing
+                        )
+                        .onAppear {
+                            print("Loading image from URL: \(url)")
+                            print("Photos array on appear: \(photos)")
+                        }
                 }
             }
         }
@@ -55,22 +50,26 @@ struct PhotoSectionView: View {
         // 下排照片
         HStack(spacing: 10) {
             ForEach(photos.suffix(3), id: \.self) { photo in
-                Image(photo)
-                    .resizable()
-                    .frame(width: 100, height: 133)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .overlay(
-                        Button(action: {
-                            removePhoto(photo: photo)
-                        }) {
-                            Image(systemName: "xmark.circle.fill")
-                                .foregroundColor(.white)
-                                .background(Color.red)
-                                .clipShape(Circle())
+                if let url = URL(string: photo) {
+                    AsyncImageView(url: url, placeholder: Image(systemName: "photo")) // 使用自定義的 AsyncImageView
+                        .frame(width: 100, height: 133)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .overlay(
+                            Button(action: {
+                                removePhoto(photo: photo)
+                            }) {
+                                Image(systemName: "xmark.circle.fill")
+                                    .foregroundColor(.white)
+                                    .background(Color.red)
+                                    .clipShape(Circle())
+                            }
+                            .offset(x: -5, y: -5), alignment: .topTrailing
+                        )
+                        .onAppear {
+                            print("Loading image from URL: \(url)")
+                            print("Photos array on appear: \(photos)")
                         }
-                        .offset(x: -5, y: -5)
-                        , alignment: .topTrailing
-                    )
+                }
             }
             
             // 如果剛好移除的是第六張照片，顯示一個占位符號
