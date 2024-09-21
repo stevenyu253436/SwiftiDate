@@ -20,6 +20,13 @@ struct ContentView: View {
                     Image(systemName: "star.fill")
                 }
             
+            NavigationView {
+                UserGuideView()
+            }
+            .tabItem {
+                Image(systemName: "questionmark.circle.fill")
+            }
+            
             Text("專屬")
                 .tabItem {
                     Image(systemName: "message.fill")

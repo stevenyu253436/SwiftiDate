@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D018AD5B2C9E57DF005A14B9 /* UserGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D018AD5A2C9E57DF005A14B9 /* UserGuideView.swift */; };
 		D0445C2F2C71B3800059D522 /* SwiftiDateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0445C2E2C71B3800059D522 /* SwiftiDateApp.swift */; };
 		D0445C312C71B3800059D522 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0445C302C71B3800059D522 /* ContentView.swift */; };
 		D0445C332C71B3820059D522 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0445C322C71B3820059D522 /* Assets.xcassets */; };
@@ -59,6 +60,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D018AD5A2C9E57DF005A14B9 /* UserGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGuideView.swift; sourceTree = "<group>"; };
 		D0445C2B2C71B3800059D522 /* SwiftiDate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftiDate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0445C2E2C71B3800059D522 /* SwiftiDateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftiDateApp.swift; sourceTree = "<group>"; };
 		D0445C302C71B3800059D522 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				D0445C8A2C73D0760059D522 /* DietPreferencesView.swift */,
 				D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */,
 				D055E9912C8CCFBA00A97DD1 /* InterestSelectionView.swift */,
+				D018AD5A2C9E57DF005A14B9 /* UserGuideView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 				D0445C312C71B3800059D522 /* ContentView.swift in Sources */,
 				D0445C812C73CA130059D522 /* PetSelectionView.swift in Sources */,
 				D0445C692C723AE80059D522 /* FlowLayout.swift in Sources */,
+				D018AD5B2C9E57DF005A14B9 /* UserGuideView.swift in Sources */,
 				D0445C852C73CDB60059D522 /* SmokingOptionsView.swift in Sources */,
 				D0445C6D2C72EA990059D522 /* SchoolInputView.swift in Sources */,
 				D055E9922C8CCFBA00A97DD1 /* InterestSelectionView.swift in Sources */,
