@@ -8,6 +8,13 @@
 import Foundation
 import SwiftUI
 
+enum PhotoState {
+    case empty
+    case loading
+    case success(UIImage)
+    case failure
+}
+
 struct PhotoSectionView: View {
     @State var photos: [String]
     @State private var showImagePicker = false // 控制顯示照片選擇器
@@ -17,24 +24,34 @@ struct PhotoSectionView: View {
         // 上排照片
         HStack(spacing: 10) {
             ForEach(photos.prefix(3), id: \.self) { photo in
-                Image(photo)
-                    .resizable()
-                    .frame(width: 100, height: 133)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .overlay(
-                        Button(action: {
-                            removePhoto(photo: photo)
-                        }) {
-                            Image(systemName: "xmark.circle.fill")
-                                .foregroundColor(.white)
-                                .background(Color.red)
-                                .clipShape(Circle())
-                        }
-                        .offset(x: -5, y: -5)
-                        , alignment: .topTrailing
-                    )
+                if let url = URL(string: photo) {
+                    
+                    // Using AsyncImage to load the image from the URL
+                    AsyncImage(url: url) { image in
+                        image
+                            .resizable()
+                            .frame(width: 100, height: 133)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .overlay(
+                                Button(action: {
+                                    removePhoto(photo: photo)
+                                }) {
+                                    Image(systemName: "xmark.circle.fill")
+                                        .foregroundColor(.white)
+                                        .background(Color.red)
+                                        .clipShape(Circle())
+                                }
+                                .offset(x: -5, y: -5), alignment: .topTrailing
+                            )
+                    } placeholder: {
+                        PlaceholderView() // Show placeholder while the image is loading
+                            .frame(width: 100, height: 133)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                    }
+                }
             }
         }
+        
         // 下排照片
         HStack(spacing: 10) {
             ForEach(photos.suffix(3), id: \.self) { photo in
@@ -85,6 +102,37 @@ struct PhotoSectionView: View {
         // 假設這裡將圖片保存到本地或上傳，並添加到圖片列表
         photos.append(imageName)
         // 可以進一步將圖片上傳並顯示在相應的 Image 中
+    }
+}
+
+// View to display an image from URL
+struct PhotoView: View {
+    var photoURL: URL?
+
+    var body: some View {
+        if let url = photoURL {
+            AsyncImage(url: url) { phase in
+                switch phase {
+                case .empty:
+                    ProgressView() // Loading indicator
+                case .success(let image):
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                case .failure:
+                    Image(systemName: "exclamationmark.triangle")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .foregroundColor(.gray)
+                @unknown default:
+                    EmptyView() // Provide an explicit view for @unknown default case
+                }
+            }
+            .frame(width: 100, height: 133) // Ensure the frame is set for AsyncImage
+        } else {
+            Color.gray.opacity(0.2)
+                .frame(width: 100, height: 133) // Ensure consistent sizing
+        }
     }
 }
 

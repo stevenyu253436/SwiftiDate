@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import FirebaseStorage
 
 struct EditProfileView: View {
     @State private var selectedTab = "編輯"
@@ -92,9 +93,12 @@ struct EditProfileView: View {
                     // 編輯界面
                     ScrollView {
                         VStack(spacing: 10) {
-                            PhotoSectionView(photos: photos) // 使用新的组件
-                            .padding()
-                            
+                            PhotoSectionView(photos: photos) // Use updated PhotoSectionView
+                                .padding()
+                                .onAppear {
+                                    fetchPhotosFromFirebase() // Fetch photos when view appears
+                                }
+
                             Toggle(isOn: .constant(true)) {
                                 Text("智慧照片曝光")
                             }
@@ -743,6 +747,41 @@ struct EditProfileView: View {
                 // 保存操作
                 presentationMode.wrappedValue.dismiss()
             })
+        }
+    }
+    
+    // Fetch photos from Firebase Storage
+    func fetchPhotosFromFirebase() {
+        let storage = Storage.storage()
+        let userID = "userID_1" // Replace this with the current user ID
+        let storageRef = storage.reference().child("user_photos/\(userID)")
+
+        storageRef.listAll { (result, error) in
+            if let error = error {
+                print("Error fetching photos: \(error)")
+                return
+            }
+
+            // Safely unwrap the result
+            guard let result = result else {
+                print("Failed to fetch the result")
+                return
+            }
+
+            for item in result.items {
+                item.downloadURL { (url, error) in
+                    if let error = error {
+                        print("Error getting download URL: \(error)")
+                        return
+                    }
+
+                    if let url = url {
+                        DispatchQueue.main.async {
+                            self.photos.append(url.absoluteString)
+                        }
+                    }
+                }
+            }
         }
     }
 }
