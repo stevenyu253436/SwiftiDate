@@ -9,6 +9,10 @@ import Foundation
 import SwiftUI
 
 struct ProfileView: View {
+    @State private var isShowingTurboPurchaseView = false // State variable to control the sheet presentation
+    @State private var isShowingCrushPurchaseView = false // State variable to control Crush sheet presentation
+    @State private var isShowingPraisePurchaseView = false // State variable to control Praise sheet presentation
+
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
@@ -92,12 +96,27 @@ struct ProfileView: View {
                 
                 // Turbo, Crush, 讚美
                 HStack(spacing: 20) {
-                    AchievementCardView(title: "TURBO", count: 0, color: Color.purple)
-                    AchievementCardView(title: "CRUSH", count: 0, color: Color.green)
-                    AchievementCardView(title: "讚美", count: 0, color: Color.orange)
+                    AchievementCardView(title: "TURBO", count: 0, color: Color.purple) {
+                        isShowingTurboPurchaseView = true // Set the state to show the TurboPurchaseView
+                    }
+                    AchievementCardView(title: "CRUSH", count: 0, color: Color.green) {
+                        isShowingCrushPurchaseView = true // Show CrushPurchaseView
+                    }
+                    AchievementCardView(title: "讚美", count: 0, color: Color.orange) {
+                        isShowingPraisePurchaseView = true // Show PraisePurchaseView
+                    }
                 }
                 .padding(.horizontal)
-                
+                .sheet(isPresented: $isShowingTurboPurchaseView) {
+                    TurboPurchaseView()
+                }
+                .sheet(isPresented: $isShowingCrushPurchaseView) {
+                    CrushPurchaseView()
+                }
+                .sheet(isPresented: $isShowingPraisePurchaseView) {
+                    PraisePurchaseView() // Present PraisePurchaseView when isShowingPraisePurchaseView is true
+                }
+
                 // 服務項目
                 VStack(alignment: .leading, spacing: 10) {
                     Text("服務項目")
@@ -121,6 +140,7 @@ struct AchievementCardView: View {
     var title: String
     var count: Int
     var color: Color
+    var action: (() -> Void)? // Optional action closure
     
     var body: some View {
         VStack {
@@ -131,8 +151,7 @@ struct AchievementCardView: View {
                 .font(.title)
                 .fontWeight(.bold)
             Button(action: {
-                // 按钮的动作，例如导航到另一个视图或执行某个功能
-                print("獲取更多按钮被点击")
+                action?() // Execute the action if provided
             }) {
                 Text("獲取更多")
                     .font(.caption)
