@@ -27,7 +27,7 @@ struct ContentView: View {
                 Image(systemName: "questionmark.circle.fill")
             }
             
-            Text("專屬")
+            Text("聊天室")
                 .tabItem {
                     Image(systemName: "message.fill")
                 }
