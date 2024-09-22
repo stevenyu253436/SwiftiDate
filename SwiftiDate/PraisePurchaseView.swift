@@ -14,8 +14,16 @@ struct PraisePurchaseView: View {
 
     var body: some View {
         VStack {
-            // Add the "X" button with padding
-            HStack {
+            ZStack(alignment: .topLeading) {
+                // Mockup header with the phone image
+                Image("praise_header") // Replace with your actual image
+                    .resizable()
+                    .scaledToFill() // Use scaledToFill to ensure the image fills the frame
+                    .frame(width: UIScreen.main.bounds.width, height: 350) // Adjust the height to extend as much as needed
+                    .clipped() // Clips any overflowed content to fit within the frame
+                    .edgesIgnoringSafeArea(.top) // Extend to the top edges
+                
+                // Add the "X" button on top of the image
                 Button(action: {
                     presentationMode.wrappedValue.dismiss() // Dismiss the view
                 }) {
@@ -25,16 +33,7 @@ struct PraisePurchaseView: View {
                         .foregroundColor(.gray)
                         .padding(16) // Add padding to give more space around the X button
                 }
-                Spacer()
             }
-            .padding(.top, 16) // Adjust top padding to avoid overlapping with the status bar
-            
-            // Mockup header with the image
-            Image("praise_header") // Replace with your actual image
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: UIScreen.main.bounds.width, height: 200)
-                .padding()
             
             Text("想使用更多次的讚美嗎？")
                 .font(.headline)

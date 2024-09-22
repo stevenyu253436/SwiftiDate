@@ -68,9 +68,29 @@ struct ChatDetailView: View {
                     let message = messages[index]
                     let showTime = index == 0 || messages[index].time != messages[index - 1].time
                     
-                    MessageBubbleView(message: message, isCurrentUser: message.isSender, showTime: showTime)
-                        .padding(.horizontal)
-                        .padding(.top, 5)
+                    // Special check for the specific text message
+                    if message.text == "她希望可以先聊天，再見面～" {
+                        // Display this message as simple Text
+                        HStack {
+                            Text("她希望")
+                                .foregroundColor(.green) // Set the color for the specific text
+
+                            Text(message.text.replacingOccurrences(of: "她希望", with: "")) // Replace the specific text with an empty string
+                                .foregroundColor(.black) // Default color for the rest of the text
+                            
+                            Spacer() // Add a Spacer to push the text to the left side
+                        }
+                        .padding()
+                        .frame(maxWidth: .infinity, alignment: .leading) // Align the entire HStack to the left
+                        .background(Color.green.opacity(0.1)) // Apply background to the entire HStack
+                        .cornerRadius(10) // Apply corner radius to the HStack
+                        .padding(.horizontal) // Add horizontal padding around the whole HStack
+                    } else {
+                        // Display other messages as message bubbles
+                        MessageBubbleView(message: message, isCurrentUser: message.isSender, showTime: showTime)
+                            .padding(.horizontal)
+                            .padding(.top, 5)
+                    }
                 }
             }
             
@@ -161,7 +181,7 @@ struct MessageBubbleView: View {
 struct ChatDetailView_Previews: PreviewProvider {
     static var previews: some View {
         // Create a dummy chat to preview
-        let dummyChat = Chat(name: "Laiiiiiiii", message: "吃美食跟看劇", time: "01:50", unreadCount: 3)
+        let dummyChat = Chat(name: "Laiiiiiiii", time: "01:50", unreadCount: 3)
         
         ChatDetailView(chat: dummyChat, messages: .constant([
             Message(id: UUID(), text: "嗨～ 你有在這上面遇到什麼有趣的人嗎？", isSender: true, time: "09/12 15:53", isCompliment: false),
