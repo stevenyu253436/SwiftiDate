@@ -95,10 +95,13 @@ struct EditProfileView: View {
                         VStack(spacing: 10) {
                             PhotoSectionView(photos: $photos) // Use updated PhotoSectionView
                                 .padding()
+<<<<<<< HEAD
                                 .onAppear {
                                     print("EditProfileView appeared")
 //                                    fetchPhotosFromFirebase()
                                 }
+=======
+>>>>>>> feature/turbo-crush-praise-headers
 
                             Toggle(isOn: .constant(true)) {
                                 Text("智慧照片曝光")
@@ -788,6 +791,41 @@ struct EditProfileView: View {
                 }
             }
         }
+    }
+    
+    func savePhotosToLocalStorage() {
+        for (index, photo) in photos.enumerated() {
+            if let image = loadImageFromURL(photo) {
+                let imageName = "photo_\(index).jpg" // Give the image a unique name
+                saveImageToLocalStorage(image: image, withName: imageName)
+                print("Saved photo \(index) to local storage")
+            }
+        }
+    }
+    
+    // Save image to local storage
+    func saveImageToLocalStorage(image: UIImage, withName imageName: String) {
+        if let data = image.jpegData(compressionQuality: 0.8) {
+            let url = getDocumentsDirectory().appendingPathComponent(imageName)
+            try? data.write(to: url)
+            print("Image saved to local storage at \(url.path)")
+        }
+    }
+    
+    // Load UIImage from a URL string
+    func loadImageFromURL(_ urlString: String) -> UIImage? {
+        guard let url = URL(string: urlString),
+              let data = try? Data(contentsOf: url),
+              let image = UIImage(data: data) else {
+            return nil
+        }
+        return image
+    }
+
+    
+    // Helper function to get the app's document directory
+    func getDocumentsDirectory() -> URL {
+        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     }
 }
 

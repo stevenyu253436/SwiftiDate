@@ -13,14 +13,17 @@ struct ProfileView: View {
     @State private var isShowingCrushPurchaseView = false // State variable to control Crush sheet presentation
     @State private var isShowingPraisePurchaseView = false // State variable to control Praise sheet presentation
     
+<<<<<<< HEAD
     @State private var photos: [String] = [] // Initialize photos array
 
+=======
+>>>>>>> feature/turbo-crush-praise-headers
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
                 // 头像及基本信息
                 HStack {
-                    Image("profile_picture") // 您需要替换为实际的头像图片名称
+                    Image("photo1") // 您需要替换为实际的头像图片名称
                         .resizable()
                         .frame(width: 100, height: 133)
                         .clipShape(Circle())
