@@ -10,15 +10,16 @@ import SwiftUI
 
 struct ChatDetailView: View {
     var chat: Chat
-    @State private var messages: [Message] = [] // Store messages for this chat
+    @Binding var messages: [Message]  // Bind to the messages passed from ChatView
     @State private var newMessageText: String = "" // State variable to hold the input message text
+    var onBack: () -> Void // Add this line to accept the onBack closure
 
     var body: some View {
         VStack {
             // Custom Navigation Bar
             HStack {
                 Button(action: {
-                    // Action for back button
+                    onBack() // Call the onBack closure when the button is pressed
                 }) {
                     Image(systemName: "chevron.left")
                         .foregroundColor(.gray)
@@ -63,8 +64,11 @@ struct ChatDetailView: View {
             Divider() // Divider line
             
             ScrollView {
-                ForEach(messages) { message in
-                    MessageBubbleView(message: message, isCurrentUser: message.isSender)
+                ForEach(messages.indices, id: \.self) { index in
+                    let message = messages[index]
+                    let showTime = index == 0 || messages[index].time != messages[index - 1].time
+                    
+                    MessageBubbleView(message: message, isCurrentUser: message.isSender, showTime: showTime)
                         .padding(.horizontal)
                         .padding(.top, 5)
                 }
@@ -85,26 +89,13 @@ struct ChatDetailView: View {
             }
             .padding()
         }
-        .onAppear {
-            loadMessages(for: chat)
-        }
-        .navigationTitle(chat.name)
-        .navigationBarTitleDisplayMode(.inline)
-    }
-
-    private func loadMessages(for chat: Chat) {
-        // Fetch messages from your data source (e.g., Firebase, local database)
-        // Dummy data for testing
-        messages = [
-            Message(id: UUID(), text: "你好呀", isSender: false, time: "10:20 AM"),
-            Message(id: UUID(), text: "嗨！最近怎麼樣？", isSender: true, time: "10:21 AM")
-        ]
+        .navigationBarHidden(true) // Hide the default navigation bar
     }
 
     private func sendMessage() {
         guard !newMessageText.trimmingCharacters(in: .whitespaces).isEmpty else { return }
         
-        let newMessage = Message(id: UUID(), text: newMessageText, isSender: true, time: getCurrentTime())
+        let newMessage = Message(id: UUID(), text: newMessageText, isSender: true, time: getCurrentTime(), isCompliment: false)
         messages.append(newMessage)
         
         // Clear the text field
@@ -126,30 +117,42 @@ struct Message: Identifiable {
     let text: String
     let isSender: Bool
     let time: String
+    var isCompliment: Bool // New property to indicate if the message is a compliment
 }
 
 // Custom view for message bubbles
 struct MessageBubbleView: View {
     var message: Message
     var isCurrentUser: Bool
-    
+    var showTime: Bool // Add this new parameter
+
     var body: some View {
-        HStack {
-            if isCurrentUser {
-                Spacer()
+        VStack {
+            if showTime {
+                // Display the time when `showTime` is true
+                Text(message.time)
+                    .font(.caption)
+                    .foregroundColor(.gray)
+                    .frame(maxWidth: .infinity, alignment: .center) // Center the time
             }
             
-            Text(message.text)
-                .padding()
-                .background(isCurrentUser ? Color.green : Color.gray.opacity(0.3))
-                .foregroundColor(isCurrentUser ? .white : .black)
-                .cornerRadius(10)
-            
-            if !isCurrentUser {
-                Spacer()
+            HStack {
+                if isCurrentUser {
+                    Spacer()
+                }
+                
+                Text(message.text)
+                    .padding()
+                    .background(isCurrentUser ? (message.isCompliment ? Color.black : Color.green) : Color.gray.opacity(0.3))
+                    .foregroundColor(isCurrentUser ? .white : .black)
+                    .cornerRadius(10)
+                
+                if !isCurrentUser {
+                    Spacer()
+                }
             }
+            .padding(isCurrentUser ? .leading : .trailing, 50)
         }
-        .padding(isCurrentUser ? .leading : .trailing, 50)
     }
 }
 
@@ -160,6 +163,17 @@ struct ChatDetailView_Previews: PreviewProvider {
         // Create a dummy chat to preview
         let dummyChat = Chat(name: "Laiiiiiiii", message: "吃美食跟看劇", time: "01:50", unreadCount: 3)
         
-        ChatDetailView(chat: dummyChat)
+        ChatDetailView(chat: dummyChat, messages: .constant([
+            Message(id: UUID(), text: "嗨～ 你有在這上面遇到什麼有趣的人嗎？", isSender: true, time: "09/12 15:53", isCompliment: false),
+            Message(id: UUID(), text: "你要夠有趣的哈哈哈", isSender: false, time: "09/16 02:09", isCompliment: false),
+            Message(id: UUID(), text: "我也不知道耶~", isSender: true, time: "09/20 15:03", isCompliment: false),
+            Message(id: UUID(), text: "我喜歡旅遊、追劇、吃日料 ，偶爾小酌，妳平常喜歡做什麼？", isSender: true, time: "09/20 15:03", isCompliment: false),
+            Message(id: UUID(), text: "還是像我一樣有趣的哈哈哈", isSender: true, time: "09/20 15:03", isCompliment: false),
+            Message(id: UUID(), text: "跳舞跟唱歌", isSender: false, time: "09/21 01:50", isCompliment: false),
+            Message(id: UUID(), text: "😂", isSender: false, time: "09/21 01:50", isCompliment: false),
+            Message(id: UUID(), text: "吃美食跟看劇", isSender: false, time: "09/21 01:50", isCompliment: false)
+        ]), onBack: {
+            // Provide an empty closure or action for the onBack parameter
+        })
     }
 }
