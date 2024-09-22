@@ -22,6 +22,7 @@ struct ChatView: View {
                 // 聊天列表
                 ScrollView {
                     VStack(alignment: .leading, spacing: 15) {
+                        // Custom title for new matches
                         Text("新配對")
                             .font(.headline)
                             .padding(.leading)
@@ -29,13 +30,53 @@ struct ChatView: View {
                         // 配對用戶的水平滾動
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 15) {
-                                ForEach(0..<5) { _ in
-                                    VStack {
-                                        Image(systemName: "person.crop.circle")
-                                            .resizable()
+                                // The "More Matches" button
+                                VStack {
+                                    ZStack {
+                                        Circle()
+                                            .fill(Color.purple.opacity(0.1)) // Background circle
                                             .frame(width: 60, height: 60)
-                                            .clipShape(Circle())
-                                        Text("用戶")
+                                        
+                                        Image(systemName: "bolt.fill")
+                                            .resizable()
+                                            .frame(width: 24, height: 24)
+                                            .foregroundColor(.purple)
+                                        
+                                        Circle()
+                                            .stroke(Color.white, lineWidth: 0) // Outer white border
+                                            .frame(width: 68, height: 68)
+                                            .offset(x: 25, y: 25)
+                                            .overlay(
+                                                Image(systemName: "plus.circle.fill")
+                                                    .foregroundColor(.white)
+                                                    .background(Circle().fill(Color.purple))
+                                                    .frame(width: 20, height: 20)
+                                                    .offset(x: 20, y: 20)
+                                            )
+                                    }
+                                    Text("更多配對")
+                                        .font(.caption)
+                                        .foregroundColor(.purple)
+                                }
+                                
+                                // Existing users
+                                ForEach(userMatches) { user in
+                                    VStack {
+                                        if let uiImage = UIImage(named: user.imageName) {
+                                            Image(uiImage: uiImage)
+                                                .resizable()
+                                                .frame(width: 60, height: 60)
+                                                .clipShape(Circle())
+                                        } else {
+                                            // Placeholder image when the actual image is not found
+                                            Image(systemName: "person.crop.circle.fill")
+                                                .resizable()
+                                                .frame(width: 60, height: 60)
+                                                .foregroundColor(.gray)
+                                                .clipShape(Circle())
+                                        }
+                                        
+                                        Text(user.name)
                                             .font(.caption)
                                     }
                                 }
@@ -62,6 +103,20 @@ struct ChatView: View {
         }
     }
 }
+
+// Define a structure for user match data
+struct UserMatch: Identifiable {
+    let id = UUID()
+    let name: String
+    let imageName: String // Use image names stored in Assets
+}
+
+// Sample user match data
+let userMatches = [
+    UserMatch(name: "詐騙集團", imageName: "user1"),
+    UserMatch(name: "ซูก้า", imageName: "user2"),
+    UserMatch(name: "賣米當卡", imageName: "user3")
+]
 
 // 聊天行的顯示樣式
 struct ChatRow: View {
@@ -102,17 +157,6 @@ struct ChatRow: View {
             }
         }
         .padding(.vertical, 5)
-    }
-}
-
-// 聊天詳情頁
-struct ChatDetailView: View {
-    var chat: Chat
-    
-    var body: some View {
-        Text("與 \(chat.name) 的聊天詳情")
-            .navigationTitle(chat.name)
-            .navigationBarTitleDisplayMode(.inline)
     }
 }
 

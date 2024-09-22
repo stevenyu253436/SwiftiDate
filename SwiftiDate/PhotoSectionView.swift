@@ -24,52 +24,42 @@ struct PhotoSectionView: View {
         // 上排照片
         HStack(spacing: 10) {
             ForEach(photos.prefix(3), id: \.self) { photo in
-                if let url = URL(string: photo) {
-                    AsyncImageView(url: url, placeholder: Image(systemName: "photo")) // 使用自定義的 AsyncImageView
-                        .frame(width: 100, height: 133)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                        .overlay(
-                            Button(action: {
-                                removePhoto(photo: photo)
-                            }) {
-                                Image(systemName: "xmark.circle.fill")
-                                    .foregroundColor(.white)
-                                    .background(Color.red)
-                                    .clipShape(Circle())
-                            }
-                            .offset(x: -5, y: -5), alignment: .topTrailing
-                        )
-                        .onAppear {
-                            print("Loading image from URL: \(url)")
-                            print("Photos array on appear: \(photos)")
+                Image(photo)
+                    .resizable()
+                    .frame(width: 100, height: 133)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .overlay(
+                        Button(action: {
+                            removePhoto(photo: photo)
+                        }) {
+                            Image(systemName: "xmark.circle.fill")
+                                .foregroundColor(.white)
+                                .background(Color.red)
+                                .clipShape(Circle())
                         }
-                }
+                        .offset(x: -5, y: -5), alignment: .topTrailing
+                    )
             }
         }
         
         // 下排照片
         HStack(spacing: 10) {
             ForEach(photos.suffix(3), id: \.self) { photo in
-                if let url = URL(string: photo) {
-                    AsyncImageView(url: url, placeholder: Image(systemName: "photo")) // 使用自定義的 AsyncImageView
-                        .frame(width: 100, height: 133)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                        .overlay(
-                            Button(action: {
-                                removePhoto(photo: photo)
-                            }) {
-                                Image(systemName: "xmark.circle.fill")
-                                    .foregroundColor(.white)
-                                    .background(Color.red)
-                                    .clipShape(Circle())
-                            }
-                            .offset(x: -5, y: -5), alignment: .topTrailing
-                        )
-                        .onAppear {
-                            print("Loading image from URL: \(url)")
-                            print("Photos array on appear: \(photos)")
+                Image(photo)
+                    .resizable()
+                    .frame(width: 100, height: 133)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .overlay(
+                        Button(action: {
+                            removePhoto(photo: photo)
+                        }) {
+                            Image(systemName: "xmark.circle.fill")
+                                .foregroundColor(.white)
+                                .background(Color.red)
+                                .clipShape(Circle())
                         }
-                }
+                        .offset(x: -5, y: -5), alignment: .topTrailing
+                    )
             }
             
             // 如果剛好移除的是第六張照片，顯示一個占位符號
@@ -88,6 +78,26 @@ struct PhotoSectionView: View {
         }
     }
     
+    // Button to add photos
+    func AddPhotoButton() -> some View {
+        Button(action: {
+            showImagePicker = true
+        }) {
+            VStack {
+                Image(systemName: "plus.circle")
+                    .resizable()
+                    .frame(width: 50, height: 50)
+                    .foregroundColor(.gray)
+                Text("添加照片")
+                    .font(.caption)
+                    .foregroundColor(.gray)
+            }
+        }
+        .frame(width: 100, height: 133)
+        .background(Color.gray.opacity(0.2))
+        .clipShape(RoundedRectangle(cornerRadius: 10))
+    }
+    
     // 移除照片的函數
     func removePhoto(photo: String) {
         if let index = photos.firstIndex(of: photo) {
@@ -97,10 +107,38 @@ struct PhotoSectionView: View {
     
     // 將選擇的圖片轉換為顯示並添加到照片列表
     func addImageToPhotos(image: UIImage) {
-        let imageName = UUID().uuidString // 生成唯一名稱
-        // 假設這裡將圖片保存到本地或上傳，並添加到圖片列表
-        photos.append(imageName)
-        // 可以進一步將圖片上傳並顯示在相應的 Image 中
+        let imageName = UUID().uuidString // Generate a unique name
+        saveImageToLocalStorage(image: image, withName: imageName) // Save to local storage
+        photos.append(imageName) // Store the image name in your photos array
+    }
+    
+    // Save image to local storage
+    func saveImageToLocalStorage(image: UIImage, withName imageName: String) {
+        if let data = image.jpegData(compressionQuality: 0.8) {
+            let url = getDocumentsDirectory().appendingPathComponent(imageName)
+            try? data.write(to: url)
+            print("Image saved to local storage at \(url.path)")
+        }
+    }
+    
+    // Load image from local storage
+    func loadImageFromLocalStorage(named imageName: String) -> UIImage? {
+        let url = getDocumentsDirectory().appendingPathComponent(imageName)
+        if let data = try? Data(contentsOf: url) {
+            return UIImage(data: data)
+        }
+        return nil
+    }
+    
+    // Delete image from local storage
+    func deleteImageFromLocalStorage(named imageName: String) {
+        let url = getDocumentsDirectory().appendingPathComponent(imageName)
+        try? FileManager.default.removeItem(at: url)
+    }
+    
+    // Helper function to get the app's document directory
+    func getDocumentsDirectory() -> URL {
+        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     }
 }
 

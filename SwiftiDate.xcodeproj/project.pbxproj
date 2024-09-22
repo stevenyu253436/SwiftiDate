@@ -68,6 +68,7 @@
 		D0445C892C73CF610059D522 /* VacationOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0445C882C73CF610059D522 /* VacationOptionsView.swift */; };
 		D0445C8B2C73D0760059D522 /* DietPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0445C8A2C73D0760059D522 /* DietPreferencesView.swift */; };
 		D055E9922C8CCFBA00A97DD1 /* InterestSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D055E9912C8CCFBA00A97DD1 /* InterestSelectionView.swift */; };
+		D0DDDB052C9FA8AF00A78A87 /* ChatDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */; };
 		D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */; };
 /* End PBXBuildFile section */
 
@@ -131,6 +132,7 @@
 		D0445C882C73CF610059D522 /* VacationOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VacationOptionsView.swift; sourceTree = "<group>"; };
 		D0445C8A2C73D0760059D522 /* DietPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietPreferencesView.swift; sourceTree = "<group>"; };
 		D055E9912C8CCFBA00A97DD1 /* InterestSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestSelectionView.swift; sourceTree = "<group>"; };
+		D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailView.swift; sourceTree = "<group>"; };
 		D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetWillingnessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -242,6 +244,7 @@
 				D018AD602C9E6ACF005A14B9 /* PraisePurchaseView.swift */,
 				D018AD622C9E87F6005A14B9 /* ChatView.swift */,
 				D018AD952C9EEA82005A14B9 /* AsyncImageView.swift */,
+				D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -459,6 +462,7 @@
 				D0445C2F2C71B3800059D522 /* SwiftiDateApp.swift in Sources */,
 				D0445C592C71BFE70059D522 /* SwipeCardView.swift in Sources */,
 				D0445C612C722EF50059D522 /* PhotoSectionView.swift in Sources */,
+				D0DDDB052C9FA8AF00A78A87 /* ChatDetailView.swift in Sources */,
 				D0445C652C72388D0059D522 /* FlowStack.swift in Sources */,
 				D0445C732C72FB440059D522 /* HometownInputView.swift in Sources */,
 				D018AD612C9E6ACF005A14B9 /* PraisePurchaseView.swift in Sources */,

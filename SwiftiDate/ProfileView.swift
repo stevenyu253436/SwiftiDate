@@ -13,21 +13,19 @@ struct ProfileView: View {
     @State private var isShowingCrushPurchaseView = false // State variable to control Crush sheet presentation
     @State private var isShowingPraisePurchaseView = false // State variable to control Praise sheet presentation
     
-    @State private var photos: [String] = [] // Initialize photos array
-
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
                 // 头像及基本信息
                 HStack {
-                    Image("profile_picture") // 您需要替换为实际的头像图片名称
+                    Image("photo1") // 您需要替换为实际的头像图片名称
                         .resizable()
                         .frame(width: 100, height: 133)
                         .clipShape(Circle())
                         .overlay(Circle().stroke(Color.white, lineWidth: 4))
                         .shadow(radius: 10)
 
-                    NavigationLink(destination: EditProfileView(photos: $photos)) { // Pass photos to EditProfileView
+                    NavigationLink(destination: EditProfileView()) { // Pass photos to EditProfileView
                         Image(systemName: "pencil.circle.fill")
                             .resizable()
                             .frame(width: 24, height: 24)

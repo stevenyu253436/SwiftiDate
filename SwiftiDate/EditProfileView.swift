@@ -11,7 +11,7 @@ import FirebaseStorage
 
 struct EditProfileView: View {
     @State private var selectedTab = "編輯"
-    @Binding var photos: [String] // Change to @Binding
+    @State private var photos = ["photo1", "photo2", "photo3", "photo4", "photo5", "photo6"]
     @State private var aboutMe = "能見面左右滑謝謝🙏\n一起吃日料吧🍣\n抽水煙也可以💨"
     @State private var currentPhotoIndex = 0
     
@@ -95,10 +95,6 @@ struct EditProfileView: View {
                         VStack(spacing: 10) {
                             PhotoSectionView(photos: $photos) // Use updated PhotoSectionView
                                 .padding()
-                                .onAppear {
-                                    print("EditProfileView appeared")
-                                    fetchPhotosFromFirebase()
-                                }
 
                             Toggle(isOn: .constant(true)) {
                                 Text("智慧照片曝光")
@@ -789,12 +785,52 @@ struct EditProfileView: View {
             }
         }
     }
+    
+    func savePhotosToLocalStorage() {
+        for (index, photo) in photos.enumerated() {
+            if let image = loadImageFromURL(photo) {
+                let imageName = "photo_\(index).jpg" // Give the image a unique name
+                saveImageToLocalStorage(image: image, withName: imageName)
+                print("Saved photo \(index) to local storage")
+            }
+        }
+    }
+    
+    // Save image to local storage
+    func saveImageToLocalStorage(image: UIImage, withName imageName: String) {
+        if let data = image.jpegData(compressionQuality: 0.8) {
+            let url = getDocumentsDirectory().appendingPathComponent(imageName)
+            try? data.write(to: url)
+            print("Image saved to local storage at \(url.path)")
+        }
+    }
+    
+    // Load UIImage from a URL string
+    func loadImageFromURL(_ urlString: String) -> UIImage? {
+        guard let url = URL(string: urlString),
+              let data = try? Data(contentsOf: url),
+              let image = UIImage(data: data) else {
+            return nil
+        }
+        return image
+    }
+
+    
+    // Helper function to get the app's document directory
+    func getDocumentsDirectory() -> URL {
+        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    }
 }
 
 struct EditProfileView_Previews: PreviewProvider {
-    @State static var previewPhotos = ["photo1", "photo2", "photo3", "photo4", "photo5", "photo6"]
-
     static var previews: some View {
-        EditProfileView(photos: $previewPhotos)
+        EditProfileView(selectedInterests: ["我喜歡Cosply", "咒術迴戰", "死神", "基本可以做到訊息秒回", "是個理性的人", "有上進心", "我是巨蟹座"])
+    }
+}
+
+extension EditProfileView {
+    init(selectedInterests: Set<String>) {
+        _selectedInterests = State(initialValue: selectedInterests)
+        _interestColors = State(initialValue: [:]) // 初始化為空字典
     }
 }
