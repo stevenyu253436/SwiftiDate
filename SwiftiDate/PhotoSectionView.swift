@@ -37,12 +37,7 @@ struct PhotoSectionView: View {
                                 .background(Color.red)
                                 .clipShape(Circle())
                         }
-<<<<<<< HEAD
-                        .offset(x: -5, y: -5)
-                        , alignment: .topTrailing
-=======
                         .offset(x: -5, y: -5), alignment: .topTrailing
->>>>>>> feature/turbo-crush-praise-headers
                     )
             }
         }

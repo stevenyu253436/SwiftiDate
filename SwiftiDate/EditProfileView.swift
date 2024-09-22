@@ -95,13 +95,6 @@ struct EditProfileView: View {
                         VStack(spacing: 10) {
                             PhotoSectionView(photos: $photos) // Use updated PhotoSectionView
                                 .padding()
-<<<<<<< HEAD
-                                .onAppear {
-                                    print("EditProfileView appeared")
-//                                    fetchPhotosFromFirebase()
-                                }
-=======
->>>>>>> feature/turbo-crush-praise-headers
 
                             Toggle(isOn: .constant(true)) {
                                 Text("智慧照片曝光")
