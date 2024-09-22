@@ -71,6 +71,8 @@
 		D0DDDB052C9FA8AF00A78A87 /* ChatDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */; };
 		D0DDDB072C9FDB1600A78A87 /* WhoLikedYouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */; };
 		D0DDDB092C9FDE0500A78A87 /* InteractiveContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB082C9FDE0500A78A87 /* InteractiveContentView.swift */; };
+		D0DDDB0B2CA07A0E00A78A87 /* TurboView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB0A2CA07A0D00A78A87 /* TurboView.swift */; };
+		D0DDDB0D2CA07A2400A78A87 /* FeaturedCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB0C2CA07A2400A78A87 /* FeaturedCardView.swift */; };
 		D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */; };
 /* End PBXBuildFile section */
 
@@ -137,6 +139,8 @@
 		D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailView.swift; sourceTree = "<group>"; };
 		D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoLikedYouView.swift; sourceTree = "<group>"; };
 		D0DDDB082C9FDE0500A78A87 /* InteractiveContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveContentView.swift; sourceTree = "<group>"; };
+		D0DDDB0A2CA07A0D00A78A87 /* TurboView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurboView.swift; sourceTree = "<group>"; };
+		D0DDDB0C2CA07A2400A78A87 /* FeaturedCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedCardView.swift; sourceTree = "<group>"; };
 		D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetWillingnessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -251,6 +255,8 @@
 				D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */,
 				D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */,
 				D0DDDB082C9FDE0500A78A87 /* InteractiveContentView.swift */,
+				D0DDDB0A2CA07A0D00A78A87 /* TurboView.swift */,
+				D0DDDB0C2CA07A2400A78A87 /* FeaturedCardView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -442,6 +448,7 @@
 				D0445C892C73CF610059D522 /* VacationOptionsView.swift in Sources */,
 				D0445C5F2C71F1070059D522 /* EditProfileView.swift in Sources */,
 				D0DDDB072C9FDB1600A78A87 /* WhoLikedYouView.swift in Sources */,
+				D0DDDB0B2CA07A0E00A78A87 /* TurboView.swift in Sources */,
 				D0DDDB092C9FDE0500A78A87 /* InteractiveContentView.swift in Sources */,
 				D0445C832C73CBE70059D522 /* FitnessOptionsView.swift in Sources */,
 				D0445C6B2C7247050059D522 /* DegreePicker.swift in Sources */,
@@ -466,6 +473,7 @@
 				D018AD5B2C9E57DF005A14B9 /* UserGuideView.swift in Sources */,
 				D0445C852C73CDB60059D522 /* SmokingOptionsView.swift in Sources */,
 				D0445C6D2C72EA990059D522 /* SchoolInputView.swift in Sources */,
+				D0DDDB0D2CA07A2400A78A87 /* FeaturedCardView.swift in Sources */,
 				D055E9922C8CCFBA00A97DD1 /* InterestSelectionView.swift in Sources */,
 				D0445C2F2C71B3800059D522 /* SwiftiDateApp.swift in Sources */,
 				D0445C592C71BFE70059D522 /* SwipeCardView.swift in Sources */,
