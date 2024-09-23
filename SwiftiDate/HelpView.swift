@@ -36,6 +36,7 @@ struct HelpView: View {
     @State private var isHowToPurchaseSwiftiDateSupremeView = false // State variable to control navigation to HowToPurchaseSwiftiDateSupremeView
     @State private var isUpdateProfileDetailsView = false // State variable to control navigation to UpdateProfileDetailsView
     @State private var isManageProfilePhotosView = false // State variable to control navigation to ManageProfilePhotosView
+    @State private var isPhotoUploadGuidelinesView = false // State variable to control navigation to PhotoUploadGuidelinesView
 
     // Extracting the data to separate properties
     private let personalInfoTopics = [
@@ -103,6 +104,8 @@ struct HelpView: View {
             UpdateProfileDetailsView(isUpdateProfileDetailsView: $isUpdateProfileDetailsView) // Navigate to UpdateProfileDetailsView
         } else if isManageProfilePhotosView {
             ManageProfilePhotosView(isManageProfilePhotosView: $isManageProfilePhotosView) // Navigate to ManageProfilePhotosView
+        } else if isPhotoUploadGuidelinesView {
+            PhotoUploadGuidelinesView(isPhotoUploadGuidelinesView: $isPhotoUploadGuidelinesView) // Navigate to PhotoUploadGuidelinesView
         } else {
             VStack {
                 // Custom Navigation Bar
@@ -498,14 +501,19 @@ struct HelpView: View {
                         }
                         .foregroundColor(.black)
 
-                        HStack {
-                            Text("我需要上傳什麼樣的照片作為頭像？")
-                                .padding(.vertical, 10)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
+                        Button(action: {
+                            isPhotoUploadGuidelinesView = true
+                        }) {
+                            HStack {
+                                Text("我需要上傳什麼樣的照片作為頭像？")
+                                    .padding(.vertical, 10)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
                         }
-                        
+                        .foregroundColor(.black)
+
                         HStack {
                             Text("如何通過真人認證？")
                                 .padding(.vertical, 10)

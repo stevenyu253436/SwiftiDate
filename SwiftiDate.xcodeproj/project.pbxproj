@@ -103,6 +103,7 @@
 		D0DDDB482CA191EE00A78A87 /* HowToPurchaseSwiftiDateSupremeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB472CA191EE00A78A87 /* HowToPurchaseSwiftiDateSupremeView.swift */; };
 		D0DDDB4A2CA196FB00A78A87 /* UpdateProfileDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB492CA196FB00A78A87 /* UpdateProfileDetailsView.swift */; };
 		D0DDDB4C2CA19A0600A78A87 /* ManageProfilePhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB4B2CA19A0600A78A87 /* ManageProfilePhotosView.swift */; };
+		D0DDDB4E2CA19D0800A78A87 /* PhotoUploadGuidelinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB4D2CA19D0800A78A87 /* PhotoUploadGuidelinesView.swift */; };
 		D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */; };
 /* End PBXBuildFile section */
 
@@ -200,6 +201,7 @@
 		D0DDDB472CA191EE00A78A87 /* HowToPurchaseSwiftiDateSupremeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPurchaseSwiftiDateSupremeView.swift; sourceTree = "<group>"; };
 		D0DDDB492CA196FB00A78A87 /* UpdateProfileDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileDetailsView.swift; sourceTree = "<group>"; };
 		D0DDDB4B2CA19A0600A78A87 /* ManageProfilePhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageProfilePhotosView.swift; sourceTree = "<group>"; };
+		D0DDDB4D2CA19D0800A78A87 /* PhotoUploadGuidelinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoUploadGuidelinesView.swift; sourceTree = "<group>"; };
 		D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetWillingnessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -346,6 +348,7 @@
 				D0DDDB472CA191EE00A78A87 /* HowToPurchaseSwiftiDateSupremeView.swift */,
 				D0DDDB492CA196FB00A78A87 /* UpdateProfileDetailsView.swift */,
 				D0DDDB4B2CA19A0600A78A87 /* ManageProfilePhotosView.swift */,
+				D0DDDB4D2CA19D0800A78A87 /* PhotoUploadGuidelinesView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -541,6 +544,7 @@
 				D0DDDB072C9FDB1600A78A87 /* WhoLikedYouView.swift in Sources */,
 				D0DDDB0B2CA07A0E00A78A87 /* TurboView.swift in Sources */,
 				D0DDDB092C9FDE0500A78A87 /* InteractiveContentView.swift in Sources */,
+				D0DDDB4E2CA19D0800A78A87 /* PhotoUploadGuidelinesView.swift in Sources */,
 				D0445C832C73CBE70059D522 /* FitnessOptionsView.swift in Sources */,
 				D0DDDB1A2CA1282B00A78A87 /* WhatIsSwiftiDateView.swift in Sources */,
 				D0DDDB322CA16B7000A78A87 /* UndoSwipeView.swift in Sources */,
