@@ -91,6 +91,7 @@
 		D0DDDB302CA164BE00A78A87 /* WhatIsTurboAndHowToUseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB2F2CA164BE00A78A87 /* WhatIsTurboAndHowToUseView.swift */; };
 		D0DDDB322CA16B7000A78A87 /* UndoSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB312CA16B7000A78A87 /* UndoSwipeView.swift */; };
 		D0DDDB342CA16D8B00A78A87 /* HowToEnablePremiumBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB332CA16D8B00A78A87 /* HowToEnablePremiumBadgeView.swift */; };
+		D0DDDB362CA16FF900A78A87 /* HowToPurchaseSwiftiDatePremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB352CA16FF900A78A87 /* HowToPurchaseSwiftiDatePremiumView.swift */; };
 		D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */; };
 /* End PBXBuildFile section */
 
@@ -176,6 +177,7 @@
 		D0DDDB2F2CA164BE00A78A87 /* WhatIsTurboAndHowToUseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIsTurboAndHowToUseView.swift; sourceTree = "<group>"; };
 		D0DDDB312CA16B7000A78A87 /* UndoSwipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoSwipeView.swift; sourceTree = "<group>"; };
 		D0DDDB332CA16D8B00A78A87 /* HowToEnablePremiumBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToEnablePremiumBadgeView.swift; sourceTree = "<group>"; };
+		D0DDDB352CA16FF900A78A87 /* HowToPurchaseSwiftiDatePremiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPurchaseSwiftiDatePremiumView.swift; sourceTree = "<group>"; };
 		D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetWillingnessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -310,6 +312,7 @@
 				D0DDDB2F2CA164BE00A78A87 /* WhatIsTurboAndHowToUseView.swift */,
 				D0DDDB312CA16B7000A78A87 /* UndoSwipeView.swift */,
 				D0DDDB332CA16D8B00A78A87 /* HowToEnablePremiumBadgeView.swift */,
+				D0DDDB352CA16FF900A78A87 /* HowToPurchaseSwiftiDatePremiumView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -529,6 +532,7 @@
 				D0445C812C73CA130059D522 /* PetSelectionView.swift in Sources */,
 				D0445C692C723AE80059D522 /* FlowLayout.swift in Sources */,
 				D0DDDB142CA10EAD00A78A87 /* SettingsView.swift in Sources */,
+				D0DDDB362CA16FF900A78A87 /* HowToPurchaseSwiftiDatePremiumView.swift in Sources */,
 				D018AD5B2C9E57DF005A14B9 /* UserGuideView.swift in Sources */,
 				D0DDDB302CA164BE00A78A87 /* WhatIsTurboAndHowToUseView.swift in Sources */,
 				D0DDDB282CA14FCC00A78A87 /* ReportUserView.swift in Sources */,
