@@ -33,6 +33,7 @@ struct HelpView: View {
     @State private var isHowToUseDailyPraiseOpportunityView = false // State variable to control navigation to HowToUseDailyPraiseOpportunityView
     @State private var isHowToUseAdvancedFilteringView = false // State variable to control navigation to HowToUseAdvancedFilteringView
     @State private var isHowToUseIncognitoModeView = false // State variable to control navigation to HowToUseIncognitoModeView
+    @State private var isHowToPurchaseSwiftiDateSupremeView = false // State variable to control navigation to HowToPurchaseSwiftiDateSupremeView
 
     // Extracting the data to separate properties
     private let personalInfoTopics = [
@@ -94,6 +95,8 @@ struct HelpView: View {
             HowToUseAdvancedFilteringView(isHowToUseAdvancedFilteringView: $isHowToUseAdvancedFilteringView) // Navigate to HowToUseAdvancedFilteringView
         } else if isHowToUseIncognitoModeView {
             HowToUseIncognitoModeView(isHowToUseIncognitoModeView: $isHowToUseIncognitoModeView) // Navigate to HowToUseIncognitoModeView
+        } else if isHowToPurchaseSwiftiDateSupremeView {
+            HowToPurchaseSwiftiDateSupremeView(isHowToPurchaseSwiftiDateSupremeView: $isHowToPurchaseSwiftiDateSupremeView) // Navigate to HowToPurchaseSwiftiDateSupremeView
         } else {
             VStack {
                 // Custom Navigation Bar
@@ -441,14 +444,20 @@ struct HelpView: View {
                                     .foregroundColor(.gray)
                             }
                         }
-                                    
-                        HStack {
-                            Text("如何購買 SwiftiDate Supreme？")
-                                .padding(.vertical, 10)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
+                        .foregroundColor(.black)
+
+                        Button(action: {
+                            isHowToPurchaseSwiftiDateSupremeView = true
+                        }) {
+                            HStack {
+                                Text("如何購買 SwiftiDate Supreme？")
+                                    .padding(.vertical, 10)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
                         }
+                        .foregroundColor(.black)
                     }
                     
                     // Adding the Personal Information and Settings section
