@@ -15,6 +15,7 @@ struct HelpView: View {
     @State private var isHowToMatchAndChat = false // State variable to control navigation to HowToMatchAndChatView
     @State private var isWhoLikedMeView = false // State variable to control navigation to WhoLikedMeView
     @State private var isWhyIsItHardToMatch = false // State variable to control navigation to WhyIsItHardTo
+    @State private var isHowToUnmatchView = false // State variable to control navigation to HowToUnmatchView
 
     // Extracting the data to separate properties
     private let premiumTopics = [
@@ -62,6 +63,8 @@ struct HelpView: View {
             WhoLikedMeView(isWhoLikedMeView: $isWhoLikedMeView) // Navigate to WhoLikedMeView
         } else if isWhyIsItHardToMatch {
             WhyIsItHardToMatchView(isWhyIsItHardToMatch: $isWhyIsItHardToMatch) // Navigate to WhyIsItHardToMatchView
+        } else if isHowToUnmatchView {
+            HowToUnmatchView(isHowToUnmatch: $isHowToUnmatchView) // Navigate to HowToUnmatchView
         } else {
             VStack {
                 // Custom Navigation Bar
@@ -163,13 +166,18 @@ struct HelpView: View {
                         }
                         .foregroundColor(.black)
                         
-                        HStack {
-                            Text("如何解除配對？")
-                                .padding(.vertical, 10)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
+                        Button(action: {
+                            isHowToUnmatchView = true // Set the state variable to true
+                        }) {
+                            HStack {
+                                Text("如何解除配對？")
+                                    .padding(.vertical, 10)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
                         }
+                        .foregroundColor(.black)
                         
                         HStack {
                             Text("可以刪除傳出去的訊息嗎？")
