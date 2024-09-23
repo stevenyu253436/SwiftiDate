@@ -11,17 +11,10 @@ import SwiftUI
 struct HelpView: View {
     @Binding var isHelpView: Bool // Binding to control the dismissal of HelpView
     @State private var isWhatIsSwiftiDate = false // State variable to control navigation to WhatIsSwiftiDateView
-    @State private var isSwiftiDatePaid = false // Binding to control the dismissal of IsSwiftiDatePaidView
+    @State private var isSwiftiDatePaid = false // State variable to control navigation to IsSwiftiDatePaidView
+    @State private var isHowToMatchAndChat = false // State variable to control navigation to HowToMatchAndChatView
 
     // Extracting the data to separate properties
-    private let chatTopics = [
-        "如何與他人配對、聊天？",
-        "我能查看誰喜歡了我嗎？",
-        "為什麼我很難配對成功？",
-        "如何解除配對？",
-        "可以刪除傳出去的訊息嗎？",
-        "如何檢舉用戶？"
-    ]
     private let premiumTopics = [
         "什麼是 SwiftiDate Premium？",
         "如何使用「看看誰喜歡你」與「開啟心動列表」功能？",
@@ -61,6 +54,8 @@ struct HelpView: View {
             WhatIsSwiftiDateView(isWhatIsSwiftiDate: $isWhatIsSwiftiDate) // Navigate to WhatIsSwiftiDateView
         } else if isSwiftiDatePaid {
             IsSwiftiDatePaidView(isSwiftiDatePaid: $isSwiftiDatePaid) // Navigate to IsSwiftiDatePaidView
+        } else if isHowToMatchAndChat {
+            HowToMatchAndChatView(isHowToMatchAndChat: $isHowToMatchAndChat) // Navigate to HowToMatchAndChatView
         } else {
             VStack {
                 // Custom Navigation Bar
@@ -121,14 +116,57 @@ struct HelpView: View {
                                 .font(.subheadline)
                                 .foregroundColor(.gray)
                                 .padding(.vertical, 5)) {
-                        ForEach(chatTopics, id: \.self) { topic in
+                        Button(action: {
+                            isHowToMatchAndChat = true // Set the state variable to true
+                        }) {
                             HStack {
-                                Text(topic)
+                                Text("如何與他人配對、聊天？")
                                     .padding(.vertical, 10)
                                 Spacer()
                                 Image(systemName: "chevron.right")
                                     .foregroundColor(.gray)
                             }
+                        }
+                        .foregroundColor(.black)
+                        
+                        HStack {
+                            Text("我能查看誰喜歡了我嗎？")
+                                .padding(.vertical, 10)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.gray)
+                        }
+                        
+                        HStack {
+                            Text("為什麼我很難配對成功？")
+                                .padding(.vertical, 10)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.gray)
+                        }
+                        
+                        HStack {
+                            Text("如何解除配對？")
+                                .padding(.vertical, 10)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.gray)
+                        }
+                        
+                        HStack {
+                            Text("可以刪除傳出去的訊息嗎？")
+                                .padding(.vertical, 10)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.gray)
+                        }
+                        
+                        HStack {
+                            Text("如何檢舉用戶？")
+                                .padding(.vertical, 10)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.gray)
                         }
                     }
                     
