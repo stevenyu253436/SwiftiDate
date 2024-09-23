@@ -23,7 +23,8 @@ struct HelpView: View {
     @State private var isWhatIsCrushAndHowToUseView = false // State variable to control navigation to WhatIsCrushAndHowToUseView
     @State private var isWhatIsTurboAndHowToUseView = false // State variable to control navigation to WhatIsTurboAndHowToUseView
     @State private var isUndoSwipeView = false // State variable to control navigation to UndoSwipeView
-    
+    @State private var isHowToEnablePremiumBadgeView = false // State variable to control navigation to HowToEnablePremiumBadgeView
+
     // Extracting the data to separate properties
     private let personalInfoTopics = [
         "如何編輯我的個人資料？",
@@ -64,6 +65,8 @@ struct HelpView: View {
             WhatIsTurboAndHowToUseView(isWhatIsTurboAndHowToUseView: $isWhatIsTurboAndHowToUseView) // Navigate to WhatIsTurboAndHowToUseView
         } else if isUndoSwipeView {
             UndoSwipeView(isUndoSwipeView: $isUndoSwipeView) // Navigate to UndoSwipeView
+        } else if isHowToEnablePremiumBadgeView {
+            HowToEnablePremiumBadgeView(isHowToEnablePremiumBadgeView: $isHowToEnablePremiumBadgeView) // Navigate to HowToEnablePremiumBadgeView
         } else {
             VStack {
                 // Custom Navigation Bar
@@ -276,12 +279,16 @@ struct HelpView: View {
                         }
                         .foregroundColor(.black)
 
-                        HStack {
-                            Text("如何開啟 Premium 專屬標誌？")
-                                .padding(.vertical, 10)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
+                        Button(action: {
+                            isHowToEnablePremiumBadgeView = true
+                        }) {
+                            HStack {
+                                Text("如何開啟 Premium 專屬標誌？")
+                                    .padding(.vertical, 10)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
                         }
                                     
                         HStack {
