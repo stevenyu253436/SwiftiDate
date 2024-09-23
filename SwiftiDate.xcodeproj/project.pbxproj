@@ -83,6 +83,7 @@
 		D0DDDB202CA13C5E00A78A87 /* WhoLikedMeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB1F2CA13C5E00A78A87 /* WhoLikedMeView.swift */; };
 		D0DDDB222CA1413600A78A87 /* WhyIsItHardToMatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB212CA1413600A78A87 /* WhyIsItHardToMatchView.swift */; };
 		D0DDDB242CA1486E00A78A87 /* HowToUnmatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB232CA1486E00A78A87 /* HowToUnmatchView.swift */; };
+		D0DDDB262CA14B2700A78A87 /* HowToDeleteMessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB252CA14B2600A78A87 /* HowToDeleteMessagesView.swift */; };
 		D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */; };
 /* End PBXBuildFile section */
 
@@ -160,6 +161,7 @@
 		D0DDDB1F2CA13C5E00A78A87 /* WhoLikedMeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoLikedMeView.swift; sourceTree = "<group>"; };
 		D0DDDB212CA1413600A78A87 /* WhyIsItHardToMatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhyIsItHardToMatchView.swift; sourceTree = "<group>"; };
 		D0DDDB232CA1486E00A78A87 /* HowToUnmatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToUnmatchView.swift; sourceTree = "<group>"; };
+		D0DDDB252CA14B2600A78A87 /* HowToDeleteMessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToDeleteMessagesView.swift; sourceTree = "<group>"; };
 		D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetWillingnessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -286,6 +288,7 @@
 				D0DDDB1F2CA13C5E00A78A87 /* WhoLikedMeView.swift */,
 				D0DDDB212CA1413600A78A87 /* WhyIsItHardToMatchView.swift */,
 				D0DDDB232CA1486E00A78A87 /* HowToUnmatchView.swift */,
+				D0DDDB252CA14B2600A78A87 /* HowToDeleteMessagesView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -523,6 +526,7 @@
 				D0DDDB1E2CA138B200A78A87 /* HowToMatchAndChatView.swift in Sources */,
 				D0DDDB0F2CA0E65F00A78A87 /* LocationManager.swift in Sources */,
 				D0DDDB242CA1486E00A78A87 /* HowToUnmatchView.swift in Sources */,
+				D0DDDB262CA14B2700A78A87 /* HowToDeleteMessagesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

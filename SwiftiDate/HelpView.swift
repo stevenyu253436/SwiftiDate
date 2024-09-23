@@ -16,6 +16,7 @@ struct HelpView: View {
     @State private var isWhoLikedMeView = false // State variable to control navigation to WhoLikedMeView
     @State private var isWhyIsItHardToMatch = false // State variable to control navigation to WhyIsItHardTo
     @State private var isHowToUnmatchView = false // State variable to control navigation to HowToUnmatchView
+    @State private var isHowToDeleteMessagesView = false // State variable to control navigation to HowToDeleteMessagesView
 
     // Extracting the data to separate properties
     private let premiumTopics = [
@@ -178,14 +179,19 @@ struct HelpView: View {
                             }
                         }
                         .foregroundColor(.black)
-                        
-                        HStack {
-                            Text("可以刪除傳出去的訊息嗎？")
-                                .padding(.vertical, 10)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
+            
+                        Button(action: {
+                            isHowToDeleteMessagesView = true
+                        }) {
+                            HStack {
+                                Text("可以刪除傳出去的訊息嗎？")
+                                    .padding(.vertical, 10)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
                         }
+                        .foregroundColor(.black)
                         
                         HStack {
                             Text("如何檢舉用戶？")
