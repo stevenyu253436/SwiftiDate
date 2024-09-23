@@ -84,6 +84,7 @@
 		D0DDDB222CA1413600A78A87 /* WhyIsItHardToMatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB212CA1413600A78A87 /* WhyIsItHardToMatchView.swift */; };
 		D0DDDB242CA1486E00A78A87 /* HowToUnmatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB232CA1486E00A78A87 /* HowToUnmatchView.swift */; };
 		D0DDDB262CA14B2700A78A87 /* HowToDeleteMessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB252CA14B2600A78A87 /* HowToDeleteMessagesView.swift */; };
+		D0DDDB282CA14FCC00A78A87 /* ReportUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB272CA14FCC00A78A87 /* ReportUserView.swift */; };
 		D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */; };
 /* End PBXBuildFile section */
 
@@ -162,6 +163,7 @@
 		D0DDDB212CA1413600A78A87 /* WhyIsItHardToMatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhyIsItHardToMatchView.swift; sourceTree = "<group>"; };
 		D0DDDB232CA1486E00A78A87 /* HowToUnmatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToUnmatchView.swift; sourceTree = "<group>"; };
 		D0DDDB252CA14B2600A78A87 /* HowToDeleteMessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToDeleteMessagesView.swift; sourceTree = "<group>"; };
+		D0DDDB272CA14FCC00A78A87 /* ReportUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUserView.swift; sourceTree = "<group>"; };
 		D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetWillingnessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -289,6 +291,7 @@
 				D0DDDB212CA1413600A78A87 /* WhyIsItHardToMatchView.swift */,
 				D0DDDB232CA1486E00A78A87 /* HowToUnmatchView.swift */,
 				D0DDDB252CA14B2600A78A87 /* HowToDeleteMessagesView.swift */,
+				D0DDDB272CA14FCC00A78A87 /* ReportUserView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -508,6 +511,7 @@
 				D0445C692C723AE80059D522 /* FlowLayout.swift in Sources */,
 				D0DDDB142CA10EAD00A78A87 /* SettingsView.swift in Sources */,
 				D018AD5B2C9E57DF005A14B9 /* UserGuideView.swift in Sources */,
+				D0DDDB282CA14FCC00A78A87 /* ReportUserView.swift in Sources */,
 				D0DDDB1C2CA1321300A78A87 /* IsSwiftiDatePaidView.swift in Sources */,
 				D0DDDB222CA1413600A78A87 /* WhyIsItHardToMatchView.swift in Sources */,
 				D0DDDB182CA11E5100A78A87 /* HelpView.swift in Sources */,

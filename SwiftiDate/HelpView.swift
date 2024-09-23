@@ -17,6 +17,7 @@ struct HelpView: View {
     @State private var isWhyIsItHardToMatch = false // State variable to control navigation to WhyIsItHardTo
     @State private var isHowToUnmatchView = false // State variable to control navigation to HowToUnmatchView
     @State private var isHowToDeleteMessagesView = false // State variable to control navigation to HowToDeleteMessagesView
+    @State private var isReportUserView = false // State variable to control navigation to ReportUserView
 
     // Extracting the data to separate properties
     private let premiumTopics = [
@@ -66,7 +67,11 @@ struct HelpView: View {
             WhyIsItHardToMatchView(isWhyIsItHardToMatch: $isWhyIsItHardToMatch) // Navigate to WhyIsItHardToMatchView
         } else if isHowToUnmatchView {
             HowToUnmatchView(isHowToUnmatch: $isHowToUnmatchView) // Navigate to HowToUnmatchView
-        } else {
+        } else if isHowToDeleteMessagesView {
+            HowToDeleteMessagesView(isHowToDeleteMessages: $isHowToDeleteMessagesView) // Navigate to HowtoDeleteMesagesView
+        } else if isReportUserView {
+            ReportUserView(isReportUserView: $isReportUserView) // Navigate to ReportUserView
+        }else {
             VStack {
                 // Custom Navigation Bar
                 HStack {
@@ -192,14 +197,19 @@ struct HelpView: View {
                             }
                         }
                         .foregroundColor(.black)
-                        
-                        HStack {
-                            Text("如何檢舉用戶？")
-                                .padding(.vertical, 10)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
+            
+                        Button(action: {
+                            isReportUserView = true
+                        }) {
+                            HStack {
+                                Text("如何檢舉用戶？")
+                                    .padding(.vertical, 10)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
                         }
+                        .foregroundColor(.black)
                     }
                     
                     // Adding the SwiftiDate Premium section
