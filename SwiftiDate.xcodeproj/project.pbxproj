@@ -95,6 +95,7 @@
 		D0DDDB382CA171B400A78A87 /* HowToCancelSubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB372CA171B300A78A87 /* HowToCancelSubscriptionView.swift */; };
 		D0DDDB3A2CA174A100A78A87 /* RestorePurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB392CA174A000A78A87 /* RestorePurchaseView.swift */; };
 		D0DDDB3C2CA1770400A78A87 /* RefundPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB3B2CA1770400A78A87 /* RefundPolicyView.swift */; };
+		D0DDDB3E2CA179AC00A78A87 /* WhatIsSwiftiDatePremiumDiscountPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB3D2CA179AC00A78A87 /* WhatIsSwiftiDatePremiumDiscountPolicyView.swift */; };
 		D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */; };
 /* End PBXBuildFile section */
 
@@ -184,6 +185,7 @@
 		D0DDDB372CA171B300A78A87 /* HowToCancelSubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToCancelSubscriptionView.swift; sourceTree = "<group>"; };
 		D0DDDB392CA174A000A78A87 /* RestorePurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestorePurchaseView.swift; sourceTree = "<group>"; };
 		D0DDDB3B2CA1770400A78A87 /* RefundPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefundPolicyView.swift; sourceTree = "<group>"; };
+		D0DDDB3D2CA179AC00A78A87 /* WhatIsSwiftiDatePremiumDiscountPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIsSwiftiDatePremiumDiscountPolicyView.swift; sourceTree = "<group>"; };
 		D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetWillingnessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -322,6 +324,7 @@
 				D0DDDB372CA171B300A78A87 /* HowToCancelSubscriptionView.swift */,
 				D0DDDB392CA174A000A78A87 /* RestorePurchaseView.swift */,
 				D0DDDB3B2CA1770400A78A87 /* RefundPolicyView.swift */,
+				D0DDDB3D2CA179AC00A78A87 /* WhatIsSwiftiDatePremiumDiscountPolicyView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -537,6 +540,7 @@
 				D0445C8B2C73D0760059D522 /* DietPreferencesView.swift in Sources */,
 				D0445C792C73C0B30059D522 /* ZodiacPickerView.swift in Sources */,
 				D0445C7F2C73C9080059D522 /* LookingForView.swift in Sources */,
+				D0DDDB3E2CA179AC00A78A87 /* WhatIsSwiftiDatePremiumDiscountPolicyView.swift in Sources */,
 				D0DDDB3A2CA174A100A78A87 /* RestorePurchaseView.swift in Sources */,
 				D0445C672C7239C80059D522 /* InterestsView.swift in Sources */,
 				D0445C312C71B3800059D522 /* ContentView.swift in Sources */,

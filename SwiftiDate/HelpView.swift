@@ -28,6 +28,7 @@ struct HelpView: View {
     @State private var isHowToCancelSubscriptionView = false // State variable to control navigation to HowToCancelSubscriptionView
     @State private var isRestorePurchaseView = false // State variable to control navigation to RestorePurchaseView
     @State private var isRefundPolicyView = false // State variable to control navigation to RefundPolicyView
+    @State private var isWhatIsSwiftiDatePremiumDiscountPolicyView = false // State variable to control navigation to WhatIsSwiftiDatePremiumDiscountPolicyView
 
     // Extracting the data to separate properties
     private let personalInfoTopics = [
@@ -79,6 +80,8 @@ struct HelpView: View {
             RestorePurchaseView(isRestorePurchaseView: $isRestorePurchaseView) // Navigate to RestorePurchaseView
         } else if isRefundPolicyView {
             RefundPolicyView(isRefundPolicyView: $isRefundPolicyView) // Navigate to RefundPolicyView
+        } else if isWhatIsSwiftiDatePremiumDiscountPolicyView {
+            WhatIsSwiftiDatePremiumDiscountPolicyView(isWhatIsSwiftiDatePremiumDiscountPolicyView: $isWhatIsSwiftiDatePremiumDiscountPolicyView) // Navigate to WhatIsSwiftiDatePremiumDiscountPolicyView
         } else {
             VStack {
                 // Custom Navigation Bar
@@ -354,13 +357,18 @@ struct HelpView: View {
                                     .foregroundColor(.gray)
                             }
                         }
-                                    
-                        HStack {
-                            Text("SwiftiDate Premium 的價格有優惠嗎？")
-                                .padding(.vertical, 10)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
+                        .foregroundColor(.black)
+
+                        Button(action: {
+                            isWhatIsSwiftiDatePremiumDiscountPolicyView = true
+                        }) {
+                            HStack {
+                                Text("SwiftiDate Premium 的價格有優惠嗎？")
+                                    .padding(.vertical, 10)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
                         }
                     }
                     
