@@ -10,9 +10,9 @@ import SwiftUI
 
 struct HelpView: View {
     @Binding var isHelpView: Bool // Binding to control the dismissal of HelpView
-    
+    @State private var isWhatIsSwiftiDate = false // State variable to control navigation to WhatIsSwiftiDateView
+
     // Extracting the data to separate properties
-    private let overviewTopics = ["SwiftiDate 是什麼？", "SwiftiDate 需要付費使用嗎？"]
     private let chatTopics = [
         "如何與他人配對、聊天？",
         "我能查看誰喜歡了我嗎？",
@@ -56,108 +56,123 @@ struct HelpView: View {
     ]
     
     var body: some View {
-        VStack {
-            // Custom Navigation Bar
-            HStack {
-                Button(action: {
-                    isHelpView = false // Dismiss HelpView and return to SettingsView
-                }) {
-                    Image(systemName: "chevron.left")
-                        .font(.title)
-                        .foregroundColor(.blue)
+        if isWhatIsSwiftiDate {
+            WhatIsSwiftiDateView(isWhatIsSwiftiDate: $isWhatIsSwiftiDate) // Navigate to WhatIsSwiftiDateView
+        } else {
+            VStack {
+                // Custom Navigation Bar
+                HStack {
+                    Button(action: {
+                        isHelpView = false // Dismiss HelpView and return to SettingsView
+                    }) {
+                        Image(systemName: "chevron.left")
+                            .font(.title)
+                    }
+                    
+                    Text("SwiftiDate 幫助")
+                        .font(.headline)
+                        .padding(.leading, 5)
+                    
+                    Spacer()
                 }
+                .padding()
                 
-                Text("SwiftiDate 幫助")
-                    .font(.headline)
-                    .padding(.leading, 5)
+                Divider()
                 
-                Spacer()
+                // Help content
+                List {
+                    Section(header: Text("SwiftiDate 概覽")
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                                .padding(.vertical, 5)) {
+                        // Convert HStack to Button
+                        Button(action: {
+                            isWhatIsSwiftiDate = true // Set the state variable to true
+                        }) {
+                            HStack {
+                                Text("SwiftiDate 是什麼？")
+                                    .padding(.vertical, 10)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
+                        }
+                        .foregroundColor(.black) // Ensure the text color remains black
+                        
+                        HStack {
+                            Text("SwiftiDate 需要付費使用嗎？")
+                                .padding(.vertical, 10)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.gray)
+                        }
+                    }
+                    
+                    Section(header: Text("配對與聊天")
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                                .padding(.vertical, 5)) {
+                        ForEach(chatTopics, id: \.self) { topic in
+                            HStack {
+                                Text(topic)
+                                    .padding(.vertical, 10)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
+                        }
+                    }
+                    
+                    // Adding the SwiftiDate Premium section
+                    Section(header: Text("SwiftiDate Premium")
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                                .padding(.vertical, 5)) {
+                        ForEach(premiumTopics, id: \.self) { topic in
+                            HStack {
+                                Text(topic)
+                                    .padding(.vertical, 10)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
+                        }
+                    }
+                    
+                    // Adding the SwiftiDate Supreme section
+                    Section(header: Text("SwiftiDate Supreme")
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                                .padding(.vertical, 5)) {
+                        ForEach(supremeTopics, id: \.self) { topic in
+                            HStack {
+                                Text(topic)
+                                    .padding(.vertical, 10)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
+                        }
+                    }
+                    
+                    // Adding the Personal Information and Settings section
+                    Section(header: Text("個人資訊與設定")
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                                .padding(.vertical, 5)) {
+                        ForEach(personalInfoTopics, id: \.self) { topic in
+                            HStack {
+                                Text(topic)
+                                    .padding(.vertical, 10)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
+                        }
+                    }
+                }
+                .listStyle(GroupedListStyle()) // To create the grouped appearance like in your image
             }
-            .padding()
-            
-            Divider()
-            
-            // Help content
-            List {
-                Section(header: Text("SwiftiDate 概覽")
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
-                            .padding(.vertical, 5)) {
-                    ForEach(overviewTopics, id: \.self) { item in
-                        HStack {
-                            Text(item)
-                                .padding(.vertical, 10)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
-                        }
-                    }
-                }
-                
-                Section(header: Text("配對與聊天")
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
-                            .padding(.vertical, 5)) {
-                    ForEach(chatTopics, id: \.self) { topic in
-                        HStack {
-                            Text(topic)
-                                .padding(.vertical, 10)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
-                        }
-                    }
-                }
-                
-                // Adding the SwiftiDate Premium section
-                Section(header: Text("SwiftiDate Premium")
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
-                            .padding(.vertical, 5)) {
-                    ForEach(premiumTopics, id: \.self) { topic in
-                        HStack {
-                            Text(topic)
-                                .padding(.vertical, 10)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
-                        }
-                    }
-                }
-                
-                // Adding the SwiftiDate Supreme section
-                Section(header: Text("SwiftiDate Supreme")
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
-                            .padding(.vertical, 5)) {
-                    ForEach(supremeTopics, id: \.self) { topic in
-                        HStack {
-                            Text(topic)
-                                .padding(.vertical, 10)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
-                        }
-                    }
-                }
-                
-                // Adding the Personal Information and Settings section
-                Section(header: Text("個人資訊與設定")
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
-                            .padding(.vertical, 5)) {
-                    ForEach(personalInfoTopics, id: \.self) { topic in
-                        HStack {
-                            Text(topic)
-                                .padding(.vertical, 10)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
-                        }
-                    }
-                }
-            }
-            .listStyle(GroupedListStyle()) // To create the grouped appearance like in your image
         }
     }
 }
