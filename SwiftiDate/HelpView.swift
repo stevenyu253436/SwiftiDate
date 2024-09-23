@@ -29,6 +29,8 @@ struct HelpView: View {
     @State private var isRestorePurchaseView = false // State variable to control navigation to RestorePurchaseView
     @State private var isRefundPolicyView = false // State variable to control navigation to RefundPolicyView
     @State private var isWhatIsSwiftiDatePremiumDiscountPolicyView = false // State variable to control navigation to WhatIsSwiftiDatePremiumDiscountPolicyView
+    @State private var isWhatIsSwiftiDateSupremeView = false // State variable to control navigation to WhatIsSwiftiDateSupremeView
+    @State private var isHowToUseDailyPraiseOpportunityView = false // State variable to control navigation to HowToUseDailyPraiseOpportunityView
 
     // Extracting the data to separate properties
     private let personalInfoTopics = [
@@ -82,6 +84,10 @@ struct HelpView: View {
             RefundPolicyView(isRefundPolicyView: $isRefundPolicyView) // Navigate to RefundPolicyView
         } else if isWhatIsSwiftiDatePremiumDiscountPolicyView {
             WhatIsSwiftiDatePremiumDiscountPolicyView(isWhatIsSwiftiDatePremiumDiscountPolicyView: $isWhatIsSwiftiDatePremiumDiscountPolicyView) // Navigate to WhatIsSwiftiDatePremiumDiscountPolicyView
+        } else if isWhatIsSwiftiDateSupremeView {
+            WhatIsSwiftiDateSupremeView(isWhatIsSwiftiDateSupremeView: $isWhatIsSwiftiDateSupremeView) // Navigate to WhatIsSwiftiDateSupremeView
+        } else if isHowToUseDailyPraiseOpportunityView {
+            
         } else {
             VStack {
                 // Custom Navigation Bar
@@ -370,6 +376,7 @@ struct HelpView: View {
                                     .foregroundColor(.gray)
                             }
                         }
+                        .foregroundColor(.black)
                     }
                     
                     // Adding the SwiftiDate Supreme section
@@ -378,20 +385,28 @@ struct HelpView: View {
                                 .foregroundColor(.gray)
                                 .padding(.vertical, 5)) {
                                     
-                        HStack {
-                            Text("什麼是 SwiftiDate Supreme？")
-                                .padding(.vertical, 10)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
+                        Button(action: {
+                            isWhatIsSwiftiDateSupremeView = true
+                        }) {
+                            HStack {
+                                Text("什麼是 SwiftiDate Supreme？")
+                                    .padding(.vertical, 10)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
                         }
                                     
-                        HStack {
-                            Text("如何使用「每日 3 次的讚美機會」功能？")
-                                .padding(.vertical, 10)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
+                        Button(action: {
+                            isHowToUseDailyPraiseOpportunityView = true
+                        }) {
+                            HStack {
+                                Text("如何使用「每日 3 次的讚美機會」功能？")
+                                    .padding(.vertical, 10)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
                         }
                                     
                         HStack {
