@@ -37,6 +37,7 @@ struct HelpView: View {
     @State private var isUpdateProfileDetailsView = false // State variable to control navigation to UpdateProfileDetailsView
     @State private var isManageProfilePhotosView = false // State variable to control navigation to ManageProfilePhotosView
     @State private var isPhotoUploadGuidelinesView = false // State variable to control navigation to PhotoUploadGuidelinesView
+    @State private var isHowToEnableNotificationsView = false // State variable to control navigation to HowToEnableNotificationsView
 
     // Extracting the data to separate properties
     private let personalInfoTopics = [
@@ -106,6 +107,8 @@ struct HelpView: View {
             ManageProfilePhotosView(isManageProfilePhotosView: $isManageProfilePhotosView) // Navigate to ManageProfilePhotosView
         } else if isPhotoUploadGuidelinesView {
             PhotoUploadGuidelinesView(isPhotoUploadGuidelinesView: $isPhotoUploadGuidelinesView) // Navigate to PhotoUploadGuidelinesView
+        } else if isHowToEnableNotificationsView {
+            HowToEnableNotificationsView(isHowToEnableNotificationsView: $isHowToEnableNotificationsView) // Navigate to HowToEnableNotificationsView
         } else {
             VStack {
                 // Custom Navigation Bar
@@ -546,12 +549,16 @@ struct HelpView: View {
                                 .foregroundColor(.gray)
                         }
                         
-                        HStack {
-                            Text("如何收到SwiftiDate的訊息提醒？")
-                                .padding(.vertical, 10)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
+                        Button(action: {
+                            isHowToEnableNotificationsView = true
+                        }) {
+                            HStack {
+                                Text("如何收到SwiftiDate的訊息提醒？")
+                                    .padding(.vertical, 10)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
                         }
                         
                         HStack {

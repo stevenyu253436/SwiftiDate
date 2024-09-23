@@ -104,6 +104,7 @@
 		D0DDDB4A2CA196FB00A78A87 /* UpdateProfileDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB492CA196FB00A78A87 /* UpdateProfileDetailsView.swift */; };
 		D0DDDB4C2CA19A0600A78A87 /* ManageProfilePhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB4B2CA19A0600A78A87 /* ManageProfilePhotosView.swift */; };
 		D0DDDB4E2CA19D0800A78A87 /* PhotoUploadGuidelinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB4D2CA19D0800A78A87 /* PhotoUploadGuidelinesView.swift */; };
+		D0DDDB502CA1A01200A78A87 /* HowToEnableNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB4F2CA1A01200A78A87 /* HowToEnableNotificationsView.swift */; };
 		D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */; };
 /* End PBXBuildFile section */
 
@@ -202,6 +203,7 @@
 		D0DDDB492CA196FB00A78A87 /* UpdateProfileDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileDetailsView.swift; sourceTree = "<group>"; };
 		D0DDDB4B2CA19A0600A78A87 /* ManageProfilePhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageProfilePhotosView.swift; sourceTree = "<group>"; };
 		D0DDDB4D2CA19D0800A78A87 /* PhotoUploadGuidelinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoUploadGuidelinesView.swift; sourceTree = "<group>"; };
+		D0DDDB4F2CA1A01200A78A87 /* HowToEnableNotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToEnableNotificationsView.swift; sourceTree = "<group>"; };
 		D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetWillingnessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -349,6 +351,7 @@
 				D0DDDB492CA196FB00A78A87 /* UpdateProfileDetailsView.swift */,
 				D0DDDB4B2CA19A0600A78A87 /* ManageProfilePhotosView.swift */,
 				D0DDDB4D2CA19D0800A78A87 /* PhotoUploadGuidelinesView.swift */,
+				D0DDDB4F2CA1A01200A78A87 /* HowToEnableNotificationsView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -562,6 +565,7 @@
 				D0445C752C73B4EF0059D522 /* LanguageSelectionView.swift in Sources */,
 				D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */,
 				D0445C712C72F7870059D522 /* JobInputView.swift in Sources */,
+				D0DDDB502CA1A01200A78A87 /* HowToEnableNotificationsView.swift in Sources */,
 				D0DDDB202CA13C5E00A78A87 /* WhoLikedMeView.swift in Sources */,
 				D0445C8B2C73D0760059D522 /* DietPreferencesView.swift in Sources */,
 				D0445C792C73C0B30059D522 /* ZodiacPickerView.swift in Sources */,
