@@ -87,6 +87,8 @@
 		D0DDDB282CA14FCC00A78A87 /* ReportUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB272CA14FCC00A78A87 /* ReportUserView.swift */; };
 		D0DDDB2A2CA156A700A78A87 /* WhatIsSwiftiDatePremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB292CA156A700A78A87 /* WhatIsSwiftiDatePremiumView.swift */; };
 		D0DDDB2C2CA160BB00A78A87 /* HowToUseWhoLikedMeAndCrushListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB2B2CA160BB00A78A87 /* HowToUseWhoLikedMeAndCrushListView.swift */; };
+		D0DDDB2E2CA1628F00A78A87 /* WhatIsCrushAndHowToUseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB2D2CA1628F00A78A87 /* WhatIsCrushAndHowToUseView.swift */; };
+		D0DDDB302CA164BE00A78A87 /* WhatIsTurboAndHowToUseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB2F2CA164BE00A78A87 /* WhatIsTurboAndHowToUseView.swift */; };
 		D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */; };
 /* End PBXBuildFile section */
 
@@ -168,6 +170,8 @@
 		D0DDDB272CA14FCC00A78A87 /* ReportUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUserView.swift; sourceTree = "<group>"; };
 		D0DDDB292CA156A700A78A87 /* WhatIsSwiftiDatePremiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIsSwiftiDatePremiumView.swift; sourceTree = "<group>"; };
 		D0DDDB2B2CA160BB00A78A87 /* HowToUseWhoLikedMeAndCrushListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToUseWhoLikedMeAndCrushListView.swift; sourceTree = "<group>"; };
+		D0DDDB2D2CA1628F00A78A87 /* WhatIsCrushAndHowToUseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIsCrushAndHowToUseView.swift; sourceTree = "<group>"; };
+		D0DDDB2F2CA164BE00A78A87 /* WhatIsTurboAndHowToUseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIsTurboAndHowToUseView.swift; sourceTree = "<group>"; };
 		D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetWillingnessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -298,6 +302,8 @@
 				D0DDDB272CA14FCC00A78A87 /* ReportUserView.swift */,
 				D0DDDB292CA156A700A78A87 /* WhatIsSwiftiDatePremiumView.swift */,
 				D0DDDB2B2CA160BB00A78A87 /* HowToUseWhoLikedMeAndCrushListView.swift */,
+				D0DDDB2D2CA1628F00A78A87 /* WhatIsCrushAndHowToUseView.swift */,
+				D0DDDB2F2CA164BE00A78A87 /* WhatIsTurboAndHowToUseView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -517,6 +523,7 @@
 				D0445C692C723AE80059D522 /* FlowLayout.swift in Sources */,
 				D0DDDB142CA10EAD00A78A87 /* SettingsView.swift in Sources */,
 				D018AD5B2C9E57DF005A14B9 /* UserGuideView.swift in Sources */,
+				D0DDDB302CA164BE00A78A87 /* WhatIsTurboAndHowToUseView.swift in Sources */,
 				D0DDDB282CA14FCC00A78A87 /* ReportUserView.swift in Sources */,
 				D0DDDB1C2CA1321300A78A87 /* IsSwiftiDatePaidView.swift in Sources */,
 				D0DDDB222CA1413600A78A87 /* WhyIsItHardToMatchView.swift in Sources */,
@@ -524,6 +531,7 @@
 				D0445C852C73CDB60059D522 /* SmokingOptionsView.swift in Sources */,
 				D0445C6D2C72EA990059D522 /* SchoolInputView.swift in Sources */,
 				D0DDDB0D2CA07A2400A78A87 /* FeaturedCardView.swift in Sources */,
+				D0DDDB2E2CA1628F00A78A87 /* WhatIsCrushAndHowToUseView.swift in Sources */,
 				D055E9922C8CCFBA00A97DD1 /* InterestSelectionView.swift in Sources */,
 				D0445C2F2C71B3800059D522 /* SwiftiDateApp.swift in Sources */,
 				D0DDDB2C2CA160BB00A78A87 /* HowToUseWhoLikedMeAndCrushListView.swift in Sources */,

@@ -20,6 +20,8 @@ struct HelpView: View {
     @State private var isReportUserView = false // State variable to control navigation to ReportUserView
     @State private var isWhatIsSwiftiDatePremium = false // State variable to control navigation to WhatIsSwiftiDatePremium
     @State private var isHowToUseWhoLikedMeAndCrushListView = false // State variable to control navigation to HowToUseWhoLikedMeAndCrushListView
+    @State private var isWhatIsCrushAndHowToUseView = false // State variable to control navigation to WhatIsCrushAndHowToUseView
+    @State private var isWhatIsTurboAndHowToUseView = false // State variable to control navigation to WhatIsTurboAndHowToUseView
     
     // Extracting the data to separate properties
     private let personalInfoTopics = [
@@ -55,6 +57,10 @@ struct HelpView: View {
             WhatIsSwiftiDatePremiumView(isWhatIsSwiftiDatePremium: $isWhatIsSwiftiDatePremium) // Navigate to WhatIsSwiftiDatePremiumView
         } else if isHowToUseWhoLikedMeAndCrushListView {
             HowToUseWhoLikedMeAndCrushListView(isHowToUseWhoLikedMeAndCrushListView: $isHowToUseWhoLikedMeAndCrushListView) // Navigate to HowToUseWhoLikedMeAndCrushListVIew
+        } else if isWhatIsCrushAndHowToUseView {
+            WhatIsCrushAndHowToUseView(isWhatIsCrushAndHowToUseView: $isWhatIsCrushAndHowToUseView) // Navigate to WhatIsCrushAndHowToUseView
+        } else if isWhatIsTurboAndHowToUseView {
+            WhatIsTurboAndHowToUseView(isWhatIsTurboAndHowToUseView: $isWhatIsTurboAndHowToUseView) // Navigate to WhatIsTurboAndHowToUseView
         } else {
             VStack {
                 // Custom Navigation Bar
@@ -228,21 +234,31 @@ struct HelpView: View {
                         }
                         .foregroundColor(.black)
                                     
-                        HStack {
-                            Text("「Crush」是什麼？如何使用？")
-                                .padding(.vertical, 10)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
+                        Button(action: {
+                            isWhatIsCrushAndHowToUseView = true
+                        }) {
+                            HStack {
+                                Text("「Crush」是什麼？如何使用？")
+                                    .padding(.vertical, 10)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
                         }
+                        .foregroundColor(.black)
                                     
-                        HStack {
-                            Text("「Turbo」是什麼？如何使用？")
-                                .padding(.vertical, 10)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
+                        Button(action: {
+                            isWhatIsTurboAndHowToUseView = true
+                        }) {
+                            HStack {
+                                Text("「Turbo」是什麼？如何使用？")
+                                    .padding(.vertical, 10)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
                         }
+                        .foregroundColor(.black)
                                     
                         HStack {
                             Text("滑錯如何反悔？")
