@@ -74,6 +74,8 @@
 		D0DDDB0B2CA07A0E00A78A87 /* TurboView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB0A2CA07A0D00A78A87 /* TurboView.swift */; };
 		D0DDDB0D2CA07A2400A78A87 /* FeaturedCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB0C2CA07A2400A78A87 /* FeaturedCardView.swift */; };
 		D0DDDB0F2CA0E65F00A78A87 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB0E2CA0E65F00A78A87 /* LocationManager.swift */; };
+		D0DDDB122CA1008B00A78A87 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = D0DDDB112CA1008B00A78A87 /* KeychainAccess */; };
+		D0DDDB142CA10EAD00A78A87 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB132CA10EAD00A78A87 /* SettingsView.swift */; };
 		D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */; };
 /* End PBXBuildFile section */
 
@@ -143,6 +145,7 @@
 		D0DDDB0A2CA07A0D00A78A87 /* TurboView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurboView.swift; sourceTree = "<group>"; };
 		D0DDDB0C2CA07A2400A78A87 /* FeaturedCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedCardView.swift; sourceTree = "<group>"; };
 		D0DDDB0E2CA0E65F00A78A87 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		D0DDDB132CA10EAD00A78A87 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetWillingnessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -171,6 +174,7 @@
 				D018AD7C2C9ED5D4005A14B9 /* FirebaseFirestoreCombine-Community in Frameworks */,
 				D018AD7A2C9ED5D4005A14B9 /* FirebaseFirestore in Frameworks */,
 				D018AD782C9ED5D4005A14B9 /* FirebaseDynamicLinks in Frameworks */,
+				D0DDDB122CA1008B00A78A87 /* KeychainAccess in Frameworks */,
 				D018AD822C9ED5D4005A14B9 /* FirebaseInAppMessaging-Beta in Frameworks */,
 				D018AD922C9ED5D4005A14B9 /* FirebaseVertexAI-Preview in Frameworks */,
 				D018AD8C2C9ED5D4005A14B9 /* FirebaseRemoteConfig in Frameworks */,
@@ -260,6 +264,7 @@
 				D0DDDB0A2CA07A0D00A78A87 /* TurboView.swift */,
 				D0DDDB0C2CA07A2400A78A87 /* FeaturedCardView.swift */,
 				D0DDDB0E2CA0E65F00A78A87 /* LocationManager.swift */,
+				D0DDDB132CA10EAD00A78A87 /* SettingsView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -329,6 +334,7 @@
 				D018AD8D2C9ED5D4005A14B9 /* FirebaseStorage */,
 				D018AD8F2C9ED5D4005A14B9 /* FirebaseStorageCombine-Community */,
 				D018AD912C9ED5D4005A14B9 /* FirebaseVertexAI-Preview */,
+				D0DDDB112CA1008B00A78A87 /* KeychainAccess */,
 			);
 			productName = SwiftiDate;
 			productReference = D0445C2B2C71B3800059D522 /* SwiftiDate.app */;
@@ -404,6 +410,7 @@
 			mainGroup = D0445C222C71B3800059D522;
 			packageReferences = (
 				D018AD642C9ED3C2005A14B9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				D0DDDB102CA1008B00A78A87 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 			);
 			productRefGroup = D0445C2C2C71B3800059D522 /* Products */;
 			projectDirPath = "";
@@ -473,6 +480,7 @@
 				D0445C312C71B3800059D522 /* ContentView.swift in Sources */,
 				D0445C812C73CA130059D522 /* PetSelectionView.swift in Sources */,
 				D0445C692C723AE80059D522 /* FlowLayout.swift in Sources */,
+				D0DDDB142CA10EAD00A78A87 /* SettingsView.swift in Sources */,
 				D018AD5B2C9E57DF005A14B9 /* UserGuideView.swift in Sources */,
 				D0445C852C73CDB60059D522 /* SmokingOptionsView.swift in Sources */,
 				D0445C6D2C72EA990059D522 /* SchoolInputView.swift in Sources */,
@@ -830,6 +838,14 @@
 				minimumVersion = 11.2.0;
 			};
 		};
+		D0DDDB102CA1008B00A78A87 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -947,6 +963,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D018AD642C9ED3C2005A14B9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseVertexAI-Preview";
+		};
+		D0DDDB112CA1008B00A78A87 /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D0DDDB102CA1008B00A78A87 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
