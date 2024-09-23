@@ -89,6 +89,7 @@
 		D0DDDB2C2CA160BB00A78A87 /* HowToUseWhoLikedMeAndCrushListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB2B2CA160BB00A78A87 /* HowToUseWhoLikedMeAndCrushListView.swift */; };
 		D0DDDB2E2CA1628F00A78A87 /* WhatIsCrushAndHowToUseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB2D2CA1628F00A78A87 /* WhatIsCrushAndHowToUseView.swift */; };
 		D0DDDB302CA164BE00A78A87 /* WhatIsTurboAndHowToUseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB2F2CA164BE00A78A87 /* WhatIsTurboAndHowToUseView.swift */; };
+		D0DDDB322CA16B7000A78A87 /* UndoSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB312CA16B7000A78A87 /* UndoSwipeView.swift */; };
 		D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */; };
 /* End PBXBuildFile section */
 
@@ -172,6 +173,7 @@
 		D0DDDB2B2CA160BB00A78A87 /* HowToUseWhoLikedMeAndCrushListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToUseWhoLikedMeAndCrushListView.swift; sourceTree = "<group>"; };
 		D0DDDB2D2CA1628F00A78A87 /* WhatIsCrushAndHowToUseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIsCrushAndHowToUseView.swift; sourceTree = "<group>"; };
 		D0DDDB2F2CA164BE00A78A87 /* WhatIsTurboAndHowToUseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIsTurboAndHowToUseView.swift; sourceTree = "<group>"; };
+		D0DDDB312CA16B7000A78A87 /* UndoSwipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoSwipeView.swift; sourceTree = "<group>"; };
 		D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetWillingnessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -304,6 +306,7 @@
 				D0DDDB2B2CA160BB00A78A87 /* HowToUseWhoLikedMeAndCrushListView.swift */,
 				D0DDDB2D2CA1628F00A78A87 /* WhatIsCrushAndHowToUseView.swift */,
 				D0DDDB2F2CA164BE00A78A87 /* WhatIsTurboAndHowToUseView.swift */,
+				D0DDDB312CA16B7000A78A87 /* UndoSwipeView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -501,6 +504,7 @@
 				D0DDDB092C9FDE0500A78A87 /* InteractiveContentView.swift in Sources */,
 				D0445C832C73CBE70059D522 /* FitnessOptionsView.swift in Sources */,
 				D0DDDB1A2CA1282B00A78A87 /* WhatIsSwiftiDateView.swift in Sources */,
+				D0DDDB322CA16B7000A78A87 /* UndoSwipeView.swift in Sources */,
 				D0445C6B2C7247050059D522 /* DegreePicker.swift in Sources */,
 				D018AD632C9E87F6005A14B9 /* ChatView.swift in Sources */,
 				D018AD962C9EEA83005A14B9 /* AsyncImageView.swift in Sources */,

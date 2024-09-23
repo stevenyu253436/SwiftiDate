@@ -22,6 +22,7 @@ struct HelpView: View {
     @State private var isHowToUseWhoLikedMeAndCrushListView = false // State variable to control navigation to HowToUseWhoLikedMeAndCrushListView
     @State private var isWhatIsCrushAndHowToUseView = false // State variable to control navigation to WhatIsCrushAndHowToUseView
     @State private var isWhatIsTurboAndHowToUseView = false // State variable to control navigation to WhatIsTurboAndHowToUseView
+    @State private var isUndoSwipeView = false // State variable to control navigation to UndoSwipeView
     
     // Extracting the data to separate properties
     private let personalInfoTopics = [
@@ -61,6 +62,8 @@ struct HelpView: View {
             WhatIsCrushAndHowToUseView(isWhatIsCrushAndHowToUseView: $isWhatIsCrushAndHowToUseView) // Navigate to WhatIsCrushAndHowToUseView
         } else if isWhatIsTurboAndHowToUseView {
             WhatIsTurboAndHowToUseView(isWhatIsTurboAndHowToUseView: $isWhatIsTurboAndHowToUseView) // Navigate to WhatIsTurboAndHowToUseView
+        } else if isUndoSwipeView {
+            UndoSwipeView(isUndoSwipeView: $isUndoSwipeView) // Navigate to UndoSwipeView
         } else {
             VStack {
                 // Custom Navigation Bar
@@ -260,14 +263,19 @@ struct HelpView: View {
                         }
                         .foregroundColor(.black)
                                     
-                        HStack {
-                            Text("滑錯如何反悔？")
-                                .padding(.vertical, 10)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
+                        Button(action: {
+                            isUndoSwipeView = true
+                        }) {
+                            HStack {
+                                Text("滑錯如何反悔？")
+                                    .padding(.vertical, 10)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
                         }
-                                    
+                        .foregroundColor(.black)
+
                         HStack {
                             Text("如何開啟 Premium 專屬標誌？")
                                 .padding(.vertical, 10)
