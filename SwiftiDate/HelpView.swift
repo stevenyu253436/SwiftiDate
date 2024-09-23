@@ -18,30 +18,10 @@ struct HelpView: View {
     @State private var isHowToUnmatchView = false // State variable to control navigation to HowToUnmatchView
     @State private var isHowToDeleteMessagesView = false // State variable to control navigation to HowToDeleteMessagesView
     @State private var isReportUserView = false // State variable to control navigation to ReportUserView
-
+    @State private var isWhatIsSwiftiDatePremium = false // State variable to control navigation to WhatIsSwiftiDatePremium
+    @State private var isHowToUseWhoLikedMeAndCrushListView = false // State variable to control navigation to HowToUseWhoLikedMeAndCrushListView
+    
     // Extracting the data to separate properties
-    private let premiumTopics = [
-        "什麼是 SwiftiDate Premium？",
-        "如何使用「看看誰喜歡你」與「開啟心動列表」功能？",
-        "「Crush」是什麼？如何使用？",
-        "「Turbo」是什麼？如何使用？",
-        "滑錯如何反悔？",
-        "如何開啟 Premium 專屬標誌？",
-        "如何購買 SwiftiDate Premium？",
-        "如何取消自動續費？",
-        "支付完成後，特權未生效怎麼辦？",
-        "如果已經成功續訂 SwiftiDate Premium，還可以退款嗎？",
-        "SwiftiDate Premium 的價格有優惠嗎？"
-    ]
-    
-    private let supremeTopics = [
-        "什麼是 SwiftiDate Supreme？",
-        "如何使用「每日 3 次的讚美機會」功能？",
-        "如何使用「高級篩選」功能？",
-        "如何使用「隱身模式」功能？",
-        "如何購買 SwiftiDate Supreme？"
-    ]
-    
     private let personalInfoTopics = [
         "如何編輯我的個人資料？",
         "如何更改我的照片？",
@@ -71,7 +51,11 @@ struct HelpView: View {
             HowToDeleteMessagesView(isHowToDeleteMessages: $isHowToDeleteMessagesView) // Navigate to HowtoDeleteMesagesView
         } else if isReportUserView {
             ReportUserView(isReportUserView: $isReportUserView) // Navigate to ReportUserView
-        }else {
+        } else if isWhatIsSwiftiDatePremium {
+            WhatIsSwiftiDatePremiumView(isWhatIsSwiftiDatePremium: $isWhatIsSwiftiDatePremium) // Navigate to WhatIsSwiftiDatePremiumView
+        } else if isHowToUseWhoLikedMeAndCrushListView {
+            HowToUseWhoLikedMeAndCrushListView(isHowToUseWhoLikedMeAndCrushListView: $isHowToUseWhoLikedMeAndCrushListView) // Navigate to HowToUseWhoLikedMeAndCrushListVIew
+        } else {
             VStack {
                 // Custom Navigation Bar
                 HStack {
@@ -217,14 +201,103 @@ struct HelpView: View {
                                 .font(.subheadline)
                                 .foregroundColor(.gray)
                                 .padding(.vertical, 5)) {
-                        ForEach(premiumTopics, id: \.self) { topic in
+                                    
+                        Button(action: {
+                            isWhatIsSwiftiDatePremium = true
+                        }) {
                             HStack {
-                                Text(topic)
+                                Text("什麼是 SwiftiDate Premium？")
                                     .padding(.vertical, 10)
                                 Spacer()
                                 Image(systemName: "chevron.right")
                                     .foregroundColor(.gray)
                             }
+                        }
+                        .foregroundColor(.black)
+                                
+                        Button(action: {
+                            isHowToUseWhoLikedMeAndCrushListView = true
+                        }) {
+                            HStack {
+                                Text("如何使用「看看誰喜歡你」與「開啟心動列表」功能？")
+                                    .padding(.vertical, 10)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
+                        }
+                        .foregroundColor(.black)
+                                    
+                        HStack {
+                            Text("「Crush」是什麼？如何使用？")
+                                .padding(.vertical, 10)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.gray)
+                        }
+                                    
+                        HStack {
+                            Text("「Turbo」是什麼？如何使用？")
+                                .padding(.vertical, 10)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.gray)
+                        }
+                                    
+                        HStack {
+                            Text("滑錯如何反悔？")
+                                .padding(.vertical, 10)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.gray)
+                        }
+                                    
+                        HStack {
+                            Text("如何開啟 Premium 專屬標誌？")
+                                .padding(.vertical, 10)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.gray)
+                        }
+                                    
+                        HStack {
+                            Text("如何購買 SwiftiDate Premium？")
+                                .padding(.vertical, 10)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.gray)
+                        }
+                                    
+                        HStack {
+                            Text("如何取消自動續費？")
+                                .padding(.vertical, 10)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.gray)
+                        }
+                                    
+                        HStack {
+                            Text("支付完成後，特權未生效怎麼辦？")
+                                .padding(.vertical, 10)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.gray)
+                        }
+                                    
+                        HStack {
+                            Text("如果已經成功續訂 SwiftiDate Premium，還可以退款嗎？")
+                                .padding(.vertical, 10)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.gray)
+                        }
+                                    
+                        HStack {
+                            Text("SwiftiDate Premium 的價格有優惠嗎？")
+                                .padding(.vertical, 10)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.gray)
                         }
                     }
                     
@@ -233,14 +306,45 @@ struct HelpView: View {
                                 .font(.subheadline)
                                 .foregroundColor(.gray)
                                 .padding(.vertical, 5)) {
-                        ForEach(supremeTopics, id: \.self) { topic in
-                            HStack {
-                                Text(topic)
-                                    .padding(.vertical, 10)
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(.gray)
-                            }
+                                    
+                        HStack {
+                            Text("什麼是 SwiftiDate Supreme？")
+                                .padding(.vertical, 10)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.gray)
+                        }
+                                    
+                        HStack {
+                            Text("如何使用「每日 3 次的讚美機會」功能？")
+                                .padding(.vertical, 10)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.gray)
+                        }
+                                    
+                        HStack {
+                            Text("如何使用「高級篩選」功能？")
+                                .padding(.vertical, 10)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.gray)
+                        }
+                                    
+                        HStack {
+                            Text("如何使用「隱身模式」功能？")
+                                .padding(.vertical, 10)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.gray)
+                        }
+                                    
+                        HStack {
+                            Text("如何購買 SwiftiDate Supreme？")
+                                .padding(.vertical, 10)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.gray)
                         }
                     }
                     
