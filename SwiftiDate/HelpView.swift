@@ -31,6 +31,8 @@ struct HelpView: View {
     @State private var isWhatIsSwiftiDatePremiumDiscountPolicyView = false // State variable to control navigation to WhatIsSwiftiDatePremiumDiscountPolicyView
     @State private var isWhatIsSwiftiDateSupremeView = false // State variable to control navigation to WhatIsSwiftiDateSupremeView
     @State private var isHowToUseDailyPraiseOpportunityView = false // State variable to control navigation to HowToUseDailyPraiseOpportunityView
+    @State private var isHowToUseAdvancedFilteringView = false // State variable to control navigation to HowToUseAdvancedFilteringView
+    @State private var isHowToUseIncognitoModeView = false // State variable to control navigation to HowToUseIncognitoModeView
 
     // Extracting the data to separate properties
     private let personalInfoTopics = [
@@ -88,6 +90,8 @@ struct HelpView: View {
             WhatIsSwiftiDateSupremeView(isWhatIsSwiftiDateSupremeView: $isWhatIsSwiftiDateSupremeView) // Navigate to WhatIsSwiftiDateSupremeView
         } else if isHowToUseDailyPraiseOpportunityView {
             HowToUseDailyPraiseOpportunityView(isHowToUseDailyPraiseOpportunityView: $isHowToUseDailyPraiseOpportunityView) // Navigate to HowToUseDailyPraiseOpportunityView
+        } else if isHowToUseAdvancedFilteringView {
+            HowToUseAdvancedFilteringView(isHowToUseAdvancedFilteringView: $isHowToUseAdvancedFilteringView) // Navigate to HowToUseAdvancedFilteringView
         } else {
             VStack {
                 // Custom Navigation Bar
@@ -396,7 +400,8 @@ struct HelpView: View {
                                     .foregroundColor(.gray)
                             }
                         }
-                                    
+                        .foregroundColor(.black)
+
                         Button(action: {
                             isHowToUseDailyPraiseOpportunityView = true
                         }) {
@@ -408,13 +413,18 @@ struct HelpView: View {
                                     .foregroundColor(.gray)
                             }
                         }
-                                    
-                        HStack {
-                            Text("如何使用「高級篩選」功能？")
-                                .padding(.vertical, 10)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
+                        .foregroundColor(.black)
+
+                        Button(action: {
+                            isHowToUseAdvancedFilteringView = true
+                        }) {
+                            HStack {
+                                Text("如何使用「高級篩選」功能？")
+                                    .padding(.vertical, 10)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
                         }
                                     
                         HStack {
