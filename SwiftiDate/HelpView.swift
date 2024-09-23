@@ -13,6 +13,7 @@ struct HelpView: View {
     @State private var isWhatIsSwiftiDate = false // State variable to control navigation to WhatIsSwiftiDateView
     @State private var isSwiftiDatePaid = false // State variable to control navigation to IsSwiftiDatePaidView
     @State private var isHowToMatchAndChat = false // State variable to control navigation to HowToMatchAndChatView
+    @State private var isWhoLikedMeView = false // State variable to control navigation to WhoLikedMeView
 
     // Extracting the data to separate properties
     private let premiumTopics = [
@@ -56,6 +57,8 @@ struct HelpView: View {
             IsSwiftiDatePaidView(isSwiftiDatePaid: $isSwiftiDatePaid) // Navigate to IsSwiftiDatePaidView
         } else if isHowToMatchAndChat {
             HowToMatchAndChatView(isHowToMatchAndChat: $isHowToMatchAndChat) // Navigate to HowToMatchAndChatView
+        } else if isWhoLikedMeView {
+            WhoLikedMeView(isWhoLikedMeView: $isWhoLikedMeView) // Navigate to WhoLikedMeView
         } else {
             VStack {
                 // Custom Navigation Bar
@@ -129,13 +132,19 @@ struct HelpView: View {
                         }
                         .foregroundColor(.black)
                         
-                        HStack {
-                            Text("我能查看誰喜歡了我嗎？")
-                                .padding(.vertical, 10)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
+                        // Convert "我能查看誰喜歡了我嗎？" to Button
+                        Button(action: {
+                            isWhoLikedMeView = true // Set the state variable to true
+                        }) {
+                            HStack {
+                                Text("我能查看誰喜歡了我嗎？")
+                                    .padding(.vertical, 10)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
                         }
+                        .foregroundColor(.black)
                         
                         HStack {
                             Text("為什麼我很難配對成功？")

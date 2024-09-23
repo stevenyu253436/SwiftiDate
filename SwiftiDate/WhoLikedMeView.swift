@@ -38,16 +38,9 @@ struct WhoLikedMeView: View {
                 .font(.title)
                 .fontWeight(.bold)
                 .padding(.bottom, 10)
-            
-            Image("who_liked_me") // Replace this with the actual image name
-                .resizable()
-                .scaledToFit()
-                .frame(height: 200)
-                .padding(.bottom, 20)
-                .frame(maxWidth: .infinity, alignment: .center) // Center the image
-            
+                        
             Text("""
-            你可以付費升級為 SwiftiDate Premium 或 Supreme，獲得「看看誰喜歡你」的特權，查看在 SwiftiDate 上有哪些用戶喜歡了你，並可以直接與她/他們配對。SwiftiDate 還會每日為你精選出最受歡迎的用戶，快去試試你跟她/他們是否投緣吧！
+            你可以付費升級為 SwiftiDate Premium 或 Supreme，獲得「看看誰喜歡你」的特權，查看在 SwiftiDate 上有哪些用戶喜歡了你，並可以直接與她/他們配對。SwiftiDate 還會每日為你精選出最受歡迎的用戶，快去試試你跟她/他們是否是吸引你的類型吧！
             """)
             .padding()
 
