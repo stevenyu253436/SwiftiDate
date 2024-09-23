@@ -87,7 +87,7 @@ struct HelpView: View {
         } else if isWhatIsSwiftiDateSupremeView {
             WhatIsSwiftiDateSupremeView(isWhatIsSwiftiDateSupremeView: $isWhatIsSwiftiDateSupremeView) // Navigate to WhatIsSwiftiDateSupremeView
         } else if isHowToUseDailyPraiseOpportunityView {
-            
+            HowToUseDailyPraiseOpportunityView(isHowToUseDailyPraiseOpportunityView: $isHowToUseDailyPraiseOpportunityView) // Navigate to HowToUseDailyPraiseOpportunityView
         } else {
             VStack {
                 // Custom Navigation Bar

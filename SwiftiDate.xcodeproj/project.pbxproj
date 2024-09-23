@@ -97,6 +97,7 @@
 		D0DDDB3C2CA1770400A78A87 /* RefundPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB3B2CA1770400A78A87 /* RefundPolicyView.swift */; };
 		D0DDDB3E2CA179AC00A78A87 /* WhatIsSwiftiDatePremiumDiscountPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB3D2CA179AC00A78A87 /* WhatIsSwiftiDatePremiumDiscountPolicyView.swift */; };
 		D0DDDB402CA17B3700A78A87 /* WhatIsSwiftiDateSupremeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB3F2CA17B3700A78A87 /* WhatIsSwiftiDateSupremeView.swift */; };
+		D0DDDB422CA17D2C00A78A87 /* HowToUseDailyPraiseOpportunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB412CA17D2C00A78A87 /* HowToUseDailyPraiseOpportunityView.swift */; };
 		D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */; };
 /* End PBXBuildFile section */
 
@@ -188,6 +189,7 @@
 		D0DDDB3B2CA1770400A78A87 /* RefundPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefundPolicyView.swift; sourceTree = "<group>"; };
 		D0DDDB3D2CA179AC00A78A87 /* WhatIsSwiftiDatePremiumDiscountPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIsSwiftiDatePremiumDiscountPolicyView.swift; sourceTree = "<group>"; };
 		D0DDDB3F2CA17B3700A78A87 /* WhatIsSwiftiDateSupremeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIsSwiftiDateSupremeView.swift; sourceTree = "<group>"; };
+		D0DDDB412CA17D2C00A78A87 /* HowToUseDailyPraiseOpportunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToUseDailyPraiseOpportunityView.swift; sourceTree = "<group>"; };
 		D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetWillingnessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -328,6 +330,7 @@
 				D0DDDB3B2CA1770400A78A87 /* RefundPolicyView.swift */,
 				D0DDDB3D2CA179AC00A78A87 /* WhatIsSwiftiDatePremiumDiscountPolicyView.swift */,
 				D0DDDB3F2CA17B3700A78A87 /* WhatIsSwiftiDateSupremeView.swift */,
+				D0DDDB412CA17D2C00A78A87 /* HowToUseDailyPraiseOpportunityView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 				D0DDDB3A2CA174A100A78A87 /* RestorePurchaseView.swift in Sources */,
 				D0445C672C7239C80059D522 /* InterestsView.swift in Sources */,
 				D0445C312C71B3800059D522 /* ContentView.swift in Sources */,
+				D0DDDB422CA17D2C00A78A87 /* HowToUseDailyPraiseOpportunityView.swift in Sources */,
 				D0445C812C73CA130059D522 /* PetSelectionView.swift in Sources */,
 				D0445C692C723AE80059D522 /* FlowLayout.swift in Sources */,
 				D0DDDB142CA10EAD00A78A87 /* SettingsView.swift in Sources */,
