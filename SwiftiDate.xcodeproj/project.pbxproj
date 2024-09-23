@@ -81,6 +81,7 @@
 		D0DDDB1C2CA1321300A78A87 /* IsSwiftiDatePaidView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB1B2CA1321300A78A87 /* IsSwiftiDatePaidView.swift */; };
 		D0DDDB1E2CA138B200A78A87 /* HowToMatchAndChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB1D2CA138B200A78A87 /* HowToMatchAndChatView.swift */; };
 		D0DDDB202CA13C5E00A78A87 /* WhoLikedMeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB1F2CA13C5E00A78A87 /* WhoLikedMeView.swift */; };
+		D0DDDB222CA1413600A78A87 /* WhyIsItHardToMatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB212CA1413600A78A87 /* WhyIsItHardToMatchView.swift */; };
 		D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */; };
 /* End PBXBuildFile section */
 
@@ -156,6 +157,7 @@
 		D0DDDB1B2CA1321300A78A87 /* IsSwiftiDatePaidView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsSwiftiDatePaidView.swift; sourceTree = "<group>"; };
 		D0DDDB1D2CA138B200A78A87 /* HowToMatchAndChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToMatchAndChatView.swift; sourceTree = "<group>"; };
 		D0DDDB1F2CA13C5E00A78A87 /* WhoLikedMeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoLikedMeView.swift; sourceTree = "<group>"; };
+		D0DDDB212CA1413600A78A87 /* WhyIsItHardToMatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhyIsItHardToMatchView.swift; sourceTree = "<group>"; };
 		D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetWillingnessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -280,6 +282,7 @@
 				D0DDDB1B2CA1321300A78A87 /* IsSwiftiDatePaidView.swift */,
 				D0DDDB1D2CA138B200A78A87 /* HowToMatchAndChatView.swift */,
 				D0DDDB1F2CA13C5E00A78A87 /* WhoLikedMeView.swift */,
+				D0DDDB212CA1413600A78A87 /* WhyIsItHardToMatchView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -500,6 +503,7 @@
 				D0DDDB142CA10EAD00A78A87 /* SettingsView.swift in Sources */,
 				D018AD5B2C9E57DF005A14B9 /* UserGuideView.swift in Sources */,
 				D0DDDB1C2CA1321300A78A87 /* IsSwiftiDatePaidView.swift in Sources */,
+				D0DDDB222CA1413600A78A87 /* WhyIsItHardToMatchView.swift in Sources */,
 				D0DDDB182CA11E5100A78A87 /* HelpView.swift in Sources */,
 				D0445C852C73CDB60059D522 /* SmokingOptionsView.swift in Sources */,
 				D0445C6D2C72EA990059D522 /* SchoolInputView.swift in Sources */,
