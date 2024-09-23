@@ -54,7 +54,9 @@ struct RestorePurchaseView: View {
                     - 檢查您的 App Store 賬號是否與您購買 SwiftiDate Premium 時使用的賬號一致。
                     - 嘗試重新啟動 SwiftiDate App 或重新登錄您的賬號。
 
-                    如果問題仍未解決，您可以聯繫 SwiftiDate 客服，我們將竭誠為您提供幫助。
+                    如果問題仍未解決，或者支付未成功，您可以聯繫 SwiftiDate 客服，我們將竭誠為您提供幫助。
+
+                    此外，SwiftiDate 的原始碼已經上傳至 GitHub，歡迎用戶查看並幫助我們排查問題，尋找解決方案。您可以在 GitHub 上提交 Issue 或查看我們的 FAQ，謝謝您的支持！
                     """)
                     .padding()
                 }
