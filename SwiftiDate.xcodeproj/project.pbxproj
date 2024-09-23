@@ -94,6 +94,7 @@
 		D0DDDB362CA16FF900A78A87 /* HowToPurchaseSwiftiDatePremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB352CA16FF900A78A87 /* HowToPurchaseSwiftiDatePremiumView.swift */; };
 		D0DDDB382CA171B400A78A87 /* HowToCancelSubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB372CA171B300A78A87 /* HowToCancelSubscriptionView.swift */; };
 		D0DDDB3A2CA174A100A78A87 /* RestorePurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB392CA174A000A78A87 /* RestorePurchaseView.swift */; };
+		D0DDDB3C2CA1770400A78A87 /* RefundPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB3B2CA1770400A78A87 /* RefundPolicyView.swift */; };
 		D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */; };
 /* End PBXBuildFile section */
 
@@ -182,6 +183,7 @@
 		D0DDDB352CA16FF900A78A87 /* HowToPurchaseSwiftiDatePremiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPurchaseSwiftiDatePremiumView.swift; sourceTree = "<group>"; };
 		D0DDDB372CA171B300A78A87 /* HowToCancelSubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToCancelSubscriptionView.swift; sourceTree = "<group>"; };
 		D0DDDB392CA174A000A78A87 /* RestorePurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestorePurchaseView.swift; sourceTree = "<group>"; };
+		D0DDDB3B2CA1770400A78A87 /* RefundPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefundPolicyView.swift; sourceTree = "<group>"; };
 		D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetWillingnessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -319,6 +321,7 @@
 				D0DDDB352CA16FF900A78A87 /* HowToPurchaseSwiftiDatePremiumView.swift */,
 				D0DDDB372CA171B300A78A87 /* HowToCancelSubscriptionView.swift */,
 				D0DDDB392CA174A000A78A87 /* RestorePurchaseView.swift */,
+				D0DDDB3B2CA1770400A78A87 /* RefundPolicyView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -518,6 +521,7 @@
 				D0DDDB1A2CA1282B00A78A87 /* WhatIsSwiftiDateView.swift in Sources */,
 				D0DDDB322CA16B7000A78A87 /* UndoSwipeView.swift in Sources */,
 				D0445C6B2C7247050059D522 /* DegreePicker.swift in Sources */,
+				D0DDDB3C2CA1770400A78A87 /* RefundPolicyView.swift in Sources */,
 				D018AD632C9E87F6005A14B9 /* ChatView.swift in Sources */,
 				D018AD962C9EEA83005A14B9 /* AsyncImageView.swift in Sources */,
 				D0445C5B2C71E5850059D522 /* ProfileView.swift in Sources */,

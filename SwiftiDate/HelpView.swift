@@ -27,6 +27,7 @@ struct HelpView: View {
     @State private var isHowToPurchaseSwiftiDatePremiumView = false // State variable to control navigation to HowToPurchaseSwiftiDatePremiumView
     @State private var isHowToCancelSubscriptionView = false // State variable to control navigation to HowToCancelSubscriptionView
     @State private var isRestorePurchaseView = false // State variable to control navigation to RestorePurchaseView
+    @State private var isRefundPolicyView = false // State variable to control navigation to RefundPolicyView
 
     // Extracting the data to separate properties
     private let personalInfoTopics = [
@@ -76,6 +77,8 @@ struct HelpView: View {
             HowToCancelSubscriptionView(isHowToCancelSubscriptionView: $isHowToCancelSubscriptionView) // Navigate to HowToCancelSubscriptionView
         } else if isRestorePurchaseView {
             RestorePurchaseView(isRestorePurchaseView: $isRestorePurchaseView) // Navigate to RestorePurchaseView
+        } else if isRefundPolicyView {
+            RefundPolicyView(isRefundPolicyView: $isRefundPolicyView) // Navigate to RefundPolicyView
         } else {
             VStack {
                 // Custom Navigation Bar
@@ -339,13 +342,17 @@ struct HelpView: View {
                             }
                         }
                         .foregroundColor(.black)
-                                    
-                        HStack {
-                            Text("如果已經成功續訂 SwiftiDate Premium，還可以退款嗎？")
-                                .padding(.vertical, 10)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
+                               
+                        Button(action: {
+                            isRefundPolicyView = true
+                        }) {
+                            HStack {
+                                Text("如果已經成功續訂 SwiftiDate Premium，還可以退款嗎？")
+                                    .padding(.vertical, 10)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
                         }
                                     
                         HStack {
