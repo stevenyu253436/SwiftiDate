@@ -560,7 +560,8 @@ struct HelpView: View {
                                     .foregroundColor(.gray)
                             }
                         }
-                        
+                        .foregroundColor(.black)
+
                         HStack {
                             Text("如何註銷我的帳號")
                                 .padding(.vertical, 10)
