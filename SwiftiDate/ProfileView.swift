@@ -17,6 +17,7 @@ struct ProfileView: View {
     @State private var isShowingCrushPurchaseView = false // State variable to control Crush sheet presentation
     @State private var isShowingPraisePurchaseView = false // State variable to control Praise sheet presentation
     @State private var isSupremeUser = true // Replace this with your actual logic to determine if the user is Supreme
+    @State private var isUserVerified = true // Replace with your actual logic
 
     var body: some View {
         ScrollView {
@@ -46,12 +47,14 @@ struct ProfileView: View {
                             .font(.title)
                             .fontWeight(.bold)
                         
-                        HStack {
-                            Image(systemName: "checkmark.seal.fill")
-                                .foregroundColor(.blue)
-                            Text("已認證")
-                                .font(.subheadline)
-                                .foregroundColor(.gray)
+                        if isUserVerified {
+                            HStack {
+                                Image(systemName: "checkmark.seal.fill")
+                                    .foregroundColor(.blue)
+                                Text("已認證")
+                                    .font(.subheadline)
+                                    .foregroundColor(.gray)
+                            }
                         }
                     }
                     Spacer()
