@@ -92,6 +92,8 @@ struct HelpView: View {
             HowToUseDailyPraiseOpportunityView(isHowToUseDailyPraiseOpportunityView: $isHowToUseDailyPraiseOpportunityView) // Navigate to HowToUseDailyPraiseOpportunityView
         } else if isHowToUseAdvancedFilteringView {
             HowToUseAdvancedFilteringView(isHowToUseAdvancedFilteringView: $isHowToUseAdvancedFilteringView) // Navigate to HowToUseAdvancedFilteringView
+        } else if isHowToUseIncognitoModeView {
+            HowToUseIncognitoModeView(isHowToUseIncognitoModeView: $isHowToUseIncognitoModeView) // Navigate to HowToUseIncognitoModeView
         } else {
             VStack {
                 // Custom Navigation Bar
@@ -426,13 +428,18 @@ struct HelpView: View {
                                     .foregroundColor(.gray)
                             }
                         }
-                                    
-                        HStack {
-                            Text("如何使用「隱身模式」功能？")
-                                .padding(.vertical, 10)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
+                        .foregroundColor(.black)
+
+                        Button(action: {
+                            isHowToUseIncognitoModeView = true
+                        }) {
+                            HStack {
+                                Text("如何使用「隱身模式」功能？")
+                                    .padding(.vertical, 10)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
                         }
                                     
                         HStack {

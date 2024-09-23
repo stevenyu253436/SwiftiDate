@@ -99,6 +99,7 @@
 		D0DDDB402CA17B3700A78A87 /* WhatIsSwiftiDateSupremeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB3F2CA17B3700A78A87 /* WhatIsSwiftiDateSupremeView.swift */; };
 		D0DDDB422CA17D2C00A78A87 /* HowToUseDailyPraiseOpportunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB412CA17D2C00A78A87 /* HowToUseDailyPraiseOpportunityView.swift */; };
 		D0DDDB442CA17FA700A78A87 /* HowToUseAdvancedFilteringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB432CA17FA700A78A87 /* HowToUseAdvancedFilteringView.swift */; };
+		D0DDDB462CA18FDC00A78A87 /* HowToUseIncognitoModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB452CA18FDC00A78A87 /* HowToUseIncognitoModeView.swift */; };
 		D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */; };
 /* End PBXBuildFile section */
 
@@ -192,6 +193,7 @@
 		D0DDDB3F2CA17B3700A78A87 /* WhatIsSwiftiDateSupremeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIsSwiftiDateSupremeView.swift; sourceTree = "<group>"; };
 		D0DDDB412CA17D2C00A78A87 /* HowToUseDailyPraiseOpportunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToUseDailyPraiseOpportunityView.swift; sourceTree = "<group>"; };
 		D0DDDB432CA17FA700A78A87 /* HowToUseAdvancedFilteringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToUseAdvancedFilteringView.swift; sourceTree = "<group>"; };
+		D0DDDB452CA18FDC00A78A87 /* HowToUseIncognitoModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToUseIncognitoModeView.swift; sourceTree = "<group>"; };
 		D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetWillingnessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -334,6 +336,7 @@
 				D0DDDB3F2CA17B3700A78A87 /* WhatIsSwiftiDateSupremeView.swift */,
 				D0DDDB412CA17D2C00A78A87 /* HowToUseDailyPraiseOpportunityView.swift */,
 				D0DDDB432CA17FA700A78A87 /* HowToUseAdvancedFilteringView.swift */,
+				D0DDDB452CA18FDC00A78A87 /* HowToUseIncognitoModeView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -558,6 +561,7 @@
 				D0445C812C73CA130059D522 /* PetSelectionView.swift in Sources */,
 				D0445C692C723AE80059D522 /* FlowLayout.swift in Sources */,
 				D0DDDB142CA10EAD00A78A87 /* SettingsView.swift in Sources */,
+				D0DDDB462CA18FDC00A78A87 /* HowToUseIncognitoModeView.swift in Sources */,
 				D0DDDB362CA16FF900A78A87 /* HowToPurchaseSwiftiDatePremiumView.swift in Sources */,
 				D0DDDB442CA17FA700A78A87 /* HowToUseAdvancedFilteringView.swift in Sources */,
 				D018AD5B2C9E57DF005A14B9 /* UserGuideView.swift in Sources */,
