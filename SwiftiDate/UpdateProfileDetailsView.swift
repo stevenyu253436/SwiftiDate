@@ -36,7 +36,7 @@ struct UpdateProfileDetailsView: View {
             ScrollView {
                 VStack(alignment: .leading) {
                     // Detailed content of HowToPurchaseSwiftiDateSupremeView
-                    Text("什麼是 SwiftiDate Supreme？")
+                    Text("如何編輯我的個人資料？")
                         .font(.title)
                         .fontWeight(.bold)
                         .padding(.bottom, 10)

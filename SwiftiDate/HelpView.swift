@@ -35,6 +35,7 @@ struct HelpView: View {
     @State private var isHowToUseIncognitoModeView = false // State variable to control navigation to HowToUseIncognitoModeView
     @State private var isHowToPurchaseSwiftiDateSupremeView = false // State variable to control navigation to HowToPurchaseSwiftiDateSupremeView
     @State private var isUpdateProfileDetailsView = false // State variable to control navigation to UpdateProfileDetailsView
+    @State private var isManageProfilePhotosView = false // State variable to control navigation to ManageProfilePhotosView
 
     // Extracting the data to separate properties
     private let personalInfoTopics = [
@@ -100,6 +101,8 @@ struct HelpView: View {
             HowToPurchaseSwiftiDateSupremeView(isHowToPurchaseSwiftiDateSupremeView: $isHowToPurchaseSwiftiDateSupremeView) // Navigate to HowToPurchaseSwiftiDateSupremeView
         } else if isUpdateProfileDetailsView {
             UpdateProfileDetailsView(isUpdateProfileDetailsView: $isUpdateProfileDetailsView) // Navigate to UpdateProfileDetailsView
+        } else if isManageProfilePhotosView {
+            ManageProfilePhotosView(isManageProfilePhotosView: $isManageProfilePhotosView) // Navigate to ManageProfilePhotosView
         } else {
             VStack {
                 // Custom Navigation Bar
@@ -480,15 +483,21 @@ struct HelpView: View {
                                     .foregroundColor(.gray)
                             }
                         }
-                        
-                        HStack {
-                            Text("如何更改我的照片？")
-                                .padding(.vertical, 10)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
+                        .foregroundColor(.black)
+
+                        Button(action: {
+                            isManageProfilePhotosView = true
+                        }) {
+                            HStack {
+                                Text("如何更改我的照片？")
+                                    .padding(.vertical, 10)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
                         }
-                        
+                        .foregroundColor(.black)
+
                         HStack {
                             Text("我需要上傳什麼樣的照片作為頭像？")
                                 .padding(.vertical, 10)

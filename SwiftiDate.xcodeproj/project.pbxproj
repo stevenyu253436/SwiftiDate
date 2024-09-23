@@ -102,6 +102,7 @@
 		D0DDDB462CA18FDC00A78A87 /* HowToUseIncognitoModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB452CA18FDC00A78A87 /* HowToUseIncognitoModeView.swift */; };
 		D0DDDB482CA191EE00A78A87 /* HowToPurchaseSwiftiDateSupremeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB472CA191EE00A78A87 /* HowToPurchaseSwiftiDateSupremeView.swift */; };
 		D0DDDB4A2CA196FB00A78A87 /* UpdateProfileDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB492CA196FB00A78A87 /* UpdateProfileDetailsView.swift */; };
+		D0DDDB4C2CA19A0600A78A87 /* ManageProfilePhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB4B2CA19A0600A78A87 /* ManageProfilePhotosView.swift */; };
 		D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */; };
 /* End PBXBuildFile section */
 
@@ -198,6 +199,7 @@
 		D0DDDB452CA18FDC00A78A87 /* HowToUseIncognitoModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToUseIncognitoModeView.swift; sourceTree = "<group>"; };
 		D0DDDB472CA191EE00A78A87 /* HowToPurchaseSwiftiDateSupremeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPurchaseSwiftiDateSupremeView.swift; sourceTree = "<group>"; };
 		D0DDDB492CA196FB00A78A87 /* UpdateProfileDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileDetailsView.swift; sourceTree = "<group>"; };
+		D0DDDB4B2CA19A0600A78A87 /* ManageProfilePhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageProfilePhotosView.swift; sourceTree = "<group>"; };
 		D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetWillingnessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -343,6 +345,7 @@
 				D0DDDB452CA18FDC00A78A87 /* HowToUseIncognitoModeView.swift */,
 				D0DDDB472CA191EE00A78A87 /* HowToPurchaseSwiftiDateSupremeView.swift */,
 				D0DDDB492CA196FB00A78A87 /* UpdateProfileDetailsView.swift */,
+				D0DDDB4B2CA19A0600A78A87 /* ManageProfilePhotosView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -575,6 +578,7 @@
 				D0DDDB282CA14FCC00A78A87 /* ReportUserView.swift in Sources */,
 				D0DDDB482CA191EE00A78A87 /* HowToPurchaseSwiftiDateSupremeView.swift in Sources */,
 				D0DDDB1C2CA1321300A78A87 /* IsSwiftiDatePaidView.swift in Sources */,
+				D0DDDB4C2CA19A0600A78A87 /* ManageProfilePhotosView.swift in Sources */,
 				D0DDDB222CA1413600A78A87 /* WhyIsItHardToMatchView.swift in Sources */,
 				D0DDDB182CA11E5100A78A87 /* HelpView.swift in Sources */,
 				D0445C852C73CDB60059D522 /* SmokingOptionsView.swift in Sources */,
