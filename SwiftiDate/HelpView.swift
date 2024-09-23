@@ -11,6 +11,7 @@ import SwiftUI
 struct HelpView: View {
     @Binding var isHelpView: Bool // Binding to control the dismissal of HelpView
     @State private var isWhatIsSwiftiDate = false // State variable to control navigation to WhatIsSwiftiDateView
+    @State private var isSwiftiDatePaid = false // Binding to control the dismissal of IsSwiftiDatePaidView
 
     // Extracting the data to separate properties
     private let chatTopics = [
@@ -58,6 +59,8 @@ struct HelpView: View {
     var body: some View {
         if isWhatIsSwiftiDate {
             WhatIsSwiftiDateView(isWhatIsSwiftiDate: $isWhatIsSwiftiDate) // Navigate to WhatIsSwiftiDateView
+        } else if isSwiftiDatePaid {
+            IsSwiftiDatePaidView(isSwiftiDatePaid: $isSwiftiDatePaid) // Navigate to IsSwiftiDatePaidView
         } else {
             VStack {
                 // Custom Navigation Bar
@@ -99,13 +102,19 @@ struct HelpView: View {
                         }
                         .foregroundColor(.black) // Ensure the text color remains black
                         
-                        HStack {
-                            Text("SwiftiDate 需要付費使用嗎？")
-                                .padding(.vertical, 10)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
+                        // Convert HStack to Button
+                        Button(action: {
+                            isSwiftiDatePaid = true // Set the state variable to true
+                        }) {
+                            HStack {
+                                Text("SwiftiDate 需要付費使用嗎？")
+                                    .padding(.vertical, 10)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
                         }
+                        .foregroundColor(.black) // Ensure the text color remains black
                     }
                     
                     Section(header: Text("配對與聊天")

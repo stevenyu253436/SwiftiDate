@@ -78,6 +78,7 @@
 		D0DDDB142CA10EAD00A78A87 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB132CA10EAD00A78A87 /* SettingsView.swift */; };
 		D0DDDB182CA11E5100A78A87 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB172CA11E5000A78A87 /* HelpView.swift */; };
 		D0DDDB1A2CA1282B00A78A87 /* WhatIsSwiftiDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB192CA1282B00A78A87 /* WhatIsSwiftiDateView.swift */; };
+		D0DDDB1C2CA1321300A78A87 /* IsSwiftiDatePaidView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB1B2CA1321300A78A87 /* IsSwiftiDatePaidView.swift */; };
 		D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */; };
 /* End PBXBuildFile section */
 
@@ -150,6 +151,7 @@
 		D0DDDB132CA10EAD00A78A87 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D0DDDB172CA11E5000A78A87 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		D0DDDB192CA1282B00A78A87 /* WhatIsSwiftiDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIsSwiftiDateView.swift; sourceTree = "<group>"; };
+		D0DDDB1B2CA1321300A78A87 /* IsSwiftiDatePaidView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsSwiftiDatePaidView.swift; sourceTree = "<group>"; };
 		D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetWillingnessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -271,6 +273,7 @@
 				D0DDDB132CA10EAD00A78A87 /* SettingsView.swift */,
 				D0DDDB172CA11E5000A78A87 /* HelpView.swift */,
 				D0DDDB192CA1282B00A78A87 /* WhatIsSwiftiDateView.swift */,
+				D0DDDB1B2CA1321300A78A87 /* IsSwiftiDatePaidView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -489,6 +492,7 @@
 				D0445C692C723AE80059D522 /* FlowLayout.swift in Sources */,
 				D0DDDB142CA10EAD00A78A87 /* SettingsView.swift in Sources */,
 				D018AD5B2C9E57DF005A14B9 /* UserGuideView.swift in Sources */,
+				D0DDDB1C2CA1321300A78A87 /* IsSwiftiDatePaidView.swift in Sources */,
 				D0DDDB182CA11E5100A78A87 /* HelpView.swift in Sources */,
 				D0445C852C73CDB60059D522 /* SmokingOptionsView.swift in Sources */,
 				D0445C6D2C72EA990059D522 /* SchoolInputView.swift in Sources */,
