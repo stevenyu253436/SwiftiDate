@@ -76,6 +76,7 @@
 		D0DDDB0F2CA0E65F00A78A87 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB0E2CA0E65F00A78A87 /* LocationManager.swift */; };
 		D0DDDB122CA1008B00A78A87 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = D0DDDB112CA1008B00A78A87 /* KeychainAccess */; };
 		D0DDDB142CA10EAD00A78A87 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB132CA10EAD00A78A87 /* SettingsView.swift */; };
+		D0DDDB182CA11E5100A78A87 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB172CA11E5000A78A87 /* HelpView.swift */; };
 		D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */; };
 /* End PBXBuildFile section */
 
@@ -146,6 +147,7 @@
 		D0DDDB0C2CA07A2400A78A87 /* FeaturedCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedCardView.swift; sourceTree = "<group>"; };
 		D0DDDB0E2CA0E65F00A78A87 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		D0DDDB132CA10EAD00A78A87 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		D0DDDB172CA11E5000A78A87 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetWillingnessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -265,6 +267,7 @@
 				D0DDDB0C2CA07A2400A78A87 /* FeaturedCardView.swift */,
 				D0DDDB0E2CA0E65F00A78A87 /* LocationManager.swift */,
 				D0DDDB132CA10EAD00A78A87 /* SettingsView.swift */,
+				D0DDDB172CA11E5000A78A87 /* HelpView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -482,6 +485,7 @@
 				D0445C692C723AE80059D522 /* FlowLayout.swift in Sources */,
 				D0DDDB142CA10EAD00A78A87 /* SettingsView.swift in Sources */,
 				D018AD5B2C9E57DF005A14B9 /* UserGuideView.swift in Sources */,
+				D0DDDB182CA11E5100A78A87 /* HelpView.swift in Sources */,
 				D0445C852C73CDB60059D522 /* SmokingOptionsView.swift in Sources */,
 				D0445C6D2C72EA990059D522 /* SchoolInputView.swift in Sources */,
 				D0DDDB0D2CA07A2400A78A87 /* FeaturedCardView.swift in Sources */,
