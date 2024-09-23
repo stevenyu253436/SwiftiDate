@@ -73,6 +73,7 @@
 		D0DDDB092C9FDE0500A78A87 /* InteractiveContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB082C9FDE0500A78A87 /* InteractiveContentView.swift */; };
 		D0DDDB0B2CA07A0E00A78A87 /* TurboView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB0A2CA07A0D00A78A87 /* TurboView.swift */; };
 		D0DDDB0D2CA07A2400A78A87 /* FeaturedCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB0C2CA07A2400A78A87 /* FeaturedCardView.swift */; };
+		D0DDDB0F2CA0E65F00A78A87 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB0E2CA0E65F00A78A87 /* LocationManager.swift */; };
 		D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */; };
 /* End PBXBuildFile section */
 
@@ -141,6 +142,7 @@
 		D0DDDB082C9FDE0500A78A87 /* InteractiveContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveContentView.swift; sourceTree = "<group>"; };
 		D0DDDB0A2CA07A0D00A78A87 /* TurboView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurboView.swift; sourceTree = "<group>"; };
 		D0DDDB0C2CA07A2400A78A87 /* FeaturedCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedCardView.swift; sourceTree = "<group>"; };
+		D0DDDB0E2CA0E65F00A78A87 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetWillingnessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -257,6 +259,7 @@
 				D0DDDB082C9FDE0500A78A87 /* InteractiveContentView.swift */,
 				D0DDDB0A2CA07A0D00A78A87 /* TurboView.swift */,
 				D0DDDB0C2CA07A2400A78A87 /* FeaturedCardView.swift */,
+				D0DDDB0E2CA0E65F00A78A87 /* LocationManager.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -483,6 +486,7 @@
 				D0445C732C72FB440059D522 /* HometownInputView.swift in Sources */,
 				D018AD612C9E6ACF005A14B9 /* PraisePurchaseView.swift in Sources */,
 				D0445C6F2C72EDF10059D522 /* IndustryPicker.swift in Sources */,
+				D0DDDB0F2CA0E65F00A78A87 /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -650,6 +654,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwiftiDate/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your location is required to find nearby matches.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -680,6 +685,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwiftiDate/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your location is required to find nearby matches.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -15,6 +15,8 @@ struct TurboView: View {
         VStack {
             // Top Tab Selection
             HStack {
+                Spacer()
+                
                 Button(action: {
                     selectedTab = 0
                 }) {
@@ -24,23 +26,31 @@ struct TurboView: View {
                 }
                 
                 Spacer()
+                Spacer()
                 
                 Button(action: {
                     selectedTab = 1
                 }) {
                     Text("我的心動對象")
                         .font(.headline)
-                        .foregroundColor(selectedTab == 1 ? .gray : .green)
+                        .foregroundColor(selectedTab == 1 ? .green : .gray) // Corrected logic
                 }
+                
+                Spacer()
             }
             .padding(.horizontal)
             .padding(.top, 16)
 
             // The selected line
-            Rectangle()
-                .frame(height: 2)
-                .foregroundColor(.green)
-                .padding(.horizontal, selectedTab == 0 ? 0 : UIScreen.main.bounds.width / 2)
+            HStack(spacing: 0) {
+                Rectangle()
+                    .frame(width: UIScreen.main.bounds.width / 2, height: 2) // Set the width to half the screen size
+                    .foregroundColor(.green)
+                    .alignmentGuide(.leading) { d in
+                        selectedTab == 0 ? 0 : -UIScreen.main.bounds.width / 2 // Align the Rectangle to either the left or right side
+                    }
+            }
+            .frame(width: UIScreen.main.bounds.width, alignment: selectedTab == 0 ? .leading : .trailing) // Align HStack based on the selected tab
 
             Spacer().frame(height: 20)
 
@@ -99,5 +109,13 @@ struct TurboView: View {
                 .padding(.bottom, 20)
             }
         }
+    }
+}
+
+// MARK: - TurboView Preview
+struct TurboView_Previews: PreviewProvider {
+    static var previews: some View {
+        TurboView()
+            .previewDevice("iPhone 15 Pro") // You can replace this with the device you want to preview on
     }
 }

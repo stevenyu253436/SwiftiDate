@@ -15,7 +15,7 @@ struct ContentView: View {
                     Image(systemName: "heart.fill")
                 }
             
-            Text("附近")
+            TurboView()
                 .tabItem {
                     Image(systemName: "star.fill")
                 }

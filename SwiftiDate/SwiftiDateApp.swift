@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseCore
+import CoreLocation // Import CoreLocation here if needed
 
 class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
