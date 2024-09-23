@@ -26,6 +26,7 @@ struct HelpView: View {
     @State private var isHowToEnablePremiumBadgeView = false // State variable to control navigation to HowToEnablePremiumBadgeView
     @State private var isHowToPurchaseSwiftiDatePremiumView = false // State variable to control navigation to HowToPurchaseSwiftiDatePremiumView
     @State private var isHowToCancelSubscriptionView = false // State variable to control navigation to HowToCancelSubscriptionView
+    @State private var isRestorePurchaseView = false // State variable to control navigation to RestorePurchaseView
 
     // Extracting the data to separate properties
     private let personalInfoTopics = [
@@ -72,7 +73,9 @@ struct HelpView: View {
         } else if isHowToPurchaseSwiftiDatePremiumView {
             HowToPurchaseSwiftiDatePremiumView(isHowToPurchaseSwiftiDatePremium: $isHowToPurchaseSwiftiDatePremiumView) // Navigate to HowToPurchaseSwiftiDatePremiumView
         } else if isHowToCancelSubscriptionView {
-            
+            HowToCancelSubscriptionView(isHowToCancelSubscriptionView: $isHowToCancelSubscriptionView) // Navigate to HowToCancelSubscriptionView
+        } else if isRestorePurchaseView {
+            RestorePurchaseView(isRestorePurchaseView: $isRestorePurchaseView) // Navigate to RestorePurchaseView
         } else {
             VStack {
                 // Custom Navigation Bar
@@ -324,13 +327,18 @@ struct HelpView: View {
                         }
                         .foregroundColor(.black)
 
-                        HStack {
-                            Text("支付完成後，特權未生效怎麼辦？")
-                                .padding(.vertical, 10)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
+                        Button(action: {
+                            isRestorePurchaseView = true
+                        }) {
+                            HStack {
+                                Text("支付完成後，特權未生效怎麼辦？")
+                                    .padding(.vertical, 10)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
                         }
+                        .foregroundColor(.black)
                                     
                         HStack {
                             Text("如果已經成功續訂 SwiftiDate Premium，還可以退款嗎？")
