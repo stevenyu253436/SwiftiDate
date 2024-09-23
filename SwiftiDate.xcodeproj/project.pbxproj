@@ -101,6 +101,7 @@
 		D0DDDB442CA17FA700A78A87 /* HowToUseAdvancedFilteringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB432CA17FA700A78A87 /* HowToUseAdvancedFilteringView.swift */; };
 		D0DDDB462CA18FDC00A78A87 /* HowToUseIncognitoModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB452CA18FDC00A78A87 /* HowToUseIncognitoModeView.swift */; };
 		D0DDDB482CA191EE00A78A87 /* HowToPurchaseSwiftiDateSupremeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB472CA191EE00A78A87 /* HowToPurchaseSwiftiDateSupremeView.swift */; };
+		D0DDDB4A2CA196FB00A78A87 /* UpdateProfileDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB492CA196FB00A78A87 /* UpdateProfileDetailsView.swift */; };
 		D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */; };
 /* End PBXBuildFile section */
 
@@ -196,6 +197,7 @@
 		D0DDDB432CA17FA700A78A87 /* HowToUseAdvancedFilteringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToUseAdvancedFilteringView.swift; sourceTree = "<group>"; };
 		D0DDDB452CA18FDC00A78A87 /* HowToUseIncognitoModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToUseIncognitoModeView.swift; sourceTree = "<group>"; };
 		D0DDDB472CA191EE00A78A87 /* HowToPurchaseSwiftiDateSupremeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPurchaseSwiftiDateSupremeView.swift; sourceTree = "<group>"; };
+		D0DDDB492CA196FB00A78A87 /* UpdateProfileDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileDetailsView.swift; sourceTree = "<group>"; };
 		D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetWillingnessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -340,6 +342,7 @@
 				D0DDDB432CA17FA700A78A87 /* HowToUseAdvancedFilteringView.swift */,
 				D0DDDB452CA18FDC00A78A87 /* HowToUseIncognitoModeView.swift */,
 				D0DDDB472CA191EE00A78A87 /* HowToPurchaseSwiftiDateSupremeView.swift */,
+				D0DDDB492CA196FB00A78A87 /* UpdateProfileDetailsView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -594,6 +597,7 @@
 				D0DDDB382CA171B400A78A87 /* HowToCancelSubscriptionView.swift in Sources */,
 				D0DDDB0F2CA0E65F00A78A87 /* LocationManager.swift in Sources */,
 				D0DDDB242CA1486E00A78A87 /* HowToUnmatchView.swift in Sources */,
+				D0DDDB4A2CA196FB00A78A87 /* UpdateProfileDetailsView.swift in Sources */,
 				D0DDDB262CA14B2700A78A87 /* HowToDeleteMessagesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

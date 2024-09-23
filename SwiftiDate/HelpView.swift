@@ -34,6 +34,7 @@ struct HelpView: View {
     @State private var isHowToUseAdvancedFilteringView = false // State variable to control navigation to HowToUseAdvancedFilteringView
     @State private var isHowToUseIncognitoModeView = false // State variable to control navigation to HowToUseIncognitoModeView
     @State private var isHowToPurchaseSwiftiDateSupremeView = false // State variable to control navigation to HowToPurchaseSwiftiDateSupremeView
+    @State private var isUpdateProfileDetailsView = false // State variable to control navigation to UpdateProfileDetailsView
 
     // Extracting the data to separate properties
     private let personalInfoTopics = [
@@ -97,6 +98,8 @@ struct HelpView: View {
             HowToUseIncognitoModeView(isHowToUseIncognitoModeView: $isHowToUseIncognitoModeView) // Navigate to HowToUseIncognitoModeView
         } else if isHowToPurchaseSwiftiDateSupremeView {
             HowToPurchaseSwiftiDateSupremeView(isHowToPurchaseSwiftiDateSupremeView: $isHowToPurchaseSwiftiDateSupremeView) // Navigate to HowToPurchaseSwiftiDateSupremeView
+        } else if isUpdateProfileDetailsView {
+            UpdateProfileDetailsView(isUpdateProfileDetailsView: $isUpdateProfileDetailsView) // Navigate to UpdateProfileDetailsView
         } else {
             VStack {
                 // Custom Navigation Bar
@@ -465,14 +468,81 @@ struct HelpView: View {
                                 .font(.subheadline)
                                 .foregroundColor(.gray)
                                 .padding(.vertical, 5)) {
-                        ForEach(personalInfoTopics, id: \.self) { topic in
+                                  
+                        Button(action: {
+                            isUpdateProfileDetailsView = true
+                        }) {
                             HStack {
-                                Text(topic)
+                                Text("如何編輯我的個人資料？")
                                     .padding(.vertical, 10)
                                 Spacer()
                                 Image(systemName: "chevron.right")
                                     .foregroundColor(.gray)
                             }
+                        }
+                        
+                        HStack {
+                            Text("如何更改我的照片？")
+                                .padding(.vertical, 10)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.gray)
+                        }
+                        
+                        HStack {
+                            Text("我需要上傳什麼樣的照片作為頭像？")
+                                .padding(.vertical, 10)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.gray)
+                        }
+                        
+                        HStack {
+                            Text("如何通過真人認證？")
+                                .padding(.vertical, 10)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.gray)
+                        }
+                        
+                        HStack {
+                            Text("如何更改我的搜尋偏好？")
+                                .padding(.vertical, 10)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.gray)
+                        }
+                        
+                        HStack {
+                            Text("如何修改備註名稱？")
+                                .padding(.vertical, 10)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.gray)
+                        }
+                        
+                        HStack {
+                            Text("如何搜尋配對好友？")
+                                .padding(.vertical, 10)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.gray)
+                        }
+                        
+                        HStack {
+                            Text("如何收到SwiftiDate的訊息提醒？")
+                                .padding(.vertical, 10)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.gray)
+                        }
+                        
+                        HStack {
+                            Text("如何註銷我的帳號")
+                                .padding(.vertical, 10)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.gray)
                         }
                     }
                 }
