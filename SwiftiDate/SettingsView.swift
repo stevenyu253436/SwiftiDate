@@ -11,10 +11,13 @@ import SwiftUI
 struct SettingsView: View {
     @Binding var showSettingsView: Bool // Binding variable to control the view dismissal
     @State private var isHelpView = false // State variable to control HelpView presentation
+    @State private var isCommunityGuidelinesView = false // State variable for CommunityGuidelinesView
 
     var body: some View {
         if isHelpView {
             HelpView(isHelpView: $isHelpView) // Use the binding variable in the preview
+        } else if isCommunityGuidelinesView {
+            CommunityGuidelinesView(isCommunityGuidelinesView: $isCommunityGuidelinesView)
         } else {
             VStack {
                 // Custom Navigation Bar

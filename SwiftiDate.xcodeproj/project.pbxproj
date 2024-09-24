@@ -105,6 +105,7 @@
 		D0DDDB4C2CA19A0600A78A87 /* ManageProfilePhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB4B2CA19A0600A78A87 /* ManageProfilePhotosView.swift */; };
 		D0DDDB4E2CA19D0800A78A87 /* PhotoUploadGuidelinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB4D2CA19D0800A78A87 /* PhotoUploadGuidelinesView.swift */; };
 		D0DDDB502CA1A01200A78A87 /* HowToEnableNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB4F2CA1A01200A78A87 /* HowToEnableNotificationsView.swift */; };
+		D0DDDB522CA251C600A78A87 /* CommunityGuidelinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB512CA251C500A78A87 /* CommunityGuidelinesView.swift */; };
 		D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */; };
 /* End PBXBuildFile section */
 
@@ -204,6 +205,7 @@
 		D0DDDB4B2CA19A0600A78A87 /* ManageProfilePhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageProfilePhotosView.swift; sourceTree = "<group>"; };
 		D0DDDB4D2CA19D0800A78A87 /* PhotoUploadGuidelinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoUploadGuidelinesView.swift; sourceTree = "<group>"; };
 		D0DDDB4F2CA1A01200A78A87 /* HowToEnableNotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToEnableNotificationsView.swift; sourceTree = "<group>"; };
+		D0DDDB512CA251C500A78A87 /* CommunityGuidelinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityGuidelinesView.swift; sourceTree = "<group>"; };
 		D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetWillingnessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -352,6 +354,7 @@
 				D0DDDB4B2CA19A0600A78A87 /* ManageProfilePhotosView.swift */,
 				D0DDDB4D2CA19D0800A78A87 /* PhotoUploadGuidelinesView.swift */,
 				D0DDDB4F2CA1A01200A78A87 /* HowToEnableNotificationsView.swift */,
+				D0DDDB512CA251C500A78A87 /* CommunityGuidelinesView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -599,6 +602,7 @@
 				D0DDDB2C2CA160BB00A78A87 /* HowToUseWhoLikedMeAndCrushListView.swift in Sources */,
 				D0445C592C71BFE70059D522 /* SwipeCardView.swift in Sources */,
 				D0445C612C722EF50059D522 /* PhotoSectionView.swift in Sources */,
+				D0DDDB522CA251C600A78A87 /* CommunityGuidelinesView.swift in Sources */,
 				D0DDDB052C9FA8AF00A78A87 /* ChatDetailView.swift in Sources */,
 				D0445C652C72388D0059D522 /* FlowStack.swift in Sources */,
 				D0DDDB2A2CA156A700A78A87 /* WhatIsSwiftiDatePremiumView.swift in Sources */,
