@@ -107,6 +107,7 @@
 		D0DDDB502CA1A01200A78A87 /* HowToEnableNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB4F2CA1A01200A78A87 /* HowToEnableNotificationsView.swift */; };
 		D0DDDB522CA251C600A78A87 /* CommunityGuidelinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB512CA251C500A78A87 /* CommunityGuidelinesView.swift */; };
 		D0DDDB542CA25B4E00A78A87 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB532CA25B4D00A78A87 /* PrivacyPolicyView.swift */; };
+		D0DDDB562CA29B1200A78A87 /* TermsOfServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB552CA29B1100A78A87 /* TermsOfServiceView.swift */; };
 		D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */; };
 /* End PBXBuildFile section */
 
@@ -208,6 +209,7 @@
 		D0DDDB4F2CA1A01200A78A87 /* HowToEnableNotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToEnableNotificationsView.swift; sourceTree = "<group>"; };
 		D0DDDB512CA251C500A78A87 /* CommunityGuidelinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityGuidelinesView.swift; sourceTree = "<group>"; };
 		D0DDDB532CA25B4D00A78A87 /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
+		D0DDDB552CA29B1100A78A87 /* TermsOfServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceView.swift; sourceTree = "<group>"; };
 		D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetWillingnessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -358,6 +360,7 @@
 				D0DDDB4F2CA1A01200A78A87 /* HowToEnableNotificationsView.swift */,
 				D0DDDB512CA251C500A78A87 /* CommunityGuidelinesView.swift */,
 				D0DDDB532CA25B4D00A78A87 /* PrivacyPolicyView.swift */,
+				D0DDDB552CA29B1100A78A87 /* TermsOfServiceView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -619,6 +622,7 @@
 				D0DDDB242CA1486E00A78A87 /* HowToUnmatchView.swift in Sources */,
 				D0DDDB4A2CA196FB00A78A87 /* UpdateProfileDetailsView.swift in Sources */,
 				D0DDDB262CA14B2700A78A87 /* HowToDeleteMessagesView.swift in Sources */,
+				D0DDDB562CA29B1200A78A87 /* TermsOfServiceView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

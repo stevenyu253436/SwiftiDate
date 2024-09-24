@@ -13,6 +13,7 @@ struct SettingsView: View {
     @State private var isHelpView = false // State variable to control HelpView presentation
     @State private var isCommunityGuidelinesView = false // State variable for CommunityGuidelinesView
     @State private var isPrivacyPolicyView = false // State variable for PrivacyPolicyView
+    @State private var isTermsOfServiceView = false // State variable for TermsOfServiceView
 
     var body: some View {
         if isHelpView {
@@ -21,6 +22,8 @@ struct SettingsView: View {
             CommunityGuidelinesView(isCommunityGuidelinesView: $isCommunityGuidelinesView)
         } else if isPrivacyPolicyView {
             PrivacyPolicyView(isPrivacyPolicyView: $isPrivacyPolicyView)
+        } else if isTermsOfServiceView {
+            TermsOfServiceView(isTermsOfServiceView: $isTermsOfServiceView)
         } else {
             VStack {
                 // Custom Navigation Bar
@@ -151,13 +154,18 @@ struct SettingsView: View {
                             .foregroundColor(.black) // Keep the text color unchanged when the button is tapped
                         }
 
-                        HStack {
-                            Text("服務協議")
-                                .padding(.vertical, 10)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
+                        Button(action: {
+                            isTermsOfServiceView = true // Show TermsOfServiceView
+                        }) {
+                            HStack {
+                                Text("服務協議")
+                                    .padding(.vertical, 10)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
                         }
+                        .foregroundColor(.black) // Keep the text color unchanged when the button is tapped
 
                         HStack {
                             Text("數據管理")
