@@ -106,6 +106,7 @@
 		D0DDDB4E2CA19D0800A78A87 /* PhotoUploadGuidelinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB4D2CA19D0800A78A87 /* PhotoUploadGuidelinesView.swift */; };
 		D0DDDB502CA1A01200A78A87 /* HowToEnableNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB4F2CA1A01200A78A87 /* HowToEnableNotificationsView.swift */; };
 		D0DDDB522CA251C600A78A87 /* CommunityGuidelinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB512CA251C500A78A87 /* CommunityGuidelinesView.swift */; };
+		D0DDDB542CA25B4E00A78A87 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB532CA25B4D00A78A87 /* PrivacyPolicyView.swift */; };
 		D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */; };
 /* End PBXBuildFile section */
 
@@ -206,6 +207,7 @@
 		D0DDDB4D2CA19D0800A78A87 /* PhotoUploadGuidelinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoUploadGuidelinesView.swift; sourceTree = "<group>"; };
 		D0DDDB4F2CA1A01200A78A87 /* HowToEnableNotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToEnableNotificationsView.swift; sourceTree = "<group>"; };
 		D0DDDB512CA251C500A78A87 /* CommunityGuidelinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityGuidelinesView.swift; sourceTree = "<group>"; };
+		D0DDDB532CA25B4D00A78A87 /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
 		D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetWillingnessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -355,6 +357,7 @@
 				D0DDDB4D2CA19D0800A78A87 /* PhotoUploadGuidelinesView.swift */,
 				D0DDDB4F2CA1A01200A78A87 /* HowToEnableNotificationsView.swift */,
 				D0DDDB512CA251C500A78A87 /* CommunityGuidelinesView.swift */,
+				D0DDDB532CA25B4D00A78A87 /* PrivacyPolicyView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -606,6 +609,7 @@
 				D0DDDB052C9FA8AF00A78A87 /* ChatDetailView.swift in Sources */,
 				D0445C652C72388D0059D522 /* FlowStack.swift in Sources */,
 				D0DDDB2A2CA156A700A78A87 /* WhatIsSwiftiDatePremiumView.swift in Sources */,
+				D0DDDB542CA25B4E00A78A87 /* PrivacyPolicyView.swift in Sources */,
 				D0445C732C72FB440059D522 /* HometownInputView.swift in Sources */,
 				D018AD612C9E6ACF005A14B9 /* PraisePurchaseView.swift in Sources */,
 				D0445C6F2C72EDF10059D522 /* IndustryPicker.swift in Sources */,

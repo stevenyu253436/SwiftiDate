@@ -12,12 +12,15 @@ struct SettingsView: View {
     @Binding var showSettingsView: Bool // Binding variable to control the view dismissal
     @State private var isHelpView = false // State variable to control HelpView presentation
     @State private var isCommunityGuidelinesView = false // State variable for CommunityGuidelinesView
+    @State private var isPrivacyPolicyView = false // State variable for PrivacyPolicyView
 
     var body: some View {
         if isHelpView {
             HelpView(isHelpView: $isHelpView) // Use the binding variable in the preview
         } else if isCommunityGuidelinesView {
             CommunityGuidelinesView(isCommunityGuidelinesView: $isCommunityGuidelinesView)
+        } else if isPrivacyPolicyView {
+            PrivacyPolicyView(isPrivacyPolicyView: $isPrivacyPolicyView)
         } else {
             VStack {
                 // Custom Navigation Bar
@@ -122,20 +125,30 @@ struct SettingsView: View {
                                 .foregroundColor(.gray)
                         }
 
-                        HStack {
-                            Text("社區規範")
-                                .padding(.vertical, 10)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
+                        Button(action: {
+                            isCommunityGuidelinesView = true
+                        }) {
+                            HStack {
+                                Text("社區規範")
+                                    .padding(.vertical, 10)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
+                            .foregroundColor(.black) // Keep the text color unchanged when the button is tapped
                         }
 
-                        HStack {
-                            Text("隱私權政策")
-                                .padding(.vertical, 10)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
+                        Button(action: {
+                            isPrivacyPolicyView = true // Show PrivacyPolicyView
+                        }) {
+                            HStack {
+                                Text("隱私權政策")
+                                    .padding(.vertical, 10)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
+                            .foregroundColor(.black) // Keep the text color unchanged when the button is tapped
                         }
 
                         HStack {
