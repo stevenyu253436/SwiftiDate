@@ -108,6 +108,7 @@
 		D0DDDB522CA251C600A78A87 /* CommunityGuidelinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB512CA251C500A78A87 /* CommunityGuidelinesView.swift */; };
 		D0DDDB542CA25B4E00A78A87 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB532CA25B4D00A78A87 /* PrivacyPolicyView.swift */; };
 		D0DDDB562CA29B1200A78A87 /* TermsOfServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB552CA29B1100A78A87 /* TermsOfServiceView.swift */; };
+		D0DDDB582CA4ECD300A78A87 /* DataManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB572CA4ECD200A78A87 /* DataManagementView.swift */; };
 		D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */; };
 /* End PBXBuildFile section */
 
@@ -210,6 +211,7 @@
 		D0DDDB512CA251C500A78A87 /* CommunityGuidelinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityGuidelinesView.swift; sourceTree = "<group>"; };
 		D0DDDB532CA25B4D00A78A87 /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
 		D0DDDB552CA29B1100A78A87 /* TermsOfServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceView.swift; sourceTree = "<group>"; };
+		D0DDDB572CA4ECD200A78A87 /* DataManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagementView.swift; sourceTree = "<group>"; };
 		D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetWillingnessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -361,6 +363,7 @@
 				D0DDDB512CA251C500A78A87 /* CommunityGuidelinesView.swift */,
 				D0DDDB532CA25B4D00A78A87 /* PrivacyPolicyView.swift */,
 				D0DDDB552CA29B1100A78A87 /* TermsOfServiceView.swift */,
+				D0DDDB572CA4ECD200A78A87 /* DataManagementView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -587,6 +590,7 @@
 				D0445C812C73CA130059D522 /* PetSelectionView.swift in Sources */,
 				D0445C692C723AE80059D522 /* FlowLayout.swift in Sources */,
 				D0DDDB142CA10EAD00A78A87 /* SettingsView.swift in Sources */,
+				D0DDDB582CA4ECD300A78A87 /* DataManagementView.swift in Sources */,
 				D0DDDB462CA18FDC00A78A87 /* HowToUseIncognitoModeView.swift in Sources */,
 				D0DDDB362CA16FF900A78A87 /* HowToPurchaseSwiftiDatePremiumView.swift in Sources */,
 				D0DDDB442CA17FA700A78A87 /* HowToUseAdvancedFilteringView.swift in Sources */,

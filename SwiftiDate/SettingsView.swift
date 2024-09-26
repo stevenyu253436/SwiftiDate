@@ -14,6 +14,7 @@ struct SettingsView: View {
     @State private var isCommunityGuidelinesView = false // State variable for CommunityGuidelinesView
     @State private var isPrivacyPolicyView = false // State variable for PrivacyPolicyView
     @State private var isTermsOfServiceView = false // State variable for TermsOfServiceView
+    @State private var isDataManagementView = false
     @State private var showUpdatePopup = false // State variable to control update popup display
     @State private var isShowingLogoutAlert = false // State variable to control alert presentation
 
@@ -27,6 +28,8 @@ struct SettingsView: View {
                 PrivacyPolicyView(isPrivacyPolicyView: $isPrivacyPolicyView)
             } else if isTermsOfServiceView {
                 TermsOfServiceView(isTermsOfServiceView: $isTermsOfServiceView)
+            } else if isDataManagementView {
+                DataManagementView(isDataManagementView: $isDataManagementView)
             } else {
                 VStack {
                     // Custom Navigation Bar
@@ -178,12 +181,17 @@ struct SettingsView: View {
                             }
                             .foregroundColor(.black) // Keep the text color unchanged when the button is tapped
 
-                            HStack {
-                                Text("數據管理")
-                                    .padding(.vertical, 10)
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(.gray)
+                            Button(action: {
+                                isDataManagementView = true // Navigate to DataManagementView
+                            }) {
+                                HStack {
+                                    Text("數據管理")
+                                        .padding(.vertical, 10)
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .foregroundColor(.gray)
+                                }
+                                .foregroundColor(.black) // Maintain text color
                             }
 
                             HStack {
