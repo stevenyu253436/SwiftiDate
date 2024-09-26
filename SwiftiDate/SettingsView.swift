@@ -14,206 +14,291 @@ struct SettingsView: View {
     @State private var isCommunityGuidelinesView = false // State variable for CommunityGuidelinesView
     @State private var isPrivacyPolicyView = false // State variable for PrivacyPolicyView
     @State private var isTermsOfServiceView = false // State variable for TermsOfServiceView
+    @State private var showUpdatePopup = false // State variable to control update popup display
+    @State private var isShowingLogoutAlert = false // State variable to control alert presentation
 
     var body: some View {
-        if isHelpView {
-            HelpView(isHelpView: $isHelpView) // Use the binding variable in the preview
-        } else if isCommunityGuidelinesView {
-            CommunityGuidelinesView(isCommunityGuidelinesView: $isCommunityGuidelinesView)
-        } else if isPrivacyPolicyView {
-            PrivacyPolicyView(isPrivacyPolicyView: $isPrivacyPolicyView)
-        } else if isTermsOfServiceView {
-            TermsOfServiceView(isTermsOfServiceView: $isTermsOfServiceView)
-        } else {
-            VStack {
-                // Custom Navigation Bar
-                HStack {
-                    Button(action: {
-                        showSettingsView = false // Dismiss SettingsView and return to ProfileView
-                    }) {
-                        Image(systemName: "chevron.left")
-                            .font(.title)
+        ZStack {
+            if isHelpView {
+                HelpView(isHelpView: $isHelpView) // Use the binding variable in the preview
+            } else if isCommunityGuidelinesView {
+                CommunityGuidelinesView(isCommunityGuidelinesView: $isCommunityGuidelinesView)
+            } else if isPrivacyPolicyView {
+                PrivacyPolicyView(isPrivacyPolicyView: $isPrivacyPolicyView)
+            } else if isTermsOfServiceView {
+                TermsOfServiceView(isTermsOfServiceView: $isTermsOfServiceView)
+            } else {
+                VStack {
+                    // Custom Navigation Bar
+                    HStack {
+                        Button(action: {
+                            showSettingsView = false // Dismiss SettingsView and return to ProfileView
+                        }) {
+                            Image(systemName: "chevron.left")
+                                .font(.title)
+                        }
+                        Text("設定")
+                            .font(.headline)
+                            .padding(.leading, 5)
+                        
+                        Spacer()
                     }
-                    Text("設定")
-                        .font(.headline)
-                        .padding(.leading, 5)
+                    .padding()
                     
-                    Spacer()
-                }
-                .padding()
-                
-                Divider()
-                
-                // Settings content
-                List {
-                    Section {
-                        HStack {
-                            Image(systemName: "qrcode.viewfinder")
-                                .foregroundColor(.purple)
-                            Text("掃碼")
-                            Spacer()
-                        }
-                        .padding(.vertical, 10) // Adjust this value to increase the height
-                        
-                        HStack {
-                            Image(systemName: "crown.fill")
-                                .foregroundColor(.orange)
-                            Text("恢復購買")
-                            Spacer()
-                        }
-                        .padding(.vertical, 10) // Adjust this value to increase the height
-                        
-                        HStack {
-                            Image(systemName: "crown")
-                                .foregroundColor(.brown)
-                            Text("開啟 SwiftiDate Supreme 會員標誌")
-                            Spacer()
-                            Toggle("", isOn: .constant(true))
-                                .labelsHidden()
-                        }
-                        .padding(.vertical, 10) // Adjust this value to increase the height
-                        
-                        HStack {
-                            Image(systemName: "envelope.fill")
-                                .foregroundColor(.pink)
-                            Text("邀請好友一起玩SwiftiDate")
-                            Spacer()
-                        }
-                        .padding(.vertical, 10) // Adjust this value to increase the height
-                        
-                        HStack {
-                            Image(systemName: "crown.fill")
-                                .foregroundColor(.pink)
-                            Text("兌換會員")
-                            Spacer()
-                        }
-                        .padding(.vertical, 10) // Adjust this value to increase the height
-                        
-                        HStack {
-                            Image(systemName: "person.fill")
-                                .foregroundColor(.cyan)
-                            Text("個人資料")
-                            Spacer()
-                        }
-                        .padding(.vertical, 10) // Adjust this value to increase the height
-                    }
+                    Divider()
                     
-                    Section {
-                        HStack {
-                            Text("客服")
+                    // Settings content
+                    List {
+                        Section {
+                            HStack {
+                                Image(systemName: "qrcode.viewfinder")
+                                    .foregroundColor(.purple)
+                                Text("掃碼")
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray) // Optional: Set the color of the chevron
+                            }
+                            .padding(.vertical, 10) // Adjust this value to increase the height
+                            
+                            HStack {
+                                Image(systemName: "crown.fill")
+                                    .foregroundColor(.orange)
+                                Text("恢復購買")
+                                Spacer()
+                            }
+                            .padding(.vertical, 10) // Adjust this value to increase the height
+                            
+                            HStack {
+                                Image(systemName: "crown")
+                                    .foregroundColor(.brown)
+                                Text("開啟 SwiftiDate Supreme 會員標誌")
+                                Spacer()
+                                Toggle("", isOn: .constant(true))
+                                    .labelsHidden()
+                            }
+                            .padding(.vertical, 10) // Adjust this value to increase the height
+                            
+                            HStack {
+                                Image(systemName: "envelope.fill")
+                                    .foregroundColor(.pink)
+                                Text("邀請好友一起玩SwiftiDate")
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray) // Optional: Set the color of the chevron
+                            }
+                            .padding(.vertical, 10) // Adjust this value to increase the height
+                            
+                            HStack {
+                                Image(systemName: "crown.fill")
+                                    .foregroundColor(.pink)
+                                Text("兌換會員")
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray) // Optional: Set the color of the chevron
+                            }
+                            .padding(.vertical, 10) // Adjust this value to increase the height
+                            
+                            HStack {
+                                Image(systemName: "person.fill")
+                                    .foregroundColor(.cyan)
+                                Text("個人資料")
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray) // Optional: Set the color of the chevron
+                            }
+                            .padding(.vertical, 10) // Adjust this value to increase the height
+                        }
+                        
+                        Section {
+                            HStack {
+                                Text("客服")
+                                    .padding(.vertical, 10) // Adjust this value to increase the height
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray) // Optional: Set the color of the chevron
+                            }
+
+                            Button(action: {
+                                isHelpView = true // Show HelpView
+                            }) {
+                                HStack {
+                                    Text("幫助")
+                                        .padding(.vertical, 10)
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .foregroundColor(.gray)
+                                }
+                                .foregroundColor(.black) // Keep the text color unchanged when the button is tapped
+                            }
+                            
+                            HStack {
+                                Text("語言")
+                                    .padding(.vertical, 10)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
+
+                            Button(action: {
+                                isCommunityGuidelinesView = true
+                            }) {
+                                HStack {
+                                    Text("社區規範")
+                                        .padding(.vertical, 10)
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .foregroundColor(.gray)
+                                }
+                                .foregroundColor(.black) // Keep the text color unchanged when the button is tapped
+                            }
+
+                            Button(action: {
+                                isPrivacyPolicyView = true // Show PrivacyPolicyView
+                            }) {
+                                HStack {
+                                    Text("隱私權政策")
+                                        .padding(.vertical, 10)
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .foregroundColor(.gray)
+                                }
+                                .foregroundColor(.black) // Keep the text color unchanged when the button is tapped
+                            }
+
+                            Button(action: {
+                                isTermsOfServiceView = true // Show TermsOfServiceView
+                            }) {
+                                HStack {
+                                    Text("服務協議")
+                                        .padding(.vertical, 10)
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .foregroundColor(.gray)
+                                }
+                            }
+                            .foregroundColor(.black) // Keep the text color unchanged when the button is tapped
+
+                            HStack {
+                                Text("數據管理")
+                                    .padding(.vertical, 10)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
+
+                            HStack {
+                                Text("資料恢復")
+                                    .padding(.vertical, 10)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
+
+                            Button(action: {
+                                showUpdatePopup = true // Show the update popup when tapped
+                            }) {
+                                HStack {
+                                    Text("檢查版本更新")
+                                        .padding(.vertical, 10)
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .foregroundColor(.gray)
+                                }
+                                .foregroundColor(.black) // Keep the text color unchanged when the button is tapped
+                            }
+
+                            HStack {
+                                Text("戀愛性格測驗")
+                                    .padding(.vertical, 10)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
+                        }
+                        
+                        Section {
+                            Button(action: {
+                                isShowingLogoutAlert = true // Show the alert when tapped
+                            }) {
+                                Text("登出")
+                                    .padding(.vertical, 10) // Adjust this value to increase the height
+                                    .frame(maxWidth: .infinity, alignment: .leading) // Extend Text to the full width
+                                    .background(Color.white) // Make sure the background is set to white
+                                    .foregroundColor(.red) // Set the text color to red
+                            }
+                            .alert(isPresented: $isShowingLogoutAlert) {
+                                Alert(
+                                    title: Text("一旦登出，你的登入資料將被清除"),
+                                    primaryButton: .default(Text("取消")),
+                                    secondaryButton: .destructive(Text("確定"), action: {
+                                        // Perform your logout action here
+                                        print("User logged out")
+                                    })
+                                )
+                            }
+                        }
+                        
+                        Section {
+                            Text("關閉帳號")
                                 .padding(.vertical, 10) // Adjust this value to increase the height
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray) // Optional: Set the color of the chevron
+                                .frame(maxWidth: .infinity, alignment: .leading) // Extend Text to the full width
+                                .background(Color.white) // Make sure the background is set to white
                         }
-
-                        Button(action: {
-                            isHelpView = true // Show HelpView
-                        }) {
-                            HStack {
-                                Text("幫助")
-                                    .padding(.vertical, 10)
-                                Spacer()
-                                Image(systemName: "chevron.right")
+                    }
+                }
+            }
+            
+            if showUpdatePopup {
+                // Custom Popup View
+                ZStack {
+                    Color.black.opacity(0.4)
+                        .edgesIgnoringSafeArea(.all)
+                    
+                    VStack(spacing: 20) {
+                        // Add a close button in the top-right corner
+                        HStack {
+                            Spacer() // Push the X button to the right
+                            Button(action: {
+                                showUpdatePopup = false // Close the popup when "X" is tapped
+                            }) {
+                                Image(systemName: "xmark")
+                                    .resizable()
+                                    .frame(width: 18, height: 18)
                                     .foregroundColor(.gray)
+                                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 20)) // Adjust padding values
                             }
-                            .foregroundColor(.black) // Keep the text color unchanged when the button is tapped
                         }
                         
-                        HStack {
-                            Text("語言")
-                                .padding(.vertical, 10)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
-                        }
-
+                        // Image (Add your custom image here)
+                        Image(systemName: "rocket.fill")
+                            .resizable()
+                            .frame(width: 100, height: 100)
+                            .padding(.top, 20)
+                        
+                        Text("目前已經是最新版本")
+                            .font(.headline)
+                            .padding(.horizontal, 20)
+                        
+                        Text("超多免費的新功能，輕鬆脫單無負擔，快來體驗全新 SwiftiDate 吧～")
+                            .font(.subheadline)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 20)
+                        
                         Button(action: {
-                            isCommunityGuidelinesView = true
+                            showUpdatePopup = false // Close the popup when "好的" button is tapped
                         }) {
-                            HStack {
-                                Text("社區規範")
-                                    .padding(.vertical, 10)
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(.gray)
-                            }
-                            .foregroundColor(.black) // Keep the text color unchanged when the button is tapped
+                            Text("好的")
+                                .foregroundColor(.white)
+                                .frame(width: 200, height: 40)
+                                .background(Color.green)
+                                .cornerRadius(20)
                         }
-
-                        Button(action: {
-                            isPrivacyPolicyView = true // Show PrivacyPolicyView
-                        }) {
-                            HStack {
-                                Text("隱私權政策")
-                                    .padding(.vertical, 10)
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(.gray)
-                            }
-                            .foregroundColor(.black) // Keep the text color unchanged when the button is tapped
-                        }
-
-                        Button(action: {
-                            isTermsOfServiceView = true // Show TermsOfServiceView
-                        }) {
-                            HStack {
-                                Text("服務協議")
-                                    .padding(.vertical, 10)
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(.gray)
-                            }
-                        }
-                        .foregroundColor(.black) // Keep the text color unchanged when the button is tapped
-
-                        HStack {
-                            Text("數據管理")
-                                .padding(.vertical, 10)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
-                        }
-
-                        HStack {
-                            Text("資料恢復")
-                                .padding(.vertical, 10)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
-                        }
-
-                        HStack {
-                            Text("檢查版本更新")
-                                .padding(.vertical, 10)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
-                        }
-
-                        HStack {
-                            Text("戀愛性格測驗")
-                                .padding(.vertical, 10)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
-                        }
+                        .padding(.bottom, 20)
                     }
-                    
-                    Section {
-                        Text("登出")
-                            .padding(.vertical, 10) // Adjust this value to increase the height
-                            .frame(maxWidth: .infinity, alignment: .leading) // Extend Text to the full width
-                            .background(Color.white) // Make sure the background is set to white
-                            .foregroundColor(.red) // Set the text color to red
-                    }
-                    
-                    Section {
-                        Text("關閉帳號")
-                            .padding(.vertical, 10) // Adjust this value to increase the height
-                            .frame(maxWidth: .infinity, alignment: .leading) // Extend Text to the full width
-                            .background(Color.white) // Make sure the background is set to white
-                    }
+                    .frame(width: 300, height: 400)
+                    .background(Color.white)
+                    .cornerRadius(20)
+                    .shadow(radius: 10)
                 }
             }
         }
