@@ -13,12 +13,16 @@ extension Color {
 }
 
 struct ProfileView: View {
+    @State private var userRankPercentage: Double = 25.4
+    @State private var isShowingInfoPopup = false // State to show/hide the popup
     @State private var isShowingTurboPurchaseView = false // State variable to control the sheet presentation
     @State private var isShowingCrushPurchaseView = false // State variable to control Crush sheet presentation
     @State private var isShowingPraisePurchaseView = false // State variable to control Praise sheet presentation
     @State private var isSupremeUser = true // Replace this with your actual logic to determine if the user is Supreme
     @State private var isUserVerified = true // Replace with your actual logic
     @State private var showSettingsView = false // State variable to control Settings View presentation
+    @State private var likesMeCount: Int = 0 // Variable to store the number of likes
+    @State private var likeCount: Int = 120 // 假設 "我喜歡" 的數量
 
     var body: some View {
         if showSettingsView {
@@ -77,7 +81,7 @@ struct ProfileView: View {
                         // 统计信息
                         HStack(spacing: 50) {
                             VStack {
-                                Text("0")
+                                Text(likesMeCount >= 99 ? "99+" : "\(likesMeCount)")
                                     .font(.title)
                                     .fontWeight(.bold)
                                 Text("喜歡我")
@@ -85,7 +89,7 @@ struct ProfileView: View {
                                     .foregroundColor(.gray)
                             }
                             VStack {
-                                Text("99+")
+                                Text(likeCount > 99 ? "99+" : "\(likeCount)") // 根據數字是否大於99來顯示
                                     .font(.title)
                                     .fontWeight(.bold)
                                 Text("我喜歡")
@@ -105,10 +109,22 @@ struct ProfileView: View {
 
                         // 成就进度条
                         VStack {
-                            Text("打敗 25.4%")
-                                .font(.subheadline)
-                                .fontWeight(.bold)
-                                .padding(.bottom, 5)
+                            HStack {
+                                Text("打敗 \(String(format: "%.1f", userRankPercentage))%")
+                                    .font(.subheadline)
+                                    .fontWeight(.bold)
+                                
+                                // Add the question mark icon with tap gesture
+                                Image(systemName: "questionmark.circle")
+                                    .resizable()
+                                    .frame(width: 20, height: 20)
+                                    .foregroundColor(.green)
+                                    .onTapGesture {
+                                        isShowingInfoPopup = true // Show the popup when tapped
+                                    }
+                            }
+                            .padding(.bottom, 5)
+
                             ProgressView(value: 0.254)
                                 .progressViewStyle(LinearProgressViewStyle(tint: .green))
                                 .scaleEffect(x: 1, y: 4, anchor: .center)
@@ -246,6 +262,87 @@ struct ProfileView: View {
                         }
                     }
                     Spacer()
+                }
+                
+                // Show dimmed background and popup when isShowingInfoPopup is true
+                if isShowingInfoPopup {
+                    Color.black.opacity(0.4) // Dimmed background
+                        .edgesIgnoringSafeArea(.all) // Make it cover the entire screen
+                    
+                    // Popup content
+                    VStack {
+                        Spacer()
+                        
+                        VStack(alignment: .leading, spacing: 10) {
+                            HStack {
+                                Text("即時更新的人氣大賽")
+                                    .font(.headline)
+                                Spacer()
+                                Button(action: {
+                                    isShowingInfoPopup = false // Close the popup
+                                }) {
+                                    Image(systemName: "xmark")
+                                        .font(.title)
+                                        .foregroundColor(.gray)
+                                        .opacity(0.4)
+                                }
+                            }
+                            .padding()
+                            
+                            Text("你好秀啊！你比附近\(String(format: "%.1f", userRankPercentage))%的用戶還受歡迎喔！")                               .font(.body)
+                                .padding(.horizontal)
+                            
+                            Text("如何獲得更多喜歡")
+                                .font(.subheadline)
+                                .fontWeight(.bold)
+                                .padding(.horizontal)
+                            
+                            VStack(alignment: .leading, spacing: 5) {
+                                HStack {
+                                    Image(systemName: "checkmark")
+                                    Text("保持活躍，每天上線 SwiftiDate")
+                                }
+                                HStack {
+                                    Image(systemName: "checkmark")
+                                    Text("配對多右滑，右滑多配對")
+                                }
+                                HStack {
+                                    Image(systemName: "checkmark")
+                                    Text("選最好的照片作為頭像")
+                                }
+                                HStack {
+                                    Image(systemName: "checkmark")
+                                    Text("個資豐富，脫穎而出")
+                                }
+                                HStack {
+                                    Image(systemName: "checkmark")
+                                    Text("頭像認證，取得信任")
+                                }
+                            }
+                            .padding(.horizontal)
+                                                        
+                            Button(action: {
+                                isShowingInfoPopup = false // Dismiss the popup
+                            }) {
+                                Text("獲得更多曝光的機會")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .frame(maxWidth: .infinity)
+                                    .background(Color.green)
+                                    .cornerRadius(10)
+                                    .padding(.horizontal)
+                            }
+                        }
+                        .padding()
+                        .background(Color.white)
+                        .cornerRadius(15)
+                        .padding(.horizontal, 40)
+                        
+                        Spacer()
+                    }
+                    .transition(.opacity) // Smooth transition when appearing/disappearing
+                    .animation(.easeInOut)
                 }
             }
         }
