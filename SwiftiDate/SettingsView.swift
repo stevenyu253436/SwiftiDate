@@ -10,6 +10,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @Binding var showSettingsView: Bool // Binding variable to control the view dismissal
+    @State private var isQRCodeScannerView = false
     @State private var isHelpView = false // State variable to control HelpView presentation
     @State private var isCommunityGuidelinesView = false // State variable for CommunityGuidelinesView
     @State private var isPrivacyPolicyView = false // State variable for PrivacyPolicyView
@@ -20,7 +21,17 @@ struct SettingsView: View {
 
     var body: some View {
         ZStack {
-            if isHelpView {
+            if isQRCodeScannerView {
+                QRCodeScannerView(didFindCode: { scannedCode in
+                    // Handle the scanned code
+                    print("Scanned QR Code: \(scannedCode)")
+                    isQRCodeScannerView = false // Dismiss QRCodeScannerView after scanning
+                }, dismissView: {
+                    // Action to dismiss the QR code scanner
+                    isQRCodeScannerView = false // Dismiss the scanner when the back button is tapped
+                })
+                .edgesIgnoringSafeArea(.all)
+            } else if isHelpView {
                 HelpView(isHelpView: $isHelpView) // Use the binding variable in the preview
             } else if isCommunityGuidelinesView {
                 CommunityGuidelinesView(isCommunityGuidelinesView: $isCommunityGuidelinesView)
@@ -61,7 +72,11 @@ struct SettingsView: View {
                                 Image(systemName: "chevron.right")
                                     .foregroundColor(.gray) // Optional: Set the color of the chevron
                             }
-                            .padding(.vertical, 10) // Adjust this value to increase the height
+                            .padding(.vertical, 10)
+                            .background(Color.clear) // 加上透明背景
+                            .onTapGesture {
+                                isQRCodeScannerView = true // Navigate to QR Code Scanner
+                            }
                             
                             HStack {
                                 Image(systemName: "crown.fill")

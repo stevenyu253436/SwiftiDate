@@ -9,5 +9,7 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Your location is required to find nearby matches.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>We need access to your camera to scan QR codes.</string>
 </dict>
 </plist>
