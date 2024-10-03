@@ -252,6 +252,14 @@ struct ProfileView: View {
                 VStack {
                     HStack {
                         Spacer()
+                        
+                        // New icon to the left of gearshape.fill
+                        Image(systemName: "shield.fill") // Replace with your custom shield icon name
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .foregroundColor(.gray) // Set the color to match the design
+                            .padding(.trailing, 10) // Adjust padding if necessary
+                        
                         Button(action: {
                             showSettingsView = true
                         }) {
