@@ -18,6 +18,7 @@ struct SettingsView: View {
     @State private var isDataManagementView = false
     @State private var showUpdatePopup = false // State variable to control update popup display
     @State private var isShowingLogoutAlert = false // State variable to control alert presentation
+    @State private var isPersonalInfoView = false // 控制個人資料頁面的顯示
 
     var body: some View {
         ZStack {
@@ -31,6 +32,8 @@ struct SettingsView: View {
                     isQRCodeScannerView = false // Dismiss the scanner when the back button is tapped
                 })
                 .edgesIgnoringSafeArea(.all)
+            } else if isPersonalInfoView {
+                PersonalInfoView(isPersonalInfoView: $isPersonalInfoView)
             } else if isHelpView {
                 HelpView(isHelpView: $isHelpView) // Use the binding variable in the preview
             } else if isCommunityGuidelinesView {
@@ -64,18 +67,20 @@ struct SettingsView: View {
                     // Settings content
                     List {
                         Section {
-                            HStack {
-                                Image(systemName: "qrcode.viewfinder")
-                                    .foregroundColor(.purple)
-                                Text("掃碼")
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(.gray) // Optional: Set the color of the chevron
-                            }
-                            .padding(.vertical, 10)
-                            .background(Color.clear) // 加上透明背景
-                            .onTapGesture {
+                            Button(action: {
                                 isQRCodeScannerView = true // Navigate to QR Code Scanner
+                            }) {
+                                HStack {
+                                    Image(systemName: "qrcode.viewfinder")
+                                        .foregroundColor(.purple)
+                                    Text("掃碼")
+                                        .foregroundColor(.black) // Keep the text color unchanged when the button is tapped
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .foregroundColor(.gray) // Optional: Set the color of the chevron
+                                }
+                                .padding(.vertical, 10)
+                                .background(Color.clear) // 加上透明背景
                             }
                             
                             HStack {
@@ -116,15 +121,21 @@ struct SettingsView: View {
                             }
                             .padding(.vertical, 10) // Adjust this value to increase the height
                             
-                            HStack {
-                                Image(systemName: "person.fill")
-                                    .foregroundColor(.cyan)
-                                Text("個人資料")
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(.gray) // Optional: Set the color of the chevron
+                            Button(action: {
+                                isPersonalInfoView = true // Navigate to Personal Info View
+                            }) {
+                                HStack {
+                                    Image(systemName: "person.fill")
+                                        .foregroundColor(.cyan)
+                                    Text("個人資料")
+                                        .foregroundColor(.black) // Keep the text color unchanged when the button is tapped
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .foregroundColor(.gray)
+                                }
+                                .padding(.vertical, 10)
+                                .background(Color.clear)
                             }
-                            .padding(.vertical, 10) // Adjust this value to increase the height
                         }
                         
                         Section {
