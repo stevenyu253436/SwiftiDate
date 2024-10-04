@@ -12,6 +12,7 @@ struct ChatDetailView: View {
     var chat: Chat
     @Binding var messages: [Message]  // Bind to the messages passed from ChatView
     @State private var newMessageText: String = "" // State variable to hold the input message text
+    @State private var phoneNumber: String = "1234567890" // Declare phoneNumber as a State variable
     var onBack: () -> Void // Add this line to accept the onBack closure
 
     var body: some View {
@@ -43,7 +44,13 @@ struct ChatDetailView: View {
                 Spacer()
                 
                 Button(action: {
-                    // Action for phone call
+                    if let phoneURL = URL(string: "tel://\(phoneNumber)") {
+                        if UIApplication.shared.canOpenURL(phoneURL) {
+                            UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
+                        } else {
+                            print("無法撥打電話，請檢查電話號碼格式")
+                        }
+                    }
                 }) {
                     Image(systemName: "phone.fill")
                         .foregroundColor(.green)
