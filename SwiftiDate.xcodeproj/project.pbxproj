@@ -12,6 +12,7 @@
 		D017F4F22CAF73AD00C71D18 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = D017F4F12CAF73AC00C71D18 /* GlobalVariables.swift */; };
 		D017F4F42CAF77D900C71D18 /* MessageBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D017F4F32CAF77D900C71D18 /* MessageBubbleView.swift */; };
 		D017F4F62CAFBFF700C71D18 /* LoginOrRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D017F4F52CAFBFF700C71D18 /* LoginOrRegisterView.swift */; };
+		D017F4F82CAFC9A200C71D18 /* PhoneNumberEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D017F4F72CAFC9A200C71D18 /* PhoneNumberEntryView.swift */; };
 		D018AD5B2C9E57DF005A14B9 /* UserGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D018AD5A2C9E57DF005A14B9 /* UserGuideView.swift */; };
 		D018AD5D2C9E6581005A14B9 /* TurboPurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D018AD5C2C9E6581005A14B9 /* TurboPurchaseView.swift */; };
 		D018AD5F2C9E6976005A14B9 /* CrushPurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D018AD5E2C9E6976005A14B9 /* CrushPurchaseView.swift */; };
@@ -140,6 +141,7 @@
 		D017F4F12CAF73AC00C71D18 /* GlobalVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
 		D017F4F32CAF77D900C71D18 /* MessageBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBubbleView.swift; sourceTree = "<group>"; };
 		D017F4F52CAFBFF700C71D18 /* LoginOrRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOrRegisterView.swift; sourceTree = "<group>"; };
+		D017F4F72CAFC9A200C71D18 /* PhoneNumberEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberEntryView.swift; sourceTree = "<group>"; };
 		D018AD5A2C9E57DF005A14B9 /* UserGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGuideView.swift; sourceTree = "<group>"; };
 		D018AD5C2C9E6581005A14B9 /* TurboPurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurboPurchaseView.swift; sourceTree = "<group>"; };
 		D018AD5E2C9E6976005A14B9 /* CrushPurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrushPurchaseView.swift; sourceTree = "<group>"; };
@@ -274,9 +276,70 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D017F4F92CAFF01900C71D18 /* EditProfileRelated */ = {
+			isa = PBXGroup;
+			children = (
+				D0445C7A2C73C74B0059D522 /* BloodTypePickerView.swift */,
+				D0445C6A2C7247050059D522 /* DegreePicker.swift */,
+				D0445C8A2C73D0760059D522 /* DietPreferencesView.swift */,
+				D0445C862C73CEFB0059D522 /* DrinkOptionsView.swift */,
+				D0445C822C73CBE70059D522 /* FitnessOptionsView.swift */,
+				D0445C762C73BF590059D522 /* HeightPickerView.swift */,
+				D0445C722C72FB430059D522 /* HometownInputView.swift */,
+				D0445C6E2C72EDF00059D522 /* IndustryPicker.swift */,
+				D0445C662C7239C80059D522 /* InterestsView.swift */,
+				D055E9912C8CCFBA00A97DD1 /* InterestSelectionView.swift */,
+				D0445C742C73B4EE0059D522 /* LanguageSelectionView.swift */,
+				D0445C7E2C73C9080059D522 /* LookingForView.swift */,
+				D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */,
+				D0445C802C73CA130059D522 /* PetSelectionView.swift */,
+				D0445C6C2C72EA990059D522 /* SchoolInputView.swift */,
+				D0445C842C73CDB60059D522 /* SmokingOptionsView.swift */,
+				D0445C882C73CF610059D522 /* VacationOptionsView.swift */,
+				D0445C782C73C0B30059D522 /* ZodiacPickerView.swift */,
+			);
+			path = EditProfileRelated;
+			sourceTree = "<group>";
+		};
+		D017F4FA2CAFF46F00C71D18 /* HelpViews */ = {
+			isa = PBXGroup;
+			children = (
+				D0DDDB372CA171B300A78A87 /* HowToCancelSubscriptionView.swift */,
+				D0DDDB252CA14B2600A78A87 /* HowToDeleteMessagesView.swift */,
+				D0DDDB4F2CA1A01200A78A87 /* HowToEnableNotificationsView.swift */,
+				D0DDDB332CA16D8B00A78A87 /* HowToEnablePremiumBadgeView.swift */,
+				D0DDDB1D2CA138B200A78A87 /* HowToMatchAndChatView.swift */,
+				D0DDDB352CA16FF900A78A87 /* HowToPurchaseSwiftiDatePremiumView.swift */,
+				D0DDDB472CA191EE00A78A87 /* HowToPurchaseSwiftiDateSupremeView.swift */,
+				D0DDDB232CA1486E00A78A87 /* HowToUnmatchView.swift */,
+				D0DDDB432CA17FA700A78A87 /* HowToUseAdvancedFilteringView.swift */,
+				D0DDDB412CA17D2C00A78A87 /* HowToUseDailyPraiseOpportunityView.swift */,
+				D0DDDB452CA18FDC00A78A87 /* HowToUseIncognitoModeView.swift */,
+				D0DDDB2B2CA160BB00A78A87 /* HowToUseWhoLikedMeAndCrushListView.swift */,
+				D0DDDB1B2CA1321300A78A87 /* IsSwiftiDatePaidView.swift */,
+				D0DDDB4B2CA19A0600A78A87 /* ManageProfilePhotosView.swift */,
+				D0DDDB3B2CA1770400A78A87 /* RefundPolicyView.swift */,
+				D0DDDB272CA14FCC00A78A87 /* ReportUserView.swift */,
+				D0DDDB392CA174A000A78A87 /* RestorePurchaseView.swift */,
+				D0DDDB312CA16B7000A78A87 /* UndoSwipeView.swift */,
+				D0DDDB492CA196FB00A78A87 /* UpdateProfileDetailsView.swift */,
+				D0DDDB2D2CA1628F00A78A87 /* WhatIsCrushAndHowToUseView.swift */,
+				D0DDDB192CA1282B00A78A87 /* WhatIsSwiftiDateView.swift */,
+				D0DDDB3D2CA179AC00A78A87 /* WhatIsSwiftiDatePremiumDiscountPolicyView.swift */,
+				D0DDDB292CA156A700A78A87 /* WhatIsSwiftiDatePremiumView.swift */,
+				D0DDDB3F2CA17B3700A78A87 /* WhatIsSwiftiDateSupremeView.swift */,
+				D0DDDB2F2CA164BE00A78A87 /* WhatIsTurboAndHowToUseView.swift */,
+				D0DDDB1F2CA13C5E00A78A87 /* WhoLikedMeView.swift */,
+				D0DDDB212CA1413600A78A87 /* WhyIsItHardToMatchView.swift */,
+			);
+			path = HelpViews;
+			sourceTree = "<group>";
+		};
 		D0445C222C71B3800059D522 = {
 			isa = PBXGroup;
 			children = (
+				D017F4FA2CAFF46F00C71D18 /* HelpViews */,
+				D017F4F92CAFF01900C71D18 /* EditProfileRelated */,
 				D0445C2D2C71B3800059D522 /* SwiftiDate */,
 				D0445C3E2C71B3830059D522 /* SwiftiDateTests */,
 				D0445C482C71B3830059D522 /* SwiftiDateUITests */,
@@ -308,26 +371,8 @@
 				D0445C5E2C71F1070059D522 /* EditProfileView.swift */,
 				D0445C602C722EF50059D522 /* PhotoSectionView.swift */,
 				D0445C642C72388D0059D522 /* FlowStack.swift */,
-				D0445C662C7239C80059D522 /* InterestsView.swift */,
 				D0445C682C723AE80059D522 /* FlowLayout.swift */,
-				D0445C6A2C7247050059D522 /* DegreePicker.swift */,
-				D0445C6C2C72EA990059D522 /* SchoolInputView.swift */,
-				D0445C6E2C72EDF00059D522 /* IndustryPicker.swift */,
 				D0445C702C72F7870059D522 /* JobInputView.swift */,
-				D0445C722C72FB430059D522 /* HometownInputView.swift */,
-				D0445C742C73B4EE0059D522 /* LanguageSelectionView.swift */,
-				D0445C762C73BF590059D522 /* HeightPickerView.swift */,
-				D0445C782C73C0B30059D522 /* ZodiacPickerView.swift */,
-				D0445C7A2C73C74B0059D522 /* BloodTypePickerView.swift */,
-				D0445C7E2C73C9080059D522 /* LookingForView.swift */,
-				D0445C802C73CA130059D522 /* PetSelectionView.swift */,
-				D0445C822C73CBE70059D522 /* FitnessOptionsView.swift */,
-				D0445C842C73CDB60059D522 /* SmokingOptionsView.swift */,
-				D0445C862C73CEFB0059D522 /* DrinkOptionsView.swift */,
-				D0445C882C73CF610059D522 /* VacationOptionsView.swift */,
-				D0445C8A2C73D0760059D522 /* DietPreferencesView.swift */,
-				D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */,
-				D055E9912C8CCFBA00A97DD1 /* InterestSelectionView.swift */,
 				D018AD5A2C9E57DF005A14B9 /* UserGuideView.swift */,
 				D018AD5C2C9E6581005A14B9 /* TurboPurchaseView.swift */,
 				D018AD5E2C9E6976005A14B9 /* CrushPurchaseView.swift */,
@@ -342,34 +387,7 @@
 				D0DDDB0E2CA0E65F00A78A87 /* LocationManager.swift */,
 				D0DDDB132CA10EAD00A78A87 /* SettingsView.swift */,
 				D0DDDB172CA11E5000A78A87 /* HelpView.swift */,
-				D0DDDB192CA1282B00A78A87 /* WhatIsSwiftiDateView.swift */,
-				D0DDDB1B2CA1321300A78A87 /* IsSwiftiDatePaidView.swift */,
-				D0DDDB1D2CA138B200A78A87 /* HowToMatchAndChatView.swift */,
-				D0DDDB1F2CA13C5E00A78A87 /* WhoLikedMeView.swift */,
-				D0DDDB212CA1413600A78A87 /* WhyIsItHardToMatchView.swift */,
-				D0DDDB232CA1486E00A78A87 /* HowToUnmatchView.swift */,
-				D0DDDB252CA14B2600A78A87 /* HowToDeleteMessagesView.swift */,
-				D0DDDB272CA14FCC00A78A87 /* ReportUserView.swift */,
-				D0DDDB292CA156A700A78A87 /* WhatIsSwiftiDatePremiumView.swift */,
-				D0DDDB2B2CA160BB00A78A87 /* HowToUseWhoLikedMeAndCrushListView.swift */,
-				D0DDDB2D2CA1628F00A78A87 /* WhatIsCrushAndHowToUseView.swift */,
-				D0DDDB2F2CA164BE00A78A87 /* WhatIsTurboAndHowToUseView.swift */,
-				D0DDDB312CA16B7000A78A87 /* UndoSwipeView.swift */,
-				D0DDDB332CA16D8B00A78A87 /* HowToEnablePremiumBadgeView.swift */,
-				D0DDDB352CA16FF900A78A87 /* HowToPurchaseSwiftiDatePremiumView.swift */,
-				D0DDDB372CA171B300A78A87 /* HowToCancelSubscriptionView.swift */,
-				D0DDDB392CA174A000A78A87 /* RestorePurchaseView.swift */,
-				D0DDDB3B2CA1770400A78A87 /* RefundPolicyView.swift */,
-				D0DDDB3D2CA179AC00A78A87 /* WhatIsSwiftiDatePremiumDiscountPolicyView.swift */,
-				D0DDDB3F2CA17B3700A78A87 /* WhatIsSwiftiDateSupremeView.swift */,
-				D0DDDB412CA17D2C00A78A87 /* HowToUseDailyPraiseOpportunityView.swift */,
-				D0DDDB432CA17FA700A78A87 /* HowToUseAdvancedFilteringView.swift */,
-				D0DDDB452CA18FDC00A78A87 /* HowToUseIncognitoModeView.swift */,
-				D0DDDB472CA191EE00A78A87 /* HowToPurchaseSwiftiDateSupremeView.swift */,
-				D0DDDB492CA196FB00A78A87 /* UpdateProfileDetailsView.swift */,
-				D0DDDB4B2CA19A0600A78A87 /* ManageProfilePhotosView.swift */,
 				D0DDDB4D2CA19D0800A78A87 /* PhotoUploadGuidelinesView.swift */,
-				D0DDDB4F2CA1A01200A78A87 /* HowToEnableNotificationsView.swift */,
 				D0DDDB512CA251C500A78A87 /* CommunityGuidelinesView.swift */,
 				D0DDDB532CA25B4D00A78A87 /* PrivacyPolicyView.swift */,
 				D0DDDB552CA29B1100A78A87 /* TermsOfServiceView.swift */,
@@ -379,6 +397,7 @@
 				D017F4F12CAF73AC00C71D18 /* GlobalVariables.swift */,
 				D017F4F32CAF77D900C71D18 /* MessageBubbleView.swift */,
 				D017F4F52CAFBFF700C71D18 /* LoginOrRegisterView.swift */,
+				D017F4F72CAFC9A200C71D18 /* PhoneNumberEntryView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -600,6 +619,7 @@
 				D0445C8B2C73D0760059D522 /* DietPreferencesView.swift in Sources */,
 				D0445C792C73C0B30059D522 /* ZodiacPickerView.swift in Sources */,
 				D017F4EE2CAEBC8700C71D18 /* QRCodeScannerView.swift in Sources */,
+				D017F4F82CAFC9A200C71D18 /* PhoneNumberEntryView.swift in Sources */,
 				D0445C7F2C73C9080059D522 /* LookingForView.swift in Sources */,
 				D0DDDB3E2CA179AC00A78A87 /* WhatIsSwiftiDatePremiumDiscountPolicyView.swift in Sources */,
 				D0DDDB3A2CA174A100A78A87 /* RestorePurchaseView.swift in Sources */,

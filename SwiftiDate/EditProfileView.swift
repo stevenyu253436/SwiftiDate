@@ -717,7 +717,7 @@ struct EditProfileView: View {
                             
                             Spacer()
                             
-                            Text("玩玩, 25")
+                            Text("\(globalUserName), 25")
                                 .font(.title)
                                 .fontWeight(.bold)
                                 .foregroundColor(.white) // 文字颜色为白色以与背景形成对比
