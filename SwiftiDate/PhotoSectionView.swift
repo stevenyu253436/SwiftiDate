@@ -229,3 +229,17 @@ struct ImagePicker: UIViewControllerRepresentable {
         }
     }
 }
+
+// PreviewProvider for PhotoSectionView
+struct PhotoSectionView_Previews: PreviewProvider {
+    @State static var samplePhotos = [
+        "photo1", "photo2", "photo3", "photo4", "photo5", "photo6"
+    ] // Example photo names (replace with actual image names)
+
+    static var previews: some View {
+        PhotoSectionView(photos: $samplePhotos)
+            .previewLayout(.sizeThatFits)
+            .padding()
+            .background(Color.gray.opacity(0.1))
+    }
+}
