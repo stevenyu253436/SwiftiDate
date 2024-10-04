@@ -42,9 +42,9 @@ struct PhotoSectionView: View {
             }
         }
         
-        // 下排照片
         HStack(spacing: 10) {
-            ForEach(photos.suffix(3), id: \.self) { photo in
+            let bottomPhotos = photos.suffix(min(max(photos.count - 3, 0), 3))
+            ForEach(bottomPhotos, id: \.self) { photo in
                 Image(photo)
                     .resizable()
                     .frame(width: 100, height: 133)
@@ -61,10 +61,13 @@ struct PhotoSectionView: View {
                         .offset(x: -5, y: -5), alignment: .topTrailing
                     )
             }
-            
-            // 如果剛好移除的是第六張照片，顯示一個占位符號
-            if photos.count == 5 {
-                PlaceholderView()  // 顯示 "生活" 占位符號
+
+            // 補齊照片到6張，並確保最後一張index為5
+            if photos.count < 6 {
+                let placeholderCount = 6 - photos.count
+                ForEach(0..<placeholderCount, id: \.self) { index in
+                    PlaceholderView(index: photos.count + index) // 傳入當前照片數 + index
+                }
             }
         }
         .sheet(isPresented: $showImagePicker) {
@@ -175,16 +178,31 @@ struct PhotoView: View {
 
 // 占位符號的View
 struct PlaceholderView: View {
+    var index: Int // 傳遞進來的參數，表示第幾張占位符號
+    
     var body: some View {
         VStack {
-            Image(systemName: "book.fill")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 50, height: 50)
-                .foregroundColor(.gray)
-            Text("生活")
-                .font(.caption)
-                .foregroundColor(.gray)
+            if index == 5 {
+                // 當 index 等於 5 時顯示 book.fill 和 "生活"
+                Image(systemName: "book.fill")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 50, height: 50)
+                    .foregroundColor(.gray)
+                Text("生活")
+                    .font(.caption)
+                    .foregroundColor(.gray)
+            } else {
+                // 否則顯示空白占位符
+                Image(systemName: "photo.fill")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 50, height: 50)
+                    .foregroundColor(.gray)
+                Text("占位符 \(index)")
+                    .font(.caption)
+                    .foregroundColor(.gray)
+            }
         }
         .frame(width: 100, height: 133)
         .background(Color.gray.opacity(0.2))

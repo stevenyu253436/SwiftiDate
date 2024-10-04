@@ -42,6 +42,28 @@ struct InterestsView: View {
                     }
                 }
                 .padding(.horizontal)
+                
+                Divider()
+                
+                // 我的標籤
+                VStack(alignment: .leading) {
+                    HStack {
+                        Image(systemName: "tag.fill")
+                            .foregroundColor(.gray)
+                        Text("我的標籤")
+                            .font(.headline)
+                            .foregroundColor(.gray)
+                        Spacer()
+                        Text("新增")
+                            .font(.headline)
+                            .foregroundColor(.green)
+                        Image(systemName: "chevron.right") // 添加向右的箭头
+                            .foregroundColor(.gray)
+                    }
+                    .background(Color.white)
+                    .cornerRadius(10)
+                }
+                .padding()
             }
             .padding()
             .background(Color.white)
@@ -56,5 +78,22 @@ struct InterestsView: View {
             }
         }
         .padding(.horizontal)
+    }
+}
+
+struct InterestsView_Previews: PreviewProvider {
+    @State static var selectedInterests: Set<String> = ["閱讀", "運動", "音樂"]
+    @State static var interestColors: [String: Color] = [
+        "閱讀": .blue,
+        "運動": .green,
+        "音樂": .orange
+    ]
+
+    static var previews: some View {
+        InterestsView(
+            interests: ["閱讀", "運動", "音樂", "旅行", "攝影", "美食"],
+            selectedInterests: $selectedInterests,
+            interestColors: $interestColors
+        )
     }
 }

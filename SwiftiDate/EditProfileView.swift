@@ -175,27 +175,6 @@ struct EditProfileView: View {
                                 selectedInterests: $selectedInterests,
                                 interestColors: $interestColors  // 傳遞 interestColors 作為 @Binding
                             )
-                            
-                            // 我的標籤
-                            VStack(alignment: .leading) {
-                                HStack {
-                                    Image(systemName: "tag.fill")
-                                        .foregroundColor(.gray)
-                                    Text("我的標籤")
-                                        .font(.headline)
-                                        .foregroundColor(.gray)
-                                    Spacer()
-                                    Text("新增")
-                                        .font(.headline)
-                                        .foregroundColor(.green)
-                                    Image(systemName: "chevron.right") // 添加向右的箭头
-                                        .foregroundColor(.gray)
-                                }
-                                .padding()
-                                .background(Color.white)
-                                .cornerRadius(10)
-                            }
-                            .padding()
 
                             // 工作與學歷
                             VStack(alignment: .leading) {
