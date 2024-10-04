@@ -69,7 +69,7 @@ struct MessageBubbleView: View {
                             .resizable()  // Make the image resizable
                             .aspectRatio(contentMode: .fit)  // Maintain aspect ratio
                             .frame(width: 24, height: 24)  // Set desired width and height
-                            .foregroundColor(isLiked ? .red : .gray)
+                            .foregroundColor(isLiked ? .red : .gray.opacity(0.4))
                     }
                     .padding(.leading, 5)
                     

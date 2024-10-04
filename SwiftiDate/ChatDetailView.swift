@@ -107,6 +107,17 @@ struct ChatDetailView: View {
                     .background(Color.gray.opacity(0.1))
                     .cornerRadius(10)
                 
+                // 替代圖標，如表示 AI 的圖標
+                Button(action: {
+                    // 這裡是觸發 ChatGPT 功能的操作
+                    print("ChatGPT icon tapped")
+                }) {
+                    Image(systemName: "brain.head.profile")
+                        .resizable()
+                        .frame(width: 24, height: 24)
+                        .padding(.trailing, 5)
+                }
+
                 Button(action: sendMessage) {
                     Image(systemName: "paperplane.fill")
                         .resizable()
