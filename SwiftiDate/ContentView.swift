@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var selectedTurboTab: Int = 0 // Add this to track the selected tab for TurboView
+    
     var body: some View {
         TabView {
             SwipeCardView()
@@ -15,7 +17,8 @@ struct ContentView: View {
                     Image(systemName: "heart.fill")
                 }
             
-            TurboView(showBackButton: false) // 確保在 ContentView 中導入時不顯示 chevron.left
+            // Pass the selectedTab to TurboView
+            TurboView(selectedTab: $selectedTurboTab, showBackButton: false) // Pass the state to control the tab
                 .tabItem {
                     Image(systemName: "star.fill")
                 }

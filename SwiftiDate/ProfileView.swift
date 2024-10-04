@@ -15,6 +15,8 @@ extension Color {
 struct ProfileView: View {
     @State private var userRankPercentage: Double = 25.4
     @State private var isShowingInfoPopup = false // State to show/hide the popup
+    @State private var isShowingTurboView = false
+    @State private var selectedTab: Int = 0 // State to control which tab is selected in TurboView
     @State private var isShowingTurboPurchaseView = false // State variable to control the sheet presentation
     @State private var isShowingCrushPurchaseView = false // State variable to control Crush sheet presentation
     @State private var isShowingPraisePurchaseView = false // State variable to control Praise sheet presentation
@@ -53,7 +55,7 @@ struct ProfileView: View {
                             
                             VStack(alignment: .leading) {
                                 HStack {
-                                    Text("玩玩")
+                                    Text(globalUserName)
                                         .font(.title)
                                         .fontWeight(.bold)
                                     
@@ -80,32 +82,50 @@ struct ProfileView: View {
 
                         // 统计信息
                         HStack(spacing: 50) {
-                            VStack {
-                                Text(likesMeCount >= 99 ? "99+" : "\(likesMeCount)")
-                                    .font(.title)
-                                    .fontWeight(.bold)
-                                Text("喜歡我")
-                                    .font(.caption)
-                                    .foregroundColor(.gray)
+                            Button(action: {
+                                selectedTab = 0 // Set selectedTab to 0 for "喜歡我的人"
+                                isShowingTurboView = true // Set state to true to show TurboView
+                            }) {
+                                VStack {
+                                    Text(likesMeCount >= 99 ? "99+" : "\(likesMeCount)")
+                                        .font(.title)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.black) // 設置文字顏色為黑色
+                                    Text("喜歡我")
+                                        .font(.caption)
+                                        .foregroundColor(.gray)
+                                }
                             }
-                            VStack {
-                                Text(likeCount > 99 ? "99+" : "\(likeCount)") // 根據數字是否大於99來顯示
-                                    .font(.title)
-                                    .fontWeight(.bold)
-                                Text("我喜歡")
-                                    .font(.caption)
-                                    .foregroundColor(.gray)
+                            Button(action: {
+                                selectedTab = 1 // Set selectedTab to 1 for "我的心動對象"
+                                isShowingTurboView = true // Show TurboView
+                            }) {
+                                VStack {
+                                    Text(likeCount > 99 ? "99+" : "\(likeCount)") // 根據數字是否大於99來顯示
+                                        .font(.title)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.black) // 設置文字顏色為黑色
+                                    Text("我喜歡")
+                                        .font(.caption)
+                                        .foregroundColor(.gray)
+                                }
                             }
                             VStack {
                                 Text("5")
                                     .font(.title)
                                     .fontWeight(.bold)
+                                    .foregroundColor(.black) // 設置文字顏色為黑色
                                 Text("精選")
                                     .font(.caption)
                                     .foregroundColor(.gray)
                             }
                         }
                         .padding(.horizontal)
+                        .fullScreenCover(isPresented: $isShowingTurboView) {
+                            TurboView(selectedTab: $selectedTab, showBackButton: true, onBack: {
+                                isShowingTurboView = false // Close the fullScreenCover when back button is pressed
+                            })
+                        }
 
                         // 成就进度条
                         VStack {
@@ -133,13 +153,13 @@ struct ProfileView: View {
                         
                         // Turbo, Crush, 讚美
                         HStack(spacing: 20) {
-                            AchievementCardView(title: "TURBO", count: 0, color: Color.purple) {
+                            AchievementCardView(title: "TURBO", count: globalTurboCount, color: Color.purple) {
                                 isShowingTurboPurchaseView = true // Set the state to show the TurboPurchaseView
                             }
-                            AchievementCardView(title: "CRUSH", count: 0, color: Color.green) {
+                            AchievementCardView(title: "CRUSH", count: globalCrushCount, color: Color.green) {
                                 isShowingCrushPurchaseView = true // Show CrushPurchaseView
                             }
-                            AchievementCardView(title: "讚美", count: 0, color: Color.orange) {
+                            AchievementCardView(title: "讚美", count: globalPraiseCount, color: Color.orange) {
                                 isShowingPraisePurchaseView = true // Show PraisePurchaseView
                             }
                         }

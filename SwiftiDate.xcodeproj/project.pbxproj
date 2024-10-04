@@ -11,6 +11,7 @@
 		D017F4F02CAECC5100C71D18 /* PersonalInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D017F4EF2CAECC5100C71D18 /* PersonalInfoView.swift */; };
 		D017F4F22CAF73AD00C71D18 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = D017F4F12CAF73AC00C71D18 /* GlobalVariables.swift */; };
 		D017F4F42CAF77D900C71D18 /* MessageBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D017F4F32CAF77D900C71D18 /* MessageBubbleView.swift */; };
+		D017F4F62CAFBFF700C71D18 /* LoginOrRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D017F4F52CAFBFF700C71D18 /* LoginOrRegisterView.swift */; };
 		D018AD5B2C9E57DF005A14B9 /* UserGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D018AD5A2C9E57DF005A14B9 /* UserGuideView.swift */; };
 		D018AD5D2C9E6581005A14B9 /* TurboPurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D018AD5C2C9E6581005A14B9 /* TurboPurchaseView.swift */; };
 		D018AD5F2C9E6976005A14B9 /* CrushPurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D018AD5E2C9E6976005A14B9 /* CrushPurchaseView.swift */; };
@@ -138,6 +139,7 @@
 		D017F4EF2CAECC5100C71D18 /* PersonalInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoView.swift; sourceTree = "<group>"; };
 		D017F4F12CAF73AC00C71D18 /* GlobalVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
 		D017F4F32CAF77D900C71D18 /* MessageBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBubbleView.swift; sourceTree = "<group>"; };
+		D017F4F52CAFBFF700C71D18 /* LoginOrRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOrRegisterView.swift; sourceTree = "<group>"; };
 		D018AD5A2C9E57DF005A14B9 /* UserGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGuideView.swift; sourceTree = "<group>"; };
 		D018AD5C2C9E6581005A14B9 /* TurboPurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurboPurchaseView.swift; sourceTree = "<group>"; };
 		D018AD5E2C9E6976005A14B9 /* CrushPurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrushPurchaseView.swift; sourceTree = "<group>"; };
@@ -376,6 +378,7 @@
 				D017F4EF2CAECC5100C71D18 /* PersonalInfoView.swift */,
 				D017F4F12CAF73AC00C71D18 /* GlobalVariables.swift */,
 				D017F4F32CAF77D900C71D18 /* MessageBubbleView.swift */,
+				D017F4F52CAFBFF700C71D18 /* LoginOrRegisterView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -580,6 +583,7 @@
 				D017F4F22CAF73AD00C71D18 /* GlobalVariables.swift in Sources */,
 				D0DDDB3C2CA1770400A78A87 /* RefundPolicyView.swift in Sources */,
 				D018AD632C9E87F6005A14B9 /* ChatView.swift in Sources */,
+				D017F4F62CAFBFF700C71D18 /* LoginOrRegisterView.swift in Sources */,
 				D018AD962C9EEA83005A14B9 /* AsyncImageView.swift in Sources */,
 				D0445C5B2C71E5850059D522 /* ProfileView.swift in Sources */,
 				D0DDDB402CA17B3700A78A87 /* WhatIsSwiftiDateSupremeView.swift in Sources */,

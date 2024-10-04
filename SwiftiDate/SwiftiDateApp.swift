@@ -131,7 +131,11 @@ struct SwiftiDateApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-              ContentView()
+                if globalPhoneNumber.isEmpty { // Check if globalPhoneNumber is empty or nil
+                    LoginOrRegisterView()
+                } else {
+                    ContentView()
+                }
             }
         }
     }
