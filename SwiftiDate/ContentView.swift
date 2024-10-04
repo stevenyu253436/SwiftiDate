@@ -15,11 +15,11 @@ struct ContentView: View {
                     Image(systemName: "heart.fill")
                 }
             
-            TurboView()
+            TurboView(showBackButton: false) // 確保在 ContentView 中導入時不顯示 chevron.left
                 .tabItem {
                     Image(systemName: "star.fill")
                 }
-            
+
             NavigationView {
                 UserGuideView()
             }

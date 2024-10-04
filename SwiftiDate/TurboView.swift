@@ -10,13 +10,29 @@ import SwiftUI
 
 struct TurboView: View {
     @State private var selectedTab = 0
+    var showBackButton: Bool = false // 這裡新增一個參數來控制是否顯示chevron.left
 
+    var onBack: (() -> Void)? // 返回按鈕的閉包操作
+    
     var body: some View {
         VStack {
+            
             // Top Tab Selection
             HStack {
-                Spacer()
+                if showBackButton {
+                    // Custom Navigation Bar with chevron.left button
+                    HStack {
+                        Button(action: {
+                            onBack?() // 執行返回操作
+                        }) {
+                            Image(systemName: "chevron.left")
+                                .foregroundColor(.gray)
+                        }
+                    }
+                }
                 
+                Spacer()
+                                
                 Button(action: {
                     selectedTab = 0
                 }) {
@@ -60,7 +76,7 @@ struct TurboView: View {
             Spacer().frame(height: 20)
             
             // Main image
-            Image("header_image") // Replace with your image asset name
+            Image("turbo_view_image") // Replace with your image asset name
                 .resizable()
                 .scaledToFit()
                 .frame(height: 250)
@@ -76,14 +92,18 @@ struct TurboView: View {
             Button(action: {
                 // Action for starting Turbo
             }) {
-                Text("馬上開始")
-                    .fontWeight(.bold)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(LinearGradient(gradient: Gradient(colors: [.pink, .purple]), startPoint: .topLeading, endPoint: .bottomTrailing))
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-                    .padding(.horizontal, 60)
+                HStack {
+                    Image(systemName: "bolt.fill")
+                    
+                    Text("馬上開始")
+                        .fontWeight(.bold)
+                        .padding()
+                }
+                .frame(maxWidth: .infinity)
+                .background(LinearGradient(gradient: Gradient(colors: [.pink, .purple]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                .foregroundColor(.white)
+                .cornerRadius(10)
+                .padding(.horizontal, 60)
             }
             .padding(.vertical, 20)
 
@@ -115,7 +135,14 @@ struct TurboView: View {
 // MARK: - TurboView Preview
 struct TurboView_Previews: PreviewProvider {
     static var previews: some View {
-        TurboView()
-            .previewDevice("iPhone 15 Pro") // You can replace this with the device you want to preview on
+        Group {
+            TurboView(showBackButton: true, onBack: {
+                print("返回到上一頁")
+            })
+            .previewDevice("iPhone 15 Pro")
+
+            TurboView(showBackButton: false)
+            .previewDevice("iPhone 15 Pro")
+        }
     }
 }

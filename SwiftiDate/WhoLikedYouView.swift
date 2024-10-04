@@ -59,3 +59,12 @@ struct WhoLikedYouView: View {
         .background(Color.white)
     }
 }
+
+// Preview for WhoLikedYouView
+struct WhoLikedYouView_Previews: PreviewProvider {
+    static var previews: some View {
+        WhoLikedYouView()
+            .previewLayout(.sizeThatFits) // Adjust the preview layout
+            .padding() // Add some padding around the view in the preview
+    }
+}

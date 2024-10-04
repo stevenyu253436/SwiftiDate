@@ -10,6 +10,7 @@ import SwiftUI
 import FirebaseCore
 import CoreLocation
 import KeychainAccess
+import UserNotifications // Import UserNotifications framework
 
 var deviceIdentifier: String? // Global variable
 var globalLatitude: Double? // Global variable for latitude
@@ -17,7 +18,7 @@ var globalLongitude: Double? // Global variable for longitude
 var globalSubadministrativeArea: String? // Global variable for subadministrative area
 var globalLocality: String? // Global variable for locality
 
-class AppDelegate: NSObject, UIApplicationDelegate, CLLocationManagerDelegate {
+class AppDelegate: NSObject, UIApplicationDelegate, CLLocationManagerDelegate, UNUserNotificationCenterDelegate {
   var locationManager: CLLocationManager?
   let geocoder = CLGeocoder() // Initialize the geocoder
 
@@ -30,6 +31,9 @@ class AppDelegate: NSObject, UIApplicationDelegate, CLLocationManagerDelegate {
       
     // Initialize location manager
     initializeLocationManager()
+      
+      // Request notification permissions
+      requestNotificationPermission()
 
     return true
   }
@@ -99,6 +103,24 @@ class AppDelegate: NSObject, UIApplicationDelegate, CLLocationManagerDelegate {
   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
     print("Failed to get location: \(error.localizedDescription)")
   }
+    
+    // Request notification permission
+    private func requestNotificationPermission() {
+        let center = UNUserNotificationCenter.current()
+        center.delegate = self
+        center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+            if let error = error {
+                print("Error requesting notification permission: \(error.localizedDescription)")
+            } else {
+                print("Notification permission granted: \(granted)")
+            }
+        }
+    }
+    
+    // UNUserNotificationCenterDelegate method to handle notifications while the app is in the foreground
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .sound, .badge])
+    }
 }
 
 @main
