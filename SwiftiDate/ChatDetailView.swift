@@ -147,42 +147,6 @@ struct Message: Identifiable {
     var isCompliment: Bool // New property to indicate if the message is a compliment
 }
 
-// Custom view for message bubbles
-struct MessageBubbleView: View {
-    var message: Message
-    var isCurrentUser: Bool
-    var showTime: Bool // Add this new parameter
-
-    var body: some View {
-        VStack {
-            if showTime {
-                // Display the time when `showTime` is true
-                Text(message.time)
-                    .font(.caption)
-                    .foregroundColor(.gray)
-                    .frame(maxWidth: .infinity, alignment: .center) // Center the time
-            }
-            
-            HStack {
-                if isCurrentUser {
-                    Spacer()
-                }
-                
-                Text(message.text)
-                    .padding()
-                    .background(isCurrentUser ? (message.isCompliment ? Color.black : Color.green) : Color.gray.opacity(0.3))
-                    .foregroundColor(isCurrentUser ? .white : .black)
-                    .cornerRadius(10)
-                
-                if !isCurrentUser {
-                    Spacer()
-                }
-            }
-            .padding(isCurrentUser ? .leading : .trailing, 50)
-        }
-    }
-}
-
 
 // PreviewProvider for ChatDetailView
 struct ChatDetailView_Previews: PreviewProvider {

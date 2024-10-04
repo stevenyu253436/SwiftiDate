@@ -10,6 +10,7 @@
 		D017F4EE2CAEBC8700C71D18 /* QRCodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D017F4ED2CAEBC8700C71D18 /* QRCodeScannerView.swift */; };
 		D017F4F02CAECC5100C71D18 /* PersonalInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D017F4EF2CAECC5100C71D18 /* PersonalInfoView.swift */; };
 		D017F4F22CAF73AD00C71D18 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = D017F4F12CAF73AC00C71D18 /* GlobalVariables.swift */; };
+		D017F4F42CAF77D900C71D18 /* MessageBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D017F4F32CAF77D900C71D18 /* MessageBubbleView.swift */; };
 		D018AD5B2C9E57DF005A14B9 /* UserGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D018AD5A2C9E57DF005A14B9 /* UserGuideView.swift */; };
 		D018AD5D2C9E6581005A14B9 /* TurboPurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D018AD5C2C9E6581005A14B9 /* TurboPurchaseView.swift */; };
 		D018AD5F2C9E6976005A14B9 /* CrushPurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D018AD5E2C9E6976005A14B9 /* CrushPurchaseView.swift */; };
@@ -136,6 +137,7 @@
 		D017F4ED2CAEBC8700C71D18 /* QRCodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScannerView.swift; sourceTree = "<group>"; };
 		D017F4EF2CAECC5100C71D18 /* PersonalInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoView.swift; sourceTree = "<group>"; };
 		D017F4F12CAF73AC00C71D18 /* GlobalVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
+		D017F4F32CAF77D900C71D18 /* MessageBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBubbleView.swift; sourceTree = "<group>"; };
 		D018AD5A2C9E57DF005A14B9 /* UserGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGuideView.swift; sourceTree = "<group>"; };
 		D018AD5C2C9E6581005A14B9 /* TurboPurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurboPurchaseView.swift; sourceTree = "<group>"; };
 		D018AD5E2C9E6976005A14B9 /* CrushPurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrushPurchaseView.swift; sourceTree = "<group>"; };
@@ -373,6 +375,7 @@
 				D017F4ED2CAEBC8700C71D18 /* QRCodeScannerView.swift */,
 				D017F4EF2CAECC5100C71D18 /* PersonalInfoView.swift */,
 				D017F4F12CAF73AC00C71D18 /* GlobalVariables.swift */,
+				D017F4F32CAF77D900C71D18 /* MessageBubbleView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -568,6 +571,7 @@
 				D0DDDB072C9FDB1600A78A87 /* WhoLikedYouView.swift in Sources */,
 				D0DDDB0B2CA07A0E00A78A87 /* TurboView.swift in Sources */,
 				D0DDDB092C9FDE0500A78A87 /* InteractiveContentView.swift in Sources */,
+				D017F4F42CAF77D900C71D18 /* MessageBubbleView.swift in Sources */,
 				D0DDDB4E2CA19D0800A78A87 /* PhotoUploadGuidelinesView.swift in Sources */,
 				D0445C832C73CBE70059D522 /* FitnessOptionsView.swift in Sources */,
 				D0DDDB1A2CA1282B00A78A87 /* WhatIsSwiftiDateView.swift in Sources */,
