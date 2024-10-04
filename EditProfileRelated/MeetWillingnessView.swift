@@ -9,17 +9,21 @@ import Foundation
 import SwiftUI
 
 struct MeetWillingnessView: View {
+    @Binding var isPresented: Bool // Binding variable to control dismissal
+    @Binding var selectedOption: String?  // 傳遞選中的見面意願
+
     var body: some View {
         VStack {
             // 頂部顯示圖標和清空按鈕
             HStack {
-//                Button(action: {
-//                    // 點擊關閉頁面的動作（可以使用NavigationLink的pop回到前一頁）
-//                }) {
-//                    Image(systemName: "xmark")
-//                        .font(.title)
-//                        .foregroundColor(.gray)
-//                }
+                Button(action: {
+                    // Dismiss the view when back button is tapped
+                    isPresented = false
+                }) {
+                    Image(systemName: "xmark")
+                        .font(.title)
+                        .foregroundColor(.black)
+                }
                 Spacer()
                 Button(action: {
                     // 點擊清空按鈕的動作
@@ -62,7 +66,8 @@ struct MeetWillingnessView: View {
     // 自定義按鈕組件
     func meetOptionButton(icon: String, text: String) -> some View {
         Button(action: {
-            // 點擊按鈕後的操作
+            // 點擊按鈕後的操作：設置選中的按鈕
+            selectedOption = text
         }) {
             HStack {
                 Text(icon)
@@ -76,7 +81,22 @@ struct MeetWillingnessView: View {
             .padding()
             .background(Color.white)
             .cornerRadius(10)
+            .overlay(
+                // 如果這個按鈕被選中，顯示綠框框
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(selectedOption == text ? Color.green : Color.clear, lineWidth: 3)
+            )
             .shadow(color: .gray.opacity(0.2), radius: 5, x: 0, y: 2)
         }
+    }
+}
+
+// PreviewProvider to display the preview of the view
+struct MeetWillingnessView_Previews: PreviewProvider {
+    @State static var isPresented = true // Provide a sample @State variable for preview
+    @State static var selectedOption: String? = nil // 需要為 preview 提供一個預設的 selectedOption
+
+    static var previews: some View {
+        MeetWillingnessView(isPresented: $isPresented, selectedOption: $selectedOption)
     }
 }

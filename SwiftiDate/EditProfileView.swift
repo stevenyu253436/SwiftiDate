@@ -64,6 +64,7 @@ struct EditProfileView: View {
     @State private var selectedDietPreference: String? = "其他飲食偏好"
     @State private var showDietPreferences = false
 
+    @State private var selectedMeetWillingness: String? = nil  // 用來存儲選中的見面意願
     @State private var isShowingMeetWillingnessView = false  // 新增：控制是否顯示 MeetWillingnessView
     
     let industries = [
@@ -161,13 +162,10 @@ struct EditProfileView: View {
                                     // 設置狀態為 true，導航到 MeetWillingnessView
                                     isShowingMeetWillingnessView = true
                                 }
-
-                                // 隱藏的 NavigationLink，通過 isActive 控制導航
-                                NavigationLink(
-                                    destination: MeetWillingnessView(),
-                                    isActive: $isShowingMeetWillingnessView,
-                                    label: { EmptyView() }
-                                )
+                                // 使用 fullScreenCover 傳遞 selectedMeetWillingness 作為 @Binding
+                                .fullScreenCover(isPresented: $isShowingMeetWillingnessView) {
+                                    MeetWillingnessView(isPresented: $isShowingMeetWillingnessView, selectedOption: $selectedMeetWillingness)  // 傳遞選擇的見面意願
+                                }
                             }
                             .padding()
 
