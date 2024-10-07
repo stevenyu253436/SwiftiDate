@@ -66,7 +66,7 @@ struct PhotoSectionView: View {
             if photos.count < 6 {
                 let placeholderCount = 6 - photos.count
                 ForEach(0..<placeholderCount, id: \.self) { index in
-                    PlaceholderView(index: photos.count + index) // 傳入當前照片數 + index
+                    PlaceholderView(index: photos.count + index, showImagePicker: $showImagePicker) // 傳入當前照片數 + index
                 }
             }
         }
@@ -179,7 +179,8 @@ struct PhotoView: View {
 // 占位符號的View
 struct PlaceholderView: View {
     var index: Int // 傳遞進來的參數，表示第幾張占位符號
-    
+    @Binding var showImagePicker: Bool // 新增 showImagePicker binding
+
     var body: some View {
         VStack {
             if index == 5 {
@@ -207,6 +208,10 @@ struct PlaceholderView: View {
         .frame(width: 100, height: 133)
         .background(Color.gray.opacity(0.2))
         .clipShape(RoundedRectangle(cornerRadius: 10))
+        .onTapGesture {
+            // 點擊時顯示相簿
+            showImagePicker = true
+        }
     }
 }
 
