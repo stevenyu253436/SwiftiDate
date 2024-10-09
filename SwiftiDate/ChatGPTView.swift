@@ -9,8 +9,9 @@ import Foundation
 import SwiftUI
 
 struct ChatGPTView: View {
+    @State private var chatHistory: [Message] = []   // 聊天歷史記錄
     @State private var userInput: String = ""   // 用戶輸入的訊息
-    @State private var chatResponse: String = "" // GPT 的回應
+    @State private var chatGPTResponse: String = ""  // GPT 的回應
     @State private var isLoading = false        // 用來顯示加載狀態
     
     let apiKey = openAIAPIKey  // 將這個替換為您的 API 密鑰
@@ -22,9 +23,24 @@ struct ChatGPTView: View {
                 .padding()
             
             ScrollView {
-                Text(chatResponse)  // 顯示 ChatGPT 的回應
+                ForEach(chatHistory, id: \.id) { message in
+                    HStack {
+                        Text(message.isSender ? "你: " : "對方: ")
+                            .fontWeight(.bold)
+                        Text(message.text)
+                    }
                     .padding()
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(10)
+                    .padding(.horizontal)
+                }
+                
+                Text(chatGPTResponse)  // 顯示 ChatGPT 的建議回應
+                    .padding()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(Color.green.opacity(0.1))
+                    .cornerRadius(10)
             }
             .frame(height: 300)
             .border(Color.gray, width: 1)
@@ -61,6 +77,20 @@ struct ChatGPTView: View {
 
         isLoading = true
         
+        // 構建聊天歷史記錄，將其轉換為 OpenAI API 所需的格式
+        var messages: [[String: String]] = chatHistory.map { message in
+            [
+                "role": message.isSender ? "user" : "assistant", // 如果是用戶發送的訊息，標記為 "user"，否則為 "assistant"
+                "content": message.text
+            ]
+        }
+        
+        // 添加用戶輸入的問題作為最後一條記錄
+        messages.append([
+            "role": "user",
+            "content": userInput
+        ])
+        
         // 準備 API 請求
         let url = URL(string: "https://api.openai.com/v1/chat/completions")!
         var request = URLRequest(url: url)
@@ -68,15 +98,12 @@ struct ChatGPTView: View {
         request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        // 設定請求的 body
+        // 設置請求 body，將聊天記錄和新問題一起發送
         let body: [String: Any] = [
-            "model": "gpt-4", // 可以使用 "gpt-3.5-turbo" 或 "gpt-4"
-            "messages": [
-                ["role": "system", "content": "你是個有幫助的助手。"],
-                ["role": "user", "content": userInput]
-            ]
+            "model": "gpt-4", // 使用 gpt-4 模型
+            "messages": messages
         ]
-        
+
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
         
         // 發送請求
@@ -94,14 +121,30 @@ struct ChatGPTView: View {
             // 解碼 API 回應
             if let response = try? JSONDecoder().decode(ChatGPTResponse.self, from: data) {
                 DispatchQueue.main.async {
-                    // 將 ChatGPT 的回應顯示在 UI 中
-                    chatResponse = response.choices.first?.message.content ?? "無回應"
+                    if let chatResponseText = response.choices.first?.message.content {
+                        // 顯示 GPT 回應
+                        chatGPTResponse = chatResponseText
+                    } else {
+                        // 如果沒有回應，顯示 "對方未回應"
+                        chatGPTResponse = "對方未回應"
+                    }
+                    chatHistory.append(Message(id: UUID(), text: userInput, isSender: true, time: getCurrentTime(), isCompliment: false))
                     userInput = ""  // 清空用戶輸入
                 }
             } else {
                 print("無法解析回應數據")
+                DispatchQueue.main.async {
+                    chatGPTResponse = "對方未回應"
+                }
             }
         }.resume()
+    }
+    
+    // 獲取當前時間的函數
+    func getCurrentTime() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a"
+        return formatter.string(from: Date())
     }
 }
 
@@ -114,4 +157,11 @@ struct ChatGPTResponse: Decodable {
         let message: Message
     }
     let choices: [Choice]
+}
+
+// 添加 PreviewProvider
+struct ChatGPTView_Previews: PreviewProvider {
+    static var previews: some View {
+        ChatGPTView()  // 不需要傳入參數
+    }
 }
