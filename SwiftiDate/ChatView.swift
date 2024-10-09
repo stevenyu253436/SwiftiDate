@@ -12,7 +12,9 @@ struct ChatView: View {
     @State private var selectedChat: Chat? = nil // State variable to handle navigation
     @State private var showInteractiveContent = false // State variable to control InteractiveContentView display
     @State private var showTurboPurchaseView = false // State variable to control TurboPurchaseView display
-
+    @State private var showTurboView = false // State variable to control TurboView display
+    @State private var selectedTurboTab: Int = 0 // State variable to control Turbo tab selection
+    
     // Dictionary to store messages for each chat
     @State private var chatMessages: [UUID: [Message]] = [
         chatData[0].id: [ // SwiftiDate messages for InteractiveContentView
@@ -140,8 +142,12 @@ struct ChatView: View {
                                 .padding(.leading)
                             
                             // Add the 'WhoLikedYouView' at the top
-                            WhoLikedYouView()
-                                .padding(.top)
+                            Button(action: {
+                                showTurboView = true // Navigate to TurboView
+                            }) {
+                                WhoLikedYouView()
+                                    .padding(.top)
+                            }
 
                             // 使用 List 顯示聊天對話
                             ForEach(chatData) { chat in
@@ -164,6 +170,12 @@ struct ChatView: View {
                 }
             }
             .navigationTitle("聊天") // Ensure this is applied to the VStack
+            .fullScreenCover(isPresented: $showTurboView) {
+                // Pass the selectedTab to TurboView
+                TurboView(selectedTab: $selectedTurboTab, showBackButton: true, onBack: {
+                    showTurboView = false // This dismisses the TurboView
+                })
+            }
             .sheet(isPresented: $showTurboPurchaseView) {
                 TurboPurchaseView() // Present TurboPurchaseView when showTurboPurchaseView is true
             }
