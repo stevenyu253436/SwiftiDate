@@ -23,11 +23,14 @@ struct ContentView: View {
                     Image(systemName: "star.fill")
                 }
 
-            NavigationView {
-                UserGuideView()
-            }
-            .tabItem {
-                Image(systemName: "questionmark.circle.fill")
+            // Only show UserGuideView if the user is male
+            if globalUserGender == .male {
+                NavigationView {
+                    UserGuideView()
+                }
+                .tabItem {
+                    Image(systemName: "questionmark.circle.fill")
+                }
             }
             
             ChatView() // 替換為 ChatView
