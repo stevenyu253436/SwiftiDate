@@ -133,7 +133,13 @@ struct ChatDetailView: View {
     private func sendMessage() {
         guard !newMessageText.trimmingCharacters(in: .whitespaces).isEmpty else { return }
         
-        let newMessage = Message(id: UUID(), text: newMessageText, isSender: true, time: getCurrentTime(), isCompliment: false)
+        let newMessage = Message(
+            id: UUID(),
+            text: newMessageText,
+            isSender: true,  // 將此訊息標記為當前使用者發送的
+            time: getCurrentTime(),
+            isCompliment: false
+        )
         messages.append(newMessage)
         
         // Clear the text field
