@@ -110,7 +110,23 @@ struct UserGuideView: View {
                     Text("• 大膽嘗試不同搭訕方式：").bold() + Text("不同的對象可能需要不同的搭訕方式，請大膽嘗試，並找到最適合自己的方法。")
                 }
                 .padding(.bottom)
+                
+                // 新增關於 ChatGPT 回訊息功能的段落
+                Group {
+                    Text("9. 使用 ChatGPT 來回應訊息")
+                        .font(.headline)
+                    
+                    Text("SwiftiDate 目前整合了 ChatGPT 功能，您可以在對話中使用 ChatGPT 來生成回應。這個功能非常適合在您不知道該如何回應時，讓 ChatGPT 提供一些建議性的對話回應。")
+                        .padding(.bottom)
+                    
+                    Text("目前，ChatGPT 提供的回應是基於最一般化的對話邏輯，能夠幫助您在各種情境下進行基本的溝通。隨著技術的發展，我們正在開發一個專門針對人性化對話的客製化 LLM 模型。未來，這個模型將能更好地理解您與對象之間的情感互動，提供更加個性化的回應，讓溝通變得更加真實和自然。")
+                        .padding(.bottom)
+                    
+                    Text("我們相信，這樣的功能將會大大提升用戶的互動體驗，幫助您在 SwiftiDate 上建立更有深度的連結。")
+                }
+                .padding(.bottom)
 
+                // Continue with other sections or conclusion...
                 Group {
                     Text("結語")
                         .font(.headline)
