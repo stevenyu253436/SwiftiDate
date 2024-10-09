@@ -55,3 +55,11 @@ struct JobInputView: View {
         .padding()
     }
 }
+
+struct JobInputView_Previews: PreviewProvider {
+    @State static var selectedJob: String? = "軟體工程師" // 預設值為軟體工程師
+
+    static var previews: some View {
+        JobInputView(selectedJob: $selectedJob) // 傳遞預設的 `@State` 變數作為綁定
+    }
+}
