@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct ChatGPTView: View {
-    @State private var chatHistory: [Message] = []   // 聊天歷史記錄
+    @Binding var messages: [Message]   // 聊天歷史記錄綁定自 ChatDetailView
     @State private var userInput: String = ""   // 用戶輸入的訊息
     @State private var chatGPTResponse: String = ""  // GPT 的回應
     @State private var isLoading = false        // 用來顯示加載狀態
@@ -23,7 +23,7 @@ struct ChatGPTView: View {
                 .padding()
             
             ScrollView {
-                ForEach(chatHistory, id: \.id) { message in
+                ForEach(messages, id: \.id) { message in
                     HStack {
                         Text(message.isSender ? "你: " : "對方: ")
                             .fontWeight(.bold)
@@ -77,20 +77,17 @@ struct ChatGPTView: View {
 
         isLoading = true
         
-        // 構建聊天歷史記錄，將其轉換為 OpenAI API 所需的格式
-        var messages: [[String: String]] = chatHistory.map { message in
+        // 確保 messages 裡面的內容可以被正確轉換成 JSON
+        let jsonMessages: [[String: String]] = messages.map { message in
             [
-                "role": message.isSender ? "user" : "assistant", // 如果是用戶發送的訊息，標記為 "user"，否則為 "assistant"
-                "content": message.text
+                "role": message.isSender ? "user" : "chat_partner", // 用 "chat_partner" 表示女生或對方的訊息，而不是 "assistant"
+                "content": message.text // 消息內容是字符串
             ]
         }
-        
+
         // 添加用戶輸入的問題作為最後一條記錄
-        messages.append([
-            "role": "user",
-            "content": userInput
-        ])
-        
+        let finalMessages = jsonMessages + [["role": "user", "content": userInput]]
+
         // 準備 API 請求
         let url = URL(string: "https://api.openai.com/v1/chat/completions")!
         var request = URLRequest(url: url)
@@ -101,7 +98,7 @@ struct ChatGPTView: View {
         // 設置請求 body，將聊天記錄和新問題一起發送
         let body: [String: Any] = [
             "model": "gpt-4", // 使用 gpt-4 模型
-            "messages": messages
+            "messages": finalMessages
         ]
 
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
@@ -128,7 +125,6 @@ struct ChatGPTView: View {
                         // 如果沒有回應，顯示 "對方未回應"
                         chatGPTResponse = "對方未回應"
                     }
-                    chatHistory.append(Message(id: UUID(), text: userInput, isSender: true, time: getCurrentTime(), isCompliment: false))
                     userInput = ""  // 清空用戶輸入
                 }
             } else {
@@ -162,6 +158,9 @@ struct ChatGPTResponse: Decodable {
 // 添加 PreviewProvider
 struct ChatGPTView_Previews: PreviewProvider {
     static var previews: some View {
-        ChatGPTView()  // 不需要傳入參數
+        ChatGPTView(messages: .constant([ // 使用 .constant 來模擬綁定數據
+            Message(id: UUID(), text: "你好，這是範例訊息1", isSender: true, time: "10:00 AM", isCompliment: false),
+            Message(id: UUID(), text: "你好，這是範例訊息2", isSender: false, time: "10:05 AM", isCompliment: false)
+        ]))
     }
 }

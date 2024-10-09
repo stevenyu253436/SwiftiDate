@@ -128,7 +128,7 @@ struct ChatDetailView: View {
             .padding()
         }
         .sheet(isPresented: $showChatGPTModal) {
-            ChatGPTView() // 彈出 ChatGPT 視圖
+            ChatGPTView(messages: $messages) // 彈出 ChatGPT 視圖並傳遞 messages
         }
         .navigationBarHidden(true) // Hide the default navigation bar
     }
