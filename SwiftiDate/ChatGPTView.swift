@@ -8,6 +8,25 @@
 import Foundation
 import SwiftUI
 
+// 自定義 UIViewRepresentable 組件
+struct TextViewRepresentable: UIViewRepresentable {
+    var text: String
+
+    func makeUIView(context: Context) -> UITextView {
+        let textView = UITextView()
+        textView.isEditable = false // 禁止編輯
+        textView.isSelectable = true // 啟用選取功能
+        textView.backgroundColor = .clear // 背景設置為透明
+        textView.isScrollEnabled = false  // 防止自動滾動
+        textView.font = UIFont.systemFont(ofSize: 17) // 設置字體
+        return textView
+    }
+
+    func updateUIView(_ uiView: UITextView, context: Context) {
+        uiView.text = text
+    }
+}
+
 struct ChatGPTView: View {
     @Binding var messages: [Message]   // 聊天歷史記錄綁定自 ChatDetailView
     @State private var userInput: String = ""   // 用戶輸入的訊息
