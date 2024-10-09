@@ -39,7 +39,7 @@
 		D018AD8A2C9ED5D4005A14B9 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = D018AD892C9ED5D4005A14B9 /* FirebasePerformance */; };
 		D018AD8C2C9ED5D4005A14B9 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = D018AD8B2C9ED5D4005A14B9 /* FirebaseRemoteConfig */; };
 		D018AD8E2C9ED5D4005A14B9 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = D018AD8D2C9ED5D4005A14B9 /* FirebaseStorage */; };
-		D018AD902C9ED5D4005A14B9 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = D018AD8F2C9ED5D4005A14B9 /* FirebaseStorageCombine-Community */; };
+		D018AD902C9ED5D4005A14B9 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = D018AD8F2C9ED5D4005A14B9 /* FirebaseStorageCombine-Community */; settings = {ATTRIBUTES = (Required, ); }; };
 		D018AD922C9ED5D4005A14B9 /* FirebaseVertexAI-Preview in Frameworks */ = {isa = PBXBuildFile; productRef = D018AD912C9ED5D4005A14B9 /* FirebaseVertexAI-Preview */; };
 		D018AD942C9EDA84005A14B9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D018AD932C9EDA84005A14B9 /* GoogleService-Info.plist */; };
 		D018AD962C9EEA83005A14B9 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D018AD952C9EEA82005A14B9 /* AsyncImageView.swift */; };
@@ -74,6 +74,7 @@
 		D0445C892C73CF610059D522 /* VacationOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0445C882C73CF610059D522 /* VacationOptionsView.swift */; };
 		D0445C8B2C73D0760059D522 /* DietPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0445C8A2C73D0760059D522 /* DietPreferencesView.swift */; };
 		D055E9922C8CCFBA00A97DD1 /* InterestSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D055E9912C8CCFBA00A97DD1 /* InterestSelectionView.swift */; };
+		D09587B92CB6552100BCD04B /* ChatGPTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587B82CB6552100BCD04B /* ChatGPTView.swift */; };
 		D0DDDB052C9FA8AF00A78A87 /* ChatDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */; };
 		D0DDDB072C9FDB1600A78A87 /* WhoLikedYouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */; };
 		D0DDDB092C9FDE0500A78A87 /* InteractiveContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB082C9FDE0500A78A87 /* InteractiveContentView.swift */; };
@@ -184,6 +185,7 @@
 		D0445C882C73CF610059D522 /* VacationOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VacationOptionsView.swift; sourceTree = "<group>"; };
 		D0445C8A2C73D0760059D522 /* DietPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietPreferencesView.swift; sourceTree = "<group>"; };
 		D055E9912C8CCFBA00A97DD1 /* InterestSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestSelectionView.swift; sourceTree = "<group>"; };
+		D09587B82CB6552100BCD04B /* ChatGPTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTView.swift; sourceTree = "<group>"; };
 		D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailView.swift; sourceTree = "<group>"; };
 		D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoLikedYouView.swift; sourceTree = "<group>"; };
 		D0DDDB082C9FDE0500A78A87 /* InteractiveContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveContentView.swift; sourceTree = "<group>"; };
@@ -398,6 +400,7 @@
 				D017F4F32CAF77D900C71D18 /* MessageBubbleView.swift */,
 				D017F4F52CAFBFF700C71D18 /* LoginOrRegisterView.swift */,
 				D017F4F72CAFC9A200C71D18 /* PhoneNumberEntryView.swift */,
+				D09587B82CB6552100BCD04B /* ChatGPTView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -638,6 +641,7 @@
 				D0DDDB282CA14FCC00A78A87 /* ReportUserView.swift in Sources */,
 				D0DDDB482CA191EE00A78A87 /* HowToPurchaseSwiftiDateSupremeView.swift in Sources */,
 				D0DDDB1C2CA1321300A78A87 /* IsSwiftiDatePaidView.swift in Sources */,
+				D09587B92CB6552100BCD04B /* ChatGPTView.swift in Sources */,
 				D0DDDB4C2CA19A0600A78A87 /* ManageProfilePhotosView.swift in Sources */,
 				D0DDDB222CA1413600A78A87 /* WhyIsItHardToMatchView.swift in Sources */,
 				D0DDDB182CA11E5100A78A87 /* HelpView.swift in Sources */,

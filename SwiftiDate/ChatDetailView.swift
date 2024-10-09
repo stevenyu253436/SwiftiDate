@@ -13,6 +13,7 @@ struct ChatDetailView: View {
     @Binding var messages: [Message]  // Bind to the messages passed from ChatView
     @State private var newMessageText: String = "" // State variable to hold the input message text
     @State private var phoneNumber: String = "1234567890" // Declare phoneNumber as a State variable
+    @State private var showChatGPTModal = false // 控制 ChatGPT 彈框的顯示
     var onBack: () -> Void // Add this line to accept the onBack closure
 
     var body: some View {
@@ -109,8 +110,7 @@ struct ChatDetailView: View {
                 
                 // 替代圖標，如表示 AI 的圖標
                 Button(action: {
-                    // 這裡是觸發 ChatGPT 功能的操作
-                    print("ChatGPT icon tapped")
+                    showChatGPTModal = true  // 當按下時顯示 ChatGPT 的彈框
                 }) {
                     Image(systemName: "brain.head.profile")
                         .resizable()
@@ -126,6 +126,9 @@ struct ChatDetailView: View {
                 }
             }
             .padding()
+        }
+        .sheet(isPresented: $showChatGPTModal) {
+            ChatGPTView() // 彈出 ChatGPT 視圖
         }
         .navigationBarHidden(true) // Hide the default navigation bar
     }
