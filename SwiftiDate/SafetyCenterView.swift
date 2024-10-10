@@ -140,38 +140,38 @@ struct SafetyCenterView: View {
                         .padding(.bottom, 10) // Add bottom padding to the entire VStack
                     }
                     
-                    NavigationLink(destination: Text("反詐騙中心")) {
-                        VStack(alignment: .leading, content: {
-                            Text("反詐騙中心")
-                                .font(.headline)
-                                .foregroundColor(.black) // Title text color
-                                .padding(.leading) // Add leading padding to align with the rest of the content
-
-                            HStack {
-                                // Image for the icon on the left
-                                Image(systemName: "shield.fill")
-                                    .resizable()
-                                    .frame(width: 50, height: 50) // Adjust the size of the icon
-                                    .foregroundColor(.green) // Change color of the icon
-
-                                Text("提升反詐騙意識")
-                                    .font(.subheadline)
-                                    .foregroundColor(.gray) // Subtitle text color
-
-                                Spacer() // Pushes everything to the left
-
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(.green) // Arrow color
-                                    .padding(.trailing, 10)
-                            }
-                            .padding(25) // Padding around the HStack content
-                            .background(Color(red: 240/255, green: 255/255, blue: 240/255)) // Light green background color
-                            .cornerRadius(15) // Rounded corners
-                            .shadow(radius: 1) // Add a slight shadow for depth
-                            .padding(.horizontal, 16) // Add padding from the left and right screen edges
-                        })
-                        .padding(.bottom, 10) // Add bottom padding to the entire VStack
-                    }
+//                    NavigationLink(destination: Text("反詐騙中心")) {
+//                        VStack(alignment: .leading, content: {
+//                            Text("反詐騙中心")
+//                                .font(.headline)
+//                                .foregroundColor(.black) // Title text color
+//                                .padding(.leading) // Add leading padding to align with the rest of the content
+//
+//                            HStack {
+//                                // Image for the icon on the left
+//                                Image(systemName: "shield.fill")
+//                                    .resizable()
+//                                    .frame(width: 50, height: 50) // Adjust the size of the icon
+//                                    .foregroundColor(.green) // Change color of the icon
+//
+//                                Text("提升反詐騙意識")
+//                                    .font(.subheadline)
+//                                    .foregroundColor(.gray) // Subtitle text color
+//
+//                                Spacer() // Pushes everything to the left
+//
+//                                Image(systemName: "chevron.right")
+//                                    .foregroundColor(.green) // Arrow color
+//                                    .padding(.trailing, 10)
+//                            }
+//                            .padding(25) // Padding around the HStack content
+//                            .background(Color(red: 240/255, green: 255/255, blue: 240/255)) // Light green background color
+//                            .cornerRadius(15) // Rounded corners
+//                            .shadow(radius: 1) // Add a slight shadow for depth
+//                            .padding(.horizontal, 16) // Add padding from the left and right screen edges
+//                        })
+//                        .padding(.bottom, 10) // Add bottom padding to the entire VStack
+//                    }
                     
                     NavigationLink(destination: Text("安全及認證")) {
                         VStack(alignment: .leading, content: {
