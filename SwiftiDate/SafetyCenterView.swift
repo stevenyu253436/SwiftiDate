@@ -17,7 +17,7 @@ struct SafetyCenterView: View {
                 // Align the text and image to the left using HStack
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("你好呀~ 玩玩")
+                        Text("你好呀~ \(globalUserName)")
                             .font(.title)
                             .fontWeight(.bold)
 
