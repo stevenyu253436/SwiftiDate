@@ -13,7 +13,10 @@ struct SafetyQuizView: View {
     @State private var showExplanation: Bool = false
     @State private var showMessage: Bool = false
     @State private var currentQuestionIndex: Int = 0
-    
+    @State private var score: Int = 0 // Tracks the user's score
+    @State private var navigateToResults: Bool = false // To trigger navigation
+    @Binding var showSafetyTestView: Bool // Binding to return to SafetyTestView
+
     let questions: [QuizQuestion] = [
         QuizQuestion(
             text: "配對後，用以下哪種聊天方式會更安全？",
@@ -44,63 +47,87 @@ struct SafetyQuizView: View {
             options: ["讓對方開車接你", "自己開車或乘坐公共交通"],
             correctAnswer: "自己開車或乘坐公共交通",
             explanation: "第一次見面乘坐自己的或公共交通工具前往更加安全哦！一定要帶好手機和家人朋友保持聯絡～"
+        ),
+        QuizQuestion(
+            text: "你配對到一個長得不錯並對你很好的對象。你們的關係進展很快，聊了幾天，對方表示有意想發展成為戀人關係。之後，他說他家人突然生病了，想問你借一大筆錢，你會：",
+            options: ["立馬檢舉，聊天過程中以任何理由借錢的都是詐騙", "詢問具體情況後再轉帳"],
+            correctAnswer: "立馬檢舉，聊天過程中以任何理由借錢的都是詐騙",
+            explanation: "請勿答應任何轉帳的請求。首先要求交往再要求轉帳的人，很可能是詐騙。建議立即向 SwiftiDate 檢舉。"
         )
     ]
     
     var body: some View {
-        VStack {
-            // Current question text and progress bar
-            Text("第 \(currentQuestionIndex + 1) 題，共 \(questions.count) 題")
-                .font(.headline)
-                .padding()
-            
-            ProgressView(value: Double(currentQuestionIndex + 1), total: Double(questions.count))
-                .padding(.horizontal, 40)
-            
-            Spacer()
-            
-            Text(questions[currentQuestionIndex].text)
-                .font(.title3)
-                .multilineTextAlignment(.center)
-                .padding()
-            
-            if showExplanation {
-                ExplanationView(explanation: questions[currentQuestionIndex].explanation)
-                    .transition(.move(edge: .bottom))
-                    .animation(.easeInOut(duration: 0.5))
-            } else {
-                if showMessage {
-                    MessageView(isCorrect: selectedOption == questions[currentQuestionIndex].correctAnswer)
+        if navigateToResults {
+            // Pass the binding to the ResultsView
+            ResultsView(score: score, totalQuestions: questions.count, showSafetyTestView: $showSafetyTestView)
+        } else {
+            VStack {
+                // Current question text and progress bar
+                Text("第 \(currentQuestionIndex + 1) 題，共 \(questions.count) 題")
+                    .font(.headline)
+                    .padding()
+                
+                ProgressView(value: Double(currentQuestionIndex + 1), total: Double(questions.count))
+                    .padding(.horizontal, 40)
+                
+                Spacer()
+                
+                Text(questions[currentQuestionIndex].text)
+                    .font(.title3)
+                    .multilineTextAlignment(.center)
+                    .padding()
+                
+                if showExplanation {
+                    ExplanationView(explanation: questions[currentQuestionIndex].explanation)
+                        .transition(.move(edge: .bottom))
+                        .animation(.easeInOut(duration: 0.5))
+                } else {
+                    if showMessage {
+                        MessageView(isCorrect: selectedOption == questions[currentQuestionIndex].correctAnswer)
+                    }
+                    
+                    // Render question options
+                    ForEach(questions[currentQuestionIndex].options, id: \.self) { option in
+                        OptionButton(optionText: option, isSelected: selectedOption == option) {
+                            selectedOption = option
+                            showMessage = true
+                            
+                            // Check if the selected option is correct and increment the score
+                            if selectedOption == questions[currentQuestionIndex].correctAnswer {
+                                score += 1 // Increment score
+                            }
+                            
+                            triggerExplanation()
+                        }
+                    }
+                    .padding(.horizontal, 30)
                 }
                 
-                // Render question options
-                ForEach(questions[currentQuestionIndex].options, id: \.self) { option in
-                    OptionButton(optionText: option, isSelected: selectedOption == option) {
-                        selectedOption = option
-                        showMessage = true
-                        triggerExplanation()
+                Spacer()
+                
+                // "Next" button
+                // "Next" button or "View Results" button for the last question
+                Button(action: {
+                    if currentQuestionIndex == questions.count - 1 {
+                        navigateToResults = true // Trigger navigation to results
+                    } else {
+                        moveToNextQuestionOrShowResults()
                     }
+                }) {
+                    Text(currentQuestionIndex == questions.count - 1 ? "查看結果" : "下一題") // Change button label based on question index
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(showExplanation ? Color.green : Color.gray) // Change background based on explanation visibility
+                        .cornerRadius(10)
+                        .padding(.horizontal, 30)
                 }
-                .padding(.horizontal, 30)
+                .disabled(!showExplanation) // Disable button when explanation is not shown
             }
-            
-            Spacer()
-            
-            // "Next" button
-            Button(action: moveToNextQuestion) {
-                Text("下一題")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(showExplanation ? Color.green : Color.gray)
-                    .cornerRadius(10)
-                    .padding(.horizontal, 30)
-            }
-            .disabled(!showExplanation)
+            .padding()
+            .background(Color.white.ignoresSafeArea())
         }
-        .padding()
-        .background(Color.white.ignoresSafeArea())
     }
     
     // Function to show the explanation after a delay
@@ -111,14 +138,16 @@ struct SafetyQuizView: View {
         }
     }
     
-    // Function to move to the next question
-    func moveToNextQuestion() {
+    // Function to move to the next question or show results
+    func moveToNextQuestionOrShowResults() {
         if currentQuestionIndex < questions.count - 1 {
             currentQuestionIndex += 1
             selectedOption = nil
             showExplanation = false
         } else {
+            // Handle quiz completion (you could navigate to a results page, for example)
             print("Quiz completed")
+            // Add logic to show results or move to another screen if necessary
         }
     }
 }
@@ -175,7 +204,9 @@ struct ExplanationView: View {
 }
 
 struct SafetyQuizView_Previews: PreviewProvider {
+    @State static var showSafetyTestView = true // Create a state variable for preview
+
     static var previews: some View {
-        SafetyQuizView()
+        SafetyQuizView(showSafetyTestView: $showSafetyTestView) // Pass the binding
     }
 }

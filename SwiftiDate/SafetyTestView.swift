@@ -14,7 +14,8 @@ struct SafetyTestView: View {
 
     var body: some View {
         if isQuizStarted {
-            SafetyQuizView() // Show the quiz view once the test starts
+            // Pass the binding to the SafetyQuizView
+            SafetyQuizView(showSafetyTestView: $showSafetyTestView)
         } else {
             VStack {
                 HStack {
