@@ -98,6 +98,32 @@ struct LoginView: View {
                 .padding(.bottom, 20)
             }
         }
+        .onAppear {
+            // 在 LoginView 出現時加載用戶狀態
+            loadUserState()
+        }
+    }
+    
+    // 加載邏輯
+    func loadUserState() {
+        let defaults = UserDefaults.standard
+        globalPhoneNumber = defaults.string(forKey: "phoneNumber") ?? "未設定"
+        globalUserName = defaults.string(forKey: "userName") ?? "未設定"
+        
+        if let genderValue = defaults.string(forKey: "userGender"), let gender = Gender(rawValue: genderValue) {
+            globalUserGender = gender
+        }
+        
+        globalIsUserVerified = defaults.bool(forKey: "isUserVerified")
+        
+        globalTurboCount = defaults.integer(forKey: "turboCount")
+        globalCrushCount = defaults.integer(forKey: "crushCount")
+        globalPraiseCount = defaults.integer(forKey: "praiseCount")
+        
+        globalLikesMeCount = defaults.integer(forKey: "likesMeCount")
+        globalLikeCount = defaults.integer(forKey: "likeCount")
+        
+        isSupremeUser = defaults.bool(forKey: "isSupremeUser")
     }
 }
 
