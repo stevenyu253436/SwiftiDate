@@ -14,6 +14,7 @@ struct SafetyCenterView: View {
     @State private var showSafetyTipsView = false // 新增控制安全提示顯示的 state
     @State private var showRealNameVerificationView = false // 控制是否顯示真人認證的畫面
     @State private var showReportConditionsView = false // 新增控制檢舉頁面的狀態
+    @State private var showHowToReportView = false // 新增控制如何檢舉頁面的狀態
 
     var body: some View {
         if showSafetyTestView {
@@ -24,6 +25,8 @@ struct SafetyCenterView: View {
             RealNameVerificationView(showRealNameVerificationView: $showRealNameVerificationView)
         } else if showReportConditionsView { // 當點擊檢舉提示時顯示的畫面
             ReportConditionsView(showReportConditionsView: $showReportConditionsView)
+        } else if showHowToReportView { // 當點擊 "如何檢舉" 時，顯示這個畫面
+            HowToReportView(showHowToReportView: $showHowToReportView) // 使用新的 HowToReportView
         } else {
             ScrollView {
                 VStack(alignment: .leading) { // Change alignment to leading
@@ -245,23 +248,26 @@ struct SafetyCenterView: View {
                                 showReportConditionsView = true // 點擊後顯示檢舉提示頁面
                             }
 
-                            NavigationLink(destination: Text("如何檢舉")) {
+                            HStack {
                                 Text("如何檢舉")
-                                    .foregroundColor(.gray) // Set the text color to gray
-                                
-                                Spacer() // Pushes everything to the left
+                                    .font(.subheadline)
+                                    .foregroundColor(.gray)
+
+                                Spacer()
 
                                 Image(systemName: "chevron.right")
-                                    .foregroundColor(.gray) // Arrow color
+                                    .foregroundColor(.gray)
                                     .padding(.trailing, 10)
                             }
                             .padding(35)
-                            .frame(maxWidth: .infinity, alignment: .leading)
                             .background(Color(red: 255/255, green: 255/255, blue: 200/255)) // Light yellow background color
                             .cornerRadius(15)
                             .shadow(radius: 1)
                             .padding(.horizontal, 16)
-                                        
+                            .onTapGesture {
+                                showHowToReportView = true // 點擊後顯示如何檢舉頁面
+                            }
+
                             NavigationLink(destination: Text("檢舉後會發生什麼？")) {
                                 Text("檢舉後會發生什麼？")
                                     .foregroundColor(.gray) // Set the text color to gray
