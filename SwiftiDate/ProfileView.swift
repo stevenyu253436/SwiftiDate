@@ -20,7 +20,6 @@ struct ProfileView: View {
     @State private var isShowingTurboPurchaseView = false // State variable to control the sheet presentation
     @State private var isShowingCrushPurchaseView = false // State variable to control Crush sheet presentation
     @State private var isShowingPraisePurchaseView = false // State variable to control Praise sheet presentation
-    @State private var isSupremeUser = true // Replace this with your actual logic to determine if the user is Supreme
     @State private var isUserVerified = true // Replace with your actual logic
     @State private var showSettingsView = false // State variable to control Settings View presentation
     @State private var likesMeCount: Int = 0 // Variable to store the number of likes
