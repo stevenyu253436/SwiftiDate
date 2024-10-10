@@ -55,8 +55,8 @@ struct SafetyTestView: View {
                 
                 // Button for starting the test
                 Button(action: {
-                    // Action for starting the test
-                    print("開始測試 button tapped")
+                    // Start the quiz by setting isQuizStarted to true
+                    isQuizStarted = true
                 }) {
                     Text("開始測試")
                         .font(.headline)
