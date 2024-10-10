@@ -16,6 +16,7 @@ struct SafetyCenterView: View {
     @State private var showReportConditionsView = false // 新增控制檢舉頁面的狀態
     @State private var showHowToReportView = false // 新增控制如何檢舉頁面的狀態
     @State private var showReportAftermathView = false // 新增控制檢舉後發生什麼頁面的狀態
+    @State private var showMeetingGuideView = false // New state variable for "相約見面"
 
     var body: some View {
         if showSafetyTestView {
@@ -30,6 +31,8 @@ struct SafetyCenterView: View {
             HowToReportView(showHowToReportView: $showHowToReportView) // 使用新的 HowToReportView
         } else if showReportAftermathView { // 當點擊檢舉後會發生什麼？時顯示的畫面
             ReportAftermathView(showReportAftermathView: $showReportAftermathView)
+        } else if showMeetingGuideView { // New conditional block for "相約見面"
+            MeetingGuideView(showMeetingGuideView: $showMeetingGuideView) // New view for "相約見面"
         } else {
             ScrollView {
                 VStack(alignment: .leading) { // Change alignment to leading
@@ -297,37 +300,37 @@ struct SafetyCenterView: View {
 
                     Spacer()
                     
-                    NavigationLink(destination: Text("相約見面")) {
-                        VStack(alignment: .leading, content: {
+                    // "相約見面" Section
+                    VStack(alignment: .leading) {
+                        Text("相約見面")
+                            .font(.headline)
+                            .foregroundColor(.black)
+                            .padding(.leading)
+
+                        HStack {
+                            Image(systemName: "person.2.fill")
+                                .resizable()
+                                .frame(width: 50, height: 50)
+                                .foregroundColor(.cyan)
+
                             Text("相約見面")
-                                .font(.headline)
-                                .foregroundColor(.black) // Title text color
-                                .padding(.leading) // Add leading padding to align with the rest of the content
-                            
-                            HStack {
-                                Image(systemName: "person.2.fill")
-                                    .resizable()
-                                    .frame(width: 50, height: 50)
-                                    .foregroundColor(.cyan)
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
 
-                                Text("相約見面")
-                                    .padding()
-                                    .font(.subheadline)
-                                    .foregroundColor(.gray)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                
-                                Spacer()
+                            Spacer()
 
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(.gray)
-                                    .padding(.trailing, 10)
-                            }
-                            .padding(25)
-                            .background(Color(red: 255/255, green: 240/255, blue: 240/255)) // Light pink background color
-                            .cornerRadius(15)
-                            .shadow(radius: 1)
-                            .padding(.horizontal, 16)
-                        })
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.gray)
+                                .padding(.trailing, 10)
+                        }
+                        .padding(25)
+                        .background(Color(red: 255/255, green: 240/255, blue: 240/255))
+                        .cornerRadius(15)
+                        .shadow(radius: 1)
+                        .padding(.horizontal, 16)
+                        .onTapGesture {
+                            showMeetingGuideView = true // Navigate to "相約見面" view
+                        }
                     }
                 }
             }
