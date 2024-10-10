@@ -46,8 +46,11 @@ struct MeetingGuideView: View {
             但是，在網友見面的過程中，安全也很重要！
 
             以下是 SwiftiDate 對奔現的安全建議：
+            
             - 在公共場所見面
+            
             - 告訴家人朋友見面的行程
+            
             - 使用公共交通工具等
             """)
                 .font(.body)
