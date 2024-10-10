@@ -11,10 +11,13 @@ import SwiftUI
 struct SafetyCenterView: View {
     @Binding var showSafetyCenterView: Bool // 透過 Binding 傳入是否顯示 SafetyCenterView 的狀態
     @State private var showSafetyTestView = false
+    @State private var showSafetyTipsView = false // 新增控制安全提示顯示的 state
 
     var body: some View {
         if showSafetyTestView {
             SafetyTestView(showSafetyTestView: $showSafetyTestView)
+        } else if showSafetyTipsView { // 當點擊安全提示後，顯示安全提示畫面
+            SafetyTipsView(showSafetyTipsView: $showSafetyTipsView) // 使用新視圖來顯示安全提示內容
         } else {
             ScrollView {
                 VStack(alignment: .leading) { // Change alignment to leading
@@ -107,38 +110,36 @@ struct SafetyCenterView: View {
                     })
                     .padding(.bottom, 10) // Add bottom padding to the entire VStack
                     
-                    NavigationLink(destination: Text("安全須知")) {
-                        VStack(alignment: .leading, content: {
-                            Text("安全須知")
-                                .font(.headline)
-                                .foregroundColor(.black) // Title text color
-                                .padding(.leading) // Add leading padding to align with the rest of the content
+                    VStack(alignment: .leading, content: {
+                        Text("安全須知")
+                            .font(.headline)
+                            .foregroundColor(.black) // Title text color
+                            .padding(.leading) // Add leading padding to align with the rest of the content
 
-                            HStack {
-                                // Image for the icon on the left
-                                Image(systemName: "bell.fill")
-                                    .resizable()
-                                    .frame(width: 50, height: 50) // Adjust the size of the icon
-                                    .foregroundColor(.pink) // Change color of the icon
+                        HStack {
+                            // Image for the icon on the left
+                            Image(systemName: "bell.fill")
+                                .resizable()
+                                .frame(width: 50, height: 50) // Adjust the size of the icon
+                                .foregroundColor(.pink) // Change color of the icon
 
-                                Text("溫馨提醒")
-                                    .font(.subheadline)
-                                    .foregroundColor(.gray) // Subtitle text color
+                            Text("溫馨提醒")
+                                .font(.subheadline)
+                                .foregroundColor(.gray) // Subtitle text color
 
-                                Spacer() // Pushes everything to the left
+                            Spacer() // Pushes everything to the left
 
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(.pink) // Arrow color
-                                    .padding(.trailing, 10)
-                            }
-                            .padding(25) // Padding around the HStack content
-                            .background(Color(red: 255/255, green: 240/255, blue: 240/255)) // Light pink background color
-                            .cornerRadius(15) // Rounded corners
-                            .shadow(radius: 1) // Add a slight shadow for depth
-                            .padding(.horizontal, 16) // Add padding from the left and right screen edges
-                        })
-                        .padding(.bottom, 10) // Add bottom padding to the entire VStack
-                    }
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.pink) // Arrow color
+                                .padding(.trailing, 10)
+                        }
+                        .padding(25) // Padding around the HStack content
+                        .background(Color(red: 255/255, green: 240/255, blue: 240/255)) // Light pink background color
+                        .cornerRadius(15) // Rounded corners
+                        .shadow(radius: 1) // Add a slight shadow for depth
+                        .padding(.horizontal, 16) // Add padding from the left and right screen edges
+                    })
+                    .padding(.bottom, 10) // Add bottom padding to the entire VStack
                     
 //                    NavigationLink(destination: Text("反詐騙中心")) {
 //                        VStack(alignment: .leading, content: {
