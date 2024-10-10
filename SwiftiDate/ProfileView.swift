@@ -145,7 +145,7 @@ struct ProfileView: View {
                             }
                             .padding(.bottom, 5)
 
-                            ProgressView(value: 0.254)
+                            ProgressView(value: userRankPercentage / 100) // Convert the percentage to a fraction
                                 .progressViewStyle(LinearProgressViewStyle(tint: .green))
                                 .scaleEffect(x: 1, y: 4, anchor: .center)
                         }
