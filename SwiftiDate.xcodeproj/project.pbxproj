@@ -80,6 +80,7 @@
 		D09587BF2CB7899D00BCD04B /* SafetyQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587BE2CB7899D00BCD04B /* SafetyQuizView.swift */; };
 		D09587C12CB7B17E00BCD04B /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587C02CB7B17E00BCD04B /* ResultsView.swift */; };
 		D09587C32CB7C0A900BCD04B /* SafetyTipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587C22CB7C0A900BCD04B /* SafetyTipsView.swift */; };
+		D09587C52CB7C73100BCD04B /* RealNameVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587C42CB7C73100BCD04B /* RealNameVerificationView.swift */; };
 		D0DDDB052C9FA8AF00A78A87 /* ChatDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */; };
 		D0DDDB072C9FDB1600A78A87 /* WhoLikedYouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */; };
 		D0DDDB092C9FDE0500A78A87 /* InteractiveContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB082C9FDE0500A78A87 /* InteractiveContentView.swift */; };
@@ -196,6 +197,7 @@
 		D09587BE2CB7899D00BCD04B /* SafetyQuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyQuizView.swift; sourceTree = "<group>"; };
 		D09587C02CB7B17E00BCD04B /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
 		D09587C22CB7C0A900BCD04B /* SafetyTipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyTipsView.swift; sourceTree = "<group>"; };
+		D09587C42CB7C73100BCD04B /* RealNameVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealNameVerificationView.swift; sourceTree = "<group>"; };
 		D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailView.swift; sourceTree = "<group>"; };
 		D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoLikedYouView.swift; sourceTree = "<group>"; };
 		D0DDDB082C9FDE0500A78A87 /* InteractiveContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveContentView.swift; sourceTree = "<group>"; };
@@ -416,6 +418,7 @@
 				D09587BE2CB7899D00BCD04B /* SafetyQuizView.swift */,
 				D09587C02CB7B17E00BCD04B /* ResultsView.swift */,
 				D09587C22CB7C0A900BCD04B /* SafetyTipsView.swift */,
+				D09587C42CB7C73100BCD04B /* RealNameVerificationView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -654,6 +657,7 @@
 				D0DDDB362CA16FF900A78A87 /* HowToPurchaseSwiftiDatePremiumView.swift in Sources */,
 				D0DDDB442CA17FA700A78A87 /* HowToUseAdvancedFilteringView.swift in Sources */,
 				D018AD5B2C9E57DF005A14B9 /* UserGuideView.swift in Sources */,
+				D09587C52CB7C73100BCD04B /* RealNameVerificationView.swift in Sources */,
 				D0DDDB302CA164BE00A78A87 /* WhatIsTurboAndHowToUseView.swift in Sources */,
 				D0DDDB282CA14FCC00A78A87 /* ReportUserView.swift in Sources */,
 				D0DDDB482CA191EE00A78A87 /* HowToPurchaseSwiftiDateSupremeView.swift in Sources */,
