@@ -22,12 +22,15 @@ struct ProfileView: View {
     @State private var isShowingPraisePurchaseView = false // State variable to control Praise sheet presentation
     @State private var isUserVerified = true // Replace with your actual logic
     @State private var showSettingsView = false // State variable to control Settings View presentation
+    @State private var showSafetyCenterView = false // 控制 SafetyCenterView 的顯示
     @State private var likesMeCount: Int = 0 // Variable to store the number of likes
     @State private var likeCount: Int = 120 // 假設 "我喜歡" 的數量
 
     var body: some View {
         if showSettingsView {
             SettingsView(showSettingsView: $showSettingsView) // Pass the binding to the SettingsView
+        } else if showSafetyCenterView {
+            SafetyCenterView(showSafetyCenterView: $showSafetyCenterView) // 如果全局变量为 true，则显示 SafetyCenterView
         } else {
             ZStack {
                 ScrollView {
@@ -272,12 +275,17 @@ struct ProfileView: View {
                     HStack {
                         Spacer()
                         
-                        // New icon to the left of gearshape.fill
-                        Image(systemName: "shield.fill") // Replace with your custom shield icon name
-                            .resizable()
-                            .frame(width: 24, height: 24)
-                            .foregroundColor(.gray) // Set the color to match the design
-                            .padding(.trailing, 10) // Adjust padding if necessary
+                        // 將 shield.fill 圖標放入 Button
+                        Button(action: {
+                            // 點擊時顯示 SafetyCenterView
+                            showSafetyCenterView = true
+                        }) {
+                            Image(systemName: "shield.fill")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                                .foregroundColor(.gray) // Set the color to match the design
+                                .padding(.trailing, 10)
+                        }
                         
                         Button(action: {
                             showSettingsView = true

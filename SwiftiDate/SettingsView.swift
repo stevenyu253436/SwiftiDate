@@ -46,21 +46,33 @@ struct SettingsView: View {
                 DataManagementView(isDataManagementView: $isDataManagementView)
             } else {
                 VStack {
-                    // Custom Navigation Bar
-                    HStack {
-                        Button(action: {
-                            showSettingsView = false // Dismiss SettingsView and return to ProfileView
-                        }) {
-                            Image(systemName: "chevron.left")
-                                .font(.title)
+                    ZStack {
+                        // 中間的標題
+                        HStack {
+                            Spacer() // Push title to the center
+                            
+                            Text("設定")
+                                .font(.headline)
+                                .fontWeight(.bold)
+                            
+                            Spacer() // Keep title centered by adding another spacer
                         }
-                        Text("設定")
-                            .font(.headline)
-                            .padding(.leading, 5)
+                        .padding() // Overall padding for the HStack
                         
-                        Spacer()
+                        // 左上角的返回按鈕
+                        HStack {
+                            Button(action: {
+                                // 當按下返回按鈕時關閉 SafetyCenterView
+                                showSettingsView = false
+                            }) {
+                                Image(systemName: "chevron.left")
+                                    .foregroundColor(.gray) // 設置按鈕顏色
+                            }
+                            .padding(.leading) // 添加內邊距以確保按鈕不會緊貼邊緣
+                            
+                            Spacer() // This will push the button to the left
+                        }
                     }
-                    .padding()
                     
                     Divider()
                     

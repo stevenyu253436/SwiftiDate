@@ -9,9 +9,40 @@ import Foundation
 import SwiftUI
 
 struct SafetyCenterView: View {
+    @Binding var showSafetyCenterView: Bool // 透過 Binding 傳入是否顯示 SafetyCenterView 的狀態
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) { // Change alignment to leading
+                // 將返回按鈕和標題放在同一個 HStack 中
+                ZStack {
+                    // 中間的標題
+                    HStack {
+                        Spacer() // Push title to the center
+                        
+                        Text("安全中心")
+                            .font(.headline)
+                            .fontWeight(.bold)
+                        
+                        Spacer() // Keep title centered by adding another spacer
+                    }
+                    .padding() // Overall padding for the HStack
+                    
+                    // 左上角的返回按鈕
+                    HStack {
+                        Button(action: {
+                            // 當按下返回按鈕時關閉 SafetyCenterView
+                            showSafetyCenterView = false
+                        }) {
+                            Image(systemName: "chevron.left")
+                                .foregroundColor(.gray) // 設置按鈕顏色
+                        }
+                        .padding(.leading) // 添加內邊距以確保按鈕不會緊貼邊緣
+                        
+                        Spacer() // This will push the button to the left
+                    }
+                }
+
                 Spacer()
                 
                 // Align the text and image to the left using HStack
@@ -267,7 +298,6 @@ struct SafetyCenterView: View {
                     })
                 }
             }
-            .navigationBarTitle("安全中心", displayMode: .inline)
         }
     }
 }
@@ -275,7 +305,7 @@ struct SafetyCenterView: View {
 struct SafetyCenterView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            SafetyCenterView() // Adding the view inside NavigationView for the preview
+            SafetyCenterView(showSafetyCenterView: .constant(true)) // 使用 .constant 提供綁定的預覽值
         }
     }
 }
