@@ -20,11 +20,8 @@ struct ProfileView: View {
     @State private var isShowingTurboPurchaseView = false // State variable to control the sheet presentation
     @State private var isShowingCrushPurchaseView = false // State variable to control Crush sheet presentation
     @State private var isShowingPraisePurchaseView = false // State variable to control Praise sheet presentation
-    @State private var isUserVerified = true // Replace with your actual logic
     @State private var showSettingsView = false // State variable to control Settings View presentation
     @State private var showSafetyCenterView = false // 控制 SafetyCenterView 的顯示
-    @State private var likesMeCount: Int = 0 // Variable to store the number of likes
-    @State private var likeCount: Int = 120 // 假設 "我喜歡" 的數量
 
     var body: some View {
         if showSettingsView {
@@ -68,7 +65,7 @@ struct ProfileView: View {
                                     }
                                 }
                                 
-                                if isUserVerified {
+                                if globalIsUserVerified {
                                     HStack {
                                         Image(systemName: "checkmark.seal.fill")
                                             .foregroundColor(.blue)
@@ -89,7 +86,7 @@ struct ProfileView: View {
                                 isShowingTurboView = true // Set state to true to show TurboView
                             }) {
                                 VStack {
-                                    Text(likesMeCount >= 99 ? "99+" : "\(likesMeCount)")
+                                    Text(globalLikesMeCount >= 99 ? "99+" : "\(globalLikesMeCount)")
                                         .font(.title)
                                         .fontWeight(.bold)
                                         .foregroundColor(.black) // 設置文字顏色為黑色
@@ -103,7 +100,7 @@ struct ProfileView: View {
                                 isShowingTurboView = true // Show TurboView
                             }) {
                                 VStack {
-                                    Text(likeCount > 99 ? "99+" : "\(likeCount)") // 根據數字是否大於99來顯示
+                                    Text(globalLikeCount > 99 ? "99+" : "\(globalLikeCount)") // 根據數字是否大於99來顯示
                                         .font(.title)
                                         .fontWeight(.bold)
                                         .foregroundColor(.black) // 設置文字顏色為黑色
