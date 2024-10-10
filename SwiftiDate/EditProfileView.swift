@@ -717,10 +717,21 @@ struct EditProfileView: View {
                 }
             }
             .navigationBarTitle("編輯個人資料", displayMode: .inline)
-            .navigationBarItems(trailing: Button("保存") {
-                // 保存操作
-                presentationMode.wrappedValue.dismiss()
-            })
+            .navigationBarItems(
+                leading: Button(action: {
+                    // Custom action to go back
+                    presentationMode.wrappedValue.dismiss()
+                }) {
+                    HStack {
+                        Image(systemName: "chevron.left")
+                            .font(.headline)
+                    }
+                },
+                trailing: Button("保存") {
+                    // 保存操作
+                    presentationMode.wrappedValue.dismiss()
+                }
+            )
         }
     }
     

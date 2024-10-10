@@ -20,6 +20,7 @@ struct ProfileView: View {
     @State private var isShowingTurboPurchaseView = false // State variable to control the sheet presentation
     @State private var isShowingCrushPurchaseView = false // State variable to control Crush sheet presentation
     @State private var isShowingPraisePurchaseView = false // State variable to control Praise sheet presentation
+    @State private var isShowingEditProfileView = false // State to show EditProfileView
     @State private var showSettingsView = false // State variable to control Settings View presentation
     @State private var showSafetyCenterView = false // 控制 SafetyCenterView 的顯示
 
@@ -41,7 +42,9 @@ struct ProfileView: View {
                                 .overlay(Circle().stroke(Color.white, lineWidth: 4))
                                 .shadow(radius: 10)
 
-                            NavigationLink(destination: EditProfileView()) { // Pass photos to EditProfileView
+                            Button(action: {
+                                isShowingEditProfileView = true // Show EditProfileView
+                            }) {
                                 Image(systemName: "pencil.circle.fill")
                                     .resizable()
                                     .frame(width: 24, height: 24)
@@ -51,7 +54,10 @@ struct ProfileView: View {
                                     .shadow(color: .gray, radius: 4, x: 0, y: 2) // 加強陰影效果
                             }
                             .offset(x: -25, y: -25) // 调整按钮的位置
-                            
+                            .fullScreenCover(isPresented: $isShowingEditProfileView) {
+                                EditProfileView() // Display EditProfileView when the state is true
+                            }
+
                             VStack(alignment: .leading) {
                                 HStack {
                                     Text(globalUserName)
