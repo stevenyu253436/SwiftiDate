@@ -9,10 +9,24 @@ import Foundation
 import SwiftUI
 
 struct SafetyTestView: View {
+    @Binding var showSafetyTestView: Bool
+    
     var body: some View {
         VStack {
+            HStack {
+                Button(action: {
+                    // Close the SafetyTestView
+                    showSafetyTestView = false
+                }) {
+                    Image(systemName: "xmark")
+                        .font(.title)
+                        .foregroundColor(.gray) // Set the color to gray
+                        .padding()
+                }
+                Spacer()
+            }
             Spacer()
-            
+
             // Icon image similar to the one in the image
             Image(systemName: "lock.shield.fill")
                 .resizable()
@@ -57,7 +71,9 @@ struct SafetyTestView: View {
 }
 
 struct SafetyTestView_Previews: PreviewProvider {
+    @State static var showSafetyTestView = true // Add a State variable for the preview
+    
     static var previews: some View {
-        SafetyTestView()
+        SafetyTestView(showSafetyTestView: $showSafetyTestView) // Pass the binding
     }
 }
