@@ -210,6 +210,7 @@
 		D09587CC2CB7D5C800BCD04B /* MeetingGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingGuideView.swift; sourceTree = "<group>"; };
 		D09587CE2CB7E44400BCD04B /* CircleExpansionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleExpansionView.swift; sourceTree = "<group>"; };
 		D09587D02CB8623C00BCD04B /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		D09587D22CB8AC6900BCD04B /* SwiftiDate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftiDate.entitlements; sourceTree = "<group>"; };
 		D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailView.swift; sourceTree = "<group>"; };
 		D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoLikedYouView.swift; sourceTree = "<group>"; };
 		D0DDDB082C9FDE0500A78A87 /* InteractiveContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveContentView.swift; sourceTree = "<group>"; };
@@ -387,6 +388,7 @@
 		D0445C2D2C71B3800059D522 /* SwiftiDate */ = {
 			isa = PBXGroup;
 			children = (
+				D09587D22CB8AC6900BCD04B /* SwiftiDate.entitlements */,
 				D018AD972C9F1A0F005A14B9 /* Info.plist */,
 				D018AD932C9EDA84005A14B9 /* GoogleService-Info.plist */,
 				D0445C2E2C71B3800059D522 /* SwiftiDateApp.swift */,
@@ -879,6 +881,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SwiftiDate/SwiftiDate.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SwiftiDate/Preview Content\"";
@@ -910,6 +913,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SwiftiDate/SwiftiDate.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SwiftiDate/Preview Content\"";

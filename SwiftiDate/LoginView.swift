@@ -7,8 +7,13 @@
 
 import Foundation
 import SwiftUI
+import AuthenticationServices
 
 struct LoginView: View {
+    @State private var authorizationController: ASAuthorizationController?
+    @State private var showExistingUserPopup = true // 控制彈框顯示
+    @State private var existingUserName: String = "" // 儲存已存在的用戶名稱
+
     var body: some View {
         ZStack {
             // 背景顏色
@@ -43,37 +48,39 @@ struct LoginView: View {
                         .padding(.horizontal)
                     }
                     
-                    Button(action: {
-                        // Facebook 登入按鈕的動作
-                    }) {
-                        HStack {
-                            Image(systemName: "f.square.fill")
-                            Text("使用 Facebook 帳號登入")
-                                .fontWeight(.bold)
-                        }
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .foregroundColor(.white)
-                        .background(Color.white.opacity(0.2))
-                        .cornerRadius(25)
-                        .padding(.horizontal)
-                    }
+//                    Button(action: {
+//                        // Facebook 登入按鈕的動作
+//                    }) {
+//                        HStack {
+//                            Image(systemName: "f.square.fill")
+//                            Text("使用 Facebook 帳號登入")
+//                                .fontWeight(.bold)
+//                        }
+//                        .frame(maxWidth: .infinity)
+//                        .padding()
+//                        .foregroundColor(.white)
+//                        .background(Color.white.opacity(0.2))
+//                        .cornerRadius(25)
+//                        .padding(.horizontal)
+//                    }
                     
-                    Button(action: {
-                        // Apple ID 登入按鈕的動作
-                    }) {
-                        HStack {
-                            Image(systemName: "applelogo")
-                            Text("使用 Apple ID 帳號登入")
-                                .fontWeight(.bold)
+                    SignInWithAppleButton(
+                        onRequest: { request in
+                            request.requestedScopes = [.fullName, .email]
+                        },
+                        onCompletion: { result in
+                            switch result {
+                            case .success(let authResults):
+                                handleAuthorizationResult(authResults)
+                            case .failure(let error):
+                                print("Authorization failed: \(error.localizedDescription)")
+                            }
                         }
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .foregroundColor(.white)
-                        .background(Color.white.opacity(0.2))
-                        .cornerRadius(25)
-                        .padding(.horizontal)
-                    }
+                    )
+                    .frame(height: 45)
+                    .signInWithAppleButtonStyle(.white)
+                    .cornerRadius(25)
+                    .padding(.horizontal)
                 }
                 
                 Spacer()
@@ -97,10 +104,76 @@ struct LoginView: View {
                 .font(.footnote)
                 .padding(.bottom, 20)
             }
+            
+            // 彈框顯示部分
+            if showExistingUserPopup {
+                Color.black.opacity(0.4).ignoresSafeArea() // 背景透明遮罩
+
+                VStack(spacing: 20) {
+                    Image("photo1")
+                        .resizable()
+                        .frame(width: 120, height: 120)
+                        .clipShape(Circle()) // 讓圖片變成圓形
+                        .overlay(Circle().stroke(Color.white, lineWidth: 4)) // 加上白色的圓形邊框
+                    
+                    Text(existingUserName)
+                        .font(.subheadline)
+                        .padding(.horizontal)
+                        .multilineTextAlignment(.center)
+                    
+                    Button(action: {
+                        // 確定以此帳號登入
+                        print("繼續使用帳號 \(existingUserName)")
+                        showExistingUserPopup = false
+                    }) {
+                        Text("以此帳號登入")
+                            .foregroundColor(.white)
+                            .frame(width: 250, height: 45)
+                            .background(Color.blue)
+                            .cornerRadius(22.5)
+                    }
+                    
+                    Button(action: {
+                        // 更換帳號並清除所有已存資料
+                        clearUserState()
+                        print("換個帳號")
+                        showExistingUserPopup = false
+                    }) {
+                        Text("換個帳號")
+                            .foregroundColor(.gray)
+                            .padding(.top, 10)
+                    }
+                }
+                .frame(width: 300, height: 350)
+                .background(Color.white)
+                .cornerRadius(20)
+                .shadow(radius: 10)
+                .padding(.horizontal, 20)
+            }
         }
         .onAppear {
             // 在 LoginView 出現時加載用戶狀態
             loadUserState()
+        }
+    }
+    
+    // 處理 Apple ID 登入結果
+    func handleAuthorizationResult(_ result: ASAuthorization) {
+        guard let credential = result.credential as? ASAuthorizationAppleIDCredential else {
+            return
+        }
+        
+        let userID = credential.user
+        let email = credential.email
+        let fullName = credential.fullName
+        
+        // 在這裡處理登錄信息，例如存儲用戶信息到本地或服務器
+        print("User ID: \(userID)")
+        if let email = email {
+            print("Email: \(email)")
+        }
+        if let fullName = fullName {
+            print("Full Name: \(fullName)")
         }
     }
     
@@ -109,6 +182,11 @@ struct LoginView: View {
         let defaults = UserDefaults.standard
         globalPhoneNumber = defaults.string(forKey: "phoneNumber") ?? "未設定"
         globalUserName = defaults.string(forKey: "userName") ?? "未設定"
+        
+        if !globalUserName.isEmpty {
+            existingUserName = globalUserName
+            showExistingUserPopup = true // 如果有已存的帳號數據則顯示彈框
+        }
         
         if let genderValue = defaults.string(forKey: "userGender"), let gender = Gender(rawValue: genderValue) {
             globalUserGender = gender
@@ -124,6 +202,26 @@ struct LoginView: View {
         globalLikeCount = defaults.integer(forKey: "likeCount")
         
         isSupremeUser = defaults.bool(forKey: "isSupremeUser")
+    }
+    
+    func clearUserState() {
+        let defaults = UserDefaults.standard
+        if let appDomain = Bundle.main.bundleIdentifier {
+            defaults.removePersistentDomain(forName: appDomain) // 清除所有的UserDefaults資料
+        }
+        defaults.synchronize() // 確保立即保存
+
+        // 清除全局變數
+        globalPhoneNumber = ""
+        globalUserName = ""
+        globalUserGender = .male
+        globalIsUserVerified = false
+        globalTurboCount = 0
+        globalCrushCount = 0
+        globalPraiseCount = 0
+        globalLikesMeCount = 0
+        globalLikeCount = 0
+        isSupremeUser = false
     }
 }
 
