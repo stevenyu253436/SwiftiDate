@@ -87,6 +87,8 @@
 		D09587CD2CB7D5C900BCD04B /* MeetingGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587CC2CB7D5C800BCD04B /* MeetingGuideView.swift */; };
 		D09587CF2CB7E44400BCD04B /* CircleExpansionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587CE2CB7E44400BCD04B /* CircleExpansionView.swift */; };
 		D09587D12CB8623C00BCD04B /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587D02CB8623C00BCD04B /* LoginView.swift */; };
+		D09587D42CB8BDEA00BCD04B /* PrivacySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587D32CB8BDEA00BCD04B /* PrivacySettingsView.swift */; };
+		D09587D62CB8CDDA00BCD04B /* GenderSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587D52CB8CDDA00BCD04B /* GenderSelectionView.swift */; };
 		D0DDDB052C9FA8AF00A78A87 /* ChatDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */; };
 		D0DDDB072C9FDB1600A78A87 /* WhoLikedYouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */; };
 		D0DDDB092C9FDE0500A78A87 /* InteractiveContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB082C9FDE0500A78A87 /* InteractiveContentView.swift */; };
@@ -211,6 +213,8 @@
 		D09587CE2CB7E44400BCD04B /* CircleExpansionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleExpansionView.swift; sourceTree = "<group>"; };
 		D09587D02CB8623C00BCD04B /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		D09587D22CB8AC6900BCD04B /* SwiftiDate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftiDate.entitlements; sourceTree = "<group>"; };
+		D09587D32CB8BDEA00BCD04B /* PrivacySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacySettingsView.swift; sourceTree = "<group>"; };
+		D09587D52CB8CDDA00BCD04B /* GenderSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSelectionView.swift; sourceTree = "<group>"; };
 		D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailView.swift; sourceTree = "<group>"; };
 		D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoLikedYouView.swift; sourceTree = "<group>"; };
 		D0DDDB082C9FDE0500A78A87 /* InteractiveContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveContentView.swift; sourceTree = "<group>"; };
@@ -439,6 +443,8 @@
 				D09587CC2CB7D5C800BCD04B /* MeetingGuideView.swift */,
 				D09587CE2CB7E44400BCD04B /* CircleExpansionView.swift */,
 				D09587D02CB8623C00BCD04B /* LoginView.swift */,
+				D09587D32CB8BDEA00BCD04B /* PrivacySettingsView.swift */,
+				D09587D52CB8CDDA00BCD04B /* GenderSelectionView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -665,6 +671,7 @@
 				D017F4F82CAFC9A200C71D18 /* PhoneNumberEntryView.swift in Sources */,
 				D0445C7F2C73C9080059D522 /* LookingForView.swift in Sources */,
 				D0DDDB3E2CA179AC00A78A87 /* WhatIsSwiftiDatePremiumDiscountPolicyView.swift in Sources */,
+				D09587D62CB8CDDA00BCD04B /* GenderSelectionView.swift in Sources */,
 				D0DDDB3A2CA174A100A78A87 /* RestorePurchaseView.swift in Sources */,
 				D0445C672C7239C80059D522 /* InterestsView.swift in Sources */,
 				D0445C312C71B3800059D522 /* ContentView.swift in Sources */,
@@ -688,6 +695,7 @@
 				D09587B92CB6552100BCD04B /* ChatGPTView.swift in Sources */,
 				D0DDDB4C2CA19A0600A78A87 /* ManageProfilePhotosView.swift in Sources */,
 				D09587CF2CB7E44400BCD04B /* CircleExpansionView.swift in Sources */,
+				D09587D42CB8BDEA00BCD04B /* PrivacySettingsView.swift in Sources */,
 				D0DDDB222CA1413600A78A87 /* WhyIsItHardToMatchView.swift in Sources */,
 				D0DDDB182CA11E5100A78A87 /* HelpView.swift in Sources */,
 				D0445C852C73CDB60059D522 /* SmokingOptionsView.swift in Sources */,
