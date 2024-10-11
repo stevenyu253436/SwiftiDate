@@ -183,7 +183,8 @@ struct PlaceholderView: View {
 
     var body: some View {
         VStack {
-            if index == 5 {
+            switch index {
+            case 5:
                 // 當 index 等於 5 時顯示 book.fill 和 "生活"
                 Image(systemName: "book.fill")
                     .resizable()
@@ -193,7 +194,47 @@ struct PlaceholderView: View {
                 Text("生活")
                     .font(.caption)
                     .foregroundColor(.gray)
-            } else {
+            case 4:
+                // 當 index 等於 4 時顯示 pet 和 "寵物"
+                Image(systemName: "pawprint.fill")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 50, height: 50)
+                    .foregroundColor(.gray)
+                Text("寵物")
+                    .font(.caption)
+                    .foregroundColor(.gray)
+            case 3:
+                // 當 index 等於 3 時顯示 "旅行"
+                Image(systemName: "airplane")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 50, height: 50)
+                    .foregroundColor(.gray)
+                Text("旅行")
+                    .font(.caption)
+                    .foregroundColor(.gray)
+            case 2:
+                // 當 index 等於 2 時顯示 "運動"
+                Image(systemName: "sportscourt.fill")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 50, height: 50)
+                    .foregroundColor(.gray)
+                Text("運動")
+                    .font(.caption)
+                    .foregroundColor(.gray)
+            case 1:
+                // 當 index 等於 1 時顯示 "自拍"
+                Image(systemName: "camera.fill")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 50, height: 50)
+                    .foregroundColor(.gray)
+                Text("自拍")
+                    .font(.caption)
+                    .foregroundColor(.gray)
+            default:
                 // 否則顯示空白占位符
                 Image(systemName: "photo.fill")
                     .resizable()
