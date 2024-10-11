@@ -14,6 +14,7 @@ struct ChatDetailView: View {
     @State private var newMessageText: String = "" // State variable to hold the input message text
     @State private var phoneNumber: String = "1234567890" // Declare phoneNumber as a State variable
     @State private var showChatGPTModal = false // 控制 ChatGPT 彈框的顯示
+    @State private var showActionSheet = false // 控制 ActionSheet 彈框的顯示
     var onBack: () -> Void // Add this line to accept the onBack closure
 
     var body: some View {
@@ -54,16 +55,51 @@ struct ChatDetailView: View {
                     }
                 }) {
                     Image(systemName: "phone.fill")
+                        .resizable() // 使圖標可以調整大小
+                        .aspectRatio(contentMode: .fit) // 確保圖標保持比例
+                        .frame(width: 25, height: 25) // 調整圖標的寬高，這裡設置為30x30
                         .foregroundColor(.green)
                         .padding(.trailing, 10)
                 }
                 
                 Button(action: {
-                    // Action for more options
+                    showActionSheet = true // 顯示 ActionSheet
                 }) {
                     Image(systemName: "ellipsis")
+                        .resizable() // 使圖標可以調整大小
+                        .aspectRatio(contentMode: .fit) // 確保圖標保持比例
+                        .frame(width: 25, height: 25) // 調整圖標的寬高，這裡設置為30x30
                         .foregroundColor(.black)
                         .padding(.trailing, 10)
+                }
+                .actionSheet(isPresented: $showActionSheet) {
+                    ActionSheet(
+                        title: Text("選項"),
+                        message: Text("請選擇你想進行的操作"),
+                        buttons: [
+                            .default(Text("修改備註名稱")) {
+                                // Handle "修改備註名稱" action
+                                print("修改備註名稱 selected")
+                            },
+                            .default(Text("匿名檢舉和封鎖")) {
+                                // Handle "匿名檢舉和封鎖" action
+                                print("匿名檢舉和封鎖 selected")
+                            },
+                            .default(Text("安全中心")) {
+                                // Handle "安全中心" action
+                                print("安全中心 selected")
+                            },
+                            .default(Text("刪除聊天記錄")) {
+                                // Handle "刪除聊天記錄" action
+                                print("刪除聊天記錄 selected")
+                            },
+                            .default(Text("解除配對")) {
+                                // Handle "解除配對" action
+                                print("解除配對 selected")
+                            },
+                            .cancel(Text("取消"))
+                        ]
+                    )
                 }
             }
             .frame(height: 60)
@@ -166,7 +202,6 @@ struct Message: Identifiable {
     let time: String
     var isCompliment: Bool // New property to indicate if the message is a compliment
 }
-
 
 // PreviewProvider for ChatDetailView
 struct ChatDetailView_Previews: PreviewProvider {
