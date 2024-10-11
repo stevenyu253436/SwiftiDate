@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import MessageUI
 
 struct SettingsView: View {
     @Binding var showSettingsView: Bool // Binding variable to control the view dismissal
@@ -20,7 +21,9 @@ struct SettingsView: View {
     @State private var isShowingLogoutAlert = false // State variable to control alert presentation
     @State private var isPersonalInfoView = false // 控制個人資料頁面的顯示
     @State private var isShowingCustomerServiceAlert = false
-    
+    @State private var isShowingMailComposer = false // 控制郵件視圖的顯示
+    @State private var mailData: MailData? // 保存郵件數據
+
     var body: some View {
         ZStack {
             if isQRCodeScannerView {
@@ -153,7 +156,7 @@ struct SettingsView: View {
                         
                         Section {
                             Button(action: {
-                                isShowingCustomerServiceAlert = true // Show the customer service alert
+                                checkIfMailIsSetup()
                             }) {
                                 HStack {
                                     Text("客服")
@@ -384,6 +387,57 @@ struct SettingsView: View {
         // 強制同步，確保立即保存
         defaults.synchronize()
     }
+    
+    // 檢查是否有設置郵箱帳戶
+    func checkIfMailIsSetup() {
+        if MFMailComposeViewController.canSendMail() {
+            // 設置郵件數據
+            mailData = MailData(subject: "反饋", recipients: ["support@swiftidate.com"], messageBody: "請描述您遇到的問題")
+            isShowingMailComposer = true // 顯示郵件撰寫頁面
+        } else {
+            // 未設置郵箱，顯示提醒框
+            isShowingCustomerServiceAlert = true
+        }
+    }
+}
+
+// 自定義的郵件撰寫視圖
+struct MailComposeView: UIViewControllerRepresentable {
+    var data: MailData
+    
+    func makeUIViewController(context: Context) -> MFMailComposeViewController {
+        let mailComposeVC = MFMailComposeViewController()
+        mailComposeVC.setSubject(data.subject)
+        mailComposeVC.setToRecipients(data.recipients)
+        mailComposeVC.setMessageBody(data.messageBody, isHTML: false)
+        mailComposeVC.mailComposeDelegate = context.coordinator
+        return mailComposeVC
+    }
+    
+    func updateUIViewController(_ uiViewController: MFMailComposeViewController, context: Context) {}
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+    
+    class Coordinator: NSObject, MFMailComposeViewControllerDelegate {
+        var parent: MailComposeView
+        
+        init(_ parent: MailComposeView) {
+            self.parent = parent
+        }
+        
+        func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+            controller.dismiss(animated: true)
+        }
+    }
+}
+
+// 定義郵件數據模型
+struct MailData {
+    var subject: String
+    var recipients: [String]
+    var messageBody: String
 }
 
 struct SettingsView_Previews: PreviewProvider {
