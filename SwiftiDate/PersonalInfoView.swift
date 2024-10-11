@@ -9,8 +9,6 @@ import SwiftUI
 
 struct PersonalInfoView: View {
     @Binding var isPersonalInfoView: Bool // Binding variable to control the view dismissal
-    @State private var userName: String = "玩玩" // Replace with your actual data
-    @State private var userBirthday: String = "1999/07/02" // Replace with your actual data
 
     var body: some View {
         VStack {
@@ -40,7 +38,7 @@ struct PersonalInfoView: View {
                 HStack {
                     Text("姓名")
                     Spacer()
-                    Text(userName)
+                    Text(globalUserName)
                         .foregroundColor(.gray)
                 }
                 .padding(.vertical, 10)
@@ -48,13 +46,22 @@ struct PersonalInfoView: View {
                 HStack {
                     Text("生日")
                     Spacer()
-                    Text(userBirthday)
+                    Text(globalUserBirthday)
                         .foregroundColor(.gray)
                 }
                 .padding(.vertical, 10)
             }
             .listStyle(GroupedListStyle()) // Optional: Set the list style to match the look
         }
+    }
+    
+    func calculateAge(birthday: String) -> Int {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy/MM/dd"
+        guard let birthDate = dateFormatter.date(from: birthday) else { return 0 }
+        let calendar = Calendar.current
+        let ageComponents = calendar.dateComponents([.year], from: birthDate, to: Date())
+        return ageComponents.year ?? 0
     }
 }
 
