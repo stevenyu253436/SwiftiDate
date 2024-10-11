@@ -19,7 +19,8 @@ struct SettingsView: View {
     @State private var showUpdatePopup = false // State variable to control update popup display
     @State private var isShowingLogoutAlert = false // State variable to control alert presentation
     @State private var isPersonalInfoView = false // 控制個人資料頁面的顯示
-
+    @State private var isShowingCustomerServiceAlert = false
+    
     var body: some View {
         ZStack {
             if isQRCodeScannerView {
@@ -151,12 +152,30 @@ struct SettingsView: View {
                         }
                         
                         Section {
-                            HStack {
-                                Text("客服")
-                                    .padding(.vertical, 10) // Adjust this value to increase the height
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(.gray) // Optional: Set the color of the chevron
+                            Button(action: {
+                                isShowingCustomerServiceAlert = true // Show the customer service alert
+                            }) {
+                                HStack {
+                                    Text("客服")
+                                        .foregroundColor(.black) // 確保字體顏色為黑色
+                                        .padding(.vertical, 10) // Adjust this value to increase the height
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .foregroundColor(.gray) // Optional: Set the color of the chevron
+                                }
+                            }
+                            .alert(isPresented: $isShowingCustomerServiceAlert) {
+                                Alert(
+                                    title: Text("請設置郵箱"),
+                                    message: Text("需要設置郵箱才可以發送反饋給我們"),
+                                    primaryButton: .default(Text("去設置"), action: {
+                                        // 跳轉到郵箱設置頁面
+                                        if let url = URL(string: "App-Prefs:root=MAIL") {
+                                            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                                        }
+                                    }),
+                                    secondaryButton: .cancel(Text("不用了"))
+                                )
                             }
 
                             Button(action: {

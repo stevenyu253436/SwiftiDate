@@ -221,7 +221,7 @@
 		D0DDDB0A2CA07A0D00A78A87 /* TurboView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurboView.swift; sourceTree = "<group>"; };
 		D0DDDB0C2CA07A2400A78A87 /* FeaturedCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedCardView.swift; sourceTree = "<group>"; };
 		D0DDDB0E2CA0E65F00A78A87 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		D0DDDB132CA10EAD00A78A87 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		D0DDDB132CA10EAD00A78A87 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		D0DDDB172CA11E5000A78A87 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		D0DDDB192CA1282B00A78A87 /* WhatIsSwiftiDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIsSwiftiDateView.swift; sourceTree = "<group>"; };
 		D0DDDB1B2CA1321300A78A87 /* IsSwiftiDatePaidView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsSwiftiDatePaidView.swift; sourceTree = "<group>"; };
