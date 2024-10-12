@@ -162,6 +162,25 @@ struct ChatView: View {
                                         }
                                     }) {
                                         ChatRow(chat: chat, messages: messages) // Pass messages to ChatRow
+                                            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                                // "解除配對" button
+                                                Button {
+                                                    // Handle unmatch action
+                                                    print("解除配對 tapped")
+                                                } label: {
+                                                    Text("解除配對")
+                                                }
+                                                .tint(.gray)
+
+                                                // "修改備註名稱" button
+                                                Button {
+                                                    // Handle rename action
+                                                    print("修改備註名稱 tapped")
+                                                } label: {
+                                                    Text("修改備註名稱")
+                                                }
+                                                .tint(.green)
+                                            }
                                     }
                                 }
                             }
