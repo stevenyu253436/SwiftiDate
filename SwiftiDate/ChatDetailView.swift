@@ -12,7 +12,6 @@ struct ChatDetailView: View {
     var chat: Chat
     @Binding var messages: [Message]  // Bind to the messages passed from ChatView
     @State private var newMessageText: String = "" // State variable to hold the input message text
-    @State private var phoneNumber: String = "1234567890" // Declare phoneNumber as a State variable
     @State private var showChatGPTModal = false // 控制 ChatGPT 彈框的顯示
     @State private var showActionSheet = false // 控制 ActionSheet 彈框的顯示
     var onBack: () -> Void // Add this line to accept the onBack closure
@@ -46,7 +45,7 @@ struct ChatDetailView: View {
                 Spacer()
                 
                 Button(action: {
-                    if let phoneURL = URL(string: "tel://\(phoneNumber)") {
+                    if let phoneURL = URL(string: "tel://\(globalPhoneNumber)") {
                         if UIApplication.shared.canOpenURL(phoneURL) {
                             UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
                         } else {
