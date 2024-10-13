@@ -18,45 +18,47 @@ struct TurboView: View {
     var body: some View {
         ZStack {
             VStack {
-                // Top Tab Selection
-                HStack {
-                    if showBackButton {
-                        // Custom Navigation Bar with chevron.left button
-                        HStack {
+                ZStack(alignment: .topLeading) {
+                    // Custom Navigation Bar with chevron.left button
+                    HStack {
+                        if showBackButton {
                             Button(action: {
                                 onBack?() // 執行返回操作
                             }) {
                                 Image(systemName: "chevron.left")
                                     .foregroundColor(.gray)
                             }
+                            .padding(.leading, 16) // 增加一點左邊的間距
                         }
+
+                        Spacer() // 把BackButton推到左邊
                     }
                     
-                    Spacer()
-                                    
-                    Button(action: {
-                        selectedTab = 0
-                    }) {
-                        Text("喜歡我的人")
-                            .font(.headline)
-                            .foregroundColor(selectedTab == 0 ? .green : .gray)
+                    // Top Tab Selection
+                    HStack {
+                        Button(action: {
+                            selectedTab = 0
+                        }) {
+                            Text("喜歡我的人")
+                                .font(.headline)
+                                .foregroundColor(selectedTab == 0 ? .green : .gray)
+                                .frame(maxWidth: .infinity) // 讓按鈕自適應空間
+                        }
+                                            
+                        Button(action: {
+                            selectedTab = 1
+                        }) {
+                            Text("我的心動對象")
+                                .font(.headline)
+                                .foregroundColor(selectedTab == 1 ? .green : .gray) // Corrected logic
+                                .frame(maxWidth: .infinity) // 讓按鈕自適應空間
+                        }
+                        
+                        Spacer()
                     }
-                    
-                    Spacer()
-                    Spacer()
-                    
-                    Button(action: {
-                        selectedTab = 1
-                    }) {
-                        Text("我的心動對象")
-                            .font(.headline)
-                            .foregroundColor(selectedTab == 1 ? .green : .gray) // Corrected logic
-                    }
-                    
-                    Spacer()
+                    .padding(.horizontal)
+                    .padding(.top, 16)
                 }
-                .padding(.horizontal)
-                .padding(.top, 16)
 
                 // The selected line
                 HStack(spacing: 0) {
@@ -70,66 +72,70 @@ struct TurboView: View {
                 .frame(width: UIScreen.main.bounds.width, alignment: selectedTab == 0 ? .leading : .trailing) // Align HStack based on the selected tab
 
                 Spacer().frame(height: 20)
+                
+                if selectedTab == 0 {
+                    // The featured card section (每日精選)
+                    FeaturedCardView()
 
-                // The featured card section (每日精選)
-                FeaturedCardView()
-
-                Spacer().frame(height: 20)
-                
-                // Main image
-                Image("turbo_view_image") // Replace with your image asset name
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 250)
-                
-                // Description text
-                Text("開啟Turbo，將你直接置頂到所有人的前面！輕鬆提升10倍配對成功率")
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 30)
-                
-                // Action button
-                Button(action: {
-                    if globalTurboCount > 0 {
-                        // Show confirmation popup if TurboCount is greater than 0
-                        showConfirmationPopup = true
-                    }
-                }) {
-                    HStack {
-                        Image(systemName: "bolt.fill")
-                        
-                        Text("馬上開始")
-                            .fontWeight(.bold)
-                            .padding()
-                    }
-                    .frame(maxWidth: .infinity)
-                    .background(LinearGradient(gradient: Gradient(colors: [.pink, .purple]), startPoint: .topLeading, endPoint: .bottomTrailing))
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-                    .padding(.horizontal, 60)
-                }
-                .padding(.vertical, 20)
-
-                Spacer()
-                
-                Button(action: {
-                    if globalTurboCount > 0 {
-                        // Show confirmation popup if TurboCount is greater than 0
-                        showConfirmationPopup = true
-                    }
-                }) {
-                    Image(systemName: "bolt.fill")
+                    Spacer().frame(height: 20)
+                    
+                    // Main image
+                    Image("turbo_view_image") // Replace with your image asset name
                         .resizable()
-                        .frame(width: 40, height: 40)
-                        .padding()
+                        .scaledToFit()
+                        .frame(height: 250)
+                    
+                    // Description text
+                    Text("開啟Turbo，將你直接置頂到所有人的前面！輕鬆提升10倍配對成功率")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 30)
+                    
+                    // Action button
+                    Button(action: {
+                        if globalTurboCount > 0 {
+                            // Show confirmation popup if TurboCount is greater than 0
+                            showConfirmationPopup = true
+                        }
+                    }) {
+                        HStack {
+                            Image(systemName: "bolt.fill")
+                            
+                            Text("馬上開始")
+                                .fontWeight(.bold)
+                                .padding()
+                        }
+                        .frame(maxWidth: .infinity)
                         .background(LinearGradient(gradient: Gradient(colors: [.pink, .purple]), startPoint: .topLeading, endPoint: .bottomTrailing))
                         .foregroundColor(.white)
-                        .clipShape(Circle())
-                        .shadow(radius: 5)
+                        .cornerRadius(10)
+                        .padding(.horizontal, 60)
+                    }
+                    .padding(.vertical, 20)
+
+                    Spacer()
+                    
+                    Button(action: {
+                        if globalTurboCount > 0 {
+                            // Show confirmation popup if TurboCount is greater than 0
+                            showConfirmationPopup = true
+                        }
+                    }) {
+                        Image(systemName: "bolt.fill")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                            .padding()
+                            .background(LinearGradient(gradient: Gradient(colors: [.pink, .purple]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                            .foregroundColor(.white)
+                            .clipShape(Circle())
+                            .shadow(radius: 5)
+                    }
+                    .padding(.trailing, 20)
+                    .padding(.bottom, 20)
+                } else {
+                    Spacer()
                 }
-                .padding(.trailing, 20)
-                .padding(.bottom, 20)
             }
             
             // Confirmation popup overlay using ZStack
