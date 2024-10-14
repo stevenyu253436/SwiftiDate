@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import FirebaseStorage
 
 enum PhotoState {
     case empty
@@ -24,42 +25,73 @@ struct PhotoSectionView: View {
         // 上排照片
         HStack(spacing: 10) {
             ForEach(photos.prefix(3), id: \.self) { photo in
-                Image(photo)
-                    .resizable()
-                    .frame(width: 100, height: 133)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .overlay(
-                        Button(action: {
-                            removePhoto(photo: photo)
-                        }) {
-                            Image(systemName: "xmark.circle.fill")
-                                .foregroundColor(.white)
-                                .background(Color.red)
-                                .clipShape(Circle())
-                        }
-                        .offset(x: -5, y: -5), alignment: .topTrailing
-                    )
+                // 使用 AsyncImage 從 URL 加載圖片
+                AsyncImage(url: URL(string: photo)) { phase in
+                    switch phase {
+                    case .empty:
+                        ProgressView() // 加載中
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .frame(width: 100, height: 133)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                    case .failure:
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 100, height: 133)
+                            .foregroundColor(.red)
+                    @unknown default:
+                        EmptyView()
+                    }
+                }
+                .overlay(
+                    Button(action: {
+                        removePhoto(photo: photo)
+                    }) {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundColor(.white)
+                            .background(Color.red)
+                            .clipShape(Circle())
+                    }
+                    .offset(x: -5, y: -5), alignment: .topTrailing
+                )
             }
         }
         
         HStack(spacing: 10) {
             let bottomPhotos = photos.suffix(min(max(photos.count - 3, 0), 3))
             ForEach(bottomPhotos, id: \.self) { photo in
-                Image(photo)
-                    .resizable()
-                    .frame(width: 100, height: 133)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .overlay(
-                        Button(action: {
-                            removePhoto(photo: photo)
-                        }) {
-                            Image(systemName: "xmark.circle.fill")
-                                .foregroundColor(.white)
-                                .background(Color.red)
-                                .clipShape(Circle())
-                        }
-                        .offset(x: -5, y: -5), alignment: .topTrailing
-                    )
+                AsyncImage(url: URL(string: photo)) { phase in
+                    switch phase {
+                    case .empty:
+                        ProgressView() // 加載中
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .frame(width: 100, height: 133)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                    case .failure:
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 100, height: 133)
+                            .foregroundColor(.red)
+                    @unknown default:
+                        EmptyView()
+                    }
+                }
+                .overlay(
+                    Button(action: {
+                        removePhoto(photo: photo)
+                    }) {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundColor(.white)
+                            .background(Color.red)
+                            .clipShape(Circle())
+                    }
+                    .offset(x: -5, y: -5), alignment: .topTrailing
+                )
             }
 
             // 補齊照片到6張，並確保最後一張index為5
@@ -69,6 +101,9 @@ struct PhotoSectionView: View {
                     PlaceholderView(index: photos.count + index, showImagePicker: $showImagePicker) // 傳入當前照片數 + index
                 }
             }
+        }
+        .onAppear {
+            fetchPhotosFromFirebase() // Fetch photos when the view appears
         }
         .sheet(isPresented: $showImagePicker) {
             ImagePicker(sourceType: .photoLibrary, selectedImage: $selectedImage)
@@ -99,6 +134,69 @@ struct PhotoSectionView: View {
         .frame(width: 100, height: 133)
         .background(Color.gray.opacity(0.2))
         .clipShape(RoundedRectangle(cornerRadius: 10))
+    }
+    
+    // Fetch photos from Firebase Storage
+    func fetchPhotosFromFirebase() {
+        print("Fetching photos from Firebase started")
+        photos.removeAll() // Clear existing photos before fetching
+        
+        let storage = Storage.storage()
+        let userID = globalUserID // Replace this with the current user ID
+        let storageRef = storage.reference().child("user_photos/\(userID)")
+
+        storageRef.listAll { (result, error) in
+            if let error = error {
+                print("Error fetching photos: \(error)")
+                return
+            }
+
+            // Safely unwrap the result
+            guard let result = result else {
+                print("Failed to fetch the result")
+                return
+            }
+            
+            var fetchedPhotoURLs: [(url: String, photoNumber: Int)] = []
+
+            for item in result.items {
+                item.downloadURL { (url, error) in
+                    if let error = error {
+                        print("Error getting download URL: \(error)")
+                        return
+                    }
+
+                    if let url = url {
+                        let urlString = url.absoluteString
+                        
+                        // Extract the number from the photo name
+                        if let photoNumber = extractPhotoNumber(from: urlString) {
+                            fetchedPhotoURLs.append((urlString, photoNumber))
+                        }
+                        
+                        // Once all URLs are fetched, sort by photo number
+                        if fetchedPhotoURLs.count == result.items.count {
+                            fetchedPhotoURLs.sort { $0.photoNumber < $1.photoNumber }
+                            DispatchQueue.main.async {
+                                self.photos = fetchedPhotoURLs.map { $0.url }
+                                print("Sorted photo URLs: \(self.photos)")
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func extractPhotoNumber(from urlString: String) -> Int? {
+        // Extracts the number from "photoX" in the URL
+        let pattern = "photo(\\d+)" // Regular expression to capture the number
+        if let regex = try? NSRegularExpression(pattern: pattern),
+           let match = regex.firstMatch(in: urlString, range: NSRange(urlString.startIndex..., in: urlString)),
+           let range = Range(match.range(at: 1), in: urlString) {
+            return Int(urlString[range])
+        }
+        return nil
     }
     
     // 移除照片的函數

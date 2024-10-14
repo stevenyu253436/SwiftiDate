@@ -11,7 +11,7 @@ import FirebaseStorage
 
 struct EditProfileView: View {
     @State private var selectedTab = "編輯"
-    @State private var photos = ["photo1", "photo2", "photo3", "photo4", "photo5", "photo6"]
+    @State private var photos: [String] = []
     @State private var aboutMe = "能見面左右滑謝謝🙏\n一起吃日料吧🍣\n抽水煙也可以💨"
     @State private var currentPhotoIndex = 0
     
@@ -732,45 +732,6 @@ struct EditProfileView: View {
                     presentationMode.wrappedValue.dismiss()
                 }
             )
-        }
-    }
-    
-    // Fetch photos from Firebase Storage
-    func fetchPhotosFromFirebase() {
-        print("Fetching photos from Firebase started")
-        photos.removeAll() // Clear existing photos before fetching
-        
-        let storage = Storage.storage()
-        let userID = "userID_1" // Replace this with the current user ID
-        let storageRef = storage.reference().child("user_photos/\(userID)")
-
-        storageRef.listAll { (result, error) in
-            if let error = error {
-                print("Error fetching photos: \(error)")
-                return
-            }
-
-            // Safely unwrap the result
-            guard let result = result else {
-                print("Failed to fetch the result")
-                return
-            }
-
-            for item in result.items {
-                item.downloadURL { (url, error) in
-                    if let error = error {
-                        print("Error getting download URL: \(error)")
-                        return
-                    }
-
-                    if let url = url {
-                        DispatchQueue.main.async {
-                            self.photos.append(url.absoluteString)
-                            print("Fetched photo URL: \(url.absoluteString)")
-                        }
-                    }
-                }
-            }
         }
     }
     
