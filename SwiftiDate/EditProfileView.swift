@@ -654,15 +654,31 @@ struct EditProfileView: View {
                     .background(Color.gray.opacity(0.1)) // 设置背景颜色为淡灰色
                 } else {
                     // 預覽界面
-                    ZStack(alignment: .bottomLeading) {
-                        // 使用最大宽度和高度，同时保留圆角效果
-                        Image(photos[currentPhotoIndex])
-                            .resizable()
-                            .scaledToFill()
-                            .frame(maxWidth: 380, maxHeight: .infinity)
-                            .clipShape(RoundedRectangle(cornerRadius: 25)) // 设置圆角
-                            .overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.white, lineWidth: 4)) // 可选：加一个白色边框
-                            .edgesIgnoringSafeArea(.top) // 使图片扩展到顶部
+                    ZStack {
+                        if let photoURL = URL(string: photos[currentPhotoIndex]) {
+                            // 使用 AsyncImage 加載網絡圖片
+                            AsyncImage(url: photoURL) { phase in
+                                switch phase {
+                                case .empty:
+                                    ProgressView() // 加載中的狀態
+                                case .success(let image):
+                                    image
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(maxWidth: 420, maxHeight: .infinity)
+                                        .clipShape(RoundedRectangle(cornerRadius: 25))
+                                        .overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.white, lineWidth: 4))
+                                        .edgesIgnoringSafeArea(.top)
+                                case .failure:
+                                    Image(systemName: "exclamationmark.triangle.fill") // 加載失敗時顯示
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 100, height: 100)
+                                        .foregroundColor(.gray)
+                                @unknown default:
+                                    EmptyView()
+                                }
+                            }
                             .onTapGesture { location in
                                 // 根据点击位置确定是否切换到上一张或下一张
                                 let halfWidth = UIScreen.main.bounds.width / 2
@@ -678,41 +694,42 @@ struct EditProfileView: View {
                                     }
                                 }
                             }
+                        }
                         
                         VStack(alignment: .leading, spacing: 5) {
                             HStack(spacing: 5) {
                                 ForEach(0..<photos.count) { index in
-                                    RoundedRectangle(cornerRadius: 4) // 使用圆角矩形代替圆形
-                                        .frame(width: 40, height: 8) // 调整宽度和高度，使其成为一个拉长的圆角矩形
+                                    RoundedRectangle(cornerRadius: 4)
+                                        .frame(width: 40, height: 8)
                                         .foregroundColor(index == currentPhotoIndex ? .white : .gray)
                                 }
                             }
-                            .frame(maxWidth: .infinity, alignment: .center) // 将 HStack 置中
-                            .padding(.vertical, 8) // 调整垂直内边距，确保圆点在中央
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .padding(.vertical, 8)
                             .padding(.horizontal)
-                            .cornerRadius(10) // 设置背景圆角
+                            .cornerRadius(10)
                             
                             Spacer()
                             
                             Text("\(globalUserName), 25")
                                 .font(.title)
                                 .fontWeight(.bold)
-                                .foregroundColor(.white) // 文字颜色为白色以与背景形成对比
+                                .foregroundColor(.white)
                             
                             HStack {
                                 Image(systemName: "checkmark.seal.fill")
                                     .foregroundColor(.blue)
                                 Text("巨蟹座 · 新竹市 · 自由接案者")
-                                    .foregroundColor(.white) // 文字颜色为白色以与背景形成对比
+                                    .foregroundColor(.white)
                             }
                             .font(.subheadline)
                             
                             Text(aboutMe)
                                 .font(.body)
-                                .foregroundColor(.white) // 文字颜色为白色以与背景形成对比
+                                .foregroundColor(.white)
                                 .padding(.top)
                         }
-                        .padding() // 给文字一些内边距
+                        .padding()
                     }
                 }
             }
@@ -733,41 +750,6 @@ struct EditProfileView: View {
                 }
             )
         }
-    }
-    
-    func savePhotosToLocalStorage() {
-        for (index, photo) in photos.enumerated() {
-            if let image = loadImageFromURL(photo) {
-                let imageName = "photo_\(index).jpg" // Give the image a unique name
-                saveImageToLocalStorage(image: image, withName: imageName)
-                print("Saved photo \(index) to local storage")
-            }
-        }
-    }
-    
-    // Save image to local storage
-    func saveImageToLocalStorage(image: UIImage, withName imageName: String) {
-        if let data = image.jpegData(compressionQuality: 0.8) {
-            let url = getDocumentsDirectory().appendingPathComponent(imageName)
-            try? data.write(to: url)
-            print("Image saved to local storage at \(url.path)")
-        }
-    }
-    
-    // Load UIImage from a URL string
-    func loadImageFromURL(_ urlString: String) -> UIImage? {
-        guard let url = URL(string: urlString),
-              let data = try? Data(contentsOf: url),
-              let image = UIImage(data: data) else {
-            return nil
-        }
-        return image
-    }
-
-    
-    // Helper function to get the app's document directory
-    func getDocumentsDirectory() -> URL {
-        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     }
 }
 

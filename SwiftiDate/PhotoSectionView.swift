@@ -23,27 +23,29 @@ struct PhotoSectionView: View {
     @State private var selectedImage: UIImage? // 保存選中的圖片
     
     var body: some View {
-        // 上排照片
-        HStack(spacing: 10) {
-            ForEach(Array(photos.prefix(3).enumerated()), id: \.element) { index, photo in
-                loadImage(photoURL: photo, index: index)
+        VStack {
+            // 上排照片
+            HStack(spacing: 10) {
+                ForEach(Array(photos.prefix(3).enumerated()), id: \.element) { index, photo in
+                    loadImage(photoURL: photo, index: index)
+                }
             }
-        }
-        
-        HStack(spacing: 10) {
-            let bottomPhotos = photos.suffix(min(max(photos.count - 3, 0), 3))
-            ForEach(Array(bottomPhotos.enumerated()), id: \.element) { index, photo in
-                loadImage(photoURL: photo, index: index + 3)
+
+            // 下排照片
+            HStack(spacing: 10) {
+                let bottomPhotos = photos.suffix(min(max(photos.count - 3, 0), 3))
+                ForEach(Array(bottomPhotos.enumerated()), id: \.element) { index, photo in
+                    loadImage(photoURL: photo, index: index + 3)
+                }
             }
         }
         .onAppear {
-            loadPhotos()
+            loadPhotosFromAppStorage()
         }
         .sheet(isPresented: $showImagePicker) {
             ImagePicker(sourceType: .photoLibrary, selectedImage: $selectedImage)
                 .onChange(of: selectedImage) { newImage in
                     if let image = newImage {
-                        // 處理圖片上傳，這裡可以使用上傳服務或直接添加到照片列表中
                         addImageToPhotos(image: image)
                     }
                 }
