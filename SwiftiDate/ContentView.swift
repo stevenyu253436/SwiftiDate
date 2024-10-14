@@ -52,6 +52,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(UserSettings()) // Provide the UserSettings object here
             .previewDevice("iPhone 15 Pro")  // 这里您可以选择想要预览的设备
     }
 }

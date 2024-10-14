@@ -230,5 +230,6 @@ struct LoginView: View {
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
+            .environmentObject(UserSettings()) // Provide the environment object for UserSettings
     }
 }
