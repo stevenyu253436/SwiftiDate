@@ -17,6 +17,7 @@ enum PhotoState {
 }
 
 struct PhotoSectionView: View {
+    @AppStorage("loadedPhotos") var loadedPhotosString: String = "" // 使用字符串保存照片 URL
     @Binding var photos: [String] // Change to @Binding
     @State private var showImagePicker = false // 控制顯示照片選擇器
     @State private var selectedImage: UIImage? // 保存選中的圖片
@@ -103,7 +104,7 @@ struct PhotoSectionView: View {
             }
         }
         .onAppear {
-            fetchPhotosFromFirebase() // Fetch photos when the view appears
+            loadPhotos()
         }
         .sheet(isPresented: $showImagePicker) {
             ImagePicker(sourceType: .photoLibrary, selectedImage: $selectedImage)
@@ -113,6 +114,14 @@ struct PhotoSectionView: View {
                         addImageToPhotos(image: image)
                     }
                 }
+        }
+    }
+    
+    func loadPhotos() {
+        if !loadedPhotosString.isEmpty {
+            photos = loadedPhotosString.components(separatedBy: ",") // 將字符串轉換回數組
+        } else {
+            fetchPhotosFromFirebase() // 如果沒有已加載的照片，則加載
         }
     }
     
@@ -179,6 +188,7 @@ struct PhotoSectionView: View {
                             fetchedPhotoURLs.sort { $0.photoNumber < $1.photoNumber }
                             DispatchQueue.main.async {
                                 self.photos = fetchedPhotoURLs.map { $0.url }
+                                self.loadedPhotosString = self.photos.joined(separator: ",") // 將數組轉換為字符串存儲
                                 print("Sorted photo URLs: \(self.photos)")
                             }
                         }
@@ -203,16 +213,18 @@ struct PhotoSectionView: View {
     func removePhoto(photo: String) {
         if let index = photos.firstIndex(of: photo) {
             photos.remove(at: index)
+            loadedPhotosString = photos.joined(separator: ",") // 更新已加載的照片
         }
     }
-    
+
     // 將選擇的圖片轉換為顯示並添加到照片列表
     func addImageToPhotos(image: UIImage) {
-        let imageName = UUID().uuidString // Generate a unique name
-        saveImageToLocalStorage(image: image, withName: imageName) // Save to local storage
-        photos.append(imageName) // Store the image name in your photos array
+        let imageName = UUID().uuidString
+        saveImageToLocalStorage(image: image, withName: imageName)
+        photos.append(imageName)
+        loadedPhotosString = photos.joined(separator: ",") // 更新已加載的照片
     }
-    
+
     // Save image to local storage
     func saveImageToLocalStorage(image: UIImage, withName imageName: String) {
         if let data = image.jpegData(compressionQuality: 0.8) {
