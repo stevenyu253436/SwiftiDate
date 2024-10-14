@@ -19,6 +19,8 @@ enum PhotoState {
 struct PhotoSectionView: View {
     @AppStorage("loadedPhotos") var loadedPhotosString: String = "" // 使用字符串保存照片 URL
     @Binding var photos: [String] // Change to @Binding
+    @EnvironmentObject var userSettings: UserSettings // Access global user data
+    
     @State private var showImagePicker = false // 控制顯示照片選擇器
     @State private var selectedImage: UIImage? // 保存選中的圖片
     
@@ -147,7 +149,7 @@ struct PhotoSectionView: View {
         photos.removeAll() // Clear existing photos before fetching
         
         let storage = Storage.storage()
-        let userID = globalUserID // Replace this with the current user ID
+        let userID = userSettings.globalUserID // Access user ID from UserSettings
         let storageRef = storage.reference().child("user_photos/\(userID)")
         
         storageRef.listAll { (result, error) in

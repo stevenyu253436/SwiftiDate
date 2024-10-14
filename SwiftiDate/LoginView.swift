@@ -191,7 +191,7 @@ struct LoginView: View {
         }
         
         if let genderValue = defaults.string(forKey: "userGender"), let gender = Gender(rawValue: genderValue) {
-            userSettings.globalUserGender = gender
+            userSettings.globalUserGender = gender.rawValue // 使用 rawValue 轉換為字符串
         }
         
         userSettings.globalIsUserVerified = defaults.bool(forKey: "isUserVerified")
@@ -200,8 +200,8 @@ struct LoginView: View {
         globalCrushCount = defaults.integer(forKey: "crushCount")
         globalPraiseCount = defaults.integer(forKey: "praiseCount")
         
-        globalLikesMeCount = defaults.integer(forKey: "likesMeCount")
-        globalLikeCount = defaults.integer(forKey: "likeCount")
+        userSettings.globalLikesMeCount = defaults.integer(forKey: "likesMeCount")
+        userSettings.globalLikeCount = defaults.integer(forKey: "likeCount")
         
         isSupremeUser = defaults.bool(forKey: "isSupremeUser")
     }
@@ -216,13 +216,13 @@ struct LoginView: View {
         // 清除全局變數
         userSettings.globalPhoneNumber = ""
         userSettings.globalUserName = ""
-        userSettings.globalUserGender = .male
+        userSettings.globalUserGender = Gender.male.rawValue
         userSettings.globalIsUserVerified = false
         globalTurboCount = 0
         globalCrushCount = 0
         globalPraiseCount = 0
-        globalLikesMeCount = 0
-        globalLikeCount = 0
+        userSettings.globalLikesMeCount = 0
+        userSettings.globalLikeCount = 0
         isSupremeUser = false
     }
 }

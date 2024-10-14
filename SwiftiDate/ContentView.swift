@@ -25,7 +25,7 @@ struct ContentView: View {
                 }
 
             // Only show UserGuideView if the user is male
-            if userSettings.globalUserGender == .male { // 從 userSettings 獲取性別資訊
+            if userSettings.gender == .male { // Use the computed property to check gender
                 NavigationView {
                     UserGuideView()
                 }

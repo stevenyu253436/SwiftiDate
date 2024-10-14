@@ -94,7 +94,7 @@ struct ProfileView: View {
                                 isShowingTurboView = true // Set state to true to show TurboView
                             }) {
                                 VStack {
-                                    Text(globalLikesMeCount >= 99 ? "99+" : "\(globalLikesMeCount)")
+                                    Text(userSettings.globalLikesMeCount >= 99 ? "99+" : "\(userSettings.globalLikesMeCount)")
                                         .font(.title)
                                         .fontWeight(.bold)
                                         .foregroundColor(.black) // 設置文字顏色為黑色
@@ -108,7 +108,7 @@ struct ProfileView: View {
                                 isShowingTurboView = true // Show TurboView
                             }) {
                                 VStack {
-                                    Text(globalLikeCount > 99 ? "99+" : "\(globalLikeCount)") // 根據數字是否大於99來顯示
+                                    Text(userSettings.globalLikeCount > 99 ? "99+" : "\(userSettings.globalLikeCount)") // Display based on the like count
                                         .font(.title)
                                         .fontWeight(.bold)
                                         .foregroundColor(.black) // 設置文字顏色為黑色

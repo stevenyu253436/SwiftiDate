@@ -292,8 +292,6 @@ struct SettingsView: View {
                                     title: Text("一旦登出，你的登入資料將被清除"),
                                     primaryButton: .default(Text("取消")),
                                     secondaryButton: .destructive(Text("確定"), action: {
-                                        // 保存需要緩存的狀態
-                                        saveUserState()
                                         // 清除或登出操作
                                         print("User logged out")
                                     })
@@ -367,27 +365,7 @@ struct SettingsView: View {
         }
     }
     
-    func saveUserState() {
-        let defaults = UserDefaults.standard
-        defaults.set(userSettings.globalPhoneNumber, forKey: "phoneNumber")
-        defaults.set(userSettings.globalUserName, forKey: "userName")
-        defaults.set(userSettings.globalUserGender.rawValue, forKey: "userGender") // 如果 `Gender` 是 enum，保存其 raw value
-        defaults.set(userSettings.globalIsUserVerified, forKey: "isUserVerified")
-        
-        // 保存 Turbo, Crush, Praise counts
-        defaults.set(globalTurboCount, forKey: "turboCount")
-        defaults.set(globalCrushCount, forKey: "crushCount")
-        defaults.set(globalPraiseCount, forKey: "praiseCount")
-        
-        // 保存 Like 和喜歡我的數量
-        defaults.set(globalLikesMeCount, forKey: "likesMeCount")
-        defaults.set(globalLikeCount, forKey: "likeCount")
-        
-        defaults.set(isSupremeUser, forKey: "isSupremeUser")
-        
-        // 強制同步，確保立即保存
-        defaults.synchronize()
-    }
+    // No need for saveUserState as @AppStorage handles persistence
     
     // 檢查是否有設置郵箱帳戶
     func checkIfMailIsSetup() {
