@@ -19,6 +19,7 @@ enum PhotoState {
 struct PhotoSectionView: View {
     @AppStorage("loadedPhotos") var loadedPhotosString: String = "" // 使用字符串保存照片 URL
     @Binding var photos: [String] // Change to @Binding
+    @Binding var deletedPhotos: [String] // Use @Binding to track deleted photos
     @EnvironmentObject var userSettings: UserSettings // Access global user data
     
     @State private var showImagePicker = false // 控制顯示照片選擇器
@@ -429,9 +430,11 @@ struct PhotoSectionView_Previews: PreviewProvider {
     @State static var samplePhotos = [
         "photo1", "photo2", "photo3", "photo4", "photo5", "photo6"
     ] // Example photo names (replace with actual image names)
+    
+    @State static var sampleDeletedPhotos = [String]() // Add a sample deletedPhotos array
 
     static var previews: some View {
-        PhotoSectionView(photos: $samplePhotos)
+        PhotoSectionView(photos: $samplePhotos, deletedPhotos: $sampleDeletedPhotos) // Pass deletedPhotos
             .previewLayout(.sizeThatFits)
             .padding()
             .background(Color.gray.opacity(0.1))

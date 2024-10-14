@@ -14,6 +14,7 @@ struct EditProfileView: View {
     
     @State private var selectedTab = "編輯"
     @State private var photos: [String] = []
+    @State private var deletedPhotos: [String] = [] // 用來存放被刪除的照片URL
     @State private var aboutMe = "能見面左右滑謝謝🙏\n一起吃日料吧🍣\n抽水煙也可以💨"
     @State private var currentPhotoIndex = 0
     
@@ -96,7 +97,7 @@ struct EditProfileView: View {
                     // 編輯界面
                     ScrollView {
                         VStack(spacing: 10) {
-                            PhotoSectionView(photos: $photos) // Use updated PhotoSectionView
+                            PhotoSectionView(photos: $photos, deletedPhotos: $deletedPhotos) // Pass both bindings
                                 .padding()
 
                             Toggle(isOn: .constant(true)) {
@@ -747,10 +748,30 @@ struct EditProfileView: View {
                     }
                 },
                 trailing: Button("保存") {
-                    // 保存操作
+                    // 遍歷 deletedPhotos，逐一從 Firebase 刪除
+                    for photoURL in deletedPhotos {
+                        deletePhotoFromFirebase(photoURL: photoURL)
+                    }
+
+                    // 完成後返回到上一頁
                     presentationMode.wrappedValue.dismiss()
                 }
             )
+        }
+    }
+    
+    // 刪除 Firebase Storage 中的照片
+    func deletePhotoFromFirebase(photoURL: String) {
+        // 創建 Storage 引用
+        let storageRef = Storage.storage().reference(forURL: photoURL)
+        
+        // 調用 delete 方法來刪除圖片
+        storageRef.delete { error in
+            if let error = error {
+                print("Failed to delete photo: \(error.localizedDescription)")
+            } else {
+                print("Photo deleted successfully from Firebase: \(photoURL)")
+            }
         }
     }
 }
