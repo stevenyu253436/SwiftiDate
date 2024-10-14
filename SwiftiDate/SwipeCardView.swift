@@ -12,6 +12,9 @@ struct SwipeCardView: View {
     @State private var showCircleAnimation = false
     @State private var showPrivacySettings = false // 控制隱私設置頁面的顯示
 
+    // Inject UserSettings to access globalLikeCount and other variables
+    @EnvironmentObject var userSettings: UserSettings
+    
     var body: some View {
         ZStack {
             if showCircleAnimation {
@@ -53,6 +56,9 @@ struct SwipeCardView: View {
                                 withAnimation {
                                     showCircleAnimation = true
                                 }
+                                // Increment globalLikeCount
+                                userSettings.globalLikeCount += 1
+                                print("Total Likes: \(userSettings.globalLikeCount)")
                             } else if self.offset.width < -100 {
                                 // 左滑動
                                 print("Dislike")
