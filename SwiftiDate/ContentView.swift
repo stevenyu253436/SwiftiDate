@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var userSettings: UserSettings // 引入 UserSettings 來獲取 globalUserGender
     @State private var selectedTurboTab: Int = 0 // Add this to track the selected tab for TurboView
     
     var body: some View {
@@ -24,7 +25,7 @@ struct ContentView: View {
                 }
 
             // Only show UserGuideView if the user is male
-            if globalUserGender == .male {
+            if userSettings.globalUserGender == .male { // 從 userSettings 獲取性別資訊
                 NavigationView {
                     UserGuideView()
                 }

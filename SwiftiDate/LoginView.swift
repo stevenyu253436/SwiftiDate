@@ -14,6 +14,8 @@ struct LoginView: View {
     @State private var showExistingUserPopup = true // 控制彈框顯示
     @State private var existingUserName: String = "" // 儲存已存在的用戶名稱
 
+    @EnvironmentObject var userSettings: UserSettings // 使用 @EnvironmentObject 來訪問 UserSettings
+    
     var body: some View {
         ZStack {
             // 背景顏色
@@ -180,20 +182,20 @@ struct LoginView: View {
     // 加載邏輯
     func loadUserState() {
         let defaults = UserDefaults.standard
-        globalPhoneNumber = defaults.string(forKey: "phoneNumber") ?? "未設定"
-        globalUserName = defaults.string(forKey: "userName") ?? "未設定"
-        
-        if !globalUserName.isEmpty {
-            existingUserName = globalUserName
+        userSettings.globalPhoneNumber = defaults.string(forKey: "phoneNumber") ?? "未設定"
+        userSettings.globalUserName = defaults.string(forKey: "userName") ?? "未設定"
+
+        if !userSettings.globalUserName.isEmpty {
+            existingUserName = userSettings.globalUserName
             showExistingUserPopup = true // 如果有已存的帳號數據則顯示彈框
         }
         
         if let genderValue = defaults.string(forKey: "userGender"), let gender = Gender(rawValue: genderValue) {
-            globalUserGender = gender
+            userSettings.globalUserGender = gender
         }
         
-        globalIsUserVerified = defaults.bool(forKey: "isUserVerified")
-        
+        userSettings.globalIsUserVerified = defaults.bool(forKey: "isUserVerified")
+
         globalTurboCount = defaults.integer(forKey: "turboCount")
         globalCrushCount = defaults.integer(forKey: "crushCount")
         globalPraiseCount = defaults.integer(forKey: "praiseCount")
@@ -212,10 +214,10 @@ struct LoginView: View {
         defaults.synchronize() // 確保立即保存
 
         // 清除全局變數
-        globalPhoneNumber = ""
-        globalUserName = ""
-        globalUserGender = .male
-        globalIsUserVerified = false
+        userSettings.globalPhoneNumber = ""
+        userSettings.globalUserName = ""
+        userSettings.globalUserGender = .male
+        userSettings.globalIsUserVerified = false
         globalTurboCount = 0
         globalCrushCount = 0
         globalPraiseCount = 0

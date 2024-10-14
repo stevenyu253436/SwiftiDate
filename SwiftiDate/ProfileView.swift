@@ -13,6 +13,8 @@ extension Color {
 }
 
 struct ProfileView: View {
+    @EnvironmentObject var userSettings: UserSettings // 使用 EnvironmentObject 存取 UserSettings
+    
     @State private var userRankPercentage: Double = 25.4
     @State private var isShowingInfoPopup = false // State to show/hide the popup
     @State private var isShowingTurboView = false
@@ -60,7 +62,7 @@ struct ProfileView: View {
 
                             VStack(alignment: .leading) {
                                 HStack {
-                                    Text(globalUserName)
+                                    Text(userSettings.globalUserName) // 使用 userSettings 來存取 globalUserName
                                         .font(.title)
                                         .fontWeight(.bold)
                                     
@@ -71,7 +73,7 @@ struct ProfileView: View {
                                     }
                                 }
                                 
-                                if globalIsUserVerified {
+                                if userSettings.globalIsUserVerified { // 使用 userSettings 來存取 globalIsUserVerified
                                     HStack {
                                         Image(systemName: "checkmark.seal.fill")
                                             .foregroundColor(.blue)

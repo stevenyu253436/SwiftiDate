@@ -46,7 +46,6 @@ struct GenderSelectionView: View {
             .padding()
             .onTapGesture {
                 selectedGender = "女生"
-                globalSelectedGender = "女生"
             }
 
             HStack {
@@ -60,7 +59,6 @@ struct GenderSelectionView: View {
             .padding()
             .onTapGesture {
                 selectedGender = "男生"
-                globalSelectedGender = "男生"
             }
 
             HStack {
@@ -74,7 +72,6 @@ struct GenderSelectionView: View {
             .padding()
             .onTapGesture {
                 selectedGender = "不限"
-                globalSelectedGender = "不限"
             }
             
             Spacer() // 使用 Spacer 將所有元素推至頂部

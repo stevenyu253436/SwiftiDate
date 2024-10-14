@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct PersonalInfoView: View {
+    @EnvironmentObject var userSettings: UserSettings // 使用 EnvironmentObject 存取 UserSettings
+    
     @Binding var isPersonalInfoView: Bool // Binding variable to control the view dismissal
 
     var body: some View {
@@ -38,7 +40,7 @@ struct PersonalInfoView: View {
                 HStack {
                     Text("姓名")
                     Spacer()
-                    Text(globalUserName)
+                    Text(userSettings.globalUserName) // 使用 userSettings 來存取 globalUserName
                         .foregroundColor(.gray)
                 }
                 .padding(.vertical, 10)
@@ -46,7 +48,7 @@ struct PersonalInfoView: View {
                 HStack {
                     Text("生日")
                     Spacer()
-                    Text(globalUserBirthday)
+                    Text(userSettings.globalUserBirthday) // 使用 userSettings 來存取 globalUserBirthday
                         .foregroundColor(.gray)
                 }
                 .padding(.vertical, 10)

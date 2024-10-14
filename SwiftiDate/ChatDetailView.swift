@@ -9,6 +9,8 @@ import Foundation
 import SwiftUI
 
 struct ChatDetailView: View {
+    @EnvironmentObject var userSettings: UserSettings // 使用 EnvironmentObject 存取 UserSettings
+    
     var chat: Chat
     @Binding var messages: [Message]  // Bind to the messages passed from ChatView
     @State private var newMessageText: String = "" // State variable to hold the input message text
@@ -45,7 +47,7 @@ struct ChatDetailView: View {
                 Spacer()
                 
                 Button(action: {
-                    if let phoneURL = URL(string: "tel://\(globalPhoneNumber)") {
+                    if let phoneURL = URL(string: "tel://\(userSettings.globalPhoneNumber)") {
                         if UIApplication.shared.canOpenURL(phoneURL) {
                             UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
                         } else {

@@ -10,6 +10,8 @@ import SwiftUI
 import FirebaseStorage
 
 struct EditProfileView: View {
+    @EnvironmentObject var userSettings: UserSettings // 使用 EnvironmentObject 存取 UserSettings
+    
     @State private var selectedTab = "編輯"
     @State private var photos: [String] = []
     @State private var aboutMe = "能見面左右滑謝謝🙏\n一起吃日料吧🍣\n抽水煙也可以💨"
@@ -711,7 +713,7 @@ struct EditProfileView: View {
                             
                             Spacer()
                             
-                            Text("\(globalUserName), 25")
+                            Text("\(userSettings.globalUserName), 25") // 使用 userSettings 來存取 globalUserName
                                 .font(.title)
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)

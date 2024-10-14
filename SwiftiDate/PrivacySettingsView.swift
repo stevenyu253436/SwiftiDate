@@ -12,14 +12,15 @@ struct PrivacySettingsView: View {
     // 用於控制視圖的消失
     @Environment(\.presentationMode) var presentationMode
     
-    @State private var showGenderSelection = false // 控制顯示性別選擇頁面
+    // 直接使用 @AppStorage 來存儲和同步 selectedGender
+    @AppStorage("globalSelectedGender") var selectedGender: String = "女生" // 使用 AppStorage 來進行雙向綁定
     
+    @State private var showGenderSelection = false // 控制顯示性別選擇頁面
     @State private var isIncognitoModeOn = false // 控制隱身模式的開關
     @State private var searchRange: Double = 100 // 控制最大搜索範圍
     @State private var autoExpandSearch = true // 控制自動擴大搜索範圍
     @State private var lowerAge: Double = 18 // 最小年齡
     @State private var upperAge: Double = 33 // 最大年齡
-    @State private var selectedGender: String = "女生" // 初始值設定為女生
 
     var body: some View {
         // 向我展示（性別選擇）

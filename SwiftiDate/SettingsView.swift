@@ -10,6 +10,7 @@ import SwiftUI
 import MessageUI
 
 struct SettingsView: View {
+    @EnvironmentObject var userSettings: UserSettings // 使用 EnvironmentObject 來獲取 global 變數
     @Binding var showSettingsView: Bool // Binding variable to control the view dismissal
     @State private var isQRCodeScannerView = false
     @State private var isHelpView = false // State variable to control HelpView presentation
@@ -368,10 +369,10 @@ struct SettingsView: View {
     
     func saveUserState() {
         let defaults = UserDefaults.standard
-        defaults.set(globalPhoneNumber, forKey: "phoneNumber")
-        defaults.set(globalUserName, forKey: "userName")
-        defaults.set(globalUserGender.rawValue, forKey: "userGender") // 如果 `Gender` 是 enum，保存其 raw value
-        defaults.set(globalIsUserVerified, forKey: "isUserVerified")
+        defaults.set(userSettings.globalPhoneNumber, forKey: "phoneNumber")
+        defaults.set(userSettings.globalUserName, forKey: "userName")
+        defaults.set(userSettings.globalUserGender.rawValue, forKey: "userGender") // 如果 `Gender` 是 enum，保存其 raw value
+        defaults.set(userSettings.globalIsUserVerified, forKey: "isUserVerified")
         
         // 保存 Turbo, Crush, Praise counts
         defaults.set(globalTurboCount, forKey: "turboCount")

@@ -18,6 +18,8 @@ struct SafetyCenterView: View {
     @State private var showReportAftermathView = false // 新增控制檢舉後發生什麼頁面的狀態
     @State private var showMeetingGuideView = false // New state variable for "相約見面"
 
+    @EnvironmentObject var userSettings: UserSettings // 使用 @EnvironmentObject 從外部傳入的 UserSettings
+    
     var body: some View {
         if showSafetyTestView {
             SafetyTestView(showSafetyTestView: $showSafetyTestView)
@@ -70,7 +72,7 @@ struct SafetyCenterView: View {
                     // Align the text and image to the left using HStack
                     HStack {
                         VStack(alignment: .leading) {
-                            Text("你好呀~ \(globalUserName)")
+                            Text("你好呀~ \(userSettings.globalUserName)") // 使用 userSettings 的 globalUserName
                                 .font(.title)
                                 .fontWeight(.bold)
 
