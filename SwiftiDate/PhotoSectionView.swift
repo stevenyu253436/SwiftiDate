@@ -25,7 +25,7 @@ struct PhotoSectionView: View {
     var body: some View {
         // 上排照片
         HStack(spacing: 10) {
-            ForEach(photos.prefix(3), id: \.self) { photo in
+            ForEach(Array(photos.prefix(3).enumerated()), id: \.element) { index, photo in
                 // 使用 AsyncImage 從 URL 加載圖片
                 AsyncImage(url: URL(string: photo)) { phase in
                     switch phase {
@@ -37,11 +37,7 @@ struct PhotoSectionView: View {
                             .frame(width: 100, height: 133)
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                     case .failure:
-                        Image(systemName: "exclamationmark.triangle.fill")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 100, height: 133)
-                            .foregroundColor(.red)
+                        PlaceholderView(index: index, showImagePicker: $showImagePicker) // 使用 PlaceholderView，並傳入對應的索引
                     @unknown default:
                         EmptyView()
                     }
@@ -62,7 +58,7 @@ struct PhotoSectionView: View {
         
         HStack(spacing: 10) {
             let bottomPhotos = photos.suffix(min(max(photos.count - 3, 0), 3))
-            ForEach(bottomPhotos, id: \.self) { photo in
+            ForEach(Array(bottomPhotos.enumerated()), id: \.element) { index, photo in
                 AsyncImage(url: URL(string: photo)) { phase in
                     switch phase {
                     case .empty:
@@ -73,11 +69,7 @@ struct PhotoSectionView: View {
                             .frame(width: 100, height: 133)
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                     case .failure:
-                        Image(systemName: "exclamationmark.triangle.fill")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 100, height: 133)
-                            .foregroundColor(.red)
+                        PlaceholderView(index: index + 3, showImagePicker: $showImagePicker) // 傳入對應的索引 (從 3 開始)
                     @unknown default:
                         EmptyView()
                     }
@@ -93,14 +85,6 @@ struct PhotoSectionView: View {
                     }
                     .offset(x: -5, y: -5), alignment: .topTrailing
                 )
-            }
-
-            // 補齊照片到6張，並確保最後一張index為5
-            if photos.count < 6 {
-                let placeholderCount = 6 - photos.count
-                ForEach(0..<placeholderCount, id: \.self) { index in
-                    PlaceholderView(index: photos.count + index, showImagePicker: $showImagePicker) // 傳入當前照片數 + index
-                }
             }
         }
         .onAppear {
