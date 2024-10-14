@@ -95,6 +95,7 @@ struct PhotoSectionView: View {
     func removePhotoButton(photoURL: String) -> some View {
         Button(action: {
             removePhoto(photo: photoURL)
+            deletedPhotos.append(photoURL) // 將刪除的照片 URL 加入到 deletedPhotos 中
         }) {
             Image(systemName: "xmark.circle.fill")
                 .foregroundColor(.white)
