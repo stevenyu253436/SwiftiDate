@@ -21,70 +21,19 @@ struct PhotoSectionView: View {
     @Binding var photos: [String] // Change to @Binding
     @State private var showImagePicker = false // 控制顯示照片選擇器
     @State private var selectedImage: UIImage? // 保存選中的圖片
-
+    
     var body: some View {
         // 上排照片
         HStack(spacing: 10) {
             ForEach(Array(photos.prefix(3).enumerated()), id: \.element) { index, photo in
-                // 使用 AsyncImage 從 URL 加載圖片
-                AsyncImage(url: URL(string: photo)) { phase in
-                    switch phase {
-                    case .empty:
-                        ProgressView() // 加載中
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .frame(width: 100, height: 133)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                    case .failure:
-                        PlaceholderView(index: index, showImagePicker: $showImagePicker) // 使用 PlaceholderView，並傳入對應的索引
-                    @unknown default:
-                        EmptyView()
-                    }
-                }
-                .overlay(
-                    Button(action: {
-                        removePhoto(photo: photo)
-                    }) {
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.white)
-                            .background(Color.red)
-                            .clipShape(Circle())
-                    }
-                    .offset(x: -5, y: -5), alignment: .topTrailing
-                )
+                loadImage(photoURL: photo, index: index)
             }
         }
         
         HStack(spacing: 10) {
             let bottomPhotos = photos.suffix(min(max(photos.count - 3, 0), 3))
             ForEach(Array(bottomPhotos.enumerated()), id: \.element) { index, photo in
-                AsyncImage(url: URL(string: photo)) { phase in
-                    switch phase {
-                    case .empty:
-                        ProgressView() // 加載中
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .frame(width: 100, height: 133)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                    case .failure:
-                        PlaceholderView(index: index + 3, showImagePicker: $showImagePicker) // 傳入對應的索引 (從 3 開始)
-                    @unknown default:
-                        EmptyView()
-                    }
-                }
-                .overlay(
-                    Button(action: {
-                        removePhoto(photo: photo)
-                    }) {
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.white)
-                            .background(Color.red)
-                            .clipShape(Circle())
-                    }
-                    .offset(x: -5, y: -5), alignment: .topTrailing
-                )
+                loadImage(photoURL: photo, index: index + 3)
             }
         }
         .onAppear {
@@ -101,10 +50,71 @@ struct PhotoSectionView: View {
         }
     }
     
+    // 加載圖片：如果本地有緩存則加載本地，否則下載
+    func loadImage(photoURL: String, index: Int) -> some View {
+        if let localImage = loadImageFromLocalStorage(named: photoURL) {
+            return Image(uiImage: localImage)
+                .resizable()
+                .frame(width: 100, height: 133)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .overlay(removePhotoButton(photoURL: photoURL), alignment: .topTrailing) // 對齊至右上角
+                .eraseToAnyView()
+        } else {
+            return AsyncImage(url: URL(string: photoURL)) { phase in
+                switch phase {
+                case .empty:
+                    ProgressView()
+                case .success(let image):
+                    image
+                        .resizable()
+                        .frame(width: 100, height: 133)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .onAppear {
+                            // 將 Image 轉換為 UIImage 並保存
+                            if let uiImage = image.asUIImage() {
+                                saveImageToLocalStorage(image: uiImage, withName: photoURL)
+                            }
+                        }
+                case .failure:
+                    PlaceholderView(index: index, showImagePicker: $showImagePicker)
+                @unknown default:
+                    EmptyView()
+                }
+            }
+            .overlay(removePhotoButton(photoURL: photoURL), alignment: .topTrailing) // 對齊至右上角
+            .eraseToAnyView()
+        }
+    }
+    
+    // 移除照片按鈕
+    func removePhotoButton(photoURL: String) -> some View {
+        Button(action: {
+            removePhoto(photo: photoURL)
+        }) {
+            Image(systemName: "xmark.circle.fill")
+                .foregroundColor(.white)
+                .background(Color.red)
+                .clipShape(Circle())
+        }
+        .offset(x: -5, y: -5)
+    }
+    
+    // 加載已保存的照片 URL 列表
+    func loadPhotosFromAppStorage() {
+        if !loadedPhotosString.isEmpty {
+            print("Loaded cached photos from AppStorage: \(loadedPhotosString)")
+            photos = loadedPhotosString.components(separatedBy: ",")
+        } else {
+            fetchPhotosFromFirebase()
+        }
+    }
+    
     func loadPhotos() {
         if !loadedPhotosString.isEmpty {
+            print("Loaded cached photos from AppStorage: \(loadedPhotosString)")
             photos = loadedPhotosString.components(separatedBy: ",") // 將字符串轉換回數組
         } else {
+            print("No cached photos found in AppStorage, fetching from Firebase.")
             fetchPhotosFromFirebase() // 如果沒有已加載的照片，則加載
         }
     }
@@ -137,13 +147,13 @@ struct PhotoSectionView: View {
         let storage = Storage.storage()
         let userID = globalUserID // Replace this with the current user ID
         let storageRef = storage.reference().child("user_photos/\(userID)")
-
+        
         storageRef.listAll { (result, error) in
             if let error = error {
                 print("Error fetching photos: \(error)")
                 return
             }
-
+            
             // Safely unwrap the result
             guard let result = result else {
                 print("Failed to fetch the result")
@@ -151,14 +161,14 @@ struct PhotoSectionView: View {
             }
             
             var fetchedPhotoURLs: [(url: String, photoNumber: Int)] = []
-
+            
             for item in result.items {
                 item.downloadURL { (url, error) in
                     if let error = error {
                         print("Error getting download URL: \(error)")
                         return
                     }
-
+                    
                     if let url = url {
                         let urlString = url.absoluteString
                         
@@ -193,23 +203,15 @@ struct PhotoSectionView: View {
         return nil
     }
     
-    // 移除照片的函數
-    func removePhoto(photo: String) {
-        if let index = photos.firstIndex(of: photo) {
-            photos.remove(at: index)
-            loadedPhotosString = photos.joined(separator: ",") // 更新已加載的照片
-        }
-    }
-
-    // 將選擇的圖片轉換為顯示並添加到照片列表
+    // 添加圖片到照片列表
     func addImageToPhotos(image: UIImage) {
         let imageName = UUID().uuidString
         saveImageToLocalStorage(image: image, withName: imageName)
         photos.append(imageName)
-        loadedPhotosString = photos.joined(separator: ",") // 更新已加載的照片
+        loadedPhotosString = photos.joined(separator: ",")
     }
-
-    // Save image to local storage
+    
+    // 儲存圖片到本地
     func saveImageToLocalStorage(image: UIImage, withName imageName: String) {
         if let data = image.jpegData(compressionQuality: 0.8) {
             let url = getDocumentsDirectory().appendingPathComponent(imageName)
@@ -217,8 +219,8 @@ struct PhotoSectionView: View {
             print("Image saved to local storage at \(url.path)")
         }
     }
-    
-    // Load image from local storage
+
+    // 從本地加載圖片
     func loadImageFromLocalStorage(named imageName: String) -> UIImage? {
         let url = getDocumentsDirectory().appendingPathComponent(imageName)
         if let data = try? Data(contentsOf: url) {
@@ -227,15 +229,45 @@ struct PhotoSectionView: View {
         return nil
     }
     
-    // Delete image from local storage
+    // 移除本地圖片
     func deleteImageFromLocalStorage(named imageName: String) {
         let url = getDocumentsDirectory().appendingPathComponent(imageName)
         try? FileManager.default.removeItem(at: url)
     }
     
-    // Helper function to get the app's document directory
+    // 獲取文件目錄
     func getDocumentsDirectory() -> URL {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    }
+    
+    // 移除照片的函數
+    func removePhoto(photo: String) {
+        if let index = photos.firstIndex(of: photo) {
+            photos.remove(at: index)
+            loadedPhotosString = photos.joined(separator: ",") // 更新已加載的照片
+        }
+    }
+}
+
+extension View {
+    func eraseToAnyView() -> AnyView {
+        return AnyView(self)
+    }
+    
+    func asUIImage() -> UIImage? {
+        let controller = UIHostingController(rootView: self)
+        let view = controller.view
+
+        let targetSize = controller.view.intrinsicContentSize
+        let size = CGSize(width: targetSize.width, height: targetSize.height)
+
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = UIScreen.main.scale
+        let renderer = UIGraphicsImageRenderer(size: size, format: format)
+
+        return renderer.image { _ in
+            view?.drawHierarchy(in: view!.bounds, afterScreenUpdates: true)
+        }
     }
 }
 
