@@ -26,6 +26,7 @@ struct ProfileView: View {
     @State private var isShowingEditProfileView = false // State to show EditProfileView
     @State private var showSettingsView = false // State variable to control Settings View presentation
     @State private var showSafetyCenterView = false // 控制 SafetyCenterView 的顯示
+    @State private var photos: [String] = [] // Local state variable for photos
 
     var body: some View {
         if showSettingsView {
@@ -58,7 +59,7 @@ struct ProfileView: View {
                             }
                             .offset(x: -25, y: -25) // 调整按钮的位置
                             .fullScreenCover(isPresented: $isShowingEditProfileView) {
-                                EditProfileView() // Display EditProfileView when the state is true
+                                EditProfileView(photos: $photos) // Pass both photos and selectedInterests
                             }
 
                             VStack(alignment: .leading) {
@@ -481,6 +482,7 @@ struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             ProfileView(contentSelectedTab: $mockSelectedTab) // Pass the binding for preview
+                .environmentObject(UserSettings()) // Add a mock EnvironmentObject for UserSettings
         }
     }
 }

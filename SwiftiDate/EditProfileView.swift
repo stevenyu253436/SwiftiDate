@@ -13,7 +13,7 @@ struct EditProfileView: View {
     @EnvironmentObject var userSettings: UserSettings // 使用 EnvironmentObject 存取 UserSettings
     
     @State private var selectedTab = "編輯"
-    @State private var photos: [String] = []
+    @Binding var photos: [String] // Change photos to a Binding variable
     @State private var deletedPhotos: [String] = [] // 用來存放被刪除的照片URL
     @State private var aboutMe = "能見面左右滑謝謝🙏\n一起吃日料吧🍣\n抽水煙也可以💨"
     @State private var currentPhotoIndex = 0
@@ -83,6 +83,13 @@ struct EditProfileView: View {
     @State private var selectedInterests: Set<String> = []  // 用來追蹤選中的標籤
     @State private var interestColors: [String: Color] = [:]  // 新增 interestColors 變量
     
+    // Custom initializer with optional selectedInterests
+    init(photos: Binding<[String]>, selectedInterests: Set<String> = []) {
+        _photos = photos // Initialize with the binding
+        _selectedInterests = State(initialValue: selectedInterests)
+        _interestColors = State(initialValue: [:]) // 初始化為空字典
+    }
+
     var body: some View {
         NavigationView {
             VStack {
@@ -777,14 +784,9 @@ struct EditProfileView: View {
 }
 
 struct EditProfileView_Previews: PreviewProvider {
+    @State static var mockPhotos = ["photo1", "photo2", "photo3", "photo4", "photo5", "photo6"]
+    
     static var previews: some View {
-        EditProfileView(selectedInterests: ["我喜歡Cosply", "咒術迴戰", "死神", "基本可以做到訊息秒回", "是個理性的人", "有上進心", "我是巨蟹座"])
-    }
-}
-
-extension EditProfileView {
-    init(selectedInterests: Set<String>) {
-        _selectedInterests = State(initialValue: selectedInterests)
-        _interestColors = State(initialValue: [:]) // 初始化為空字典
+        EditProfileView(photos: $mockPhotos, selectedInterests: ["我喜歡Cosply", "咒術迴戰", "死神", "基本可以做到訊息秒回", "是個理性的人", "有上進心", "我是巨蟹座"]) // Pass selectedInterests first
     }
 }
