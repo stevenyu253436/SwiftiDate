@@ -153,7 +153,7 @@ struct TurboView: View {
                                 .padding(.top, 16)
                             
                             Button(action: {
-                                // Action for 去滑卡 button
+                                contentSelectedTab = 0 // Navigate to the SwipeCardView
                             }) {
                                 Text("去滑卡")
                                     .font(.headline)
