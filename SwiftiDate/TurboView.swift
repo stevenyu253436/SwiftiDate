@@ -9,7 +9,8 @@ import Foundation
 import SwiftUI
 
 struct TurboView: View {
-    @Binding var selectedTab: Int // This is now a @Binding property to accept external changes
+    @ObservedObject var userSettings = UserSettings() // Add this to observe the UserSettings
+    @Binding var localSelectedTab: Int // Rename to avoid ambiguity with ContentView's selectedTab
     var showBackButton: Bool = false // 這裡新增一個參數來控制是否顯示chevron.left
     @State private var showConfirmationPopup = false // State to control the visibility of the confirmation popup
 
@@ -37,20 +38,20 @@ struct TurboView: View {
                     // Top Tab Selection
                     HStack {
                         Button(action: {
-                            selectedTab = 0
+                            localSelectedTab = 0
                         }) {
                             Text("喜歡我的人")
                                 .font(.headline)
-                                .foregroundColor(selectedTab == 0 ? .green : .gray)
+                                .foregroundColor(localSelectedTab == 0 ? .green : .gray)
                                 .frame(maxWidth: .infinity) // 讓按鈕自適應空間
                         }
                                             
                         Button(action: {
-                            selectedTab = 1
+                            localSelectedTab = 1
                         }) {
                             Text("我的心動對象")
                                 .font(.headline)
-                                .foregroundColor(selectedTab == 1 ? .green : .gray) // Corrected logic
+                                .foregroundColor(localSelectedTab == 1 ? .green : .gray)
                                 .frame(maxWidth: .infinity) // 讓按鈕自適應空間
                         }
                         
@@ -66,14 +67,14 @@ struct TurboView: View {
                         .frame(width: UIScreen.main.bounds.width / 2, height: 2) // Set the width to half the screen size
                         .foregroundColor(.green)
                         .alignmentGuide(.leading) { d in
-                            selectedTab == 0 ? 0 : -UIScreen.main.bounds.width / 2 // Align the Rectangle to either the left or right side
+                            localSelectedTab == 0 ? 0 : -UIScreen.main.bounds.width / 2
                         }
                 }
-                .frame(width: UIScreen.main.bounds.width, alignment: selectedTab == 0 ? .leading : .trailing) // Align HStack based on the selected tab
+                .frame(width: UIScreen.main.bounds.width, alignment: localSelectedTab == 0 ? .leading : .trailing)
 
                 Spacer().frame(height: 20)
                 
-                if selectedTab == 0 {
+                if localSelectedTab == 0 {
                     // The featured card section (每日精選)
                     FeaturedCardView()
 
@@ -134,7 +135,34 @@ struct TurboView: View {
                     .padding(.trailing, 20)
                     .padding(.bottom, 20)
                 } else {
-                    Spacer()
+                    if userSettings.globalLikeCount == 0 { // Access globalLikeCount from UserSettings
+                        VStack {
+                            Spacer()
+                            Image(systemName: "cube.box")
+                                .resizable()
+                                .frame(width: 100, height: 100)
+                                .foregroundColor(.gray)
+                            Text("你還沒有送出喜歡，快去滑動吧")
+                                .foregroundColor(.gray)
+                                .padding(.top, 16)
+                            
+                            Button(action: {
+                                // Action for 去滑卡 button
+                            }) {
+                                Text("去滑卡")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .frame(maxWidth: .infinity)
+                                    .background(Color.green)
+                                    .cornerRadius(10)
+                                    .padding(.horizontal, 60)
+                            }
+                            Spacer()
+                        }
+                    } else {
+                        Spacer()
+                    }
                 }
             }
             
@@ -192,17 +220,10 @@ struct TurboView: View {
 
 // MARK: - TurboView Preview
 struct TurboView_Previews: PreviewProvider {
-    @State static var selectedTab = 0
-    
-    static var previews: some View {
-        Group {
-            TurboView(selectedTab: $selectedTab, showBackButton: true, onBack: {
-                print("返回到上一頁")
-            })
-            .previewDevice("iPhone 15 Pro")
+    @State static var localSelectedTab = 1 // Renamed here too
 
-            TurboView(selectedTab: $selectedTab, showBackButton: false)
-            .previewDevice("iPhone 15 Pro")
-        }
+    static var previews: some View {
+        TurboView(localSelectedTab: $localSelectedTab, showBackButton: false)
+        .previewDevice("iPhone 15 Pro")
     }
 }

@@ -129,7 +129,7 @@ struct ProfileView: View {
                         }
                         .padding(.horizontal)
                         .fullScreenCover(isPresented: $isShowingTurboView) {
-                            TurboView(selectedTab: $selectedTab, showBackButton: true, onBack: {
+                            TurboView(localSelectedTab: $selectedTab, showBackButton: true, onBack: {
                                 isShowingTurboView = false // Close the fullScreenCover when back button is pressed
                             })
                         }

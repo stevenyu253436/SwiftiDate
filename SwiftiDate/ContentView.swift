@@ -9,20 +9,23 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var userSettings: UserSettings // 引入 UserSettings 來獲取 globalUserGender
+    @State private var selectedTab: Int = 0 // Add this to track the selected tab
     @State private var selectedTurboTab: Int = 0 // Add this to track the selected tab for TurboView
     
     var body: some View {
-        TabView {
+        TabView(selection: $selectedTab) { // Bind TabView selection to selectedTab
             SwipeCardView()
                 .tabItem {
                     Image(systemName: "heart.fill")
                 }
+                .tag(0) // Assign a tag for SwipeCardView tab
             
             // Pass the selectedTab to TurboView
-            TurboView(selectedTab: $selectedTurboTab, showBackButton: false) // Pass the state to control the tab
+            TurboView(localSelectedTab: $selectedTurboTab, showBackButton: false) // Match the parameter name here
                 .tabItem {
                     Image(systemName: "star.fill")
                 }
+                .tag(1) // Assign a tag for TurboView tab
 
             // Only show UserGuideView if the user is male
             if userSettings.globalUserGender == .male { // Use globalUserGender for the gender check
@@ -32,12 +35,14 @@ struct ContentView: View {
                 .tabItem {
                     Image(systemName: "questionmark.circle.fill")
                 }
+                .tag(2) // Assign a tag for UserGuideView tab
             }
             
             ChatView() // 替換為 ChatView
                 .tabItem {
                     Image(systemName: "message.fill")
                 }
+                .tag(3) // Assign a tag for ChatView tab
             
             NavigationView {
                 ProfileView()
@@ -45,6 +50,7 @@ struct ContentView: View {
                 .tabItem {
                     Image(systemName: "person.fill")
                 }
+                .tag(4) // Assign a tag for ProfileView tab
         }
     }
 }

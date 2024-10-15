@@ -191,7 +191,7 @@ struct ChatView: View {
             .navigationTitle("聊天") // Ensure this is applied to the VStack
             .fullScreenCover(isPresented: $showTurboView) {
                 // Pass the selectedTab to TurboView
-                TurboView(selectedTab: $selectedTurboTab, showBackButton: true, onBack: {
+                TurboView(localSelectedTab: $selectedTurboTab, showBackButton: true, onBack: {
                     showTurboView = false // This dismisses the TurboView
                 })
             }
