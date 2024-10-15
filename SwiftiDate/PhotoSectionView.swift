@@ -42,9 +42,6 @@ struct PhotoSectionView: View {
                 }
             }
         }
-        .onAppear {
-            loadPhotosFromAppStorage()
-        }
         .sheet(isPresented: $showImagePicker) {
             ImagePicker(sourceType: .photoLibrary, selectedImage: $selectedImage)
                 .onChange(of: selectedImage) { newImage in
@@ -111,17 +108,8 @@ struct PhotoSectionView: View {
             print("Loaded cached photos from AppStorage: \(loadedPhotosString)")
             photos = loadedPhotosString.components(separatedBy: ",")
         } else {
-            fetchPhotosFromFirebase()
-        }
-    }
-    
-    func loadPhotos() {
-        if !loadedPhotosString.isEmpty {
-            print("Loaded cached photos from AppStorage: \(loadedPhotosString)")
-            photos = loadedPhotosString.components(separatedBy: ",") // 將字符串轉換回數組
-        } else {
             print("No cached photos found in AppStorage, fetching from Firebase.")
-            fetchPhotosFromFirebase() // 如果沒有已加載的照片，則加載
+            fetchPhotosFromFirebase()
         }
     }
     
