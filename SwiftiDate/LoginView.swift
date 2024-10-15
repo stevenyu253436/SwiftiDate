@@ -191,9 +191,9 @@ struct LoginView: View {
         }
         
         if let genderValue = defaults.string(forKey: "userGender"), let gender = Gender(rawValue: genderValue) {
-            userSettings.globalUserGender = gender.rawValue // 使用 rawValue 轉換為字符串
+            userSettings.globalUserGender = gender // Correctly set the Gender enum
         }
-        
+
         userSettings.globalIsUserVerified = defaults.bool(forKey: "isUserVerified")
 
         globalTurboCount = defaults.integer(forKey: "turboCount")
@@ -203,7 +203,7 @@ struct LoginView: View {
         userSettings.globalLikesMeCount = defaults.integer(forKey: "likesMeCount")
         userSettings.globalLikeCount = defaults.integer(forKey: "likeCount")
         
-        isSupremeUser = defaults.bool(forKey: "isSupremeUser")
+        userSettings.isSupremeUser = defaults.bool(forKey: "isSupremeUser")
     }
     
     func clearUserState() {
@@ -216,14 +216,14 @@ struct LoginView: View {
         // 清除全局變數
         userSettings.globalPhoneNumber = ""
         userSettings.globalUserName = ""
-        userSettings.globalUserGender = Gender.male.rawValue
+        userSettings.storedGender = Gender.male.rawValue // Use storedGender for reset
         userSettings.globalIsUserVerified = false
         globalTurboCount = 0
         globalCrushCount = 0
         globalPraiseCount = 0
         userSettings.globalLikesMeCount = 0
         userSettings.globalLikeCount = 0
-        isSupremeUser = false
+        userSettings.isSupremeUser = false
     }
 }
 

@@ -12,9 +12,12 @@ struct PrivacySettingsView: View {
     // 用於控制視圖的消失
     @Environment(\.presentationMode) var presentationMode
     
-    // 直接使用 @AppStorage 來存儲和同步 selectedGender
-    @AppStorage("globalSelectedGender") var selectedGender: String = "女生" // 使用 AppStorage 來進行雙向綁定
+    // 使用 @EnvironmentObject 引入 UserSettings
+    @EnvironmentObject var userSettings: UserSettings
     
+    // 直接使用 @AppStorage 來存儲和同步 selectedGender
+    @AppStorage("globalSelectedGender") var selectedGender: String = "女生"
+
     @State private var showGenderSelection = false // 控制顯示性別選擇頁面
     @State private var isIncognitoModeOn = false // 控制隱身模式的開關
     @State private var searchRange: Double = 100 // 控制最大搜索範圍
@@ -56,7 +59,7 @@ struct PrivacySettingsView: View {
                         .font(.headline)
                         .foregroundColor(.gray)
 
-                    if isSupremeUser {
+                    if userSettings.isSupremeUser {
                         // "Supreme" 標籤
                         Text("Supreme")
                             .font(.caption)
@@ -74,7 +77,7 @@ struct PrivacySettingsView: View {
                 }
                 .padding(.leading)
                 
-                if isSupremeUser {
+                if userSettings.isSupremeUser {
                     // 隱身模式卡片
                     ZStack {
                         // 黑色背景圖片

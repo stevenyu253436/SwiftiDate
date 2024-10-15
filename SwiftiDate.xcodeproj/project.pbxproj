@@ -41,7 +41,6 @@
 		D018AD8E2C9ED5D4005A14B9 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = D018AD8D2C9ED5D4005A14B9 /* FirebaseStorage */; };
 		D018AD902C9ED5D4005A14B9 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = D018AD8F2C9ED5D4005A14B9 /* FirebaseStorageCombine-Community */; settings = {ATTRIBUTES = (Required, ); }; };
 		D018AD922C9ED5D4005A14B9 /* FirebaseVertexAI-Preview in Frameworks */ = {isa = PBXBuildFile; productRef = D018AD912C9ED5D4005A14B9 /* FirebaseVertexAI-Preview */; };
-		D018AD942C9EDA84005A14B9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D018AD932C9EDA84005A14B9 /* GoogleService-Info.plist */; };
 		D018AD962C9EEA83005A14B9 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D018AD952C9EEA82005A14B9 /* AsyncImageView.swift */; };
 		D0445C2F2C71B3800059D522 /* SwiftiDateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0445C2E2C71B3800059D522 /* SwiftiDateApp.swift */; };
 		D0445C312C71B3800059D522 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0445C302C71B3800059D522 /* ContentView.swift */; };
@@ -89,6 +88,8 @@
 		D09587D12CB8623C00BCD04B /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587D02CB8623C00BCD04B /* LoginView.swift */; };
 		D09587D42CB8BDEA00BCD04B /* PrivacySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587D32CB8BDEA00BCD04B /* PrivacySettingsView.swift */; };
 		D09587D62CB8CDDA00BCD04B /* GenderSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587D52CB8CDDA00BCD04B /* GenderSelectionView.swift */; };
+		D09588FC2CBDEF3B00BCD04B /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09588FB2CBDEF3A00BCD04B /* GlobalVariables.swift */; };
+		D09589002CBDF0CD00BCD04B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D09588FF2CBDF0CC00BCD04B /* GoogleService-Info.plist */; };
 		D0DDDB052C9FA8AF00A78A87 /* ChatDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */; };
 		D0DDDB072C9FDB1600A78A87 /* WhoLikedYouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */; };
 		D0DDDB092C9FDE0500A78A87 /* InteractiveContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB082C9FDE0500A78A87 /* InteractiveContentView.swift */; };
@@ -162,7 +163,6 @@
 		D018AD5E2C9E6976005A14B9 /* CrushPurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrushPurchaseView.swift; sourceTree = "<group>"; };
 		D018AD602C9E6ACF005A14B9 /* PraisePurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PraisePurchaseView.swift; sourceTree = "<group>"; };
 		D018AD622C9E87F6005A14B9 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; wrapsLines = 0; };
-		D018AD932C9EDA84005A14B9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D018AD952C9EEA82005A14B9 /* AsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
 		D018AD972C9F1A0F005A14B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D0445C2B2C71B3800059D522 /* SwiftiDate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftiDate.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -215,6 +215,8 @@
 		D09587D22CB8AC6900BCD04B /* SwiftiDate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftiDate.entitlements; sourceTree = "<group>"; };
 		D09587D32CB8BDEA00BCD04B /* PrivacySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacySettingsView.swift; sourceTree = "<group>"; };
 		D09587D52CB8CDDA00BCD04B /* GenderSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSelectionView.swift; sourceTree = "<group>"; };
+		D09588FB2CBDEF3A00BCD04B /* GlobalVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
+		D09588FF2CBDF0CC00BCD04B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailView.swift; sourceTree = "<group>"; };
 		D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoLikedYouView.swift; sourceTree = "<group>"; };
 		D0DDDB082C9FDE0500A78A87 /* InteractiveContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveContentView.swift; sourceTree = "<group>"; };
@@ -394,7 +396,7 @@
 			children = (
 				D09587D22CB8AC6900BCD04B /* SwiftiDate.entitlements */,
 				D018AD972C9F1A0F005A14B9 /* Info.plist */,
-				D018AD932C9EDA84005A14B9 /* GoogleService-Info.plist */,
+				D09588FF2CBDF0CC00BCD04B /* GoogleService-Info.plist */,
 				D0445C2E2C71B3800059D522 /* SwiftiDateApp.swift */,
 				D0445C302C71B3800059D522 /* ContentView.swift */,
 				D0445C322C71B3820059D522 /* Assets.xcassets */,
@@ -445,6 +447,7 @@
 				D09587D02CB8623C00BCD04B /* LoginView.swift */,
 				D09587D32CB8BDEA00BCD04B /* PrivacySettingsView.swift */,
 				D09587D52CB8CDDA00BCD04B /* GenderSelectionView.swift */,
+				D09588FB2CBDEF3A00BCD04B /* GlobalVariables.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -610,7 +613,7 @@
 			files = (
 				D0445C362C71B3820059D522 /* Preview Assets.xcassets in Resources */,
 				D0445C332C71B3820059D522 /* Assets.xcassets in Resources */,
-				D018AD942C9EDA84005A14B9 /* GoogleService-Info.plist in Resources */,
+				D09589002CBDF0CD00BCD04B /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,6 +667,7 @@
 				D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */,
 				D0445C712C72F7870059D522 /* JobInputView.swift in Sources */,
 				D0DDDB502CA1A01200A78A87 /* HowToEnableNotificationsView.swift in Sources */,
+				D09588FC2CBDEF3B00BCD04B /* GlobalVariables.swift in Sources */,
 				D0DDDB202CA13C5E00A78A87 /* WhoLikedMeView.swift in Sources */,
 				D0445C8B2C73D0760059D522 /* DietPreferencesView.swift in Sources */,
 				D0445C792C73C0B30059D522 /* ZodiacPickerView.swift in Sources */,

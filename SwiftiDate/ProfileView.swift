@@ -66,7 +66,7 @@ struct ProfileView: View {
                                         .font(.title)
                                         .fontWeight(.bold)
                                     
-                                    if isSupremeUser {
+                                    if userSettings.isSupremeUser {
                                         Image(systemName: "crown.fill") // Adding the crown icon
                                             .foregroundColor(.gold) // Matching the gold color
                                             .font(.system(size: 18)) // Adjust the size as needed
@@ -182,7 +182,7 @@ struct ProfileView: View {
                         }
                         
                         // Display Supreme banner if the user has purchased Supreme
-                        if isSupremeUser {
+                        if userSettings.isSupremeUser {
                             HStack {
                                 Image(systemName: "crown.fill") // Adding the crown icon
                                     .foregroundColor(.gold) // Matching the gold color
