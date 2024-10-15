@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ChatView: View {
     @State private var selectedChat: Chat? = nil // State variable to handle navigation
+    @AppStorage("chatMessagesStorage") private var chatMessagesString: String = "" // 使用 AppStorage 儲存 JSON 字符串
     @State private var showInteractiveContent = false // State variable to control InteractiveContentView display
     @State private var showTurboPurchaseView = false // State variable to control TurboPurchaseView display
     @State private var showTurboView = false // State variable to control TurboView display
@@ -201,6 +202,40 @@ struct ChatView: View {
             }
         }
     }
+    
+    // 將 chatMessages 編碼為 JSON 字符串並存入 AppStorage
+    private func saveChatMessagesToAppStorage() {
+        do {
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(chatMessages)
+            chatMessagesString = String(data: data, encoding: .utf8) ?? ""
+        } catch {
+            print("Failed to encode chatMessages: \(error)")
+        }
+    }
+
+    // 從 AppStorage 載入聊天消息
+    private func loadChatMessagesFromAppStorage() {
+        guard !chatMessagesString.isEmpty else {
+            print("No chat messages found in AppStorage")
+            return
+        }
+        
+        do {
+            let decoder = JSONDecoder()
+            if let data = chatMessagesString.data(using: .utf8) {
+                chatMessages = try decoder.decode([UUID: [Message]].self, from: data)
+            }
+        } catch {
+            print("Failed to decode chatMessages: \(error)")
+        }
+    }
+
+    // 添加或更新聊天消息
+    private func updateChatMessages(for chatID: UUID, messages: [Message]) {
+        chatMessages[chatID] = messages
+        saveChatMessagesToAppStorage() // 保存至 AppStorage
+    }
 }
 
 // Define a structure for user match data
@@ -216,6 +251,15 @@ let userMatches = [
     UserMatch(name: "ซูก้า", imageName: "user2"),
     UserMatch(name: "賣米當卡", imageName: "user3")
 ]
+
+// Message model
+struct Message: Identifiable, Codable {
+    let id: UUID
+    let text: String
+    let isSender: Bool
+    let time: String
+    var isCompliment: Bool // New property to indicate if the message is a compliment
+}
 
 // 聊天行的顯示樣式
 struct ChatRow: View {
@@ -276,7 +320,7 @@ struct ChatRow: View {
 }
 
 // 聊天模型
-struct Chat: Identifiable {
+struct Chat: Identifiable, Codable {
     let id = UUID()
     let name: String
     let time: String

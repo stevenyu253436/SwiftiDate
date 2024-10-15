@@ -195,15 +195,6 @@ struct ChatDetailView: View {
     }
 }
 
-// Message model
-struct Message: Identifiable {
-    let id: UUID
-    let text: String
-    let isSender: Bool
-    let time: String
-    var isCompliment: Bool // New property to indicate if the message is a compliment
-}
-
 // PreviewProvider for ChatDetailView
 struct ChatDetailView_Previews: PreviewProvider {
     static var previews: some View {
