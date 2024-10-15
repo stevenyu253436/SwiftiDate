@@ -101,7 +101,6 @@ struct SwipeCardView: View {
 struct SwipeCardView_Previews: PreviewProvider {
     static var previews: some View {
         SwipeCardView()
-            .previewDevice("iPhone 15 Pro") // 指定預覽設備
-            .previewLayout(.sizeThatFits) // 使得預覽視圖自適應大小
+            .previewDevice("iPhone 15 Pro Max") // 指定預覽設備為 iPhone 15 Pro Max
     }
 }
