@@ -9,13 +9,19 @@ import Foundation
 import SwiftUI
 
 struct TurboView: View {
-    @ObservedObject var userSettings = UserSettings() // Add this to observe the UserSettings
-    @Binding var localSelectedTab: Int // Rename to avoid ambiguity with ContentView's selectedTab
-    var showBackButton: Bool = false // 這裡新增一個參數來控制是否顯示chevron.left
-    @State private var showConfirmationPopup = false // State to control the visibility of the confirmation popup
-
-    var onBack: (() -> Void)? // 返回按鈕的閉包操作
+    @ObservedObject var userSettings = UserSettings()
     
+    // Binding to control the ContentView's selectedTab
+    @Binding var contentSelectedTab: Int
+    
+    // State to manage TurboView's own tabs
+    @Binding var turboSelectedTab: Int
+
+    var showBackButton: Bool = false
+    @State private var showConfirmationPopup = false
+
+    var onBack: (() -> Void)? // Closure for back action
+
     var body: some View {
         ZStack {
             VStack {
@@ -38,20 +44,20 @@ struct TurboView: View {
                     // Top Tab Selection
                     HStack {
                         Button(action: {
-                            localSelectedTab = 0
+                            turboSelectedTab = 0
                         }) {
                             Text("喜歡我的人")
                                 .font(.headline)
-                                .foregroundColor(localSelectedTab == 0 ? .green : .gray)
+                                .foregroundColor(turboSelectedTab == 0 ? .green : .gray)
                                 .frame(maxWidth: .infinity) // 讓按鈕自適應空間
                         }
                                             
                         Button(action: {
-                            localSelectedTab = 1
+                            turboSelectedTab = 1
                         }) {
                             Text("我的心動對象")
                                 .font(.headline)
-                                .foregroundColor(localSelectedTab == 1 ? .green : .gray)
+                                .foregroundColor(turboSelectedTab == 1 ? .green : .gray)
                                 .frame(maxWidth: .infinity) // 讓按鈕自適應空間
                         }
                         
@@ -67,14 +73,14 @@ struct TurboView: View {
                         .frame(width: UIScreen.main.bounds.width / 2, height: 2) // Set the width to half the screen size
                         .foregroundColor(.green)
                         .alignmentGuide(.leading) { d in
-                            localSelectedTab == 0 ? 0 : -UIScreen.main.bounds.width / 2
+                            turboSelectedTab == 0 ? 0 : -UIScreen.main.bounds.width / 2
                         }
                 }
-                .frame(width: UIScreen.main.bounds.width, alignment: localSelectedTab == 0 ? .leading : .trailing)
+                .frame(width: UIScreen.main.bounds.width, alignment: turboSelectedTab == 0 ? .leading : .trailing)
 
                 Spacer().frame(height: 20)
                 
-                if localSelectedTab == 0 {
+                if turboSelectedTab == 0 {
                     // The featured card section (每日精選)
                     FeaturedCardView()
 
@@ -220,10 +226,11 @@ struct TurboView: View {
 
 // MARK: - TurboView Preview
 struct TurboView_Previews: PreviewProvider {
-    @State static var localSelectedTab = 1 // Renamed here too
+    @State static var contentSelectedTab = 1 // For ContentView's TabView
+    @State static var turboSelectedTab = 1 // For TurboView's internal tabs
 
     static var previews: some View {
-        TurboView(localSelectedTab: $localSelectedTab, showBackButton: false)
-        .previewDevice("iPhone 15 Pro")
+        TurboView(contentSelectedTab: $contentSelectedTab, turboSelectedTab: $turboSelectedTab, showBackButton: false)
+            .previewDevice("iPhone 15 Pro")
     }
 }

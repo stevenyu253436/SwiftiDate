@@ -21,7 +21,7 @@ struct ContentView: View {
                 .tag(0) // Assign a tag for SwipeCardView tab
             
             // Pass the selectedTab to TurboView
-            TurboView(localSelectedTab: $selectedTurboTab, showBackButton: false) // Match the parameter name here
+            TurboView(contentSelectedTab: $selectedTab, turboSelectedTab: $selectedTurboTab, showBackButton: false) // Match the parameter name here
                 .tabItem {
                     Image(systemName: "star.fill")
                 }

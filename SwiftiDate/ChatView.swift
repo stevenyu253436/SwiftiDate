@@ -14,7 +14,8 @@ struct ChatView: View {
     @State private var showTurboPurchaseView = false // State variable to control TurboPurchaseView display
     @State private var showTurboView = false // State variable to control TurboView display
     @State private var selectedTurboTab: Int = 0 // State variable to control Turbo tab selection
-    
+    @State private var contentSelectedTab: Int = 4 // New state variable to track ContentView selected tab
+
     // Dictionary to store messages for each chat
     @State private var chatMessages: [UUID: [Message]] = [
         chatData[0].id: [ // SwiftiDate messages for InteractiveContentView
@@ -191,7 +192,7 @@ struct ChatView: View {
             .navigationTitle("聊天") // Ensure this is applied to the VStack
             .fullScreenCover(isPresented: $showTurboView) {
                 // Pass the selectedTab to TurboView
-                TurboView(localSelectedTab: $selectedTurboTab, showBackButton: true, onBack: {
+                TurboView(contentSelectedTab: $contentSelectedTab, turboSelectedTab: $selectedTurboTab, showBackButton: true, onBack: {
                     showTurboView = false // This dismisses the TurboView
                 })
             }

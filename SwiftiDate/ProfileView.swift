@@ -19,6 +19,7 @@ struct ProfileView: View {
     @State private var isShowingInfoPopup = false // State to show/hide the popup
     @State private var isShowingTurboView = false
     @State private var selectedTab: Int = 0 // State to control which tab is selected in TurboView
+    @State private var contentSelectedTab: Int = 0 // State to control the selected tab in ContentView
     @State private var isShowingTurboPurchaseView = false // State variable to control the sheet presentation
     @State private var isShowingCrushPurchaseView = false // State variable to control Crush sheet presentation
     @State private var isShowingPraisePurchaseView = false // State variable to control Praise sheet presentation
@@ -129,7 +130,7 @@ struct ProfileView: View {
                         }
                         .padding(.horizontal)
                         .fullScreenCover(isPresented: $isShowingTurboView) {
-                            TurboView(localSelectedTab: $selectedTab, showBackButton: true, onBack: {
+                            TurboView(contentSelectedTab: $contentSelectedTab, turboSelectedTab: $selectedTab, showBackButton: true, onBack: {
                                 isShowingTurboView = false // Close the fullScreenCover when back button is pressed
                             })
                         }
