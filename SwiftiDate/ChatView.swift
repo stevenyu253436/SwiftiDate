@@ -19,27 +19,33 @@ struct ChatView: View {
     @State private var selectedTurboTab: Int = 0 // State variable to control Turbo tab selection
     @Binding var contentSelectedTab: Int // Use a binding variable for selectedTab from ContentView
     
-    @State private var userMatches: [UserMatch] = [
-        UserMatch(name: "詐騙集團", imageName: "user1"),
-        UserMatch(name: "ซูก้า", imageName: "user2"),
-        UserMatch(name: "賣米當卡", imageName: "user3")
-    ] // 使用狀態變量來保存匹配用戶資料
+    @State private var userMatches: [UserMatch] = []
     
-    @State private var chatData: [Chat] = [
-        Chat(name: "SwiftiDate", time: "09:15", unreadCount: 0),
-        Chat(name: "霏", time: "09:15", unreadCount: 0),
-        Chat(name: "Claire", time: "09:15", unreadCount: 0),
-        Chat(name: "Laiiiiiiii", time: "09/21", unreadCount: 0),
-        Chat(name: "嫣兒", time: "09/20", unreadCount: 0),
-        Chat(name: "兔兔", time: "09/20", unreadCount: 0),
-        Chat(name: "心心", time: "09/15", unreadCount: 1)
-    ]
+    @State private var chatData: [Chat] = []
     
     // Dictionary to store messages for each chat
     @State private var chatMessages: [UUID: [Message]] = [:]
 
     init(contentSelectedTab: Binding<Int>) {
         self._contentSelectedTab = contentSelectedTab
+        
+        // 初始化 userMatches
+        _userMatches = State(initialValue: [
+            UserMatch(name: "詐騙集團", imageName: "user1"),
+            UserMatch(name: "ซูก้า", imageName: "user2"),
+            UserMatch(name: "賣米當卡", imageName: "user3")
+        ])
+        
+        // 初始化 chatData
+        _chatData = State(initialValue: [
+            Chat(name: "SwiftiDate", time: "09:15", unreadCount: 0),
+            Chat(name: "霏", time: "09:15", unreadCount: 0),
+            Chat(name: "Claire", time: "09:15", unreadCount: 0),
+            Chat(name: "Laiiiiiiii", time: "09/21", unreadCount: 0),
+            Chat(name: "嫣兒", time: "09/20", unreadCount: 0),
+            Chat(name: "兔兔", time: "09/20", unreadCount: 0),
+            Chat(name: "心心", time: "09/15", unreadCount: 1)
+        ])
 
         // 初始化 chatMessages，確保初始化之後再進行設置
         _chatMessages = State(initialValue: [
