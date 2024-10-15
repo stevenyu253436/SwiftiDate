@@ -38,14 +38,14 @@ struct ContentView: View {
                 .tag(2) // Assign a tag for UserGuideView tab
             }
             
-            ChatView() // 替換為 ChatView
+            ChatView(contentSelectedTab: $selectedTab) // Pass the binding to contentSelectedTab
                 .tabItem {
                     Image(systemName: "message.fill")
                 }
                 .tag(3) // Assign a tag for ChatView tab
             
             NavigationView {
-                ProfileView()
+                ProfileView(contentSelectedTab: $selectedTab) // Pass the binding variable
             }
                 .tabItem {
                     Image(systemName: "person.fill")

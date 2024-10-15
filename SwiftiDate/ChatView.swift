@@ -14,7 +14,7 @@ struct ChatView: View {
     @State private var showTurboPurchaseView = false // State variable to control TurboPurchaseView display
     @State private var showTurboView = false // State variable to control TurboView display
     @State private var selectedTurboTab: Int = 0 // State variable to control Turbo tab selection
-    @State private var contentSelectedTab: Int = 4 // New state variable to track ContentView selected tab
+    @Binding var contentSelectedTab: Int // Use a binding variable for selectedTab from ContentView
 
     // Dictionary to store messages for each chat
     @State private var chatMessages: [UUID: [Message]] = [
@@ -295,7 +295,9 @@ let chatData = [
 ]
 
 struct ChatView_Previews: PreviewProvider {
+    @State static var contentSelectedTab = 3 // Add the required state variable
+    
     static var previews: some View {
-        ChatView()
+        ChatView(contentSelectedTab: $contentSelectedTab) // Pass the binding to the contentSelectedTab
     }
 }

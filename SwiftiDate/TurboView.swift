@@ -153,6 +153,7 @@ struct TurboView: View {
                                 .padding(.top, 16)
                             
                             Button(action: {
+                                onBack?() // Dismiss TurboView
                                 contentSelectedTab = 0 // Navigate to the SwipeCardView
                             }) {
                                 Text("去滑卡")

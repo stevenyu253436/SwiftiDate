@@ -19,7 +19,7 @@ struct ProfileView: View {
     @State private var isShowingInfoPopup = false // State to show/hide the popup
     @State private var isShowingTurboView = false
     @State private var selectedTab: Int = 0 // State to control which tab is selected in TurboView
-    @State private var contentSelectedTab: Int = 0 // State to control the selected tab in ContentView
+    @Binding var contentSelectedTab: Int // Use a binding variable for selectedTab from ContentView
     @State private var isShowingTurboPurchaseView = false // State variable to control the sheet presentation
     @State private var isShowingCrushPurchaseView = false // State variable to control Crush sheet presentation
     @State private var isShowingPraisePurchaseView = false // State variable to control Praise sheet presentation
@@ -476,9 +476,11 @@ struct ServiceSectionView: View {
 }
 
 struct ProfileView_Previews: PreviewProvider {
+    @State static var mockSelectedTab = 4 // Create a mock State for the binding
+    
     static var previews: some View {
         NavigationView {
-            ProfileView() // Now it works since we provided a default initializer with photos
+            ProfileView(contentSelectedTab: $mockSelectedTab) // Pass the binding for preview
         }
     }
 }
