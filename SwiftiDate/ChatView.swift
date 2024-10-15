@@ -10,12 +10,19 @@ import SwiftUI
 
 struct ChatView: View {
     @State private var selectedChat: Chat? = nil // State variable to handle navigation
+    @AppStorage("userMatchesStorage") private var userMatchesString: String = "" // 使用 AppStorage 儲存 JSON 字符串
     @AppStorage("chatMessagesStorage") private var chatMessagesString: String = "" // 使用 AppStorage 儲存 JSON 字符串
     @State private var showInteractiveContent = false // State variable to control InteractiveContentView display
     @State private var showTurboPurchaseView = false // State variable to control TurboPurchaseView display
     @State private var showTurboView = false // State variable to control TurboView display
     @State private var selectedTurboTab: Int = 0 // State variable to control Turbo tab selection
     @Binding var contentSelectedTab: Int // Use a binding variable for selectedTab from ContentView
+    
+    @State private var userMatches: [UserMatch] = [
+        UserMatch(name: "詐騙集團", imageName: "user1"),
+        UserMatch(name: "ซูก้า", imageName: "user2"),
+        UserMatch(name: "賣米當卡", imageName: "user3")
+    ] // 使用狀態變量來保存匹配用戶資料
 
     // Dictionary to store messages for each chat
     @State private var chatMessages: [UUID: [Message]] = [
@@ -244,13 +251,6 @@ struct UserMatch: Identifiable {
     let name: String
     let imageName: String // Use image names stored in Assets
 }
-
-// Sample user match data
-let userMatches = [
-    UserMatch(name: "詐騙集團", imageName: "user1"),
-    UserMatch(name: "ซูก้า", imageName: "user2"),
-    UserMatch(name: "賣米當卡", imageName: "user3")
-]
 
 // Message model
 struct Message: Identifiable, Codable {
