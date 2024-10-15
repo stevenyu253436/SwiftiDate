@@ -11,6 +11,7 @@ import SwiftUI
 struct ChatView: View {
     @State private var selectedChat: Chat? = nil // State variable to handle navigation
     @AppStorage("userMatchesStorage") private var userMatchesString: String = "" // 使用 AppStorage 儲存 JSON 字符串
+    @AppStorage("chatDataStorage") private var chatDataString: String = "" // 使用 AppStorage 儲存 JSON 字符串
     @AppStorage("chatMessagesStorage") private var chatMessagesString: String = "" // 使用 AppStorage 儲存 JSON 字符串
     @State private var showInteractiveContent = false // State variable to control InteractiveContentView display
     @State private var showTurboPurchaseView = false // State variable to control TurboPurchaseView display
@@ -23,43 +24,58 @@ struct ChatView: View {
         UserMatch(name: "ซูก้า", imageName: "user2"),
         UserMatch(name: "賣米當卡", imageName: "user3")
     ] // 使用狀態變量來保存匹配用戶資料
-
-    // Dictionary to store messages for each chat
-    @State private var chatMessages: [UUID: [Message]] = [
-        chatData[0].id: [ // SwiftiDate messages for InteractiveContentView
-            Message(id: UUID(), text: "😝6秒前有127人透過<戀人卡>完成了配對！", isSender: false, time: "09/15", isCompliment: false),
-            Message(id: UUID(), text: "❤️ @玩玩，來找到真正適合自己的配對！", isSender: false, time: "09/15", isCompliment: false),
-            // Add more messages if needed
-        ],
-        chatData[1].id: [ // This is where you add 兔兔's chat messages
-            Message(id: UUID(), text: "你感覺起來很有氣質～是在做什麼的呢？ 😊", isSender: true, time: "09/20 15:03", isCompliment: false),
-        ],
-        chatData[2].id: [ // This is where you add 兔兔's chat messages
-            Message(id: UUID(), text: "嘿嘿！分享一首你最近在聽的歌吧～", isSender: true, time: "09/20 15:03", isCompliment: false),
-        ],
-        chatData[3].id: [
-            Message(id: UUID(), text: "嗨～ 你有在這上面遇到什麼有趣的人嗎？", isSender: true, time: "09/12 15:53", isCompliment: false),
-            Message(id: UUID(), text: "你要夠有趣的哈哈哈", isSender: false, time: "09/16 02:09", isCompliment: false),
-            Message(id: UUID(), text: "我也不知道耶~", isSender: true, time: "09/20 15:03", isCompliment: false),
-            Message(id: UUID(), text: "我喜歡旅遊、追劇、吃日料 ，偶爾小酌，妳平常喜歡做什麼？", isSender: true, time: "09/20 15:03", isCompliment: false),
-            Message(id: UUID(), text: "還是像我一樣有趣的哈哈哈", isSender: true, time: "09/20 15:03", isCompliment: false),
-            Message(id: UUID(), text: "跳舞跟唱歌", isSender: false, time: "09/21 01:50", isCompliment: false),
-            Message(id: UUID(), text: "😂", isSender: false, time: "09/21 01:50", isCompliment: false),
-            Message(id: UUID(), text: "吃美食跟看劇", isSender: false, time: "09/21 01:50", isCompliment: false)
-        ],
-        // Add more entries for other chats as needed
-        chatData[4].id: [ // Replace UUID() with a real unique ID if available
-            Message(id: UUID(), text: "她希望可以先聊天，再見面～", isSender: false, time: "09/13 22:44", isCompliment: false),
-            Message(id: UUID(), text: "妳感覺起來很有氣質～", isSender: true, time: "09/20 15:03", isCompliment: true),
-            Message(id: UUID(), text: "謝謝", isSender: false, time: "09/20 15:03", isCompliment: false),
-            Message(id: UUID(), text: "你感覺起來很有氣質～是在做什麼的呢？ 😊", isSender: true, time: "09/20 15:03", isCompliment: false)
-        ],
-        chatData[5].id: [ // This is where you add 兔兔's chat messages
-            Message(id: UUID(), text: "你感覺起來很有氣質～是在做什麼的呢？ 😊", isSender: true, time: "09/20 15:03", isCompliment: true),
-            Message(id: UUID(), text: "我已通過你的好友請求，我們可以開始聊天啦～", isSender: false, time: "09/19 14:10", isCompliment: false),
-            Message(id: UUID(), text: "我喜歡旅遊、追劇、吃日料，偶爾小酌，你平常喜歡做什麼？", isSender: true, time: "09/20 15:03", isCompliment: false)
-        ]
+    
+    @State private var chatData: [Chat] = [
+        Chat(name: "SwiftiDate", time: "09:15", unreadCount: 0),
+        Chat(name: "霏", time: "09:15", unreadCount: 0),
+        Chat(name: "Claire", time: "09:15", unreadCount: 0),
+        Chat(name: "Laiiiiiiii", time: "09/21", unreadCount: 0),
+        Chat(name: "嫣兒", time: "09/20", unreadCount: 0),
+        Chat(name: "兔兔", time: "09/20", unreadCount: 0),
+        Chat(name: "心心", time: "09/15", unreadCount: 1)
     ]
+    
+    // Dictionary to store messages for each chat
+    @State private var chatMessages: [UUID: [Message]] = [:]
+
+    init(contentSelectedTab: Binding<Int>) {
+        self._contentSelectedTab = contentSelectedTab
+
+        // 初始化 chatMessages，確保初始化之後再進行設置
+        _chatMessages = State(initialValue: [
+            chatData[0].id: [ // SwiftiDate messages for InteractiveContentView
+                Message(id: UUID(), text: "😝6秒前有127人透過<戀人卡>完成了配對！", isSender: false, time: "09/15", isCompliment: false),
+                Message(id: UUID(), text: "❤️ @玩玩，來找到真正適合自己的配對！", isSender: false, time: "09/15", isCompliment: false),
+            ],
+            chatData[1].id: [
+                Message(id: UUID(), text: "你感覺起來很有氣質～是在做什麼的呢？ 😊", isSender: true, time: "09/20 15:03", isCompliment: false),
+            ],
+            chatData[2].id: [
+                Message(id: UUID(), text: "嘿嘿！分享一首你最近在聽的歌吧～", isSender: true, time: "09/20 15:03", isCompliment: false),
+            ],
+            chatData[3].id: [
+                Message(id: UUID(), text: "嗨～ 你有在這上面遇到什麼有趣的人嗎？", isSender: true, time: "09/12 15:53", isCompliment: false),
+                Message(id: UUID(), text: "你要夠有趣的哈哈哈", isSender: false, time: "09/16 02:09", isCompliment: false),
+                Message(id: UUID(), text: "我也不知道耶~", isSender: true, time: "09/20 15:03", isCompliment: false),
+                Message(id: UUID(), text: "我喜歡旅遊、追劇、吃日料 ，偶爾小酌，妳平常喜歡做什麼？", isSender: true, time: "09/20 15:03", isCompliment: false),
+                Message(id: UUID(), text: "還是像我一樣有趣的哈哈哈", isSender: true, time: "09/20 15:03", isCompliment: false),
+                Message(id: UUID(), text: "跳舞跟唱歌", isSender: false, time: "09/21 01:50", isCompliment: false),
+                Message(id: UUID(), text: "😂", isSender: false, time: "09/21 01:50", isCompliment: false),
+                Message(id: UUID(), text: "吃美食跟看劇", isSender: false, time: "09/21 01:50", isCompliment: false)
+            ],
+            chatData[4].id: [
+                Message(id: UUID(), text: "她希望可以先聊天，再見面～", isSender: false, time: "09/13 22:44", isCompliment: false),
+                Message(id: UUID(), text: "妳感覺起來很有氣質～", isSender: true, time: "09/20 15:03", isCompliment: true),
+                Message(id: UUID(), text: "謝謝", isSender: false, time: "09/20 15:03", isCompliment: false),
+                Message(id: UUID(), text: "你感覺起來很有氣質～是在做什麼的呢？ 😊", isSender: true, time: "09/20 15:03", isCompliment: false)
+            ],
+            chatData[5].id: [
+                Message(id: UUID(), text: "你感覺起來很有氣質～是在做什麼的呢？ 😊", isSender: true, time: "09/20 15:03", isCompliment: true),
+                Message(id: UUID(), text: "我已通過你的好友請求，我們可以開始聊天啦～", isSender: false, time: "09/19 14:10", isCompliment: false),
+                Message(id: UUID(), text: "我喜歡旅遊、追劇、吃日料，偶爾小酌，你平常喜歡做什麼？", isSender: true, time: "09/20 15:03", isCompliment: false)
+            ]
+        ])
+    }
     
     var body: some View {
         NavigationView {
@@ -244,99 +260,6 @@ struct ChatView: View {
         saveChatMessagesToAppStorage() // 保存至 AppStorage
     }
 }
-
-// Define a structure for user match data
-struct UserMatch: Identifiable {
-    let id = UUID()
-    let name: String
-    let imageName: String // Use image names stored in Assets
-}
-
-// Message model
-struct Message: Identifiable, Codable {
-    let id: UUID
-    let text: String
-    let isSender: Bool
-    let time: String
-    var isCompliment: Bool // New property to indicate if the message is a compliment
-}
-
-// 聊天行的顯示樣式
-struct ChatRow: View {
-    var chat: Chat
-    var messages: [Message] // Add this parameter
-    
-    var body: some View {
-        HStack(spacing: 15) {
-            // Avatar image
-            if let uiImage = UIImage(named: chat.name) {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .frame(width: 50, height: 50)
-                    .clipShape(Circle())
-                    .padding(4)
-            } else {
-                Image(systemName: "person.crop.circle.fill")
-                    .resizable()
-                    .frame(width: 50, height: 50)
-                    .foregroundColor(.gray)
-                    .clipShape(Circle())
-                    .padding(4)
-            }
-            
-            VStack(alignment: .leading) {
-                Text(chat.name)
-                    .font(.headline)
-                    .foregroundColor(.black) // Set the text color to black
-
-                // Display the last message
-                if let lastMessage = messages.last {
-                    Text(lastMessage.text)
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                        .lineLimit(1)
-                }
-            }
-            
-            Spacer()
-            
-            VStack {
-                Text(chat.time)
-                    .font(.caption)
-                    .foregroundColor(.gray)
-                
-                if chat.unreadCount > 0 {
-                    Text("\(chat.unreadCount)")
-                        .font(.caption)
-                        .padding(5)
-                        .background(Color.red)
-                        .foregroundColor(.white)
-                        .clipShape(Circle())
-                }
-            }
-        }
-        .padding(.vertical, 5)
-    }
-}
-
-// 聊天模型
-struct Chat: Identifiable, Codable {
-    let id = UUID()
-    let name: String
-    let time: String
-    let unreadCount: Int
-}
-
-// 測試數據
-let chatData = [
-    Chat(name: "SwiftiDate", time: "09:15", unreadCount: 0),
-    Chat(name: "霏", time: "09:15", unreadCount: 0),
-    Chat(name: "Claire", time: "09:15", unreadCount: 0),
-    Chat(name: "Laiiiiiiii", time: "09/21", unreadCount: 0),
-    Chat(name: "嫣兒", time: "09/20", unreadCount: 0),
-    Chat(name: "兔兔", time: "09/20", unreadCount: 0),
-    Chat(name: "心心", time: "09/15", unreadCount: 1)
-]
 
 struct ChatView_Previews: PreviewProvider {
     @State static var contentSelectedTab = 3 // Add the required state variable
