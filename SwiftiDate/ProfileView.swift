@@ -40,7 +40,7 @@ struct ProfileView: View {
                     VStack(spacing: 20) {
                         // 头像及基本信息
                         HStack {
-                            if let firstPhotoName = photos.first, let image = loadImageFromLocalStorage(named: firstPhotoName) {
+                            if let firstPhotoName = photos.first, let image = PhotoUtility.loadImageFromLocalStorage(named: firstPhotoName) {
                                 Image(uiImage: image)
                                     .resizable()
                                     .frame(width: 100, height: 133)
@@ -176,7 +176,7 @@ struct ProfileView: View {
                             // 當頭像未通過驗證時，顯示提示視圖
                             HStack {
                                 ZStack {
-                                    if let firstPhotoName = photos.first, let image = loadImageFromLocalStorage(named: firstPhotoName) {
+                                    if let firstPhotoName = photos.first, let image = PhotoUtility.loadImageFromLocalStorage(named: firstPhotoName) {
                                         Image(uiImage: image)
                                             .resizable()
                                             .frame(width: 50, height: 50)
@@ -609,30 +609,10 @@ struct ProfileView: View {
     // 儲存圖片到本地
     func saveImageToLocalStorage(image: UIImage, withName imageName: String) {
         if let data = image.jpegData(compressionQuality: 0.8) {
-            let url = getDocumentsDirectory().appendingPathComponent(imageName)
+            let url = PhotoUtility.getDocumentsDirectory().appendingPathComponent(imageName)
             try? data.write(to: url)
             print("Image saved to local storage at \(url.path)")
         }
-    }
-
-    // 從本地加載圖片
-    func loadImageFromLocalStorage(named imageName: String) -> UIImage? {
-        let url = getDocumentsDirectory().appendingPathComponent(imageName)
-        if let data = try? Data(contentsOf: url) {
-            return UIImage(data: data)
-        }
-        return nil
-    }
-    
-    // 移除本地圖片
-    func deleteImageFromLocalStorage(named imageName: String) {
-        let url = getDocumentsDirectory().appendingPathComponent(imageName)
-        try? FileManager.default.removeItem(at: url)
-    }
-    
-    // 獲取文件目錄
-    func getDocumentsDirectory() -> URL {
-        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     }
 }
 

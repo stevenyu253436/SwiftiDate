@@ -77,6 +77,7 @@
 		D049387C2CBF465300754E46 /* EducationAndWorkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D049387B2CBF465300754E46 /* EducationAndWorkView.swift */; };
 		D051EF252CBF4F1B004563A3 /* BasicInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D051EF242CBF4F1B004563A3 /* BasicInfoView.swift */; };
 		D051EF272CBF50CB004563A3 /* LifestyleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D051EF262CBF50CB004563A3 /* LifestyleView.swift */; };
+		D051EF2C2CC02C33004563A3 /* PhotoUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D051EF2B2CC02C33004563A3 /* PhotoUtility.swift */; };
 		D055E9922C8CCFBA00A97DD1 /* InterestSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D055E9912C8CCFBA00A97DD1 /* InterestSelectionView.swift */; };
 		D09587B92CB6552100BCD04B /* ChatGPTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587B82CB6552100BCD04B /* ChatGPTView.swift */; };
 		D09587BB2CB7558600BCD04B /* SafetyCenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587BA2CB7558600BCD04B /* SafetyCenterView.swift */; };
@@ -208,6 +209,7 @@
 		D049387B2CBF465300754E46 /* EducationAndWorkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EducationAndWorkView.swift; sourceTree = "<group>"; };
 		D051EF242CBF4F1B004563A3 /* BasicInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicInfoView.swift; sourceTree = "<group>"; };
 		D051EF262CBF50CB004563A3 /* LifestyleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifestyleView.swift; sourceTree = "<group>"; };
+		D051EF2B2CC02C33004563A3 /* PhotoUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoUtility.swift; sourceTree = "<group>"; };
 		D055E9912C8CCFBA00A97DD1 /* InterestSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestSelectionView.swift; sourceTree = "<group>"; };
 		D09587B82CB6552100BCD04B /* ChatGPTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTView.swift; sourceTree = "<group>"; };
 		D09587BA2CB7558600BCD04B /* SafetyCenterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyCenterView.swift; sourceTree = "<group>"; wrapsLines = 1; };
@@ -463,6 +465,7 @@
 				D09588FB2CBDEF3A00BCD04B /* GlobalVariables.swift */,
 				D04938772CBF0A4600754E46 /* ChatRow.swift */,
 				D04938792CBF0A6F00754E46 /* Models.swift */,
+				D051EF2B2CC02C33004563A3 /* PhotoUtility.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -664,6 +667,7 @@
 				D0445C832C73CBE70059D522 /* FitnessOptionsView.swift in Sources */,
 				D0DDDB1A2CA1282B00A78A87 /* WhatIsSwiftiDateView.swift in Sources */,
 				D0DDDB322CA16B7000A78A87 /* UndoSwipeView.swift in Sources */,
+				D051EF2C2CC02C33004563A3 /* PhotoUtility.swift in Sources */,
 				D0445C6B2C7247050059D522 /* DegreePicker.swift in Sources */,
 				D017F4F22CAF73AD00C71D18 /* GlobalVariables.swift in Sources */,
 				D0DDDB3C2CA1770400A78A87 /* RefundPolicyView.swift in Sources */,

@@ -274,7 +274,7 @@ struct EditProfileView: View {
                     // 預覽界面
                     ZStack {
                         if let imageName = photos.indices.contains(currentPhotoIndex) ? photos[currentPhotoIndex] : nil,
-                           let image = loadImageFromLocalStorage(named: imageName) {
+                           let image = PhotoUtility.loadImageFromLocalStorage(named: imageName) {
                             Image(uiImage: image)
                                 .resizable()
                                 .scaledToFill()
@@ -394,15 +394,6 @@ struct EditProfileView: View {
         }
     }
     
-    // 從本地加載圖片
-    func loadImageFromLocalStorage(named imageName: String) -> UIImage? {
-        let url = getDocumentsDirectory().appendingPathComponent(imageName)
-        if let data = try? Data(contentsOf: url) {
-            return UIImage(data: data)
-        }
-        return nil
-    }
-    
     // 獲取文件目錄
     func getDocumentsDirectory() -> URL {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -420,7 +411,7 @@ struct EditProfileView: View {
             
             if !isPhotoAlreadyUploaded(photoName: photoName) {
                 // 如果照片還沒有上傳過
-                if let localImage = loadImageFromLocalStorage(named: photoName),
+                if let localImage = PhotoUtility.loadImageFromLocalStorage(named: photoName),
                    let imageData = localImage.jpegData(compressionQuality: 0.8) {
                     
                     let photoRef = storageRef.child("\(expectedPhotoName).jpeg") // Firebase 儲存名稱
@@ -463,28 +454,45 @@ struct EditProfileView: View {
                 
                 // 同時刪除本地存儲中的圖片
                 if let imageName = self.extractImageName(from: photoURL) {
-                    self.deleteImageFromLocalStorage(named: imageName)
+                    PhotoUtility.deleteImageFromLocalStorage(named: imageName)
                 }
             }
-        }
-    }
-    
-    // 從本地存儲刪除圖片
-    func deleteImageFromLocalStorage(named imageName: String) {
-        let fileManager = FileManager.default
-        let fileURL = getDocumentsDirectory().appendingPathComponent(imageName)
-        
-        do {
-            try fileManager.removeItem(at: fileURL)
-            print("Photo deleted successfully from local storage: \(imageName)")
-        } catch {
-            print("Failed to delete photo from local storage: \(error.localizedDescription)")
         }
     }
 
     // 從 Firebase URL 中提取圖片名稱
     func extractImageName(from url: String) -> String? {
         return URL(string: url)?.lastPathComponent
+    }
+}
+
+// 獨立的返回按鈕
+struct NavigationBackButton: View {
+    @Binding var deletedPhotos: [String]
+    @Binding var photos: [String]
+    @EnvironmentObject var userSettings: UserSettings // 使用 EnvironmentObject 存取 userSettings
+    @Environment(\.presentationMode) var presentationMode // 使用 Environment 存取 presentationMode
+
+    var body: some View {
+        Button(action: {
+            // 將 deletedPhotos 中的照片移回到 photos
+            deletedPhotos.sort(by: >) // 逆序排序
+            photos.append(contentsOf: deletedPhotos)
+            
+            // 更新 loadedPhotosString 以包含最新的照片列表
+            userSettings.loadedPhotosString = photos.joined(separator: ",")
+
+            // 清空 deletedPhotos
+            deletedPhotos.removeAll()
+
+            // Custom action to go back
+            presentationMode.wrappedValue.dismiss() // 返回上一個視圖
+        }) {
+            HStack {
+                Image(systemName: "chevron.left")
+                    .font(.headline)
+            }
+        }
     }
 }
 
