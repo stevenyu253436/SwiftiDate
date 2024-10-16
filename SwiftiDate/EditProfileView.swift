@@ -373,8 +373,31 @@ struct EditProfileView: View {
                 print("Failed to delete photo: \(error.localizedDescription)")
             } else {
                 print("Photo deleted successfully from Firebase: \(photoURL)")
+                
+                // 同時刪除本地存儲中的圖片
+                if let imageName = self.extractImageName(from: photoURL) {
+                    self.deleteImageFromLocalStorage(named: imageName)
+                }
             }
         }
+    }
+    
+    // 從本地存儲刪除圖片
+    func deleteImageFromLocalStorage(named imageName: String) {
+        let fileManager = FileManager.default
+        let fileURL = getDocumentsDirectory().appendingPathComponent(imageName)
+        
+        do {
+            try fileManager.removeItem(at: fileURL)
+            print("Photo deleted successfully from local storage: \(imageName)")
+        } catch {
+            print("Failed to delete photo from local storage: \(error.localizedDescription)")
+        }
+    }
+
+    // 從 Firebase URL 中提取圖片名稱
+    func extractImageName(from url: String) -> String? {
+        return URL(string: url)?.lastPathComponent
     }
 }
 
