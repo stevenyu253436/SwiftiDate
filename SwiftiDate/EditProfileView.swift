@@ -665,47 +665,23 @@ struct EditProfileView: View {
                 } else {
                     // 預覽界面
                     ZStack {
-                        if let photoURL = URL(string: photos[currentPhotoIndex]) {
-                            // 使用 AsyncImage 加載網絡圖片
-                            AsyncImage(url: photoURL) { phase in
-                                switch phase {
-                                case .empty:
-                                    ProgressView() // 加載中的狀態
-                                case .success(let image):
-                                    image
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(maxWidth: 420, maxHeight: .infinity)
-                                        .clipShape(RoundedRectangle(cornerRadius: 25))
-                                        .overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.white, lineWidth: 4))
-                                        .edgesIgnoringSafeArea(.top)
-                                case .failure:
-                                    Image(systemName: "exclamationmark.triangle.fill") // 加載失敗時顯示
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 100, height: 100)
-                                        .foregroundColor(.gray)
-                                @unknown default:
-                                    EmptyView()
-                                }
-                            }
-                            .onTapGesture { location in
-                                // 根据点击位置确定是否切换到上一张或下一张
-                                let halfWidth = UIScreen.main.bounds.width / 2
-                                if location.x < halfWidth {
-                                    // 左半部分点击，显示上一张图片
-                                    if currentPhotoIndex > 0 {
-                                        currentPhotoIndex -= 1
-                                    }
-                                } else {
-                                    // 右半部分点击，显示下一张图片
-                                    if currentPhotoIndex < photos.count - 1 {
-                                        currentPhotoIndex += 1
-                                    }
-                                }
-                            }
+                        if let imageName = photos[safe: currentPhotoIndex], let image = loadImageFromLocalStorage(named: imageName) {
+                            Image(uiImage: image)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(maxWidth: 420, maxHeight: .infinity)
+                                .clipShape(RoundedRectangle(cornerRadius: 25))
+                                .overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.white, lineWidth: 4))
+                                .edgesIgnoringSafeArea(.top)
+                        } else {
+                            // 顯示預設佔位符圖片或錯誤圖標
+                            Image(systemName: "exclamationmark.triangle.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 100, height: 100)
+                                .foregroundColor(.gray)
                         }
-                        
+
                         VStack(alignment: .leading, spacing: 5) {
                             HStack(spacing: 5) {
                                 ForEach(0..<photos.count) { index in
@@ -765,6 +741,20 @@ struct EditProfileView: View {
                 }
             )
         }
+    }
+    
+    // 從本地加載圖片
+    func loadImageFromLocalStorage(named imageName: String) -> UIImage? {
+        let url = getDocumentsDirectory().appendingPathComponent(imageName)
+        if let data = try? Data(contentsOf: url) {
+            return UIImage(data: data)
+        }
+        return nil
+    }
+    
+    // 獲取文件目錄
+    func getDocumentsDirectory() -> URL {
+        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     }
     
     // 刪除 Firebase Storage 中的照片

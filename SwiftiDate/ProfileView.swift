@@ -40,12 +40,23 @@ struct ProfileView: View {
                     VStack(spacing: 20) {
                         // 头像及基本信息
                         HStack {
-                            Image("photo1") // 您需要替换为实际的头像图片名称
-                                .resizable()
-                                .frame(width: 100, height: 133)
-                                .clipShape(Circle())
-                                .overlay(Circle().stroke(Color.white, lineWidth: 4))
-                                .shadow(radius: 10)
+                            if let firstPhotoName = photos.first, let image = loadImageFromLocalStorage(named: firstPhotoName) {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .frame(width: 100, height: 133)
+                                    .clipShape(Circle())
+                                    .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                                    .shadow(radius: 10)
+                            } else {
+                                // 顯示預設的佔位符圖片
+                                Image(systemName: "person.crop.circle.fill")
+                                    .resizable()
+                                    .frame(width: 100, height: 133)
+                                    .foregroundColor(.gray)
+                                    .clipShape(Circle())
+                                    .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                                    .shadow(radius: 10)
+                            }
 
                             Button(action: {
                                 isShowingEditProfileView = true // Show EditProfileView
@@ -398,7 +409,9 @@ struct ProfileView: View {
     func loadPhotosFromAppStorage() {
         if !userSettings.loadedPhotosString.isEmpty {
             print("Loaded cached photos from AppStorage: \(userSettings.loadedPhotosString)")
-            photos = userSettings.loadedPhotosString.components(separatedBy: ",")
+            // 直接將快取的照片名稱分割成陣列並賦值給 photos
+            self.photos = userSettings.loadedPhotosString.components(separatedBy: ",")
+            print("Photos loaded from cache: \(self.photos)")
         } else {
             print("No cached photos found in AppStorage, fetching from Firebase.")
             fetchPhotosFromFirebase()
@@ -427,7 +440,8 @@ struct ProfileView: View {
             }
             
             var fetchedPhotoURLs: [(url: String, photoNumber: Int)] = []
-            
+            var downloadedPhotos: [(url: String, imageName: String)] = [] // Temporary array to store downloaded photos
+
             for item in result.items {
                 item.downloadURL { (url, error) in
                     if let error = error {
@@ -446,16 +460,69 @@ struct ProfileView: View {
                         // Once all URLs are fetched, sort by photo number
                         if fetchedPhotoURLs.count == result.items.count {
                             fetchedPhotoURLs.sort { $0.photoNumber < $1.photoNumber }
-                            DispatchQueue.main.async {
-                                self.photos = fetchedPhotoURLs.map { $0.url }
-                                userSettings.loadedPhotosString = self.photos.joined(separator: ",") // 將數組轉換為字符串存儲
-                                print("Sorted photo URLs: \(self.photos)")
+                            
+                            // Download each photo and save it to local storage
+                            for (urlString, _) in fetchedPhotoURLs {
+                                downloadAndSavePhoto(from: urlString) { imageName in
+                                    if let imageName = imageName {
+                                        downloadedPhotos.append((url: urlString, imageName: imageName))
+                                    }
+                                    
+                                    // If all photos are downloaded, update the photos array
+                                    if downloadedPhotos.count == fetchedPhotoURLs.count {
+                                        // Sort the downloaded photos according to fetchedPhotoURLs order
+                                        downloadedPhotos.sort { lhs, rhs in
+                                            fetchedPhotoURLs.firstIndex(where: { $0.url == lhs.url })! < fetchedPhotoURLs.firstIndex(where: { $0.url == rhs.url })!
+                                        }
+                                        
+                                        DispatchQueue.main.async {
+                                            // Update the photos array and AppStorage
+                                            self.photos = downloadedPhotos.map { $0.imageName }
+                                            userSettings.loadedPhotosString = self.photos.joined(separator: ",")
+                                            print("Updated photos array after download: \(self.photos)")
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
                 }
             }
         }
+    }
+    
+    // Download photo from a URL and save it to local storage
+    func downloadAndSavePhoto(from urlString: String, completion: @escaping (String?) -> Void) {
+        guard let url = URL(string: urlString) else {
+            completion(nil)
+            return
+        }
+        
+        print("Starting download for photo: \(urlString)")
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print("Error downloading photo: \(error)")
+                completion(nil)
+                return
+            }
+            
+            guard let data = data, let image = UIImage(data: data) else {
+                print("Failed to convert data to image for URL: \(urlString)")
+                completion(nil)
+                return
+            }
+            
+            // Generate a unique name for the image and save it locally
+            let imageName = UUID().uuidString
+            self.saveImageToLocalStorage(image: image, withName: imageName)
+            print("Photo downloaded and saved as \(imageName)")
+            
+            // 使用回調返回照片名稱
+            completion(imageName)
+        }
+        
+        task.resume()
     }
     
     func extractPhotoNumber(from urlString: String) -> Int? {
