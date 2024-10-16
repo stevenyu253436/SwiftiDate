@@ -150,28 +150,7 @@ struct ProfileView: View {
                         
                         if userSettings.isProfilePhotoVerified {
                             // 成就进度条
-                            VStack {
-                                HStack {
-                                    Text("打敗 \(String(format: "%.1f", userRankPercentage))%")
-                                        .font(.subheadline)
-                                        .fontWeight(.bold)
-                                    
-                                    // Add the question mark icon with tap gesture
-                                    Image(systemName: "questionmark.circle")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                        .foregroundColor(.green)
-                                        .onTapGesture {
-                                            isShowingInfoPopup = true // Show the popup when tapped
-                                        }
-                                }
-                                .padding(.bottom, 5)
-
-                                ProgressView(value: userRankPercentage / 100) // Convert the percentage to a fraction
-                                    .progressViewStyle(LinearProgressViewStyle(tint: .green))
-                                    .scaleEffect(x: 1, y: 4, anchor: .center)
-                            }
-                            .padding(.horizontal)
+                            VerifiedProfileProgressView(userRankPercentage: userRankPercentage, isShowingInfoPopup: $isShowingInfoPopup)
                         } else {
                             // 當頭像未通過驗證時，顯示提示視圖
                             HStack {
@@ -227,27 +206,12 @@ struct ProfileView: View {
                         }
                         
                         // Turbo, Crush, 讚美
-                        HStack(spacing: 20) {
-                            AchievementCardView(title: "TURBO", count: userSettings.globalTurboCount, color: Color.purple) {
-                                isShowingTurboPurchaseView = true // Set the state to show the TurboPurchaseView
-                            }
-                            AchievementCardView(title: "CRUSH", count: userSettings.globalCrushCount, color: Color.green) {
-                                isShowingCrushPurchaseView = true // Show CrushPurchaseView
-                            }
-                            AchievementCardView(title: "讚美", count: userSettings.globalPraiseCount, color: Color.orange) {
-                                isShowingPraisePurchaseView = true // Show PraisePurchaseView
-                            }
-                        }
-                        .padding(.horizontal)
-                        .sheet(isPresented: $isShowingTurboPurchaseView) {
-                            TurboPurchaseView()
-                        }
-                        .sheet(isPresented: $isShowingCrushPurchaseView) {
-                            CrushPurchaseView()
-                        }
-                        .sheet(isPresented: $isShowingPraisePurchaseView) {
-                            PraisePurchaseView() // Present PraisePurchaseView when isShowingPraisePurchaseView is true
-                        }
+                        AchievementSectionView(
+                            isShowingTurboPurchaseView: $isShowingTurboPurchaseView,
+                            isShowingCrushPurchaseView: $isShowingCrushPurchaseView,
+                            isShowingPraisePurchaseView: $isShowingPraisePurchaseView
+                        )
+                        .environmentObject(userSettings)
                         
                         // Display Supreme banner if the user has purchased Supreme
                         if userSettings.isSupremeUser {
