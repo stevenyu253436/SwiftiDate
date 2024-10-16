@@ -577,7 +577,7 @@ struct ProfileView: View {
             
             // Generate a unique name for the image and save it locally
             let imageName = UUID().uuidString
-            self.saveImageToLocalStorage(image: image, withName: imageName)
+            PhotoUtility.saveImageToLocalStorage(image: image, withName: imageName)
             print("Photo downloaded and saved as \(imageName)")
             
             // 使用回調返回照片名稱
@@ -601,18 +601,9 @@ struct ProfileView: View {
     // 添加圖片到照片列表
     func addImageToPhotos(image: UIImage) {
         let imageName = UUID().uuidString
-        saveImageToLocalStorage(image: image, withName: imageName)
+        PhotoUtility.saveImageToLocalStorage(image: image, withName: imageName)
         photos.append(imageName)
         userSettings.loadedPhotosString = photos.joined(separator: ",")
-    }
-    
-    // 儲存圖片到本地
-    func saveImageToLocalStorage(image: UIImage, withName imageName: String) {
-        if let data = image.jpegData(compressionQuality: 0.8) {
-            let url = PhotoUtility.getDocumentsDirectory().appendingPathComponent(imageName)
-            try? data.write(to: url)
-            print("Image saved to local storage at \(url.path)")
-        }
     }
 }
 

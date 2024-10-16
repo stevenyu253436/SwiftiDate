@@ -25,18 +25,7 @@ struct PhotoUtility {
     }
 
     static func deleteImageFromLocalStorage(named imageName: String) {
-        let fileManager = FileManager.default
-        let fileURL = getDocumentsDirectory().appendingPathComponent(imageName)
-        
-        do {
-            try fileManager.removeItem(at: fileURL)
-            print("Photo deleted successfully from local storage: \(imageName)")
-        } catch {
-            print("Failed to delete photo from local storage: \(error.localizedDescription)")
-        }
-    }
-    
-    static func getDocumentsDirectory() -> URL {
-        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(imageName)
+        try? FileManager.default.removeItem(at: url)
     }
 }

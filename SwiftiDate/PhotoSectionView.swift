@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftUI
-import FirebaseStorage
 
 enum PhotoState {
     case empty
@@ -66,7 +65,7 @@ struct PhotoSectionView: View {
     
     // 加載圖片：如果本地有緩存則加載本地，否則下載
     func loadImage(photoURL: String, index: Int) -> some View {
-        if let localImage = loadImageFromLocalStorage(named: photoURL) {
+        if let localImage = PhotoUtility.loadImageFromLocalStorage(named: photoURL) {
             return Image(uiImage: localImage)
                 .resizable()
                 .frame(width: 100, height: 133)
@@ -86,7 +85,7 @@ struct PhotoSectionView: View {
                         .onAppear {
                             // 將 Image 轉換為 UIImage 並保存
                             if let uiImage = image.asUIImage() {
-                                saveImageToLocalStorage(image: uiImage, withName: photoURL)
+                                PhotoUtility.saveImageToLocalStorage(image: uiImage, withName: photoURL)
                             }
                         }
                 case .failure:
@@ -116,17 +115,6 @@ struct PhotoSectionView: View {
         .offset(x: -5, y: -5)
     }
     
-    // 加載已保存的照片 URL 列表
-    func loadPhotosFromAppStorage() {
-        if !userSettings.loadedPhotosString.isEmpty {
-            print("Loaded cached photos from AppStorage: \(userSettings.loadedPhotosString)")
-            photos = userSettings.loadedPhotosString.components(separatedBy: ",")
-        } else {
-            print("No cached photos found in AppStorage, fetching from Firebase.")
-            fetchPhotosFromFirebase()
-        }
-    }
-    
     // Button to add photos
     func AddPhotoButton() -> some View {
         Button(action: {
@@ -147,105 +135,12 @@ struct PhotoSectionView: View {
         .clipShape(RoundedRectangle(cornerRadius: 10))
     }
     
-    // Fetch photos from Firebase Storage
-    func fetchPhotosFromFirebase() {
-        print("Fetching photos from Firebase started")
-        photos.removeAll() // Clear existing photos before fetching
-        
-        let storage = Storage.storage()
-        let userID = userSettings.globalUserID // Access user ID from UserSettings
-        let storageRef = storage.reference().child("user_photos/\(userID)")
-        
-        storageRef.listAll { (result, error) in
-            if let error = error {
-                print("Error fetching photos: \(error)")
-                return
-            }
-            
-            // Safely unwrap the result
-            guard let result = result else {
-                print("Failed to fetch the result")
-                return
-            }
-            
-            var fetchedPhotoURLs: [(url: String, photoNumber: Int)] = []
-            
-            for item in result.items {
-                item.downloadURL { (url, error) in
-                    if let error = error {
-                        print("Error getting download URL: \(error)")
-                        return
-                    }
-                    
-                    if let url = url {
-                        let urlString = url.absoluteString
-                        
-                        // Extract the number from the photo name
-                        if let photoNumber = extractPhotoNumber(from: urlString) {
-                            fetchedPhotoURLs.append((urlString, photoNumber))
-                        }
-                        
-                        // Once all URLs are fetched, sort by photo number
-                        if fetchedPhotoURLs.count == result.items.count {
-                            fetchedPhotoURLs.sort { $0.photoNumber < $1.photoNumber }
-                            DispatchQueue.main.async {
-                                self.photos = fetchedPhotoURLs.map { $0.url }
-                                userSettings.loadedPhotosString = self.photos.joined(separator: ",") // 將數組轉換為字符串存儲
-                                print("Sorted photo URLs: \(self.photos)")
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    func extractPhotoNumber(from urlString: String) -> Int? {
-        // Extracts the number from "photoX" in the URL
-        let pattern = "photo(\\d+)" // Regular expression to capture the number
-        if let regex = try? NSRegularExpression(pattern: pattern),
-           let match = regex.firstMatch(in: urlString, range: NSRange(urlString.startIndex..., in: urlString)),
-           let range = Range(match.range(at: 1), in: urlString) {
-            return Int(urlString[range])
-        }
-        return nil
-    }
-    
     // 添加圖片到照片列表
     func addImageToPhotos(image: UIImage) {
         let imageName = UUID().uuidString
-        saveImageToLocalStorage(image: image, withName: imageName)
+        PhotoUtility.saveImageToLocalStorage(image: image, withName: imageName)
         photos.append(imageName)
         userSettings.loadedPhotosString = photos.joined(separator: ",")
-    }
-    
-    // 儲存圖片到本地
-    func saveImageToLocalStorage(image: UIImage, withName imageName: String) {
-        if let data = image.jpegData(compressionQuality: 0.8) {
-            let url = getDocumentsDirectory().appendingPathComponent(imageName)
-            try? data.write(to: url)
-            print("Image saved to local storage at \(url.path)")
-        }
-    }
-
-    // 從本地加載圖片
-    func loadImageFromLocalStorage(named imageName: String) -> UIImage? {
-        let url = getDocumentsDirectory().appendingPathComponent(imageName)
-        if let data = try? Data(contentsOf: url) {
-            return UIImage(data: data)
-        }
-        return nil
-    }
-    
-    // 移除本地圖片
-    func deleteImageFromLocalStorage(named imageName: String) {
-        let url = getDocumentsDirectory().appendingPathComponent(imageName)
-        try? FileManager.default.removeItem(at: url)
-    }
-    
-    // 獲取文件目錄
-    func getDocumentsDirectory() -> URL {
-        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     }
     
     // 移除照片的函數

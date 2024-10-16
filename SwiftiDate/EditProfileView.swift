@@ -466,36 +466,6 @@ struct EditProfileView: View {
     }
 }
 
-// 獨立的返回按鈕
-struct NavigationBackButton: View {
-    @Binding var deletedPhotos: [String]
-    @Binding var photos: [String]
-    @EnvironmentObject var userSettings: UserSettings // 使用 EnvironmentObject 存取 userSettings
-    @Environment(\.presentationMode) var presentationMode // 使用 Environment 存取 presentationMode
-
-    var body: some View {
-        Button(action: {
-            // 將 deletedPhotos 中的照片移回到 photos
-            deletedPhotos.sort(by: >) // 逆序排序
-            photos.append(contentsOf: deletedPhotos)
-            
-            // 更新 loadedPhotosString 以包含最新的照片列表
-            userSettings.loadedPhotosString = photos.joined(separator: ",")
-
-            // 清空 deletedPhotos
-            deletedPhotos.removeAll()
-
-            // Custom action to go back
-            presentationMode.wrappedValue.dismiss() // 返回上一個視圖
-        }) {
-            HStack {
-                Image(systemName: "chevron.left")
-                    .font(.headline)
-            }
-        }
-    }
-}
-
 struct EditProfileView_Previews: PreviewProvider {
     @State static var mockPhotos = ["photo1", "photo2", "photo3", "photo4", "photo5", "photo6"]
     
