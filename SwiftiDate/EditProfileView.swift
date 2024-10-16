@@ -330,8 +330,13 @@ struct EditProfileView: View {
                     // 將 deletedPhotos 中的照片移回到 photos
                     deletedPhotos.sort(by: >) // 逆序排序
                     photos.append(contentsOf: deletedPhotos)
-                    deletedPhotos.removeAll() // 清空 deletedPhotos
                     
+                    // 更新 loadedPhotosString 以包含最新的照片列表
+                    userSettings.loadedPhotosString = photos.joined(separator: ",")
+
+                    // 清空 deletedPhotos
+                    deletedPhotos.removeAll()
+
                     // Custom action to go back
                     presentationMode.wrappedValue.dismiss()
                 }) {

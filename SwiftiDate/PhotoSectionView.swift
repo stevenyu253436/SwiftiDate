@@ -17,7 +17,6 @@ enum PhotoState {
 }
 
 struct PhotoSectionView: View {
-    @AppStorage("loadedPhotos") var loadedPhotosString: String = "" // 使用字符串保存照片 URL
     @Binding var photos: [String] // Change to @Binding
     @Binding var deletedPhotos: [String] // Use @Binding to track deleted photos
     @EnvironmentObject var userSettings: UserSettings // Access global user data
@@ -29,16 +28,29 @@ struct PhotoSectionView: View {
         VStack {
             // 上排照片
             HStack(spacing: 10) {
-                ForEach(Array(photos.prefix(3).enumerated()), id: \.element) { index, photo in
+                let topPhotos = photos.prefix(3)
+                ForEach(Array(topPhotos.enumerated()), id: \.element) { index, photo in
                     loadImage(photoURL: photo, index: index)
+                }
+                // 如果上排照片少於 3 張，顯示 PlaceHolderView
+                if topPhotos.count < 3 {
+                    ForEach(topPhotos.count..<3, id: \.self) { index in
+                        PlaceholderView(index: index, showImagePicker: $showImagePicker)
+                    }
                 }
             }
 
             // 下排照片
             HStack(spacing: 10) {
-                let bottomPhotos = photos.suffix(min(max(photos.count - 3, 0), 3))
+                let bottomPhotos = photos.suffix(from: min(photos.count, 3))
                 ForEach(Array(bottomPhotos.enumerated()), id: \.element) { index, photo in
                     loadImage(photoURL: photo, index: index + 3)
+                }
+                // 如果下排照片少於 3 張，顯示 PlaceHolderView
+                if bottomPhotos.count < 3 {
+                    ForEach(bottomPhotos.count..<3, id: \.self) { index in
+                        PlaceholderView(index: index + 3, showImagePicker: $showImagePicker)
+                    }
                 }
             }
         }
@@ -91,8 +103,10 @@ struct PhotoSectionView: View {
     // 移除照片按鈕
     func removePhotoButton(photoURL: String) -> some View {
         Button(action: {
+            print("Attempting to remove photo: \(photoURL)")
             removePhoto(photo: photoURL)
             deletedPhotos.append(photoURL) // 將刪除的照片 URL 加入到 deletedPhotos 中
+            print("Photo \(photoURL) added to deletedPhotos.")
         }) {
             Image(systemName: "xmark.circle.fill")
                 .foregroundColor(.white)
@@ -104,9 +118,9 @@ struct PhotoSectionView: View {
     
     // 加載已保存的照片 URL 列表
     func loadPhotosFromAppStorage() {
-        if !loadedPhotosString.isEmpty {
-            print("Loaded cached photos from AppStorage: \(loadedPhotosString)")
-            photos = loadedPhotosString.components(separatedBy: ",")
+        if !userSettings.loadedPhotosString.isEmpty {
+            print("Loaded cached photos from AppStorage: \(userSettings.loadedPhotosString)")
+            photos = userSettings.loadedPhotosString.components(separatedBy: ",")
         } else {
             print("No cached photos found in AppStorage, fetching from Firebase.")
             fetchPhotosFromFirebase()
@@ -176,7 +190,7 @@ struct PhotoSectionView: View {
                             fetchedPhotoURLs.sort { $0.photoNumber < $1.photoNumber }
                             DispatchQueue.main.async {
                                 self.photos = fetchedPhotoURLs.map { $0.url }
-                                self.loadedPhotosString = self.photos.joined(separator: ",") // 將數組轉換為字符串存儲
+                                userSettings.loadedPhotosString = self.photos.joined(separator: ",") // 將數組轉換為字符串存儲
                                 print("Sorted photo URLs: \(self.photos)")
                             }
                         }
@@ -202,7 +216,7 @@ struct PhotoSectionView: View {
         let imageName = UUID().uuidString
         saveImageToLocalStorage(image: image, withName: imageName)
         photos.append(imageName)
-        loadedPhotosString = photos.joined(separator: ",")
+        userSettings.loadedPhotosString = photos.joined(separator: ",")
     }
     
     // 儲存圖片到本地
@@ -238,7 +252,7 @@ struct PhotoSectionView: View {
     func removePhoto(photo: String) {
         if let index = photos.firstIndex(of: photo) {
             photos.remove(at: index)
-            loadedPhotosString = photos.joined(separator: ",") // 更新已加載的照片
+            userSettings.loadedPhotosString = photos.joined(separator: ",") // 更新已加載的照片
         }
     }
 }

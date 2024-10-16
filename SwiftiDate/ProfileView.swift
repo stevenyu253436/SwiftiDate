@@ -407,6 +407,14 @@ struct ProfileView: View {
     
     // 加載已保存的照片 URL 列表
     func loadPhotosFromAppStorage() {
+//        // 清空 loadedPhotosString
+//        userSettings.loadedPhotosString = ""
+//
+//        // 同步更新 photos 列表
+//        self.photos.removeAll()
+//
+//        print("loadedPhotosString has been cleared, and photos have been reset.")
+        
         if !userSettings.loadedPhotosString.isEmpty {
             print("Loaded cached photos from AppStorage: \(userSettings.loadedPhotosString)")
             // 直接將快取的照片名稱分割成陣列並賦值給 photos
