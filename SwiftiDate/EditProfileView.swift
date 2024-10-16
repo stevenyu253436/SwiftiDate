@@ -340,6 +340,9 @@ struct EditProfileView: View {
                     for photoURL in deletedPhotos {
                         deletePhotoFromFirebase(photoURL: photoURL)
                     }
+                    
+                    // 上傳新添加的照片到 Firebase
+                    uploadNewPhotosToFirebase()
 
                     // 完成後返回到上一頁
                     presentationMode.wrappedValue.dismiss()
@@ -360,6 +363,47 @@ struct EditProfileView: View {
     // 獲取文件目錄
     func getDocumentsDirectory() -> URL {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    }
+    
+    // 上傳新照片到 Firebase 的函數
+    func uploadNewPhotosToFirebase() {
+        let storage = Storage.storage()
+        let userID = userSettings.globalUserID // 假設從 UserSettings 取得用戶 ID
+        let storageRef = storage.reference().child("user_photos/\(userID)")
+
+        // 找出需要上傳的照片
+        for (index, photoName) in photos.enumerated() {
+            let expectedPhotoName = "photo\(index)" // 期待的照片名稱格式
+            
+            if !isPhotoAlreadyUploaded(photoName: photoName) {
+                // 如果照片還沒有上傳過
+                if let localImage = loadImageFromLocalStorage(named: photoName),
+                   let imageData = localImage.jpegData(compressionQuality: 0.8) {
+                    
+                    let photoRef = storageRef.child("\(expectedPhotoName).jpg") // Firebase 儲存名稱
+                    
+                    let uploadTask = photoRef.putData(imageData, metadata: nil) { (metadata, error) in
+                        if let error = error {
+                            print("Failed to upload photo: \(error.localizedDescription)")
+                        } else {
+                            print("Photo \(expectedPhotoName) uploaded successfully.")
+                        }
+                    }
+                    
+                    // 可選：監聽上傳進度
+                    uploadTask.observe(.progress) { snapshot in
+                        let percentComplete = 100.0 * Double(snapshot.progress?.completedUnitCount ?? 0) / Double(snapshot.progress?.totalUnitCount ?? 0)
+                        print("Upload is \(percentComplete)% complete.")
+                    }
+                }
+            }
+        }
+    }
+
+    // 檢查照片是否已經上傳的輔助函數
+    func isPhotoAlreadyUploaded(photoName: String) -> Bool {
+        // 假設所有 Firebase 上傳的照片都以 "photo" 開頭
+        return photoName.starts(with: "photo")
     }
     
     // 刪除 Firebase Storage 中的照片
