@@ -380,6 +380,7 @@ struct PlaceholderView: View {
 struct ImagePicker: UIViewControllerRepresentable {
     var sourceType: UIImagePickerController.SourceType
     @Binding var selectedImage: UIImage?
+    var onImagePicked: ((UIImage) -> Void)? // Closure to handle the image picked action
 
     func makeUIViewController(context: Context) -> UIImagePickerController {
         let imagePicker = UIImagePickerController()
@@ -404,6 +405,7 @@ struct ImagePicker: UIViewControllerRepresentable {
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             if let image = info[.originalImage] as? UIImage {
                 parent.selectedImage = image
+                parent.onImagePicked?(image) // Trigger the closure to handle the image
             }
             picker.dismiss(animated: true)
         }

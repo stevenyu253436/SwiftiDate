@@ -373,14 +373,14 @@ struct EditProfileView: View {
 
         // 找出需要上傳的照片
         for (index, photoName) in photos.enumerated() {
-            let expectedPhotoName = "photo\(index)" // 期待的照片名稱格式
+            let expectedPhotoName = "photo\(index + 1)" // 期待的照片名稱格式
             
             if !isPhotoAlreadyUploaded(photoName: photoName) {
                 // 如果照片還沒有上傳過
                 if let localImage = loadImageFromLocalStorage(named: photoName),
                    let imageData = localImage.jpegData(compressionQuality: 0.8) {
                     
-                    let photoRef = storageRef.child("\(expectedPhotoName).jpg") // Firebase 儲存名稱
+                    let photoRef = storageRef.child("\(expectedPhotoName).jpeg") // Firebase 儲存名稱
                     
                     let uploadTask = photoRef.putData(imageData, metadata: nil) { (metadata, error) in
                         if let error = error {
