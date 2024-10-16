@@ -74,6 +74,7 @@
 		D0445C8B2C73D0760059D522 /* DietPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0445C8A2C73D0760059D522 /* DietPreferencesView.swift */; };
 		D04729C22CC038B6007C33EC /* UnverifiedProfilePlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04729C12CC038B6007C33EC /* UnverifiedProfilePlaceholderView.swift */; };
 		D04729C42CC03C4D007C33EC /* StatisticsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04729C32CC03C4D007C33EC /* StatisticsSectionView.swift */; };
+		D04729C62CC03D55007C33EC /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04729C52CC03D55007C33EC /* ProfileHeaderView.swift */; };
 		D04938782CBF0A4700754E46 /* ChatRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04938772CBF0A4600754E46 /* ChatRow.swift */; };
 		D049387A2CBF0A6F00754E46 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04938792CBF0A6F00754E46 /* Models.swift */; };
 		D049387C2CBF465300754E46 /* EducationAndWorkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D049387B2CBF465300754E46 /* EducationAndWorkView.swift */; };
@@ -210,6 +211,7 @@
 		D0445C8A2C73D0760059D522 /* DietPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietPreferencesView.swift; sourceTree = "<group>"; };
 		D04729C12CC038B6007C33EC /* UnverifiedProfilePlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnverifiedProfilePlaceholderView.swift; sourceTree = "<group>"; };
 		D04729C32CC03C4D007C33EC /* StatisticsSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsSectionView.swift; sourceTree = "<group>"; };
+		D04729C52CC03D55007C33EC /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		D04938772CBF0A4600754E46 /* ChatRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRow.swift; sourceTree = "<group>"; };
 		D04938792CBF0A6F00754E46 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		D049387B2CBF465300754E46 /* EducationAndWorkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EducationAndWorkView.swift; sourceTree = "<group>"; };
@@ -475,6 +477,7 @@
 				D04938772CBF0A4600754E46 /* ChatRow.swift */,
 				D04938792CBF0A6F00754E46 /* Models.swift */,
 				D051EF2B2CC02C33004563A3 /* PhotoUtility.swift */,
+				D04729C52CC03D55007C33EC /* ProfileHeaderView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -685,6 +688,7 @@
 				D049387C2CBF465300754E46 /* EducationAndWorkView.swift in Sources */,
 				D0DDDB4E2CA19D0800A78A87 /* PhotoUploadGuidelinesView.swift in Sources */,
 				D0445C832C73CBE70059D522 /* FitnessOptionsView.swift in Sources */,
+				D04729C62CC03D55007C33EC /* ProfileHeaderView.swift in Sources */,
 				D0DDDB1A2CA1282B00A78A87 /* WhatIsSwiftiDateView.swift in Sources */,
 				D0DDDB322CA16B7000A78A87 /* UndoSwipeView.swift in Sources */,
 				D051EF2C2CC02C33004563A3 /* PhotoUtility.swift in Sources */,

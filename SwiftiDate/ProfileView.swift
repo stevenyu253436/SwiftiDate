@@ -39,67 +39,8 @@ struct ProfileView: View {
                 ScrollView {
                     VStack(spacing: 20) {
                         // 头像及基本信息
-                        HStack {
-                            if let firstPhotoName = photos.first, let image = PhotoUtility.loadImageFromLocalStorage(named: firstPhotoName) {
-                                Image(uiImage: image)
-                                    .resizable()
-                                    .frame(width: 100, height: 133)
-                                    .clipShape(Circle())
-                                    .overlay(Circle().stroke(Color.white, lineWidth: 4))
-                                    .shadow(radius: 10)
-                            } else {
-                                // 顯示預設的佔位符圖片
-                                Image(systemName: "person.crop.circle.fill")
-                                    .resizable()
-                                    .frame(width: 100, height: 133)
-                                    .foregroundColor(.gray)
-                                    .clipShape(Circle())
-                                    .overlay(Circle().stroke(Color.white, lineWidth: 4))
-                                    .shadow(radius: 10)
-                            }
-
-                            Button(action: {
-                                isShowingEditProfileView = true // Show EditProfileView
-                            }) {
-                                Image(systemName: "pencil.circle.fill")
-                                    .resizable()
-                                    .frame(width: 24, height: 24)
-                                    .foregroundColor(.blue) // 改變圖標顏色來確保對比
-                                    .background(Color.white) // 可選，如果不需要可以去掉
-                                    .clipShape(Circle())
-                                    .shadow(color: .gray, radius: 4, x: 0, y: 2) // 加強陰影效果
-                            }
-                            .offset(x: -25, y: -25) // 调整按钮的位置
-                            .fullScreenCover(isPresented: $isShowingEditProfileView) {
-                                EditProfileView(photos: $photos) // Pass both photos and selectedInterests
-                            }
-
-                            VStack(alignment: .leading) {
-                                HStack {
-                                    Text(userSettings.globalUserName) // 使用 userSettings 來存取 globalUserName
-                                        .font(.title)
-                                        .fontWeight(.bold)
-                                    
-                                    if userSettings.isSupremeUser {
-                                        Image(systemName: "crown.fill") // Adding the crown icon
-                                            .foregroundColor(.gold) // Matching the gold color
-                                            .font(.system(size: 18)) // Adjust the size as needed
-                                    }
-                                }
-                                
-                                if userSettings.globalIsUserVerified { // 使用 userSettings 來存取 globalIsUserVerified
-                                    HStack {
-                                        Image(systemName: "checkmark.seal.fill")
-                                            .foregroundColor(.blue)
-                                        Text("已認證")
-                                            .font(.subheadline)
-                                            .foregroundColor(.gray)
-                                    }
-                                }
-                            }
-                            Spacer()
-                        }
-                        .padding()
+                        ProfileHeaderView(isShowingEditProfileView: $isShowingEditProfileView, photos: $photos)
+                            .environmentObject(userSettings)
 
                         // 统计信息
                         StatisticsSectionView(selectedTab: $selectedTab, isShowingTurboView: $isShowingTurboView)
