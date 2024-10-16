@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SwipeCardView: View {
+    @StateObject private var locationManager = LocationManager()
     @State private var offset = CGSize.zero
     @State private var showCircleAnimation = false
     @State private var showPrivacySettings = false // 控制隱私設置頁面的顯示
@@ -16,6 +17,42 @@ struct SwipeCardView: View {
     @EnvironmentObject var userSettings: UserSettings
     
     var body: some View {
+        ZStack {
+            if locationManager.authorizationStatus == .authorizedWhenInUse ||
+               locationManager.authorizationStatus == .authorizedAlways {
+                // 使用者已授權位置存取，顯示滑動卡片畫面
+                mainSwipeCardView
+            } else {
+                // 使用者未授權位置存取，顯示提示畫面
+                locationPermissionPromptView
+            }
+
+            // 右上角的圖標，固定在整個螢幕的右上角
+            VStack {
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        // 顯示隱私設置畫面
+                        showPrivacySettings = true
+                    }) {
+                        Image(systemName: "slider.horizontal.3")
+                            .foregroundColor(.gray)
+                            .font(.system(size: 30))
+                            .padding(.top, 50)
+                            .padding(.trailing, 20)
+                    }
+                }
+                Spacer()
+            }
+        }
+        .edgesIgnoringSafeArea(.all) // 保證圖標能貼近螢幕邊緣
+        .fullScreenCover(isPresented: $showPrivacySettings) {
+            PrivacySettingsView() // 顯示隱私設置頁面
+        }
+    }
+    
+    // 主滑動卡片畫面
+    var mainSwipeCardView: some View {
         ZStack {
             if showCircleAnimation {
                 // 動態圓圈動畫頁面
@@ -72,29 +109,41 @@ struct SwipeCardView: View {
                         }
                 )
             }
+        }
+    }
+    
+    // 位置權限提示畫面
+    var locationPermissionPromptView: some View {
+        VStack {
+            Spacer()
+            Image(systemName: "location.fill")
+                .font(.system(size: 80))
+                .foregroundColor(.green)
+            Text("來認識附近的新朋友吧")
+                .font(.title)
+                .fontWeight(.bold)
+                .padding(.top)
 
-            // 右上角的圖標，固定在整個螢幕的右上角
-            VStack {
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        // 顯示隱私設置畫面
-                        showPrivacySettings = true
-                    }) {
-                        Image(systemName: "slider.horizontal.3")
-                            .foregroundColor(.gray)
-                            .font(.system(size: 30))
-                            .padding(.top, 50)
-                            .padding(.trailing, 20)
-                    }
-                }
-                Spacer()
+            Text("SwiftiDate 需要你的 \"位置權限\" 才能幫你找到附近好友哦")
+                .foregroundColor(.gray)
+                .multilineTextAlignment(.center)
+                .padding()
+
+            Button(action: {
+                locationManager.requestPermission()
+            }) {
+                Text("前往設置")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.green)
+                    .cornerRadius(10)
+                    .padding(.horizontal, 40)
             }
+            Spacer()
         }
-        .edgesIgnoringSafeArea(.all) // 保證圖標能貼近螢幕邊緣
-        .fullScreenCover(isPresented: $showPrivacySettings) {
-            PrivacySettingsView() // 顯示隱私設置頁面
-        }
+        .padding()
     }
 }
 
