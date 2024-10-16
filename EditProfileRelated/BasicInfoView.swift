@@ -8,6 +8,35 @@
 import Foundation
 import SwiftUI
 
+struct BasicInfoRowView<Icon: View>: View {
+    let label: String
+    let value: String?
+    let icon: Icon
+    let isValueEmpty: Bool
+    let onTap: () -> Void
+    
+    var body: some View {
+        HStack {
+            icon
+                .foregroundColor(.gray)
+            Text(label)
+                .font(.headline)
+            Spacer()
+            Text(isValueEmpty ? "新增" : value ?? "")
+                .font(.subheadline)
+                .foregroundColor(isValueEmpty ? .green : .gray)
+            Image(systemName: "chevron.right")
+                .foregroundColor(.gray)
+        }
+        .padding()
+        .background(Color.white)
+        .cornerRadius(10)
+        .onTapGesture {
+            onTap()
+        }
+    }
+}
+
 struct BasicInfoView: View {
     @Binding var selectedHometown: String?
     @Binding var showHometownInput: Bool
@@ -27,139 +56,73 @@ struct BasicInfoView: View {
                 .font(.headline)
                 .padding(.bottom, 5)
             
-            HStack {
-                Image(systemName: "house.fill")
-                    .foregroundColor(.gray)
-                Text("來自")
-                    .font(.headline)
-                    .padding(.bottom, 5)
-                Spacer()
-                if let selectedHometown = selectedHometown {
-                    Text(selectedHometown)
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                } else {
-                    Text("新增")
-                        .font(.headline)
-                        .foregroundColor(.green)
+            BasicInfoRowView(
+                label: "來自",
+                value: selectedHometown,
+                icon: Image(systemName: "house.fill"),
+                isValueEmpty: selectedHometown == nil,
+                onTap: {
+                    showHometownInput = true
                 }
-                Image(systemName: "chevron.right") // 添加向右的箭头
-                    .foregroundColor(.gray)
-            }
-            .padding()
-            .background(Color.white)
-            .cornerRadius(10)
-            .onTapGesture {
-                showHometownInput = true  // 点击时显示家乡输入页面
-            }
+            )
             .sheet(isPresented: $showHometownInput) {
                 HometownInputView(selectedHometown: $selectedHometown)
             }
             
-            HStack {
-                Image(systemName: "globe")
-                    .foregroundColor(.gray)
-                Text("語言")
-                    .font(.headline)
-                    .padding(.bottom, 5)
-                Spacer()
-                Text(selectedLanguages.joined(separator: ", "))
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
-                Image(systemName: "chevron.right") // 添加向右的箭头
-                    .foregroundColor(.gray)
-            }
-            .padding()
-            .background(Color.white)
-            .cornerRadius(10)
-            .onTapGesture {
-                showLanguageSelection = true
-            }
+            BasicInfoRowView(
+                label: "語言",
+                value: selectedLanguages.joined(separator: ", "),
+                icon: Image(systemName: "globe"),
+                isValueEmpty: selectedLanguages.isEmpty,
+                onTap: {
+                    showLanguageSelection = true
+                }
+            )
             .sheet(isPresented: $showLanguageSelection) {
                 LanguageSelectionView(selectedLanguages: $selectedLanguages)
             }
             
-            HStack {
-                Image(systemName: "ruler.fill")
-                    .foregroundColor(.gray)
-                Text("身高")
-                    .font(.headline)
-                    .padding(.bottom, 5)
-                Spacer()
-                Text("\(selectedHeight ?? 170) cm")
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
-                Image(systemName: "chevron.right") // 添加向右的箭头
-                    .foregroundColor(.gray)
-            }
-            .padding()
-            .background(Color.white)
-            .cornerRadius(10)
-            .onTapGesture {
-                showHeightPicker = true // 点击时显示身高选择页面
-            }
+            BasicInfoRowView(
+                label: "身高",
+                value: "\(selectedHeight ?? 170) cm",
+                icon: Image(systemName: "ruler.fill"),
+                isValueEmpty: selectedHeight == nil,
+                onTap: {
+                    showHeightPicker = true
+                }
+            )
             .sheet(isPresented: $showHeightPicker) {
                 HeightPickerView(selectedHeight: $selectedHeight)
             }
             
-            HStack {
-                Image("zodiac_icon")
+            BasicInfoRowView(
+                label: "星座",
+                value: selectedZodiac,
+                icon: Image("zodiac_icon")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 24, height: 24) // 调整大小以适应你的设计
-                Text("星座")
-                    .font(.headline)
-                    .padding(.bottom, 5)
-                Spacer()
-                if selectedZodiac.isEmpty {
-                    Text("新增")
-                        .font(.headline)
-                        .foregroundColor(.green)
-                } else {
-                    Text(selectedZodiac)
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
+                    .frame(width: 24, height: 24), // Adjust size as needed
+                isValueEmpty: selectedZodiac.isEmpty,
+                onTap: {
+                    showZodiacPicker = true
                 }
-                Image(systemName: "chevron.right") // 添加向右的箭头
-                    .foregroundColor(.gray)
-            }
-            .padding()
-            .background(Color.white)
-            .cornerRadius(10)
-            .onTapGesture {
-                showZodiacPicker = true // 点击时显示星座选择页面
-            }
+            )
             .sheet(isPresented: $showZodiacPicker) {
                 ZodiacPickerView(selectedZodiac: $selectedZodiac)
             }
             
-            HStack {
-                Image("blood_type_icon")
+            BasicInfoRowView(
+                label: "血型",
+                value: selectedBloodType ?? "新增",
+                icon: Image("blood_type_icon")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 24, height: 24) // 调整大小以适应你的设计
-                Text("血型")
-                    .font(.headline)
-                    .padding(.bottom, 5)
-                Spacer()
-                if let bloodType = selectedBloodType {
-                    Text(bloodType)
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                } else {
-                    Text("新增")
-                        .font(.headline)
-                        .foregroundColor(.green)
+                    .frame(width: 24, height: 24), // 调整大小以适应你的设计
+                isValueEmpty: selectedBloodType == nil,
+                onTap: {
+                    showBloodTypePicker = true
                 }
-                Image(systemName: "chevron.right") // 添加向右的箭头
-                    .foregroundColor(.gray)
-            }
-            .padding()
-            .background(Color.white)
-            .cornerRadius(10)
-            .onTapGesture {
-                showBloodTypePicker = true // 点击时显示血型选择页面
-            }
+            )
             .sheet(isPresented: $showBloodTypePicker) {
                 BloodTypePickerView(selectedBloodType: $selectedBloodType)
             }
