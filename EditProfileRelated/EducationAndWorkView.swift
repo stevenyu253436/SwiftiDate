@@ -8,6 +8,38 @@
 import Foundation
 import SwiftUI
 
+// Reusable row view for the education and work items
+struct EducationWorkRowView<Icon: View>: View {
+    let label: String
+    let value: String
+    let icon: Icon
+    let isValueEmpty: Bool
+    let onTap: () -> Void
+    
+    var body: some View {
+        HStack {
+            icon
+                .foregroundColor(.gray)
+                .frame(width: 24, height: 24) // Adjust size to fit the design
+            Text(label)
+                .font(.headline)
+                .padding(.bottom, 5)
+            Spacer()
+            Text(value)
+                .font(.subheadline)
+                .foregroundColor(isValueEmpty ? .green : .gray)
+            Image(systemName: "chevron.right")
+                .foregroundColor(.gray)
+        }
+        .padding()
+        .background(Color.white)
+        .cornerRadius(10)
+        .onTapGesture {
+            onTap()
+        }
+    }
+}
+
 // 教育與工作子視圖
 struct EducationAndWorkView: View {
     @Binding var selectedDegree: String?
@@ -30,108 +62,57 @@ struct EducationAndWorkView: View {
                 .font(.headline)
                 .padding(.bottom, 5)
 
-            HStack {
-                Image(systemName: "graduationcap.fill")
-                    .foregroundColor(.gray)
-                Text("學歷")
-                    .font(.headline)
-                    .padding(.bottom, 5)
-                Spacer()
-                if let selectedDegree = selectedDegree {
-                    Text(selectedDegree)
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                } else {
-                    Text("新增")
-                        .font(.headline)
-                        .foregroundColor(.green) // 未选择时显示绿色的“新增”
+            // Education and Work sections using the reusable row component
+            EducationWorkRowView(
+                label: "學歷",
+                value: selectedDegree ?? "新增",
+                icon: Image(systemName: "graduationcap.fill"),
+                isValueEmpty: selectedDegree == nil,
+                onTap: {
+                    showDegreePicker = true
                 }
-                Image(systemName: "chevron.right") // 添加向右的箭头
-                    .foregroundColor(.gray)
-            }
-            .padding()
-            .background(Color.white)
-            .cornerRadius(10)
-            .onTapGesture {
-                showDegreePicker = true // 点击时显示学历选择
-            }
+            )
             .sheet(isPresented: $showDegreePicker) {
                 DegreePicker(selectedDegree: $selectedDegree, degrees: degrees)
             }
             
-            HStack {
-                Image("school_icon") // 假设你的图标命名为 "school_icon"
+            EducationWorkRowView(
+                label: "學校",
+                value: selectedSchool ?? "新增",
+                icon: Image("school_icon")
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 24, height: 24) // 调整大小以适应你的设计
-                Text("學校")
-                    .font(.headline)
-                    .padding(.bottom, 5)
-                Spacer()
-                if let selectedSchool = selectedSchool {
-                    Text(selectedSchool)
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                } else {
-                    Text("新增")
-                        .font(.headline)
-                        .foregroundColor(.green)
+                    .aspectRatio(contentMode: .fit),
+                isValueEmpty: selectedSchool == nil,
+                onTap: {
+                    showSchoolInput = true
                 }
-                Image(systemName: "chevron.right") // 添加向右的箭头
-                    .foregroundColor(.gray)
-            }
-            .padding()
-            .background(Color.white)
-            .cornerRadius(10)
-            .onTapGesture {
-                showSchoolInput = true
-            }
+            )
             .sheet(isPresented: $showSchoolInput) {
                 SchoolInputView(selectedSchool: $selectedSchool)
             }
             
-            HStack {
-                Image(systemName: "building.fill")
-                    .foregroundColor(.gray)
-                Text("工作行業")
-                    .font(.headline)
-                    .padding(.bottom, 5)
-                Spacer()
-                Text(selectedIndustry ?? "未選擇")
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
-                Image(systemName: "chevron.right") // 添加向右的箭头
-                    .foregroundColor(.gray)
-            }
-            .padding()
-            .background(Color.white)
-            .cornerRadius(10)
-            .onTapGesture {
-                showIndustryPicker = true // 显示行业选择页面
-            }
+            EducationWorkRowView(
+                label: "工作行業",
+                value: selectedIndustry ?? "未選擇",
+                icon: Image(systemName: "building.fill"),
+                isValueEmpty: selectedIndustry == nil,
+                onTap: {
+                    showIndustryPicker = true
+                }
+            )
             .sheet(isPresented: $showIndustryPicker) {
                 IndustryPicker(selectedIndustry: $selectedIndustry, industries: industries)
             }
             
-            HStack {
-                Image(systemName: "building.fill")
-                    .foregroundColor(.gray)
-                Text("職業")
-                    .font(.headline)
-                    .padding(.bottom, 5)
-                Spacer()
-                Text(selectedJob ?? "新增")
-                    .font(.subheadline)
-                    .foregroundColor(selectedJob != nil ? .gray : .green)
-                Image(systemName: "chevron.right") // 添加向右的箭头
-                    .foregroundColor(.gray)
-            }
-            .padding()
-            .background(Color.white)
-            .cornerRadius(10)
-            .onTapGesture {
-                showJobInput = true // 点击时显示职业输入页面
-            }
+            EducationWorkRowView(
+                label: "職業",
+                value: selectedJob ?? "新增",
+                icon: Image(systemName: "building.fill"),
+                isValueEmpty: selectedJob == nil,
+                onTap: {
+                    showJobInput = true
+                }
+            )
             .sheet(isPresented: $showJobInput) {
                 JobInputView(selectedJob: $selectedJob)
             }
