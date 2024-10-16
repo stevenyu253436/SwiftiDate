@@ -9,16 +9,79 @@ import Foundation
 import SwiftUI
 import FirebaseStorage
 
+// Enum for ProfileTab
+enum ProfileTab: String {
+    case edit = "編輯"
+    case preview = "預覽"
+}
+
+// Safe array access extension
 extension Array {
     subscript(safe index: Index) -> Element? {
         return indices.contains(index) ? self[index] : nil
     }
 }
 
+// 將切換選項的 Picker 提取到獨立的 View
+struct ProfileTabPicker: View {
+    @Binding var selectedTab: ProfileTab
+
+    var body: some View {
+        Picker("編輯個人資料", selection: $selectedTab) {
+            Text(ProfileTab.edit.rawValue).tag(ProfileTab.edit)
+            Text(ProfileTab.preview.rawValue).tag(ProfileTab.preview)
+        }
+        .pickerStyle(SegmentedPickerStyle())
+        .padding()
+    }
+}
+
+// 將認證部分提取到獨立的 View
+struct VerificationStatusView: View {
+    @EnvironmentObject var userSettings: UserSettings
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 5) {
+            Text("真人認證")
+                .font(.headline)
+                .foregroundColor(.black)
+                .padding(.bottom, 5)
+
+            HStack {
+                Image(systemName: "checkmark.seal.fill")
+                    .foregroundColor(.blue)
+                Text("認證你的個人照片")
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                Spacer()
+                if userSettings.globalIsUserVerified {
+                    Text("已認證")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                } else {
+                    Text("未認證")
+                        .font(.subheadline)
+                        .foregroundColor(.red)
+
+                    Image(systemName: "chevron.right")
+                        .foregroundColor(.gray)
+                }
+            }
+            .padding()
+            .background(Color.white)
+            .cornerRadius(10)
+            .shadow(radius: 2)
+        }
+        .padding(.horizontal)
+        .padding(.vertical, 5)
+        .background(Color.clear)
+    }
+}
+
 struct EditProfileView: View {
     @EnvironmentObject var userSettings: UserSettings // 使用 EnvironmentObject 存取 UserSettings
     
-    @State private var selectedTab = "編輯"
+    @State private var selectedTab: ProfileTab = .edit
     @Binding var photos: [String] // Change photos to a Binding variable
     @State private var deletedPhotos: [String] = [] // 用來存放被刪除的照片URL
     @State private var aboutMe = "能見面左右滑謝謝🙏\n一起吃日料吧🍣\n抽水煙也可以💨"
@@ -99,14 +162,9 @@ struct EditProfileView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Picker("編輯個人資料", selection: $selectedTab) {
-                    Text("編輯").tag("編輯")
-                    Text("預覽").tag("預覽")
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                .padding()
+                ProfileTabPicker(selectedTab: $selectedTab)
 
-                if selectedTab == "編輯" {
+                if selectedTab == .edit {
                     // 編輯界面
                     ScrollView {
                         VStack(spacing: 10) {
@@ -118,32 +176,7 @@ struct EditProfileView: View {
                             }
                             .padding()
                             
-                            // 藍勾勾認證部分
-                            VStack(alignment: .leading, spacing: 5) {
-                                Text("真人認證")
-                                    .font(.headline)
-                                    .foregroundColor(.black) // 标题颜色为黑色
-                                    .padding(.bottom, 5)
-
-                                HStack {
-                                    Image(systemName: "checkmark.seal.fill")
-                                        .foregroundColor(.blue)
-                                    Text("認證你的個人照片")
-                                        .font(.subheadline)
-                                        .foregroundColor(.gray)
-                                    Spacer()
-                                    Text("已認證")
-                                        .font(.subheadline)
-                                        .foregroundColor(.gray)
-                                }
-                                .padding()
-                                .background(Color.white) // 设置背景颜色为白色
-                                .cornerRadius(10) // 设置圆角
-                                .shadow(radius: 2) // 可选：添加阴影以突出显示框框
-                            }
-                            .padding(.horizontal)
-                            .padding(.vertical, 5)
-                            .background(Color.clear) // 保持背景透明，以便显示框框效果
+                            VerificationStatusView() // 使用剛剛提取的 VerificationStatusView
                             
                             VStack(alignment: .leading) {
                                 Text("關於我")
@@ -281,7 +314,7 @@ struct EditProfileView: View {
                             HStack {
                                 Image(systemName: "checkmark.seal.fill")
                                     .foregroundColor(.blue)
-                                Text("巨蟹座 · 新竹市 · 自由接案者")
+                                Text("\(selectedZodiac) · 新竹市 · \(selectedJob ?? "職業未填寫")")
                                     .foregroundColor(.white)
                             }
                             .font(.subheadline)
@@ -460,5 +493,6 @@ struct EditProfileView_Previews: PreviewProvider {
     
     static var previews: some View {
         EditProfileView(photos: $mockPhotos, selectedInterests: ["我喜歡Cosply", "咒術迴戰", "死神", "基本可以做到訊息秒回", "是個理性的人", "有上進心", "我是巨蟹座"]) // Pass selectedInterests first
+            .environmentObject(UserSettings()) // 提供一個 mock 的 UserSettings 環境物件
     }
 }
