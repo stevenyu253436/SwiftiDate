@@ -139,3 +139,41 @@ struct EducationAndWorkView: View {
         .padding(.horizontal)
     }
 }
+
+struct EducationAndWorkView_Previews: PreviewProvider {
+    @State static var mockSelectedDegree: String? = "碩士及以上"
+    @State static var mockSelectedSchool: String? = "台灣大學"
+    @State static var mockSelectedIndustry: String? = "學生"
+    @State static var mockSelectedJob: String? = "自由接案者"
+    
+    @State static var mockShowDegreePicker = false
+    @State static var mockShowSchoolInput = false
+    @State static var mockShowIndustryPicker = false
+    @State static var mockShowJobInput = false
+    
+    static var mockDegrees = ["高中", "職校/專科", "學士", "碩士及以上", "其他學歷"]
+    static var mockIndustries = [
+        "藝術/設計", "建築", "航空/交通運輸", "商業/金融", "傳播/媒體", "文創產業",
+        "時尚/模特", "健身/體育", "自由業", "教育培訓", "工程技術", "政府機關",
+        "醫療/醫藥", "律政行業", "市場營銷", "製造業", "NGO/慈善事業", "公眾關係",
+        "銷售/零售業", "媒體傳播/自媒體", "社會工作者", "學生", "科技行業/科學研究",
+        "旅遊業", "其他：新創/創業", "其他：自營企業", "其他行業"
+    ]
+    
+    static var previews: some View {
+        EducationAndWorkView(
+            selectedDegree: $mockSelectedDegree,
+            selectedSchool: $mockSelectedSchool,
+            selectedIndustry: $mockSelectedIndustry,
+            selectedJob: $mockSelectedJob,
+            showDegreePicker: $mockShowDegreePicker,
+            showSchoolInput: $mockShowSchoolInput,
+            showIndustryPicker: $mockShowIndustryPicker,
+            showJobInput: $mockShowJobInput,
+            degrees: mockDegrees,
+            industries: mockIndustries
+        )
+        .previewLayout(.sizeThatFits)
+        .padding()
+    }
+}
