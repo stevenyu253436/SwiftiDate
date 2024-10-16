@@ -174,13 +174,13 @@ struct ProfileView: View {
                         
                         // Turbo, Crush, 讚美
                         HStack(spacing: 20) {
-                            AchievementCardView(title: "TURBO", count: globalTurboCount, color: Color.purple) {
+                            AchievementCardView(title: "TURBO", count: userSettings.globalTurboCount, color: Color.purple) {
                                 isShowingTurboPurchaseView = true // Set the state to show the TurboPurchaseView
                             }
-                            AchievementCardView(title: "CRUSH", count: globalCrushCount, color: Color.green) {
+                            AchievementCardView(title: "CRUSH", count: userSettings.globalCrushCount, color: Color.green) {
                                 isShowingCrushPurchaseView = true // Show CrushPurchaseView
                             }
-                            AchievementCardView(title: "讚美", count: globalPraiseCount, color: Color.orange) {
+                            AchievementCardView(title: "讚美", count: userSettings.globalPraiseCount, color: Color.orange) {
                                 isShowingPraisePurchaseView = true // Show PraisePurchaseView
                             }
                         }

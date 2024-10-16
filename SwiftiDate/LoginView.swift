@@ -196,9 +196,9 @@ struct LoginView: View {
 
         userSettings.globalIsUserVerified = defaults.bool(forKey: "isUserVerified")
 
-        globalTurboCount = defaults.integer(forKey: "turboCount")
-        globalCrushCount = defaults.integer(forKey: "crushCount")
-        globalPraiseCount = defaults.integer(forKey: "praiseCount")
+        userSettings.globalTurboCount = defaults.integer(forKey: "turboCount")
+        userSettings.globalCrushCount = defaults.integer(forKey: "crushCount")
+        userSettings.globalPraiseCount = defaults.integer(forKey: "praiseCount")
         
         userSettings.globalLikesMeCount = defaults.integer(forKey: "likesMeCount")
         userSettings.globalLikeCount = defaults.integer(forKey: "likeCount")
@@ -218,9 +218,9 @@ struct LoginView: View {
         userSettings.globalUserName = ""
         userSettings.storedGender = Gender.male.rawValue // Use storedGender for reset
         userSettings.globalIsUserVerified = false
-        globalTurboCount = 0
-        globalCrushCount = 0
-        globalPraiseCount = 0
+        userSettings.globalTurboCount = 0
+        userSettings.globalCrushCount = 0
+        userSettings.globalPraiseCount = 0
         userSettings.globalLikesMeCount = 0
         userSettings.globalLikeCount = 0
         userSettings.isSupremeUser = false

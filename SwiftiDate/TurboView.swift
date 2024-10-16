@@ -101,7 +101,7 @@ struct TurboView: View {
                     
                     // Action button
                     Button(action: {
-                        if globalTurboCount > 0 {
+                        if userSettings.globalTurboCount > 0 {
                             // Show confirmation popup if TurboCount is greater than 0
                             showConfirmationPopup = true
                         }
@@ -124,7 +124,7 @@ struct TurboView: View {
                     Spacer()
                     
                     Button(action: {
-                        if globalTurboCount > 0 {
+                        if userSettings.globalTurboCount > 0 {
                             // Show confirmation popup if TurboCount is greater than 0
                             showConfirmationPopup = true
                         }
