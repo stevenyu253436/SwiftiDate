@@ -74,6 +74,9 @@
 		D0445C8B2C73D0760059D522 /* DietPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0445C8A2C73D0760059D522 /* DietPreferencesView.swift */; };
 		D04938782CBF0A4700754E46 /* ChatRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04938772CBF0A4600754E46 /* ChatRow.swift */; };
 		D049387A2CBF0A6F00754E46 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04938792CBF0A6F00754E46 /* Models.swift */; };
+		D049387C2CBF465300754E46 /* EducationAndWorkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D049387B2CBF465300754E46 /* EducationAndWorkView.swift */; };
+		D051EF252CBF4F1B004563A3 /* BasicInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D051EF242CBF4F1B004563A3 /* BasicInfoView.swift */; };
+		D051EF272CBF50CB004563A3 /* LifestyleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D051EF262CBF50CB004563A3 /* LifestyleView.swift */; };
 		D055E9922C8CCFBA00A97DD1 /* InterestSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D055E9912C8CCFBA00A97DD1 /* InterestSelectionView.swift */; };
 		D09587B92CB6552100BCD04B /* ChatGPTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587B82CB6552100BCD04B /* ChatGPTView.swift */; };
 		D09587BB2CB7558600BCD04B /* SafetyCenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587BA2CB7558600BCD04B /* SafetyCenterView.swift */; };
@@ -202,6 +205,9 @@
 		D0445C8A2C73D0760059D522 /* DietPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietPreferencesView.swift; sourceTree = "<group>"; };
 		D04938772CBF0A4600754E46 /* ChatRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRow.swift; sourceTree = "<group>"; };
 		D04938792CBF0A6F00754E46 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		D049387B2CBF465300754E46 /* EducationAndWorkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EducationAndWorkView.swift; sourceTree = "<group>"; };
+		D051EF242CBF4F1B004563A3 /* BasicInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicInfoView.swift; sourceTree = "<group>"; };
+		D051EF262CBF50CB004563A3 /* LifestyleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifestyleView.swift; sourceTree = "<group>"; };
 		D055E9912C8CCFBA00A97DD1 /* InterestSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestSelectionView.swift; sourceTree = "<group>"; };
 		D09587B82CB6552100BCD04B /* ChatGPTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTView.swift; sourceTree = "<group>"; };
 		D09587BA2CB7558600BCD04B /* SafetyCenterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyCenterView.swift; sourceTree = "<group>"; wrapsLines = 1; };
@@ -316,10 +322,12 @@
 		D017F4F92CAFF01900C71D18 /* EditProfileRelated */ = {
 			isa = PBXGroup;
 			children = (
+				D051EF242CBF4F1B004563A3 /* BasicInfoView.swift */,
 				D0445C7A2C73C74B0059D522 /* BloodTypePickerView.swift */,
 				D0445C6A2C7247050059D522 /* DegreePicker.swift */,
 				D0445C8A2C73D0760059D522 /* DietPreferencesView.swift */,
 				D0445C862C73CEFB0059D522 /* DrinkOptionsView.swift */,
+				D049387B2CBF465300754E46 /* EducationAndWorkView.swift */,
 				D0445C822C73CBE70059D522 /* FitnessOptionsView.swift */,
 				D0445C762C73BF590059D522 /* HeightPickerView.swift */,
 				D0445C722C72FB430059D522 /* HometownInputView.swift */,
@@ -328,6 +336,7 @@
 				D055E9912C8CCFBA00A97DD1 /* InterestSelectionView.swift */,
 				D0445C702C72F7870059D522 /* JobInputView.swift */,
 				D0445C742C73B4EE0059D522 /* LanguageSelectionView.swift */,
+				D051EF262CBF50CB004563A3 /* LifestyleView.swift */,
 				D0445C7E2C73C9080059D522 /* LookingForView.swift */,
 				D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */,
 				D0445C802C73CA130059D522 /* PetSelectionView.swift */,
@@ -650,6 +659,7 @@
 				D0DDDB0B2CA07A0E00A78A87 /* TurboView.swift in Sources */,
 				D0DDDB092C9FDE0500A78A87 /* InteractiveContentView.swift in Sources */,
 				D017F4F42CAF77D900C71D18 /* MessageBubbleView.swift in Sources */,
+				D049387C2CBF465300754E46 /* EducationAndWorkView.swift in Sources */,
 				D0DDDB4E2CA19D0800A78A87 /* PhotoUploadGuidelinesView.swift in Sources */,
 				D0445C832C73CBE70059D522 /* FitnessOptionsView.swift in Sources */,
 				D0DDDB1A2CA1282B00A78A87 /* WhatIsSwiftiDateView.swift in Sources */,
@@ -669,6 +679,7 @@
 				D0445C772C73BF590059D522 /* HeightPickerView.swift in Sources */,
 				D018AD5F2C9E6976005A14B9 /* CrushPurchaseView.swift in Sources */,
 				D049387A2CBF0A6F00754E46 /* Models.swift in Sources */,
+				D051EF272CBF50CB004563A3 /* LifestyleView.swift in Sources */,
 				D0445C752C73B4EF0059D522 /* LanguageSelectionView.swift in Sources */,
 				D09587C12CB7B17E00BCD04B /* ResultsView.swift in Sources */,
 				D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */,
@@ -705,6 +716,7 @@
 				D09587CB2CB7D19B00BCD04B /* ReportAftermathView.swift in Sources */,
 				D09587B92CB6552100BCD04B /* ChatGPTView.swift in Sources */,
 				D0DDDB4C2CA19A0600A78A87 /* ManageProfilePhotosView.swift in Sources */,
+				D051EF252CBF4F1B004563A3 /* BasicInfoView.swift in Sources */,
 				D09587CF2CB7E44400BCD04B /* CircleExpansionView.swift in Sources */,
 				D09587D42CB8BDEA00BCD04B /* PrivacySettingsView.swift in Sources */,
 				D0DDDB222CA1413600A78A87 /* WhyIsItHardToMatchView.swift in Sources */,

@@ -9,6 +9,12 @@ import Foundation
 import SwiftUI
 import FirebaseStorage
 
+extension Array {
+    subscript(safe index: Index) -> Element? {
+        return indices.contains(index) ? self[index] : nil
+    }
+}
+
 struct EditProfileView: View {
     @EnvironmentObject var userSettings: UserSettings // 使用 EnvironmentObject 存取 UserSettings
     
@@ -185,480 +191,49 @@ struct EditProfileView: View {
                                 selectedInterests: $selectedInterests,
                                 interestColors: $interestColors  // 傳遞 interestColors 作為 @Binding
                             )
-
-                            // 工作與學歷
-                            VStack(alignment: .leading) {
-                                Text("工作與學歷")
-                                    .font(.headline)
-                                    .padding(.bottom, 5)
-
-                                HStack {
-                                    Image(systemName: "graduationcap.fill")
-                                        .foregroundColor(.gray)
-                                    Text("學歷")
-                                        .font(.headline)
-                                        .padding(.bottom, 5)
-                                    Spacer()
-                                    if let selectedDegree = selectedDegree {
-                                        Text(selectedDegree)
-                                            .font(.subheadline)
-                                            .foregroundColor(.gray)
-                                    } else {
-                                        Text("新增")
-                                            .font(.headline)
-                                            .foregroundColor(.green) // 未选择时显示绿色的“新增”
-                                    }
-                                    Image(systemName: "chevron.right") // 添加向右的箭头
-                                        .foregroundColor(.gray)
-                                }
-                                .padding()
-                                .background(Color.white)
-                                .cornerRadius(10)
-                                .onTapGesture {
-                                    showDegreePicker = true // 点击时显示学历选择
-                                }
-                                .sheet(isPresented: $showDegreePicker) {
-                                    DegreePicker(selectedDegree: $selectedDegree, degrees: degrees)
-                                }
-                                
-                                HStack {
-                                    Image("school_icon") // 假设你的图标命名为 "school_icon"
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 24, height: 24) // 调整大小以适应你的设计
-                                    Text("學校")
-                                        .font(.headline)
-                                        .padding(.bottom, 5)
-                                    Spacer()
-                                    if let selectedSchool = selectedSchool {
-                                        Text(selectedSchool)
-                                            .font(.subheadline)
-                                            .foregroundColor(.gray)
-                                    } else {
-                                        Text("新增")
-                                            .font(.headline)
-                                            .foregroundColor(.green)
-                                    }
-                                    Image(systemName: "chevron.right") // 添加向右的箭头
-                                        .foregroundColor(.gray)
-                                }
-                                .padding()
-                                .background(Color.white)
-                                .cornerRadius(10)
-                                .onTapGesture {
-                                    showSchoolInput = true
-                                }
-                                .sheet(isPresented: $showSchoolInput) {
-                                    SchoolInputView(selectedSchool: $selectedSchool)
-                                }
-                                
-                                HStack {
-                                    Image(systemName: "building.fill")
-                                        .foregroundColor(.gray)
-                                    Text("工作行業")
-                                        .font(.headline)
-                                        .padding(.bottom, 5)
-                                    Spacer()
-                                    Text(selectedIndustry ?? "未選擇")
-                                        .font(.subheadline)
-                                        .foregroundColor(.gray)
-                                    Image(systemName: "chevron.right") // 添加向右的箭头
-                                        .foregroundColor(.gray)
-                                }
-                                .padding()
-                                .background(Color.white)
-                                .cornerRadius(10)
-                                .onTapGesture {
-                                    showIndustryPicker = true // 显示行业选择页面
-                                }
-                                .sheet(isPresented: $showIndustryPicker) {
-                                    IndustryPicker(selectedIndustry: $selectedIndustry, industries: industries)
-                                }
-                                
-                                HStack {
-                                    Image(systemName: "building.fill")
-                                        .foregroundColor(.gray)
-                                    Text("職業")
-                                        .font(.headline)
-                                        .padding(.bottom, 5)
-                                    Spacer()
-                                    Text(selectedJob ?? "新增")
-                                        .font(.subheadline)
-                                        .foregroundColor(selectedJob != nil ? .gray : .green)
-                                    Image(systemName: "chevron.right") // 添加向右的箭头
-                                        .foregroundColor(.gray)
-                                }
-                                .padding()
-                                .background(Color.white)
-                                .cornerRadius(10)
-                                .onTapGesture {
-                                    showJobInput = true // 点击时显示职业输入页面
-                                }
-                                .sheet(isPresented: $showJobInput) {
-                                    JobInputView(selectedJob: $selectedJob)
-                                }
-                            }
-                            .padding(.horizontal)
                             
-                            // 基本資料
-                            VStack(alignment: .leading) {
-                                Text("基本資料")
-                                    .font(.headline)
-                                    .padding(.bottom, 5)
-                                
-                                HStack {
-                                    Image(systemName: "house.fill")
-                                        .foregroundColor(.gray)
-                                    Text("來自")
-                                        .font(.headline)
-                                        .padding(.bottom, 5)
-                                    Spacer()
-                                    if let selectedHometown = selectedHometown {
-                                        Text(selectedHometown)
-                                            .font(.subheadline)
-                                            .foregroundColor(.gray)
-                                    } else {
-                                        Text("新增")
-                                            .font(.headline)
-                                            .foregroundColor(.green)
-                                    }
-                                    Image(systemName: "chevron.right") // 添加向右的箭头
-                                        .foregroundColor(.gray)
-                                }
-                                .padding()
-                                .background(Color.white)
-                                .cornerRadius(10)
-                                .onTapGesture {
-                                    showHometownInput = true  // 点击时显示家乡输入页面
-                                }
-                                .sheet(isPresented: $showHometownInput) {
-                                    HometownInputView(selectedHometown: $selectedHometown)
-                                }
-
-                                HStack {
-                                    Image(systemName: "globe")
-                                        .foregroundColor(.gray)
-                                    Text("語言")
-                                        .font(.headline)
-                                        .padding(.bottom, 5)
-                                    Spacer()
-                                    Text(selectedLanguages.joined(separator: ", "))
-                                        .font(.subheadline)
-                                        .foregroundColor(.gray)
-                                    Image(systemName: "chevron.right") // 添加向右的箭头
-                                        .foregroundColor(.gray)
-                                }
-                                .padding()
-                                .background(Color.white)
-                                .cornerRadius(10)
-                                .onTapGesture {
-                                    showLanguageSelection = true
-                                }
-                                .sheet(isPresented: $showLanguageSelection) {
-                                    LanguageSelectionView(selectedLanguages: $selectedLanguages)
-                                }
-
-                                HStack {
-                                    Image(systemName: "ruler.fill")
-                                        .foregroundColor(.gray)
-                                    Text("身高")
-                                        .font(.headline)
-                                        .padding(.bottom, 5)
-                                    Spacer()
-                                    Text("\(selectedHeight ?? 170) cm")
-                                        .font(.subheadline)
-                                        .foregroundColor(.gray)
-                                    Image(systemName: "chevron.right") // 添加向右的箭头
-                                        .foregroundColor(.gray)
-                                }
-                                .padding()
-                                .background(Color.white)
-                                .cornerRadius(10)
-                                .onTapGesture {
-                                    showHeightPicker = true // 点击时显示身高选择页面
-                                }
-                                .sheet(isPresented: $showHeightPicker) {
-                                    HeightPickerView(selectedHeight: $selectedHeight)
-                                }
-
-                                HStack {
-                                    Image("zodiac_icon")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 24, height: 24) // 调整大小以适应你的设计
-                                    Text("星座")
-                                        .font(.headline)
-                                        .padding(.bottom, 5)
-                                    Spacer()
-                                    if selectedZodiac.isEmpty {
-                                        Text("新增")
-                                            .font(.headline)
-                                            .foregroundColor(.green)
-                                    } else {
-                                        Text(selectedZodiac)
-                                            .font(.subheadline)
-                                            .foregroundColor(.gray)
-                                    }
-                                    Image(systemName: "chevron.right") // 添加向右的箭头
-                                        .foregroundColor(.gray)
-                                }
-                                .padding()
-                                .background(Color.white)
-                                .cornerRadius(10)
-                                .onTapGesture {
-                                    showZodiacPicker = true // 点击时显示星座选择页面
-                                }
-                                .sheet(isPresented: $showZodiacPicker) {
-                                    ZodiacPickerView(selectedZodiac: $selectedZodiac)
-                                }
-
-                                HStack {
-                                    Image("blood_type_icon")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 24, height: 24) // 调整大小以适应你的设计
-                                    Text("血型")
-                                        .font(.headline)
-                                        .padding(.bottom, 5)
-                                    Spacer()
-                                    if let bloodType = selectedBloodType {
-                                        Text(bloodType)
-                                            .font(.subheadline)
-                                            .foregroundColor(.gray)
-                                    } else {
-                                        Text("新增")
-                                            .font(.headline)
-                                            .foregroundColor(.green)
-                                    }
-                                    Image(systemName: "chevron.right") // 添加向右的箭头
-                                        .foregroundColor(.gray)
-                                }
-                                .padding()
-                                .background(Color.white)
-                                .cornerRadius(10)
-                                .onTapGesture {
-                                    showBloodTypePicker = true // 点击时显示血型选择页面
-                                }
-                                .sheet(isPresented: $showBloodTypePicker) {
-                                    BloodTypePickerView(selectedBloodType: $selectedBloodType)
-                                }
-                            }
-                            .padding(.horizontal)
+                            EducationAndWorkView(
+                                selectedDegree: $selectedDegree,
+                                selectedSchool: $selectedSchool,
+                                selectedIndustry: $selectedIndustry,
+                                selectedJob: $selectedJob,
+                                showDegreePicker: $showDegreePicker,
+                                showSchoolInput: $showSchoolInput,
+                                showIndustryPicker: $showIndustryPicker,
+                                showJobInput: $showJobInput,
+                                degrees: degrees,
+                                industries: industries
+                            )
                             
-                            // 生活方式
-                            VStack(alignment: .leading) {
-                                Text("生活方式")
-                                    .font(.headline)
-                                    .padding(.bottom, 5)
-                                
-                                HStack {
-                                    Image(systemName: "magnifyingglass")
-                                        .foregroundColor(.gray)
-                                    Text("想找")
-                                        .font(.headline)
-                                        .padding(.bottom, 5)
-                                    Spacer()
-                                    if let lookingFor = selectedLookingFor {
-                                        Text(lookingFor)
-                                            .font(.subheadline)
-                                            .foregroundColor(.gray)
-                                    } else {
-                                        Text("新增")
-                                            .font(.headline)
-                                            .foregroundColor(.green)
-                                    }
-                                    Image(systemName: "chevron.right") // 添加向右的箭头
-                                        .foregroundColor(.gray)
-                                }
-                                .padding()
-                                .background(Color.white)
-                                .cornerRadius(10)
-                                .onTapGesture {
-                                    showLookingForView = true
-                                }
-                                .sheet(isPresented: $showLookingForView) {
-                                    LookingForView(selectedLookingFor: $selectedLookingFor)
-                                }
-                                
-                                HStack {
-                                    Image(systemName: "pawprint")
-                                        .foregroundColor(.gray)
-                                    Text("寵物")
-                                        .font(.headline)
-                                        .padding(.bottom, 5)
-                                    Spacer()
-                                    if let pet = selectedPet {
-                                        Text(pet)
-                                            .font(.subheadline)
-                                            .foregroundColor(.gray)
-                                    } else {
-                                        Text("新增")
-                                            .font(.headline)
-                                            .foregroundColor(.green)
-                                    }
-                                    Image(systemName: "chevron.right") // 添加向右的箭头
-                                        .foregroundColor(.gray)
-                                }
-                                .padding()
-                                .background(Color.white)
-                                .cornerRadius(10)
-                                .onTapGesture {
-                                    showPetSelectionView = true
-                                }
-                                .sheet(isPresented: $showPetSelectionView) {
-                                    PetSelectionView(selectedPet: $selectedPet)
-                                }
-
-                                HStack {
-                                    Image(systemName: "dumbbell")
-                                        .foregroundColor(.gray)
-                                    Text("健身")
-                                        .font(.headline)
-                                        .padding(.bottom, 5)
-                                    Spacer()
-                                    if let option = selectedFitnessOption {
-                                        Text(option)
-                                            .font(.subheadline)
-                                            .foregroundColor(.gray)
-                                    } else {
-                                        Text("新增")
-                                            .font(.headline)
-                                            .foregroundColor(.green)
-                                    }
-                                    Image(systemName: "chevron.right") // 添加向右的箭头
-                                        .foregroundColor(.gray)
-                                }
-                                .padding()
-                                .background(Color.white)
-                                .cornerRadius(10)
-                                .onTapGesture {
-                                    showFitnessOptions = true
-                                }
-                                .sheet(isPresented: $showFitnessOptions) {
-                                    FitnessOptionsView(selectedFitnessOption: $selectedFitnessOption)
-                                }
-
-                                HStack {
-                                    Image("smoking")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 24, height: 24) // 调整大小以适应你的设计
-                                    Text("抽煙")
-                                        .font(.headline)
-                                        .padding(.bottom, 5)
-                                    Spacer()
-                                    if let option = selectedSmokingOption {
-                                        Text(option)
-                                            .font(.subheadline)
-                                            .foregroundColor(.gray)
-                                    } else {
-                                        Text("新增")
-                                            .font(.headline)
-                                            .foregroundColor(.green)
-                                    }
-                                    Image(systemName: "chevron.right") // 添加向右的箭头
-                                        .foregroundColor(.gray)
-                                }
-                                .padding()
-                                .background(Color.white)
-                                .cornerRadius(10)
-                                .onTapGesture {
-                                    showSmokingOptions = true
-                                }
-                                .sheet(isPresented: $showSmokingOptions) {
-                                    SmokingOptionsView(selectedSmokingOption: $selectedSmokingOption)
-                                }
-
-                                HStack {
-                                    Image(systemName: "wineglass.fill")
-                                        .foregroundColor(.gray)
-                                    Text("喝酒")
-                                        .font(.headline)
-                                        .padding(.bottom, 5)
-                                    Spacer()
-                                    if let option = selectedDrinkOption {
-                                        Text(option)
-                                            .font(.subheadline)
-                                            .foregroundColor(.gray)
-                                    } else {
-                                        Text("新增")
-                                            .font(.headline)
-                                            .foregroundColor(.green)
-                                    }
-                                    Image(systemName: "chevron.right") // 添加向右的箭头
-                                        .foregroundColor(.gray)
-                                }
-                                .padding()
-                                .background(Color.white)
-                                .cornerRadius(10)
-                                .onTapGesture {
-                                    showDrinkOptions = true
-                                }
-                                .sheet(isPresented: $showDrinkOptions) {
-                                    DrinkOptionsView(selectedDrinkOption: $selectedDrinkOption)
-                                }
-
-                                HStack {
-                                    Image(systemName: "tree.fill")
-                                        .foregroundColor(.gray)
-                                    Text("休假日")
-                                        .font(.headline)
-                                        .padding(.bottom, 5)
-                                    Spacer()
-                                    if let option = selectedVacationOption {
-                                        Text(option)
-                                            .font(.subheadline)
-                                            .foregroundColor(.gray)
-                                    } else {
-                                        Text("新增")
-                                            .font(.headline)
-                                            .foregroundColor(.green)
-                                    }
-                                    Image(systemName: "chevron.right") // 添加向右的箭头
-                                        .foregroundColor(.gray)
-                                }
-                                .padding()
-                                .background(Color.white)
-                                .cornerRadius(10)
-                                .onTapGesture {
-                                    showVacationOptions = true
-                                }
-                                .sheet(isPresented: $showVacationOptions) {
-                                    VacationOptionsView(selectedVacationOption: $selectedVacationOption)
-                                }
-
-                                HStack {
-                                    Image(systemName: "fork.knife")
-                                        .foregroundColor(.gray)
-                                    Text("飲食習慣")
-                                        .font(.headline)
-                                        .padding(.bottom, 5)
-                                    Spacer()
-                                    if let option = selectedDietPreference {
-                                        Text(option)
-                                            .font(.subheadline)
-                                            .foregroundColor(.gray)
-                                    } else {
-                                        Text("新增")
-                                            .font(.headline)
-                                            .foregroundColor(.green)
-                                    }
-                                    Image(systemName: "chevron.right") // 添加向右的箭头
-                                        .foregroundColor(.gray)
-                                }
-                                .padding()
-                                .background(Color.white)
-                                .cornerRadius(10)
-                                .onTapGesture {
-                                    showDietPreferences = true
-                                }
-                                .sheet(isPresented: $showDietPreferences) {
-                                    DietPreferencesView(selectedDietPreference: $selectedDietPreference)
-                                }
-
-                                Spacer()
-                            }
-                            .padding(.horizontal)
+                            BasicInfoView(
+                                selectedHometown: $selectedHometown,
+                                showHometownInput: $showHometownInput,
+                                selectedLanguages: $selectedLanguages,
+                                showLanguageSelection: $showLanguageSelection,
+                                selectedHeight: $selectedHeight,
+                                showHeightPicker: $showHeightPicker,
+                                selectedZodiac: $selectedZodiac,
+                                showZodiacPicker: $showZodiacPicker,
+                                selectedBloodType: $selectedBloodType,
+                                showBloodTypePicker: $showBloodTypePicker
+                            )
+                            
+                            LifestyleView(
+                                selectedLookingFor: $selectedLookingFor,
+                                showLookingForView: $showLookingForView,
+                                selectedPet: $selectedPet,
+                                showPetSelectionView: $showPetSelectionView,
+                                selectedFitnessOption: $selectedFitnessOption,
+                                showFitnessOptions: $showFitnessOptions,
+                                selectedSmokingOption: $selectedSmokingOption,
+                                showSmokingOptions: $showSmokingOptions,
+                                selectedDrinkOption: $selectedDrinkOption,
+                                showDrinkOptions: $showDrinkOptions,
+                                selectedVacationOption: $selectedVacationOption,
+                                showVacationOptions: $showVacationOptions,
+                                selectedDietPreference: $selectedDietPreference,
+                                showDietPreferences: $showDietPreferences
+                            )
                         }
                     }
                     .background(Color.gray.opacity(0.1)) // 设置背景颜色为淡灰色
