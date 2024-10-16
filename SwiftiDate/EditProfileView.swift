@@ -359,44 +359,55 @@ struct EditProfileView: View {
             }
             .navigationBarTitle("編輯個人資料", displayMode: .inline)
             .navigationBarItems(
-                leading: Button(action: {
-                    // 將 deletedPhotos 中的照片移回到 photos
-                    deletedPhotos.sort(by: >) // 逆序排序
-                    photos.append(contentsOf: deletedPhotos)
-                    
-                    // 更新 loadedPhotosString 以包含最新的照片列表
-                    userSettings.loadedPhotosString = photos.joined(separator: ",")
-
-                    // 清空 deletedPhotos
-                    deletedPhotos.removeAll()
-
-                    // Custom action to go back
-                    presentationMode.wrappedValue.dismiss()
-                }) {
-                    HStack {
-                        Image(systemName: "chevron.left")
-                            .font(.headline)
-                    }
-                },
-                trailing: Button("保存") {
-                    // 遍歷 deletedPhotos，逐一從 Firebase 刪除
-                    for photoURL in deletedPhotos {
-                        deletePhotoFromFirebase(photoURL: photoURL)
-                    }
-                    
-                    // 上傳新添加的照片到 Firebase
-                    uploadNewPhotosToFirebase()
-
-                    // 完成後返回到上一頁
-                    presentationMode.wrappedValue.dismiss()
-                }
+                leading: backButton,
+                trailing: saveButton
             )
         }
     }
     
-    // 獲取文件目錄
-    func getDocumentsDirectory() -> URL {
-        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    // "返回" 按鈕的行為
+    private var backButton: some View {
+        Button(action: handleBack) {
+            HStack {
+                Image(systemName: "chevron.left")
+                    .font(.headline)
+            }
+        }
+    }
+    
+    // "保存" 按鈕的行為
+    private var saveButton: some View {
+        Button("保存", action: handleSave)
+    }
+    
+    // 處理 "返回" 的邏輯
+    private func handleBack() {
+        // 將 deletedPhotos 中的照片移回到 photos
+        deletedPhotos.sort(by: >) // 逆序排序
+        photos.append(contentsOf: deletedPhotos)
+
+        // 更新 loadedPhotosString 以包含最新的照片列表
+        userSettings.loadedPhotosString = photos.joined(separator: ",")
+
+        // 清空 deletedPhotos
+        deletedPhotos.removeAll()
+
+        // Custom action to go back
+        presentationMode.wrappedValue.dismiss()
+    }
+    
+    // 處理 "保存" 的邏輯
+    private func handleSave() {
+        // 遍歷 deletedPhotos，逐一從 Firebase 刪除
+        for photoURL in deletedPhotos {
+            deletePhotoFromFirebase(photoURL: photoURL)
+        }
+
+        // 上傳新添加的照片到 Firebase
+        uploadNewPhotosToFirebase()
+
+        // 完成後返回到上一頁
+        presentationMode.wrappedValue.dismiss()
     }
     
     // 上傳新照片到 Firebase 的函數
