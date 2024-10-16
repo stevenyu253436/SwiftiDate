@@ -240,7 +240,8 @@ struct EditProfileView: View {
                 } else {
                     // 預覽界面
                     ZStack {
-                        if let imageName = photos[safe: currentPhotoIndex], let image = loadImageFromLocalStorage(named: imageName) {
+                        if let imageName = photos.indices.contains(currentPhotoIndex) ? photos[currentPhotoIndex] : nil,
+                           let image = loadImageFromLocalStorage(named: imageName) {
                             Image(uiImage: image)
                                 .resizable()
                                 .scaledToFill()
@@ -249,7 +250,7 @@ struct EditProfileView: View {
                                 .overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.white, lineWidth: 4))
                                 .edgesIgnoringSafeArea(.top)
                         } else {
-                            // 顯示預設佔位符圖片或錯誤圖標
+                            // Display a placeholder or error image
                             Image(systemName: "exclamationmark.triangle.fill")
                                 .resizable()
                                 .scaledToFit()
@@ -291,6 +292,35 @@ struct EditProfileView: View {
                                 .padding(.top)
                         }
                         .padding()
+                        
+                        // Add a transparent layer for tap detection
+                        GeometryReader { geometry in
+                            HStack {
+                                // Left half tap gesture
+                                Rectangle()
+                                    .fill(Color.clear)
+                                    .contentShape(Rectangle()) // Make the whole area tappable
+                                    .frame(width: geometry.size.width / 2)
+                                    .onTapGesture {
+                                        // Decrease index if not at the first photo
+                                        if currentPhotoIndex > 0 {
+                                            currentPhotoIndex -= 1
+                                        }
+                                    }
+                                
+                                // Right half tap gesture
+                                Rectangle()
+                                    .fill(Color.clear)
+                                    .contentShape(Rectangle()) // Make the whole area tappable
+                                    .frame(width: geometry.size.width / 2)
+                                    .onTapGesture {
+                                        // Increase index if not at the last photo
+                                        if currentPhotoIndex < photos.count - 1 {
+                                            currentPhotoIndex += 1
+                                        }
+                                    }
+                            }
+                        }
                     }
                 }
             }
