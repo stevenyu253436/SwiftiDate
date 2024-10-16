@@ -327,6 +327,11 @@ struct EditProfileView: View {
             .navigationBarTitle("編輯個人資料", displayMode: .inline)
             .navigationBarItems(
                 leading: Button(action: {
+                    // 將 deletedPhotos 中的照片移回到 photos
+                    deletedPhotos.sort(by: >) // 逆序排序
+                    photos.append(contentsOf: deletedPhotos)
+                    deletedPhotos.removeAll() // 清空 deletedPhotos
+                    
                     // Custom action to go back
                     presentationMode.wrappedValue.dismiss()
                 }) {
