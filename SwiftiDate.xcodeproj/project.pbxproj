@@ -477,7 +477,6 @@
 				D04938772CBF0A4600754E46 /* ChatRow.swift */,
 				D04938792CBF0A6F00754E46 /* Models.swift */,
 				D051EF2B2CC02C33004563A3 /* PhotoUtility.swift */,
-				D04729C52CC03D55007C33EC /* ProfileHeaderView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -511,6 +510,7 @@
 			isa = PBXGroup;
 			children = (
 				D051EF302CC033C5004563A3 /* AchievementSectionView.swift */,
+				D04729C52CC03D55007C33EC /* ProfileHeaderView.swift */,
 				D04729C32CC03C4D007C33EC /* StatisticsSectionView.swift */,
 				D04729C12CC038B6007C33EC /* UnverifiedProfilePlaceholderView.swift */,
 				D051EF2D2CC03360004563A3 /* VerifiedProfileProgressView.swift */,
