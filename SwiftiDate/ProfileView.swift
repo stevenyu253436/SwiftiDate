@@ -102,51 +102,13 @@ struct ProfileView: View {
                         .padding()
 
                         // 统计信息
-                        HStack(spacing: 50) {
-                            Button(action: {
-                                selectedTab = 0 // Set selectedTab to 0 for "喜歡我的人"
-                                isShowingTurboView = true // Set state to true to show TurboView
-                            }) {
-                                VStack {
-                                    Text(userSettings.globalLikesMeCount >= 99 ? "99+" : "\(userSettings.globalLikesMeCount)")
-                                        .font(.title)
-                                        .fontWeight(.bold)
-                                        .foregroundColor(.black) // 設置文字顏色為黑色
-                                    Text("喜歡我")
-                                        .font(.caption)
-                                        .foregroundColor(.gray)
-                                }
+                        StatisticsSectionView(selectedTab: $selectedTab, isShowingTurboView: $isShowingTurboView)
+                            .environmentObject(userSettings) // 傳遞 EnvironmentObject
+                            .fullScreenCover(isPresented: $isShowingTurboView) {
+                                TurboView(contentSelectedTab: $contentSelectedTab, turboSelectedTab: $selectedTab, showBackButton: true, onBack: {
+                                    isShowingTurboView = false // 當返回按鈕被按下時，關閉 fullScreenCover
+                                })
                             }
-                            Button(action: {
-                                selectedTab = 1 // Set selectedTab to 1 for "我的心動對象"
-                                isShowingTurboView = true // Show TurboView
-                            }) {
-                                VStack {
-                                    Text(userSettings.globalLikeCount > 99 ? "99+" : "\(userSettings.globalLikeCount)") // Display based on the like count
-                                        .font(.title)
-                                        .fontWeight(.bold)
-                                        .foregroundColor(.black) // 設置文字顏色為黑色
-                                    Text("我喜歡")
-                                        .font(.caption)
-                                        .foregroundColor(.gray)
-                                }
-                            }
-                            VStack {
-                                Text("5")
-                                    .font(.title)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.black) // 設置文字顏色為黑色
-                                Text("精選")
-                                    .font(.caption)
-                                    .foregroundColor(.gray)
-                            }
-                        }
-                        .padding(.horizontal)
-                        .fullScreenCover(isPresented: $isShowingTurboView) {
-                            TurboView(contentSelectedTab: $contentSelectedTab, turboSelectedTab: $selectedTab, showBackButton: true, onBack: {
-                                isShowingTurboView = false // Close the fullScreenCover when back button is pressed
-                            })
-                        }
                         
                         if userSettings.isProfilePhotoVerified {
                             // 成就进度条
@@ -186,7 +148,9 @@ struct ProfileView: View {
                             .background(Color.black)
                             .cornerRadius(10)
                             .padding(.horizontal)
-                            
+                        }
+                        
+                        if userSettings.isSupremeUser {
                             // 服務項目
                             VStack(alignment: .leading, spacing: 10) {
                                 // Service Section Title
