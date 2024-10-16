@@ -8,6 +8,38 @@
 import Foundation
 import SwiftUI
 
+// Reusable row component for lifestyle options
+struct LifestyleRowView<Icon: View>: View {
+    let label: String
+    let value: String
+    let icon: Icon
+    let isValueEmpty: Bool
+    let onTap: () -> Void
+    
+    var body: some View {
+        HStack {
+            icon
+                .foregroundColor(.gray)
+                .frame(width: 24, height: 24)
+            Text(label)
+                .font(.headline)
+                .padding(.bottom, 5)
+            Spacer()
+            Text(value)
+                .font(.subheadline)
+                .foregroundColor(isValueEmpty ? .green : .gray)
+            Image(systemName: "chevron.right")
+                .foregroundColor(.gray)
+        }
+        .padding()
+        .background(Color.white)
+        .cornerRadius(10)
+        .onTapGesture {
+            onTap()
+        }
+    }
+}
+
 struct LifestyleView: View {
     @Binding var selectedLookingFor: String?
     @Binding var showLookingForView: Bool
@@ -31,211 +63,100 @@ struct LifestyleView: View {
                 .font(.headline)
                 .padding(.bottom, 5)
             
-            HStack {
-                Image(systemName: "magnifyingglass")
-                    .foregroundColor(.gray)
-                Text("想找")
-                    .font(.headline)
-                    .padding(.bottom, 5)
-                Spacer()
-                if let lookingFor = selectedLookingFor {
-                    Text(lookingFor)
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                } else {
-                    Text("新增")
-                        .font(.headline)
-                        .foregroundColor(.green)
+            LifestyleRowView(
+                label: "想找",
+                value: selectedLookingFor ?? "新增",
+                icon: Image(systemName: "magnifyingglass"),
+                isValueEmpty: selectedLookingFor == nil,
+                onTap: {
+                    showLookingForView = true
                 }
-                Image(systemName: "chevron.right") // 添加向右的箭头
-                    .foregroundColor(.gray)
-            }
-            .padding()
-            .background(Color.white)
-            .cornerRadius(10)
-            .onTapGesture {
-                showLookingForView = true
-            }
+            )
             .sheet(isPresented: $showLookingForView) {
                 LookingForView(selectedLookingFor: $selectedLookingFor)
             }
-            
-            HStack {
-                Image(systemName: "pawprint")
-                    .foregroundColor(.gray)
-                Text("寵物")
-                    .font(.headline)
-                    .padding(.bottom, 5)
-                Spacer()
-                if let pet = selectedPet {
-                    Text(pet)
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                } else {
-                    Text("新增")
-                        .font(.headline)
-                        .foregroundColor(.green)
+
+            LifestyleRowView(
+                label: "寵物",
+                value: selectedPet ?? "新增",
+                icon: Image(systemName: "pawprint"),
+                isValueEmpty: selectedPet == nil,
+                onTap: {
+                    showPetSelectionView = true
                 }
-                Image(systemName: "chevron.right") // 添加向右的箭头
-                    .foregroundColor(.gray)
-            }
-            .padding()
-            .background(Color.white)
-            .cornerRadius(10)
-            .onTapGesture {
-                showPetSelectionView = true
-            }
+            )
             .sheet(isPresented: $showPetSelectionView) {
                 PetSelectionView(selectedPet: $selectedPet)
             }
-            
-            HStack {
-                Image(systemName: "dumbbell")
-                    .foregroundColor(.gray)
-                Text("健身")
-                    .font(.headline)
-                    .padding(.bottom, 5)
-                Spacer()
-                if let option = selectedFitnessOption {
-                    Text(option)
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                } else {
-                    Text("新增")
-                        .font(.headline)
-                        .foregroundColor(.green)
+
+            LifestyleRowView(
+                label: "健身",
+                value: selectedFitnessOption ?? "新增",
+                icon: Image(systemName: "dumbbell"),
+                isValueEmpty: selectedFitnessOption == nil,
+                onTap: {
+                    showFitnessOptions = true
                 }
-                Image(systemName: "chevron.right") // 添加向右的箭头
-                    .foregroundColor(.gray)
-            }
-            .padding()
-            .background(Color.white)
-            .cornerRadius(10)
-            .onTapGesture {
-                showFitnessOptions = true
-            }
+            )
             .sheet(isPresented: $showFitnessOptions) {
                 FitnessOptionsView(selectedFitnessOption: $selectedFitnessOption)
             }
-            
-            HStack {
-                Image("smoking")
+
+            LifestyleRowView(
+                label: "抽煙",
+                value: selectedSmokingOption ?? "新增",
+                icon: Image("smoking")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 24, height: 24) // 调整大小以适应你的设计
-                Text("抽煙")
-                    .font(.headline)
-                    .padding(.bottom, 5)
-                Spacer()
-                if let option = selectedSmokingOption {
-                    Text(option)
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                } else {
-                    Text("新增")
-                        .font(.headline)
-                        .foregroundColor(.green)
+                    .frame(width: 24, height: 24),
+                isValueEmpty: selectedSmokingOption == nil,
+                onTap: {
+                    showSmokingOptions = true
                 }
-                Image(systemName: "chevron.right") // 添加向右的箭头
-                    .foregroundColor(.gray)
-            }
-            .padding()
-            .background(Color.white)
-            .cornerRadius(10)
-            .onTapGesture {
-                showSmokingOptions = true
-            }
+            )
             .sheet(isPresented: $showSmokingOptions) {
                 SmokingOptionsView(selectedSmokingOption: $selectedSmokingOption)
             }
-            
-            HStack {
-                Image(systemName: "wineglass.fill")
-                    .foregroundColor(.gray)
-                Text("喝酒")
-                    .font(.headline)
-                    .padding(.bottom, 5)
-                Spacer()
-                if let option = selectedDrinkOption {
-                    Text(option)
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                } else {
-                    Text("新增")
-                        .font(.headline)
-                        .foregroundColor(.green)
+
+            LifestyleRowView(
+                label: "喝酒",
+                value: selectedDrinkOption ?? "新增",
+                icon: Image(systemName: "wineglass.fill"),
+                isValueEmpty: selectedDrinkOption == nil,
+                onTap: {
+                    showDrinkOptions = true
                 }
-                Image(systemName: "chevron.right") // 添加向右的箭头
-                    .foregroundColor(.gray)
-            }
-            .padding()
-            .background(Color.white)
-            .cornerRadius(10)
-            .onTapGesture {
-                showDrinkOptions = true
-            }
+            )
             .sheet(isPresented: $showDrinkOptions) {
                 DrinkOptionsView(selectedDrinkOption: $selectedDrinkOption)
             }
-            
-            HStack {
-                Image(systemName: "tree.fill")
-                    .foregroundColor(.gray)
-                Text("休假日")
-                    .font(.headline)
-                    .padding(.bottom, 5)
-                Spacer()
-                if let option = selectedVacationOption {
-                    Text(option)
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                } else {
-                    Text("新增")
-                        .font(.headline)
-                        .foregroundColor(.green)
+
+            LifestyleRowView(
+                label: "休假日",
+                value: selectedVacationOption ?? "新增",
+                icon: Image(systemName: "tree.fill"),
+                isValueEmpty: selectedVacationOption == nil,
+                onTap: {
+                    showVacationOptions = true
                 }
-                Image(systemName: "chevron.right") // 添加向右的箭头
-                    .foregroundColor(.gray)
-            }
-            .padding()
-            .background(Color.white)
-            .cornerRadius(10)
-            .onTapGesture {
-                showVacationOptions = true
-            }
+            )
             .sheet(isPresented: $showVacationOptions) {
                 VacationOptionsView(selectedVacationOption: $selectedVacationOption)
             }
-            
-            HStack {
-                Image(systemName: "fork.knife")
-                    .foregroundColor(.gray)
-                Text("飲食習慣")
-                    .font(.headline)
-                    .padding(.bottom, 5)
-                Spacer()
-                if let option = selectedDietPreference {
-                    Text(option)
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                } else {
-                    Text("新增")
-                        .font(.headline)
-                        .foregroundColor(.green)
+
+            LifestyleRowView(
+                label: "飲食習慣",
+                value: selectedDietPreference ?? "新增",
+                icon: Image(systemName: "fork.knife"),
+                isValueEmpty: selectedDietPreference == nil,
+                onTap: {
+                    showDietPreferences = true
                 }
-                Image(systemName: "chevron.right") // 添加向右的箭头
-                    .foregroundColor(.gray)
-            }
-            .padding()
-            .background(Color.white)
-            .cornerRadius(10)
-            .onTapGesture {
-                showDietPreferences = true
-            }
+            )
             .sheet(isPresented: $showDietPreferences) {
                 DietPreferencesView(selectedDietPreference: $selectedDietPreference)
             }
-            
+
             Spacer()
         }
         .padding(.horizontal)
