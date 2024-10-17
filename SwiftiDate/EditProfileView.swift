@@ -22,49 +22,6 @@ extension Array {
     }
 }
 
-
-// 將認證部分提取到獨立的 View
-struct VerificationStatusView: View {
-    @EnvironmentObject var userSettings: UserSettings
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 5) {
-            Text("真人認證")
-                .font(.headline)
-                .foregroundColor(.black)
-                .padding(.bottom, 5)
-
-            HStack {
-                Image(systemName: "checkmark.seal.fill")
-                    .foregroundColor(.blue)
-                Text("認證你的個人照片")
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
-                Spacer()
-                if userSettings.globalIsUserVerified {
-                    Text("已認證")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                } else {
-                    Text("未認證")
-                        .font(.subheadline)
-                        .foregroundColor(.red)
-
-                    Image(systemName: "chevron.right")
-                        .foregroundColor(.gray)
-                }
-            }
-            .padding()
-            .background(Color.white)
-            .cornerRadius(10)
-            .shadow(radius: 2)
-        }
-        .padding(.horizontal)
-        .padding(.vertical, 5)
-        .background(Color.clear)
-    }
-}
-
 struct EditProfileView: View {
     @EnvironmentObject var userSettings: UserSettings // 使用 EnvironmentObject 存取 UserSettings
     
@@ -73,7 +30,8 @@ struct EditProfileView: View {
     @State private var deletedPhotos: [String] = [] // 用來存放被刪除的照片URL
     @State private var aboutMe = "能見面左右滑謝謝🙏\n一起吃日料吧🍣\n抽水煙也可以💨"
     @State private var currentPhotoIndex = 0
-    
+    @State private var isShowingVerificationView = false // 新增這個變量來控制驗證頁面的顯示
+
     @State private var selectedDegree: String? = "碩士及以上"  // 改为可选类型
     @State private var showDegreePicker = false // 新增
     let degrees = ["高中", "職校/專科", "學士", "碩士及以上", "其他學歷"] // 新增
@@ -162,8 +120,9 @@ struct EditProfileView: View {
                             SmartPhotoToggle()
 
                             // 認證狀態
-                            VerificationStatusView()
-
+                            VerificationStatusView(isShowingVerificationView: $isShowingVerificationView, photos: $photos)
+                                .environmentObject(userSettings) // Provide the UserSettings environment object
+                            
                             // 關於我
                             AboutMeSection(aboutMe: $aboutMe)
 

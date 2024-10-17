@@ -15,23 +15,7 @@ struct ProfileHeaderView: View {
 
     var body: some View {
         HStack {
-            if let firstPhotoName = photos.first, let image = PhotoUtility.loadImageFromLocalStorage(named: firstPhotoName) {
-                Image(uiImage: image)
-                    .resizable()
-                    .frame(width: 100, height: 133)
-                    .clipShape(Circle())
-                    .overlay(Circle().stroke(Color.white, lineWidth: 4))
-                    .shadow(radius: 10)
-            } else {
-                // 顯示預設的佔位符圖片
-                Image(systemName: "person.crop.circle.fill")
-                    .resizable()
-                    .frame(width: 100, height: 133)
-                    .foregroundColor(.gray)
-                    .clipShape(Circle())
-                    .overlay(Circle().stroke(Color.white, lineWidth: 4))
-                    .shadow(radius: 10)
-            }
+            ProfileImageView(photoName: photos.first)
 
             Button(action: {
                 isShowingEditProfileView = true // 顯示 EditProfileView
