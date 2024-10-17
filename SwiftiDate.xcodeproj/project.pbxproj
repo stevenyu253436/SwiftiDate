@@ -86,6 +86,10 @@
 		D04729D82CC099BA007C33EC /* VerificationStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04729D72CC099BA007C33EC /* VerificationStatusView.swift */; };
 		D04729DA2CC09B54007C33EC /* EditSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04729D92CC09B54007C33EC /* EditSectionView.swift */; };
 		D04729DC2CC0BDC4007C33EC /* ServiceSectionContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04729DB2CC0BDC4007C33EC /* ServiceSectionContainer.swift */; };
+		D04729DE2CC11320007C33EC /* InfoPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04729DD2CC11320007C33EC /* InfoPopupView.swift */; };
+		D04729E02CC1149E007C33EC /* TopRightActionButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04729DF2CC1149D007C33EC /* TopRightActionButtons.swift */; };
+		D04729E22CC1315F007C33EC /* SupremeBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04729E12CC1315F007C33EC /* SupremeBannerView.swift */; };
+		D04729E42CC13221007C33EC /* PremiumCardTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04729E32CC13221007C33EC /* PremiumCardTabView.swift */; };
 		D04938782CBF0A4700754E46 /* ChatRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04938772CBF0A4600754E46 /* ChatRow.swift */; };
 		D049387A2CBF0A6F00754E46 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04938792CBF0A6F00754E46 /* Models.swift */; };
 		D049387C2CBF465300754E46 /* EducationAndWorkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D049387B2CBF465300754E46 /* EducationAndWorkView.swift */; };
@@ -234,6 +238,10 @@
 		D04729D72CC099BA007C33EC /* VerificationStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationStatusView.swift; sourceTree = "<group>"; };
 		D04729D92CC09B54007C33EC /* EditSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSectionView.swift; sourceTree = "<group>"; };
 		D04729DB2CC0BDC4007C33EC /* ServiceSectionContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceSectionContainer.swift; sourceTree = "<group>"; };
+		D04729DD2CC11320007C33EC /* InfoPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPopupView.swift; sourceTree = "<group>"; };
+		D04729DF2CC1149D007C33EC /* TopRightActionButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRightActionButtons.swift; sourceTree = "<group>"; };
+		D04729E12CC1315F007C33EC /* SupremeBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupremeBannerView.swift; sourceTree = "<group>"; };
+		D04729E32CC13221007C33EC /* PremiumCardTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumCardTabView.swift; sourceTree = "<group>"; };
 		D04938772CBF0A4600754E46 /* ChatRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRow.swift; sourceTree = "<group>"; };
 		D04938792CBF0A6F00754E46 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		D049387B2CBF465300754E46 /* EducationAndWorkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EducationAndWorkView.swift; sourceTree = "<group>"; };
@@ -508,6 +516,7 @@
 				D04938772CBF0A4600754E46 /* ChatRow.swift */,
 				D04938792CBF0A6F00754E46 /* Models.swift */,
 				D051EF2B2CC02C33004563A3 /* PhotoUtility.swift */,
+				D04729E32CC13221007C33EC /* PremiumCardTabView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -541,10 +550,13 @@
 			isa = PBXGroup;
 			children = (
 				D051EF302CC033C5004563A3 /* AchievementSectionView.swift */,
+				D04729DD2CC11320007C33EC /* InfoPopupView.swift */,
 				D04729C52CC03D55007C33EC /* ProfileHeaderView.swift */,
 				D04729D52CC09749007C33EC /* ProfileImageView.swift */,
 				D04729DB2CC0BDC4007C33EC /* ServiceSectionContainer.swift */,
 				D04729C32CC03C4D007C33EC /* StatisticsSectionView.swift */,
+				D04729E12CC1315F007C33EC /* SupremeBannerView.swift */,
+				D04729DF2CC1149D007C33EC /* TopRightActionButtons.swift */,
 				D04729C12CC038B6007C33EC /* UnverifiedProfilePlaceholderView.swift */,
 				D051EF2D2CC03360004563A3 /* VerifiedProfileProgressView.swift */,
 			);
@@ -756,6 +768,7 @@
 				D0445C792C73C0B30059D522 /* ZodiacPickerView.swift in Sources */,
 				D051EF2E2CC03360004563A3 /* VerifiedProfileProgressView.swift in Sources */,
 				D017F4EE2CAEBC8700C71D18 /* QRCodeScannerView.swift in Sources */,
+				D04729E22CC1315F007C33EC /* SupremeBannerView.swift in Sources */,
 				D017F4F82CAFC9A200C71D18 /* PhoneNumberEntryView.swift in Sources */,
 				D0445C7F2C73C9080059D522 /* LookingForView.swift in Sources */,
 				D0DDDB3E2CA179AC00A78A87 /* WhatIsSwiftiDatePremiumDiscountPolicyView.swift in Sources */,
@@ -769,6 +782,7 @@
 				D0445C692C723AE80059D522 /* FlowLayout.swift in Sources */,
 				D0DDDB142CA10EAD00A78A87 /* SettingsView.swift in Sources */,
 				D0DDDB582CA4ECD300A78A87 /* DataManagementView.swift in Sources */,
+				D04729DE2CC11320007C33EC /* InfoPopupView.swift in Sources */,
 				D0DDDB462CA18FDC00A78A87 /* HowToUseIncognitoModeView.swift in Sources */,
 				D04729CA2CC087AD007C33EC /* PreviewSectionView.swift in Sources */,
 				D0DDDB362CA16FF900A78A87 /* HowToPurchaseSwiftiDatePremiumView.swift in Sources */,
@@ -812,6 +826,7 @@
 				D0445C652C72388D0059D522 /* FlowStack.swift in Sources */,
 				D04729C42CC03C4D007C33EC /* StatisticsSectionView.swift in Sources */,
 				D0DDDB2A2CA156A700A78A87 /* WhatIsSwiftiDatePremiumView.swift in Sources */,
+				D04729E02CC1149E007C33EC /* TopRightActionButtons.swift in Sources */,
 				D0DDDB542CA25B4E00A78A87 /* PrivacyPolicyView.swift in Sources */,
 				D04729DC2CC0BDC4007C33EC /* ServiceSectionContainer.swift in Sources */,
 				D0445C732C72FB440059D522 /* HometownInputView.swift in Sources */,
@@ -822,6 +837,7 @@
 				D09587C32CB7C0A900BCD04B /* SafetyTipsView.swift in Sources */,
 				D09587C92CB7CDB800BCD04B /* HowToReportView.swift in Sources */,
 				D0DDDB1E2CA138B200A78A87 /* HowToMatchAndChatView.swift in Sources */,
+				D04729E42CC13221007C33EC /* PremiumCardTabView.swift in Sources */,
 				D0DDDB382CA171B400A78A87 /* HowToCancelSubscriptionView.swift in Sources */,
 				D0DDDB0F2CA0E65F00A78A87 /* LocationManager.swift in Sources */,
 				D0DDDB242CA1486E00A78A87 /* HowToUnmatchView.swift in Sources */,

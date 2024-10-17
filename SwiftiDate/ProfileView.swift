@@ -21,6 +21,7 @@ struct ProfileView: View {
     @State private var isShowingTurboView = false
     @State private var selectedTab: Int = 0 // State to control which tab is selected in TurboView
     @Binding var contentSelectedTab: Int // Use a binding variable for selectedTab from ContentView
+    @State private var profileSelectedTab: Int = 0 // State to control which tab is selected in ProfileView
     @State private var isShowingTurboPurchaseView = false // State variable to control the sheet presentation
     @State private var isShowingCrushPurchaseView = false // State variable to control Crush sheet presentation
     @State private var isShowingPraisePurchaseView = false // State variable to control Praise sheet presentation
@@ -73,57 +74,9 @@ struct ProfileView: View {
                         
                         // Display Supreme banner if the user has purchased Supreme
                         if isSupreme {
-                            ZStack {
-                                VStack(alignment: .leading) {
-                                    HStack {
-                                        Image(systemName: "crown.fill") // Adding the crown icon
-                                            .foregroundColor(.gold) // Matching the gold color
-                                            .font(.system(size: 18)) // Adjust the size as needed
-                                        
-                                        Text("SwiftiDate Supreme")
-                                            .font(.headline)
-                                            .foregroundColor(.gold) // Set text color to gold
-                                            .fontWeight(.bold)
-                                    }
-                                    
-                                    Text("已開啟 SwiftiDate 所有特權")
-                                        .font(.subheadline)
-                                        .foregroundColor(.gold)
-                                    
-                                    Spacer()
-                                }
-                                .padding(.vertical, 30)
-                                .frame(maxWidth: UIScreen.main.bounds.width - 80, alignment: .leading) // 設置最大寬度稍小於螢幕寬度
-                                .padding(.horizontal) // Add horizontal padding to the outer VStack
-                            }
-                            .background(Color.black) // Apply background color to the entire ZStack
-                            .cornerRadius(10) // Apply corner radius to the entire ZStack
+                            SupremeBannerView()
                         } else {
-                            ZStack {
-                                VStack(alignment: .leading) {
-                                    HStack {
-                                        Image(systemName: "crown.fill") // Adding the crown icon
-                                            .foregroundColor(.gold) // Matching the gold color
-                                            .font(.system(size: 18)) // Adjust the size as needed
-                                        
-                                        Text("SwiftiDate Supreme")
-                                            .font(.headline)
-                                            .foregroundColor(.gold) // Set text color to gold
-                                            .fontWeight(.bold)
-                                    }
-                                    
-                                    Text("已開啟 SwiftiDate 所有特權")
-                                        .font(.subheadline)
-                                        .foregroundColor(.gold)
-                                    
-                                    Spacer()
-                                }
-                                .padding(.vertical, 30)
-                                .frame(maxWidth: UIScreen.main.bounds.width - 80, alignment: .leading) // 設置最大寬度稍小於螢幕寬度
-                                .padding(.horizontal) // Add horizontal padding to the outer VStack
-                            }
-                            .background(Color.black) // Apply background color to the entire ZStack
-                            .cornerRadius(10) // Apply corner radius to the entire ZStack
+                            PremiumCardTabView(selectedTab: $profileSelectedTab)
                         }
                         
                         ServiceSectionContainer(isSupreme: $isSupreme)
