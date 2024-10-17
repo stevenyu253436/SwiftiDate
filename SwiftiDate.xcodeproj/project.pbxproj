@@ -84,6 +84,7 @@
 		D04729D42CC09543007C33EC /* VerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04729D32CC09543007C33EC /* VerificationView.swift */; };
 		D04729D62CC09749007C33EC /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04729D52CC09749007C33EC /* ProfileImageView.swift */; };
 		D04729D82CC099BA007C33EC /* VerificationStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04729D72CC099BA007C33EC /* VerificationStatusView.swift */; };
+		D04729DA2CC09B54007C33EC /* EditSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04729D92CC09B54007C33EC /* EditSectionView.swift */; };
 		D04938782CBF0A4700754E46 /* ChatRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04938772CBF0A4600754E46 /* ChatRow.swift */; };
 		D049387A2CBF0A6F00754E46 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04938792CBF0A6F00754E46 /* Models.swift */; };
 		D049387C2CBF465300754E46 /* EducationAndWorkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D049387B2CBF465300754E46 /* EducationAndWorkView.swift */; };
@@ -230,6 +231,7 @@
 		D04729D32CC09543007C33EC /* VerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationView.swift; sourceTree = "<group>"; };
 		D04729D52CC09749007C33EC /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		D04729D72CC099BA007C33EC /* VerificationStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationStatusView.swift; sourceTree = "<group>"; };
+		D04729D92CC09B54007C33EC /* EditSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSectionView.swift; sourceTree = "<group>"; };
 		D04938772CBF0A4600754E46 /* ChatRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRow.swift; sourceTree = "<group>"; };
 		D04938792CBF0A6F00754E46 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		D049387B2CBF465300754E46 /* EducationAndWorkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EducationAndWorkView.swift; sourceTree = "<group>"; };
@@ -358,6 +360,7 @@
 				D0445C6A2C7247050059D522 /* DegreePicker.swift */,
 				D0445C8A2C73D0760059D522 /* DietPreferencesView.swift */,
 				D0445C862C73CEFB0059D522 /* DrinkOptionsView.swift */,
+				D04729D92CC09B54007C33EC /* EditSectionView.swift */,
 				D049387B2CBF465300754E46 /* EducationAndWorkView.swift */,
 				D0445C822C73CBE70059D522 /* FitnessOptionsView.swift */,
 				D0445C762C73BF590059D522 /* HeightPickerView.swift */,
@@ -808,6 +811,7 @@
 				D0DDDB2A2CA156A700A78A87 /* WhatIsSwiftiDatePremiumView.swift in Sources */,
 				D0DDDB542CA25B4E00A78A87 /* PrivacyPolicyView.swift in Sources */,
 				D0445C732C72FB440059D522 /* HometownInputView.swift in Sources */,
+				D04729DA2CC09B54007C33EC /* EditSectionView.swift in Sources */,
 				D018AD612C9E6ACF005A14B9 /* PraisePurchaseView.swift in Sources */,
 				D04729D62CC09749007C33EC /* ProfileImageView.swift in Sources */,
 				D0445C6F2C72EDF10059D522 /* IndustryPicker.swift in Sources */,
