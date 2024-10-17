@@ -75,6 +75,12 @@
 		D04729C22CC038B6007C33EC /* UnverifiedProfilePlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04729C12CC038B6007C33EC /* UnverifiedProfilePlaceholderView.swift */; };
 		D04729C42CC03C4D007C33EC /* StatisticsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04729C32CC03C4D007C33EC /* StatisticsSectionView.swift */; };
 		D04729C62CC03D55007C33EC /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04729C52CC03D55007C33EC /* ProfileHeaderView.swift */; };
+		D04729C82CC086F4007C33EC /* ProfileTabPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04729C72CC086F4007C33EC /* ProfileTabPicker.swift */; };
+		D04729CA2CC087AD007C33EC /* PreviewSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04729C92CC087AD007C33EC /* PreviewSectionView.swift */; };
+		D04729CC2CC08B62007C33EC /* MeetWillingnessSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04729CB2CC08B62007C33EC /* MeetWillingnessSection.swift */; };
+		D04729CE2CC08BD7007C33EC /* AboutMeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04729CD2CC08BD7007C33EC /* AboutMeSection.swift */; };
+		D04729D02CC08CC1007C33EC /* SmartPhotoToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04729CF2CC08CC1007C33EC /* SmartPhotoToggle.swift */; };
+		D04729D22CC08D34007C33EC /* PhotoSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04729D12CC08D34007C33EC /* PhotoSection.swift */; };
 		D04938782CBF0A4700754E46 /* ChatRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04938772CBF0A4600754E46 /* ChatRow.swift */; };
 		D049387A2CBF0A6F00754E46 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04938792CBF0A6F00754E46 /* Models.swift */; };
 		D049387C2CBF465300754E46 /* EducationAndWorkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D049387B2CBF465300754E46 /* EducationAndWorkView.swift */; };
@@ -212,6 +218,12 @@
 		D04729C12CC038B6007C33EC /* UnverifiedProfilePlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnverifiedProfilePlaceholderView.swift; sourceTree = "<group>"; };
 		D04729C32CC03C4D007C33EC /* StatisticsSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsSectionView.swift; sourceTree = "<group>"; };
 		D04729C52CC03D55007C33EC /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		D04729C72CC086F4007C33EC /* ProfileTabPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabPicker.swift; sourceTree = "<group>"; };
+		D04729C92CC087AD007C33EC /* PreviewSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewSectionView.swift; sourceTree = "<group>"; };
+		D04729CB2CC08B62007C33EC /* MeetWillingnessSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetWillingnessSection.swift; sourceTree = "<group>"; };
+		D04729CD2CC08BD7007C33EC /* AboutMeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutMeSection.swift; sourceTree = "<group>"; };
+		D04729CF2CC08CC1007C33EC /* SmartPhotoToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartPhotoToggle.swift; sourceTree = "<group>"; };
+		D04729D12CC08D34007C33EC /* PhotoSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSection.swift; sourceTree = "<group>"; };
 		D04938772CBF0A4600754E46 /* ChatRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRow.swift; sourceTree = "<group>"; };
 		D04938792CBF0A6F00754E46 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		D049387B2CBF465300754E46 /* EducationAndWorkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EducationAndWorkView.swift; sourceTree = "<group>"; };
@@ -334,6 +346,7 @@
 		D017F4F92CAFF01900C71D18 /* EditProfileRelated */ = {
 			isa = PBXGroup;
 			children = (
+				D04729CD2CC08BD7007C33EC /* AboutMeSection.swift */,
 				D051EF242CBF4F1B004563A3 /* BasicInfoView.swift */,
 				D0445C7A2C73C74B0059D522 /* BloodTypePickerView.swift */,
 				D0445C6A2C7247050059D522 /* DegreePicker.swift */,
@@ -350,9 +363,13 @@
 				D0445C742C73B4EE0059D522 /* LanguageSelectionView.swift */,
 				D051EF262CBF50CB004563A3 /* LifestyleView.swift */,
 				D0445C7E2C73C9080059D522 /* LookingForView.swift */,
+				D04729CB2CC08B62007C33EC /* MeetWillingnessSection.swift */,
 				D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */,
 				D0445C802C73CA130059D522 /* PetSelectionView.swift */,
+				D04729C92CC087AD007C33EC /* PreviewSectionView.swift */,
+				D04729C72CC086F4007C33EC /* ProfileTabPicker.swift */,
 				D0445C6C2C72EA990059D522 /* SchoolInputView.swift */,
+				D04729CF2CC08CC1007C33EC /* SmartPhotoToggle.swift */,
 				D0445C842C73CDB60059D522 /* SmokingOptionsView.swift */,
 				D0445C882C73CF610059D522 /* VacationOptionsView.swift */,
 				D0445C782C73C0B30059D522 /* ZodiacPickerView.swift */,
@@ -430,6 +447,7 @@
 				D0445C582C71BFE70059D522 /* SwipeCardView.swift */,
 				D0445C5A2C71E5850059D522 /* ProfileView.swift */,
 				D0445C5E2C71F1070059D522 /* EditProfileView.swift */,
+				D04729D12CC08D34007C33EC /* PhotoSection.swift */,
 				D0445C602C722EF50059D522 /* PhotoSectionView.swift */,
 				D0445C642C72388D0059D522 /* FlowStack.swift */,
 				D0445C682C723AE80059D522 /* FlowLayout.swift */,
@@ -679,6 +697,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D04729C82CC086F4007C33EC /* ProfileTabPicker.swift in Sources */,
 				D0445C892C73CF610059D522 /* VacationOptionsView.swift in Sources */,
 				D0445C5F2C71F1070059D522 /* EditProfileView.swift in Sources */,
 				D0DDDB072C9FDB1600A78A87 /* WhoLikedYouView.swift in Sources */,
@@ -715,6 +734,7 @@
 				D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */,
 				D0445C712C72F7870059D522 /* JobInputView.swift in Sources */,
 				D0DDDB502CA1A01200A78A87 /* HowToEnableNotificationsView.swift in Sources */,
+				D04729CE2CC08BD7007C33EC /* AboutMeSection.swift in Sources */,
 				D09588FC2CBDEF3B00BCD04B /* GlobalVariables.swift in Sources */,
 				D0DDDB202CA13C5E00A78A87 /* WhoLikedMeView.swift in Sources */,
 				D0445C8B2C73D0760059D522 /* DietPreferencesView.swift in Sources */,
@@ -735,6 +755,7 @@
 				D0DDDB142CA10EAD00A78A87 /* SettingsView.swift in Sources */,
 				D0DDDB582CA4ECD300A78A87 /* DataManagementView.swift in Sources */,
 				D0DDDB462CA18FDC00A78A87 /* HowToUseIncognitoModeView.swift in Sources */,
+				D04729CA2CC087AD007C33EC /* PreviewSectionView.swift in Sources */,
 				D0DDDB362CA16FF900A78A87 /* HowToPurchaseSwiftiDatePremiumView.swift in Sources */,
 				D0DDDB442CA17FA700A78A87 /* HowToUseAdvancedFilteringView.swift in Sources */,
 				D018AD5B2C9E57DF005A14B9 /* UserGuideView.swift in Sources */,
@@ -752,6 +773,7 @@
 				D09587D42CB8BDEA00BCD04B /* PrivacySettingsView.swift in Sources */,
 				D0DDDB222CA1413600A78A87 /* WhyIsItHardToMatchView.swift in Sources */,
 				D0DDDB182CA11E5100A78A87 /* HelpView.swift in Sources */,
+				D04729D22CC08D34007C33EC /* PhotoSection.swift in Sources */,
 				D04938782CBF0A4700754E46 /* ChatRow.swift in Sources */,
 				D0445C852C73CDB60059D522 /* SmokingOptionsView.swift in Sources */,
 				D0445C6D2C72EA990059D522 /* SchoolInputView.swift in Sources */,
@@ -767,6 +789,7 @@
 				D0445C592C71BFE70059D522 /* SwipeCardView.swift in Sources */,
 				D0445C612C722EF50059D522 /* PhotoSectionView.swift in Sources */,
 				D0DDDB522CA251C600A78A87 /* CommunityGuidelinesView.swift in Sources */,
+				D04729CC2CC08B62007C33EC /* MeetWillingnessSection.swift in Sources */,
 				D017F4F02CAECC5100C71D18 /* PersonalInfoView.swift in Sources */,
 				D0DDDB052C9FA8AF00A78A87 /* ChatDetailView.swift in Sources */,
 				D0445C652C72388D0059D522 /* FlowStack.swift in Sources */,
@@ -784,6 +807,7 @@
 				D0DDDB242CA1486E00A78A87 /* HowToUnmatchView.swift in Sources */,
 				D0DDDB4A2CA196FB00A78A87 /* UpdateProfileDetailsView.swift in Sources */,
 				D0DDDB262CA14B2700A78A87 /* HowToDeleteMessagesView.swift in Sources */,
+				D04729D02CC08CC1007C33EC /* SmartPhotoToggle.swift in Sources */,
 				D0DDDB562CA29B1200A78A87 /* TermsOfServiceView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

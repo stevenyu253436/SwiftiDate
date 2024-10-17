@@ -22,19 +22,6 @@ extension Array {
     }
 }
 
-// 將切換選項的 Picker 提取到獨立的 View
-struct ProfileTabPicker: View {
-    @Binding var selectedTab: ProfileTab
-
-    var body: some View {
-        Picker("編輯個人資料", selection: $selectedTab) {
-            Text(ProfileTab.edit.rawValue).tag(ProfileTab.edit)
-            Text(ProfileTab.preview.rawValue).tag(ProfileTab.preview)
-        }
-        .pickerStyle(SegmentedPickerStyle())
-        .padding()
-    }
-}
 
 // 將認證部分提取到獨立的 View
 struct VerificationStatusView: View {
@@ -168,63 +155,32 @@ struct EditProfileView: View {
                     // 編輯界面
                     ScrollView {
                         VStack(spacing: 10) {
-                            PhotoSectionView(photos: $photos, deletedPhotos: $deletedPhotos) // Pass both bindings
-                                .padding()
+                            // 照片區域
+                            PhotoSection(photos: $photos, deletedPhotos: $deletedPhotos)
 
-                            Toggle(isOn: .constant(true)) {
-                                Text("智慧照片曝光")
-                            }
-                            .padding()
-                            
-                            VerificationStatusView() // 使用剛剛提取的 VerificationStatusView
-                            
-                            VStack(alignment: .leading) {
-                                Text("關於我")
-                                    .font(.headline)
-                                    .padding(.bottom, 5)
-                                
-                                TextEditor(text: $aboutMe)
-                                    .frame(height: 100)
-                                    .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray.opacity(0.5), lineWidth: 1))
-                            }
-                            .padding()
-                            
-                            VStack(alignment: .leading) {
-                                Text("線下見面")
-                                    .font(.headline)
-                                    .padding(.bottom, 5)
+                            // 智慧照片曝光
+                            SmartPhotoToggle()
 
-                                HStack {
-                                    Image(systemName: "person.2.fill")
-                                        .foregroundColor(.gray)
-                                        .font(.headline)
-                                    Text("見面意願")
-                                    Spacer()
-                                    Text("已填寫")
-                                        .font(.subheadline)
-                                        .foregroundColor(.gray)
-                                }
-                                .padding()
-                                .background(Color.white)
-                                .cornerRadius(10)
-                                .onTapGesture {
-                                    // 設置狀態為 true，導航到 MeetWillingnessView
-                                    isShowingMeetWillingnessView = true
-                                }
-                                // 使用 fullScreenCover 傳遞 selectedMeetWillingness 作為 @Binding
-                                .fullScreenCover(isPresented: $isShowingMeetWillingnessView) {
-                                    MeetWillingnessView(isPresented: $isShowingMeetWillingnessView, selectedOption: $selectedMeetWillingness)  // 傳遞選擇的見面意願
-                                }
-                            }
-                            .padding()
+                            // 認證狀態
+                            VerificationStatusView()
 
-                            // 在這裡插入 InterestsView，並將隨機選中的6個興趣標籤傳遞給它
+                            // 關於我
+                            AboutMeSection(aboutMe: $aboutMe)
+
+                            // 見面意願
+                            MeetWillingnessSection(
+                                selectedMeetWillingness: $selectedMeetWillingness,
+                                isShowingMeetWillingnessView: $isShowingMeetWillingnessView
+                            )
+
+                            // 興趣標籤
                             InterestsView(
                                 interests: Array(selectedInterests.shuffled().prefix(6)),
                                 selectedInterests: $selectedInterests,
                                 interestColors: $interestColors  // 傳遞 interestColors 作為 @Binding
                             )
                             
+                            // 教育和工作
                             EducationAndWorkView(
                                 selectedDegree: $selectedDegree,
                                 selectedSchool: $selectedSchool,
@@ -238,6 +194,7 @@ struct EditProfileView: View {
                                 industries: industries
                             )
                             
+                            // 基本資料
                             BasicInfoView(
                                 selectedHometown: $selectedHometown,
                                 showHometownInput: $showHometownInput,
@@ -251,6 +208,7 @@ struct EditProfileView: View {
                                 showBloodTypePicker: $showBloodTypePicker
                             )
                             
+                            // 生活方式
                             LifestyleView(
                                 selectedLookingFor: $selectedLookingFor,
                                 showLookingForView: $showLookingForView,
@@ -271,90 +229,7 @@ struct EditProfileView: View {
                     }
                     .background(Color.gray.opacity(0.1)) // 设置背景颜色为淡灰色
                 } else {
-                    // 預覽界面
-                    ZStack {
-                        if let imageName = photos.indices.contains(currentPhotoIndex) ? photos[currentPhotoIndex] : nil,
-                           let image = PhotoUtility.loadImageFromLocalStorage(named: imageName) {
-                            Image(uiImage: image)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(maxWidth: 420, maxHeight: .infinity)
-                                .clipShape(RoundedRectangle(cornerRadius: 25))
-                                .overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.white, lineWidth: 4))
-                                .edgesIgnoringSafeArea(.top)
-                        } else {
-                            // Display a placeholder or error image
-                            Image(systemName: "exclamationmark.triangle.fill")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 100, height: 100)
-                                .foregroundColor(.gray)
-                        }
-
-                        VStack(alignment: .leading, spacing: 5) {
-                            HStack(spacing: 5) {
-                                ForEach(0..<photos.count) { index in
-                                    RoundedRectangle(cornerRadius: 4)
-                                        .frame(width: 40, height: 8)
-                                        .foregroundColor(index == currentPhotoIndex ? .white : .gray)
-                                }
-                            }
-                            .frame(maxWidth: .infinity, alignment: .center)
-                            .padding(.vertical, 8)
-                            .padding(.horizontal)
-                            .cornerRadius(10)
-                            
-                            Spacer()
-                            
-                            Text("\(userSettings.globalUserName), 25") // 使用 userSettings 來存取 globalUserName
-                                .font(.title)
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                            
-                            HStack {
-                                Image(systemName: "checkmark.seal.fill")
-                                    .foregroundColor(.blue)
-                                Text("\(selectedZodiac) · 新竹市 · \(selectedJob ?? "職業未填寫")")
-                                    .foregroundColor(.white)
-                            }
-                            .font(.subheadline)
-                            
-                            Text(aboutMe)
-                                .font(.body)
-                                .foregroundColor(.white)
-                                .padding(.top)
-                        }
-                        .padding()
-                        
-                        // Add a transparent layer for tap detection
-                        GeometryReader { geometry in
-                            HStack {
-                                // Left half tap gesture
-                                Rectangle()
-                                    .fill(Color.clear)
-                                    .contentShape(Rectangle()) // Make the whole area tappable
-                                    .frame(width: geometry.size.width / 2)
-                                    .onTapGesture {
-                                        // Decrease index if not at the first photo
-                                        if currentPhotoIndex > 0 {
-                                            currentPhotoIndex -= 1
-                                        }
-                                    }
-                                
-                                // Right half tap gesture
-                                Rectangle()
-                                    .fill(Color.clear)
-                                    .contentShape(Rectangle()) // Make the whole area tappable
-                                    .frame(width: geometry.size.width / 2)
-                                    .onTapGesture {
-                                        // Increase index if not at the last photo
-                                        if currentPhotoIndex < photos.count - 1 {
-                                            currentPhotoIndex += 1
-                                        }
-                                    }
-                            }
-                        }
-                    }
+                    PreviewSectionView(photos: $photos, currentPhotoIndex: $currentPhotoIndex, aboutMe: aboutMe, selectedZodiac: selectedZodiac, selectedJob: selectedJob)
                 }
             }
             .navigationBarTitle("編輯個人資料", displayMode: .inline)
