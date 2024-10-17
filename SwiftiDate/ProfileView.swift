@@ -132,41 +132,14 @@ struct ProfileView: View {
                 .onAppear {
                     loadPhotosFromAppStorage()
                 }
-
-                // Gear icon in the top-right corner
-                VStack {
-                    HStack {
-                        Spacer()
-                        
-                        // 將 shield.fill 圖標放入 Button
-                        Button(action: {
-                            // 點擊時顯示 SafetyCenterView
-                            showSafetyCenterView = true
-                        }) {
-                            Image(systemName: "shield.fill")
-                                .resizable()
-                                .frame(width: 24, height: 24)
-                                .foregroundColor(.gray) // Set the color to match the design
-                                .padding(.trailing, 10)
-                        }
-                        
-                        Button(action: {
-                            showSettingsView = true
-                        }) {
-                            Image(systemName: "gearshape.fill")
-                                .font(.title2)
-                                .padding()
-                                .foregroundColor(.gray)
-                        }
-                    }
-                    Spacer()
-                }
+                
+                // 使用新的 TopRightActionButtons 组件
+                TopRightActionButtons(showSettingsView: $showSettingsView, showSafetyCenterView: $showSafetyCenterView)
                 
                 // Show dimmed background and popup when isShowingInfoPopup is true
                 if isShowingInfoPopup {
                     Color.black.opacity(0.4) // Dimmed background
                         .edgesIgnoringSafeArea(.all) // Make it cover the entire screen
-                    
                     InfoPopupView(isShowing: $isShowingInfoPopup, userRankPercentage: userRankPercentage)
                 }
             }
