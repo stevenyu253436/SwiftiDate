@@ -41,8 +41,18 @@ struct ProfileHeaderView: View {
                     
                     if userSettings.isSupremeUser {
                         Image(systemName: "crown.fill")
-                            .foregroundColor(.gold)
+                            .foregroundColor(.black)
                             .font(.system(size: 18))
+                            .padding(10) // 添加一些內邊距，讓背景顏色與圖片之間有間隔
+                            .background(Color.gold) // 設置背景顏色
+                            .clipShape(Circle()) // 如果想讓背景是圓形的，可以使用這個修飾符
+                    } else {
+                        Image(systemName: "crown.fill")
+                            .foregroundColor(.white)
+                            .font(.system(size: 18))
+                            .padding(10) // 添加一些內邊距，讓背景顏色與圖片之間有間隔
+                            .background(Color.gray.opacity(0.5)) // 設置背景顏色
+                            .clipShape(Circle()) // 如果想讓背景是圓形的，可以使用這個修飾符
                     }
                 }
                 
@@ -51,6 +61,15 @@ struct ProfileHeaderView: View {
                         Image(systemName: "checkmark.seal.fill")
                             .foregroundColor(.blue)
                         Text("已認證")
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                    }
+                } else {
+                    HStack {
+                        Image(systemName: "checkmark.seal.fill")
+                            .foregroundColor(.gray.opacity(0.7))
+                            .background(Color.white)
+                        Text("尚未認證")
                             .font(.subheadline)
                             .foregroundColor(.gray)
                     }

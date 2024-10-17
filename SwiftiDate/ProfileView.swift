@@ -28,6 +28,9 @@ struct ProfileView: View {
     @State private var showSettingsView = false // State variable to control Settings View presentation
     @State private var showSafetyCenterView = false // 控制 SafetyCenterView 的顯示
     @State private var photos: [String] = [] // Local state variable for photos
+    
+    // Local debug variable for Supreme status
+    @State private var isSupreme = false // Modify this to test different scenarios
 
     var body: some View {
         if showSettingsView {
@@ -39,9 +42,11 @@ struct ProfileView: View {
                 ScrollView {
                     VStack(spacing: 20) {
                         // 头像及基本信息
-                        ProfileHeaderView(isShowingEditProfileView: $isShowingEditProfileView, photos: $photos)
-                            .environmentObject(userSettings)
-
+                        ProfileHeaderView(
+                            isShowingEditProfileView: $isShowingEditProfileView,
+                            photos: $photos
+                        )
+                        
                         // 统计信息
                         StatisticsSectionView(selectedTab: $selectedTab, isShowingTurboView: $isShowingTurboView)
                             .environmentObject(userSettings) // 傳遞 EnvironmentObject
@@ -67,98 +72,61 @@ struct ProfileView: View {
                         .environmentObject(userSettings)
                         
                         // Display Supreme banner if the user has purchased Supreme
-                        if userSettings.isSupremeUser {
-                            HStack {
-                                Image(systemName: "crown.fill") // Adding the crown icon
-                                    .foregroundColor(.gold) // Matching the gold color
-                                    .font(.system(size: 18)) // Adjust the size as needed
-                                
+                        if isSupreme {
+                            ZStack {
                                 VStack(alignment: .leading) {
-                                    Text("SwiftiDate Supreme")
-                                        .font(.headline)
-                                        .foregroundColor(.gold) // Set text color to gold
-                                        .fontWeight(.bold)
+                                    HStack {
+                                        Image(systemName: "crown.fill") // Adding the crown icon
+                                            .foregroundColor(.gold) // Matching the gold color
+                                            .font(.system(size: 18)) // Adjust the size as needed
+                                        
+                                        Text("SwiftiDate Supreme")
+                                            .font(.headline)
+                                            .foregroundColor(.gold) // Set text color to gold
+                                            .fontWeight(.bold)
+                                    }
                                     
                                     Text("已開啟 SwiftiDate 所有特權")
                                         .font(.subheadline)
                                         .foregroundColor(.gold)
+                                    
+                                    Spacer()
                                 }
-                                Spacer()
+                                .padding(.vertical, 30)
+                                .frame(maxWidth: UIScreen.main.bounds.width - 80, alignment: .leading) // 設置最大寬度稍小於螢幕寬度
+                                .padding(.horizontal) // Add horizontal padding to the outer VStack
                             }
-                            .padding()
-                            .background(Color.black)
-                            .cornerRadius(10)
-                            .padding(.horizontal)
-                        }
-                        
-                        if userSettings.isSupremeUser {
-                            // 服務項目
-                            VStack(alignment: .leading, spacing: 10) {
-                                // Service Section Title
-                                HStack {
-                                    Text("服務項目")
-                                        .font(.headline)
-                                        .padding(.top)
-
-                                    Spacer() // This spacer will push the next text to the right side
-
-                                    VStack(alignment: .trailing) {
-                                        Text("Supreme")
+                            .background(Color.black) // Apply background color to the entire ZStack
+                            .cornerRadius(10) // Apply corner radius to the entire ZStack
+                        } else {
+                            ZStack {
+                                VStack(alignment: .leading) {
+                                    HStack {
+                                        Image(systemName: "crown.fill") // Adding the crown icon
+                                            .foregroundColor(.gold) // Matching the gold color
+                                            .font(.system(size: 18)) // Adjust the size as needed
+                                        
+                                        Text("SwiftiDate Supreme")
                                             .font(.headline)
+                                            .foregroundColor(.gold) // Set text color to gold
                                             .fontWeight(.bold)
-                                            .foregroundColor(.black)
-
-                                        Text("16項特權")
-                                            .font(.subheadline)
-                                            .foregroundColor(.gray)
                                     }
+                                    
+                                    Text("已開啟 SwiftiDate 所有特權")
+                                        .font(.subheadline)
+                                        .foregroundColor(.gold)
+                                    
+                                    Spacer()
                                 }
-                                .padding(.horizontal)
-
-                                // Service sections
-                                ServiceSectionView(
-                                    sectionTitle: "更快篩選對的人",
-                                    totalItems: 4,
-                                    services: [
-                                        ("附近的人", true, nil),
-                                        ("高級篩選", true, nil),
-                                        ("每日精選", true, nil),
-                                        ("額外的喜歡次數", false, "∞")
-                                    ]
-                                )
-                                
-                                // Adding the "獲取更多配對" ServiceSectionView
-                                ServiceSectionView(
-                                    sectionTitle: "獲取更多配對",
-                                    totalItems: 7,
-                                    services: [
-                                        ("免費讚美", true, "3/天"),
-                                        ("免費的Crush", true, "5/天"),
-                                        ("免費Turbo", true, "1/月"),
-                                        ("看看誰喜歡你", true, nil),
-                                        ("開啟心動列表", true, nil),
-                                        ("免費的反悔機會", false, "∞"),
-                                        ("找回已解除的配對", true, nil)
-                                    ]
-                                )
-                                
-                                // Adding the "升級體驗" ServiceSectionView
-                                ServiceSectionView(
-                                    sectionTitle: "升級體驗",
-                                    totalItems: 5,
-                                    services: [
-                                        ("隱身模式", true, nil),
-                                        ("24小時專屬客服", true, nil),
-                                        ("已讀回執", true, nil),
-                                        ("專屬會員標誌", true, nil),
-                                        ("不限次數的「緣分合盤」解讀", true, nil)
-                                    ]
-                                )
+                                .padding(.vertical, 30)
+                                .frame(maxWidth: UIScreen.main.bounds.width - 80, alignment: .leading) // 設置最大寬度稍小於螢幕寬度
+                                .padding(.horizontal) // Add horizontal padding to the outer VStack
                             }
-                            .padding(.horizontal)
+                            .background(Color.black) // Apply background color to the entire ZStack
+                            .cornerRadius(10) // Apply corner radius to the entire ZStack
                         }
                         
-                        Spacer()
+                        ServiceSectionContainer(isSupreme: $isSupreme)
                     }
                 }
                 .onAppear {
@@ -454,60 +422,6 @@ struct AchievementCardView: View {
         .frame(width: 100, height: 100)
         .background(color.opacity(0.2))
         .cornerRadius(10)
-    }
-}
-
-struct ServiceSectionView: View {
-    var sectionTitle: String
-    var totalItems: Int
-    var services: [(name: String, isAvailable: Bool, count: String?)] // (Service name, availability, count)
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            
-            // Service items
-            VStack(spacing: 5) {
-                // Title and total items count
-                HStack {
-                    Text(sectionTitle)
-                        .font(.headline)
-
-                    Spacer()
-                    
-                    Text("\(totalItems)項")
-                        .font(.subheadline)
-                        .padding(5)
-                        .background(Color.gray.opacity(0.2))
-                        .cornerRadius(5)
-                }
-                
-                ForEach(services, id: \.name) { service in
-                    HStack {
-                        Text(service.name)
-                            .font(.subheadline)
-                            .foregroundColor(.black)
-                        
-                        Spacer()
-                        
-                        if let count = service.count {
-                            Text(count)
-                                .font(.subheadline)
-                        } else if service.isAvailable {
-                            Image(systemName: "checkmark")
-                        } else {
-                            Image(systemName: "infinity")
-                        }
-                    }
-                    Spacer()
-                }
-            }
-            .padding()
-            .background(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.gray.opacity(0.5), lineWidth: 1)
-            )
-        }
-        .padding(.horizontal)
     }
 }
 
