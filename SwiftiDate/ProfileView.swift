@@ -9,10 +9,6 @@ import Foundation
 import SwiftUI
 import FirebaseStorage
 
-extension Color {
-    static let gold = Color(red: 212 / 255, green: 175 / 255, blue: 55 / 255) // Custom gold color
-}
-
 struct ProfileView: View {
     @EnvironmentObject var userSettings: UserSettings // 使用 EnvironmentObject 存取 UserSettings
     

@@ -90,6 +90,9 @@
 		D04729E02CC1149E007C33EC /* TopRightActionButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04729DF2CC1149D007C33EC /* TopRightActionButtons.swift */; };
 		D04729E22CC1315F007C33EC /* SupremeBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04729E12CC1315F007C33EC /* SupremeBannerView.swift */; };
 		D04729E42CC13221007C33EC /* PremiumCardTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04729E32CC13221007C33EC /* PremiumCardTabView.swift */; };
+		D04729E62CC1DA82007C33EC /* PremiumDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04729E52CC1DA82007C33EC /* PremiumDetailsView.swift */; };
+		D04729EA2CC1F999007C33EC /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04729E92CC1F999007C33EC /* Color.swift */; };
+		D04729EC2CC1FB16007C33EC /* SubscriptionScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04729EB2CC1FB16007C33EC /* SubscriptionScrollView.swift */; };
 		D04938782CBF0A4700754E46 /* ChatRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04938772CBF0A4600754E46 /* ChatRow.swift */; };
 		D049387A2CBF0A6F00754E46 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04938792CBF0A6F00754E46 /* Models.swift */; };
 		D049387C2CBF465300754E46 /* EducationAndWorkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D049387B2CBF465300754E46 /* EducationAndWorkView.swift */; };
@@ -242,6 +245,9 @@
 		D04729DF2CC1149D007C33EC /* TopRightActionButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRightActionButtons.swift; sourceTree = "<group>"; };
 		D04729E12CC1315F007C33EC /* SupremeBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupremeBannerView.swift; sourceTree = "<group>"; };
 		D04729E32CC13221007C33EC /* PremiumCardTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumCardTabView.swift; sourceTree = "<group>"; };
+		D04729E52CC1DA82007C33EC /* PremiumDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumDetailsView.swift; sourceTree = "<group>"; };
+		D04729E92CC1F999007C33EC /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		D04729EB2CC1FB16007C33EC /* SubscriptionScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionScrollView.swift; sourceTree = "<group>"; };
 		D04938772CBF0A4600754E46 /* ChatRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRow.swift; sourceTree = "<group>"; };
 		D04938792CBF0A6F00754E46 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		D049387B2CBF465300754E46 /* EducationAndWorkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EducationAndWorkView.swift; sourceTree = "<group>"; };
@@ -516,7 +522,7 @@
 				D04938772CBF0A4600754E46 /* ChatRow.swift */,
 				D04938792CBF0A6F00754E46 /* Models.swift */,
 				D051EF2B2CC02C33004563A3 /* PhotoUtility.swift */,
-				D04729E32CC13221007C33EC /* PremiumCardTabView.swift */,
+				D04729E92CC1F999007C33EC /* Color.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -551,10 +557,13 @@
 			children = (
 				D051EF302CC033C5004563A3 /* AchievementSectionView.swift */,
 				D04729DD2CC11320007C33EC /* InfoPopupView.swift */,
+				D04729E32CC13221007C33EC /* PremiumCardTabView.swift */,
+				D04729E52CC1DA82007C33EC /* PremiumDetailsView.swift */,
 				D04729C52CC03D55007C33EC /* ProfileHeaderView.swift */,
 				D04729D52CC09749007C33EC /* ProfileImageView.swift */,
 				D04729DB2CC0BDC4007C33EC /* ServiceSectionContainer.swift */,
 				D04729C32CC03C4D007C33EC /* StatisticsSectionView.swift */,
+				D04729EB2CC1FB16007C33EC /* SubscriptionScrollView.swift */,
 				D04729E12CC1315F007C33EC /* SupremeBannerView.swift */,
 				D04729DF2CC1149D007C33EC /* TopRightActionButtons.swift */,
 				D04729C12CC038B6007C33EC /* UnverifiedProfilePlaceholderView.swift */,
@@ -744,6 +753,7 @@
 				D018AD632C9E87F6005A14B9 /* ChatView.swift in Sources */,
 				D017F4F62CAFBFF700C71D18 /* LoginOrRegisterView.swift in Sources */,
 				D04729C22CC038B6007C33EC /* UnverifiedProfilePlaceholderView.swift in Sources */,
+				D04729EA2CC1F999007C33EC /* Color.swift in Sources */,
 				D018AD962C9EEA83005A14B9 /* AsyncImageView.swift in Sources */,
 				D0445C5B2C71E5850059D522 /* ProfileView.swift in Sources */,
 				D09587BF2CB7899D00BCD04B /* SafetyQuizView.swift in Sources */,
@@ -807,6 +817,7 @@
 				D04938782CBF0A4700754E46 /* ChatRow.swift in Sources */,
 				D0445C852C73CDB60059D522 /* SmokingOptionsView.swift in Sources */,
 				D0445C6D2C72EA990059D522 /* SchoolInputView.swift in Sources */,
+				D04729E62CC1DA82007C33EC /* PremiumDetailsView.swift in Sources */,
 				D0DDDB0D2CA07A2400A78A87 /* FeaturedCardView.swift in Sources */,
 				D0DDDB2E2CA1628F00A78A87 /* WhatIsCrushAndHowToUseView.swift in Sources */,
 				D055E9922C8CCFBA00A97DD1 /* InterestSelectionView.swift in Sources */,
@@ -820,6 +831,7 @@
 				D0445C592C71BFE70059D522 /* SwipeCardView.swift in Sources */,
 				D0445C612C722EF50059D522 /* PhotoSectionView.swift in Sources */,
 				D0DDDB522CA251C600A78A87 /* CommunityGuidelinesView.swift in Sources */,
+				D04729EC2CC1FB16007C33EC /* SubscriptionScrollView.swift in Sources */,
 				D04729CC2CC08B62007C33EC /* MeetWillingnessSection.swift in Sources */,
 				D017F4F02CAECC5100C71D18 /* PersonalInfoView.swift in Sources */,
 				D0DDDB052C9FA8AF00A78A87 /* ChatDetailView.swift in Sources */,

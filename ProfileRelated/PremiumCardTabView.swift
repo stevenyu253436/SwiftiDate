@@ -78,7 +78,8 @@ struct PremiumCardTabView: View {
                 buttonText: "開啟",
                 backgroundColor: Color.yellow.opacity(0.3),
                 buttonAction: {
-                    print("Open SwiftiDate Premium")
+                    // Set selectedType to .premium when button is clicked
+                    selectedType = .premium
                 }
             )
             .tag(0)
@@ -90,7 +91,8 @@ struct PremiumCardTabView: View {
                 buttonText: "開啟",
                 backgroundColor: Color.black,
                 buttonAction: {
-                    print("SwiftiDate Supreme Activated")
+                    // Set selectedType to .supreme when button is clicked
+                    selectedType = .supreme
                 }
             )
             .tag(1)
@@ -100,5 +102,13 @@ struct PremiumCardTabView: View {
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
         .frame(height: 120)
         .padding(.horizontal)
+        .fullScreenCover(item: $selectedType) { type in
+            // Create a Binding for PremiumDetailsView
+            let bindingType = Binding<PremiumType>(
+                get: { type },
+                set: { selectedType = $0 }
+            )
+            PremiumDetailsView(selectedTab: bindingType)
+        }
     }
 }
