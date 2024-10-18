@@ -7,14 +7,34 @@
 
 import SwiftUI
 
+struct User {
+    let id: String
+    let name: String
+    let age: Int
+    let zodiac: String
+    let location: String
+    let height: Int
+    let photos: [String]
+}
+
 struct SwipeCardView: View {
     @StateObject private var locationManager = LocationManager()
     @State private var offset = CGSize.zero
     @State private var showCircleAnimation = false
     @State private var showPrivacySettings = false // 控制隱私設置頁面的顯示
-
-    // Inject UserSettings to access globalLikeCount and other variables
     @EnvironmentObject var userSettings: UserSettings
+
+    // List of users and current index
+    @State private var users: [User] = [
+        User(id: "userID_2", name: "後照鏡被偷", age: 20, zodiac: "雙魚座", location: "桃園市", height: 172, photos: [
+            "userID_2_photo1", "userID_2_photo2", "userID_2_photo3", "userID_2_photo4", "userID_2_photo5", "userID_2_photo6"
+        ]),
+        User(id: "userID_3", name: "小明", age: 22, zodiac: "天秤座", location: "台北市", height: 180, photos: [
+            "userID_3_photo1", "userID_3_photo2"
+        ]),
+        // Add more users here
+    ]
+    @State private var currentIndex = 0
     
     var body: some View {
         ZStack {
@@ -64,17 +84,24 @@ struct SwipeCardView: View {
                         .shadow(radius: 5)
 
                     VStack {
-                        Image("profile_picture_others")
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 300, height: 400)
-                            .clipShape(RoundedRectangle(cornerRadius: 25))
+                        TabView {
+                            ForEach(users[currentIndex].photos, id: \.self) { photo in
+                                Image(photo)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 300, height: 400)
+                                    .clipShape(RoundedRectangle(cornerRadius: 25))
+                                    .padding()
+                            }
+                        }
+                        .tabViewStyle(PageTabViewStyle())
+                        .frame(height: 420)
 
-                        Text("後照鏡被偷, 20")
+                        Text("\(users[currentIndex].name), \(users[currentIndex].age)")
                             .font(.title)
                             .fontWeight(.bold)
 
-                        Text("雙魚座 · 桃園市 · 172 cm")
+                        Text("\(users[currentIndex].zodiac) · \(users[currentIndex].location) · \(users[currentIndex].height) cm")
                             .foregroundColor(.gray)
                     }
                     .padding()
@@ -88,27 +115,44 @@ struct SwipeCardView: View {
                         }
                         .onEnded { _ in
                             if self.offset.width > 100 {
-                                // 右滑動
-                                print("Like")
-                                withAnimation {
-                                    showCircleAnimation = true
-                                }
-                                // Increment globalLikeCount
-                                userSettings.globalLikeCount += 1
-                                print("Total Likes: \(userSettings.globalLikeCount)")
+                                // Like gesture (right swipe)
+                                handleSwipe(rightSwipe: true)
                             } else if self.offset.width < -100 {
-                                // 左滑動
-                                print("Dislike")
-                                withAnimation {
-                                    showCircleAnimation = true
-                                }
+                                // Dislike gesture (left swipe)
+                                handleSwipe(rightSwipe: false)
                             } else {
-                                // 恢復原位
+                                // Reset position if not swiped enough
                                 self.offset = .zero
                             }
                         }
                 )
             }
+        }
+    }
+    
+    // Handle swipe action
+    func handleSwipe(rightSwipe: Bool) {
+        if rightSwipe {
+            print("Like")
+            userSettings.globalLikeCount += 1
+        } else {
+            print("Dislike")
+        }
+
+        // Move to the next user after a delay
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            // Go to the next user if available
+            if currentIndex < users.count - 1 {
+                currentIndex += 1
+            } else {
+                // No more users, show animation
+                withAnimation {
+                    showCircleAnimation = true
+                }
+                print("No more users")
+            }
+            // Reset offset
+            self.offset = .zero
         }
     }
     
