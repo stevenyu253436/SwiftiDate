@@ -67,7 +67,8 @@ struct PremiumCardView: View {
 
 struct PremiumCardTabView: View {
     @Binding var selectedTab: Int
-    
+    @State private var selectedType: PremiumType? = nil // Control the selected type for the details view
+
     var body: some View {
         TabView(selection: $selectedTab) {
             // First Card
@@ -85,8 +86,8 @@ struct PremiumCardTabView: View {
             // Second Card (SwiftiDate Supreme)
             PremiumCardView(
                 title: "SwiftiDate Supreme",
-                subtitle: "已開啟 SwiftiDate 所有特權",
-                buttonText: "已啟用",
+                subtitle: "[未開啟] SwiftiDate 所有特權",
+                buttonText: "開啟",
                 backgroundColor: Color.black,
                 buttonAction: {
                     print("SwiftiDate Supreme Activated")
