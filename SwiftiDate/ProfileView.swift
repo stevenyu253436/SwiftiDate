@@ -69,13 +69,13 @@ struct ProfileView: View {
                         .environmentObject(userSettings)
                         
                         // Display Supreme banner if the user has purchased Supreme
-                        if isSupreme {
+                        if userSettings.isSupremeUser {
                             SupremeBannerView()
                         } else {
                             PremiumCardTabView(selectedTab: $profileSelectedTab)
                         }
                         
-                        ServiceSectionContainer(isSupreme: $isSupreme)
+                        ServiceSectionContainer(isSupreme: .constant(userSettings.isSupremeUser))
                     }
                 }
                 .onAppear {
