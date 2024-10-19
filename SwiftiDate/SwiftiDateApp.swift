@@ -35,6 +35,15 @@ class AppDelegate: NSObject, UIApplicationDelegate, CLLocationManagerDelegate, U
       settings.host = "firestore.googleapis.com"
       settings.isPersistenceEnabled = true // 開啟本地資料緩存
       settings.cacheSizeBytes = FirestoreCacheSizeUnlimited
+      
+      // Use Mirror to reflect on the FirestoreSettings object
+      let mirror = Mirror(reflecting: settings)
+      print("Firestore Settings Properties:")
+      for child in mirror.children {
+          if let propertyName = child.label {
+              print("\(propertyName): \(child.value)")
+          }
+      }
 
       var db = Firestore.firestore() // 使用 var 來讓 db 可以重新指派
       db.settings = settings
