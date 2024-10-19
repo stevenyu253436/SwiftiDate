@@ -13,6 +13,7 @@ import KeychainAccess
 import UserNotifications // Import UserNotifications framework
 import FirebaseFirestore
 import FirebaseAppCheck
+import FirebaseAuth
 
 var deviceIdentifier: String? // Global variable
 var globalLatitude: Double? // Global variable for latitude
