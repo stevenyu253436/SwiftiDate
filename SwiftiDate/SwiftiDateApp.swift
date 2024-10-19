@@ -11,6 +11,8 @@ import FirebaseCore
 import CoreLocation
 import KeychainAccess
 import UserNotifications // Import UserNotifications framework
+import FirebaseFirestore
+import FirebaseAppCheck
 
 var deviceIdentifier: String? // Global variable
 var globalLatitude: Double? // Global variable for latitude
@@ -24,8 +26,29 @@ class AppDelegate: NSObject, UIApplicationDelegate, CLLocationManagerDelegate, U
 
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    FirebaseApp.configure()
-    
+      FirebaseApp.configure()
+      print("Firebase configured successfully")
+      
+      // 初始化 Firestore 並指定資料庫名稱
+      let settings = FirestoreSettings()
+      settings.host = "firestore.googleapis.com"
+      settings.isPersistenceEnabled = true // 開啟本地資料緩存
+      settings.cacheSizeBytes = FirestoreCacheSizeUnlimited
+
+      var db = Firestore.firestore() // 使用 var 來讓 db 可以重新指派
+      db.settings = settings
+
+      // 如果需要指定資料庫ID
+      if let app = FirebaseApp.app() {
+          db = Firestore.firestore(app: app, database: "swiftidate-database")
+      }
+
+      print("Firestore initialized: \(db)")
+      
+      // 初始化 App Check
+      let providerFactory = DeviceCheckProviderFactory()
+      AppCheck.setAppCheckProviderFactory(providerFactory)
+      
     // Store or retrieve device identifier
     storeDeviceIdentifier()
       

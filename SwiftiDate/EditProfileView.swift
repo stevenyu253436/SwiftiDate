@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import FirebaseStorage
+import FirebaseFirestore
 
 // Enum for ProfileTab
 enum ProfileTab: String {
@@ -111,6 +112,51 @@ struct EditProfileView: View {
 
                 if selectedTab == .edit {
                     // 編輯界面
+                    EditSectionView(
+                        photos: $photos,
+                        deletedPhotos: $deletedPhotos,
+                        aboutMe: $aboutMe,
+                        isShowingVerificationView: $isShowingVerificationView,
+                        selectedMeetWillingness: $selectedMeetWillingness,
+                        isShowingMeetWillingnessView: $isShowingMeetWillingnessView,
+                        selectedInterests: $selectedInterests,
+                        interestColors: $interestColors,
+                        selectedDegree: $selectedDegree,
+                        selectedSchool: $selectedSchool,
+                        selectedIndustry: $selectedIndustry,
+                        selectedJob: $selectedJob,
+                        showDegreePicker: $showDegreePicker,
+                        showSchoolInput: $showSchoolInput,
+                        showIndustryPicker: $showIndustryPicker,
+                        showJobInput: $showJobInput,
+                        degrees: degrees,
+                        industries: industries,
+                        selectedHometown: $selectedHometown,
+                        showHometownInput: $showHometownInput,
+                        selectedLanguages: $selectedLanguages,
+                        showLanguageSelection: $showLanguageSelection,
+                        selectedHeight: $selectedHeight,
+                        showHeightPicker: $showHeightPicker,
+                        selectedZodiac: $selectedZodiac,
+                        showZodiacPicker: $showZodiacPicker,
+                        selectedBloodType: $selectedBloodType,
+                        showBloodTypePicker: $showBloodTypePicker,
+                        selectedLookingFor: $selectedLookingFor,
+                        showLookingForView: $showLookingForView,
+                        selectedPet: $selectedPet,
+                        showPetSelectionView: $showPetSelectionView,
+                        selectedFitnessOption: $selectedFitnessOption,
+                        showFitnessOptions: $showFitnessOptions,
+                        selectedSmokingOption: $selectedSmokingOption,
+                        showSmokingOptions: $showSmokingOptions,
+                        selectedDrinkOption: $selectedDrinkOption,
+                        showDrinkOptions: $showDrinkOptions,
+                        selectedVacationOption: $selectedVacationOption,
+                        showVacationOptions: $showVacationOptions,
+                        selectedDietPreference: $selectedDietPreference,
+                        showDietPreferences: $showDietPreferences
+                    )
+                    .environmentObject(userSettings) // 傳遞 EnvironmentObject
                 } else {
                     PreviewSectionView(photos: $photos, currentPhotoIndex: $currentPhotoIndex, aboutMe: aboutMe, selectedZodiac: selectedZodiac, selectedJob: selectedJob)
                 }
@@ -156,6 +202,8 @@ struct EditProfileView: View {
     
     // 處理 "保存" 的邏輯
     private func handleSave() {
+        print("handleSave called")
+        
         // 遍歷 deletedPhotos，逐一從 Firebase 刪除
         for photoURL in deletedPhotos {
             deletePhotoFromFirebase(photoURL: photoURL)
@@ -163,6 +211,9 @@ struct EditProfileView: View {
 
         // 上傳新添加的照片到 Firebase
         uploadNewPhotosToFirebase()
+        
+        // 保存用戶資料到 Firestore
+        saveUserProfileToFirestore()
 
         // 完成後返回到上一頁
         presentationMode.wrappedValue.dismiss()
@@ -189,14 +240,14 @@ struct EditProfileView: View {
                         if let error = error {
                             print("Failed to upload photo: \(error.localizedDescription)")
                         } else {
-                            print("Photo \(expectedPhotoName) uploaded successfully.")
+//                            print("Photo \(expectedPhotoName) uploaded successfully.")
                         }
                     }
                     
                     // 可選：監聽上傳進度
                     uploadTask.observe(.progress) { snapshot in
                         let percentComplete = 100.0 * Double(snapshot.progress?.completedUnitCount ?? 0) / Double(snapshot.progress?.totalUnitCount ?? 0)
-                        print("Upload is \(percentComplete)% complete.")
+//                        print("Upload is \(percentComplete)% complete.")
                     }
                 }
             }
@@ -207,6 +258,52 @@ struct EditProfileView: View {
     func isPhotoAlreadyUploaded(photoName: String) -> Bool {
         // 假設所有 Firebase 上傳的照片都以 "photo" 開頭
         return photoName.starts(with: "photo")
+    }
+    
+    // 將用戶資料保存到 Firestore
+    func saveUserProfileToFirestore() {
+        let db = Firestore.firestore() // 初始化 Firestore 參考
+        let userID = userSettings.globalUserID // 從 UserSettings 取得用戶 ID
+
+        // 創建字典，將所有變量作為鍵值對存儲
+        let userData: [String: Any] = [
+            "aboutMe": aboutMe,
+            "selectedDegree": selectedDegree ?? "",
+            "selectedSchool": selectedSchool ?? "",
+            "selectedIndustry": selectedIndustry ?? "",
+            "selectedJob": selectedJob ?? "",
+            "selectedHometown": selectedHometown ?? "",
+            "selectedLanguages": selectedLanguages,
+            "selectedHeight": selectedHeight ?? 0,
+            "selectedZodiac": selectedZodiac,
+            "selectedBloodType": selectedBloodType ?? "",
+            "selectedLookingFor": selectedLookingFor ?? "",
+            "selectedPet": selectedPet ?? "",
+            "selectedFitnessOption": selectedFitnessOption ?? "",
+            "selectedSmokingOption": selectedSmokingOption ?? "",
+            "selectedDrinkOption": selectedDrinkOption ?? "",
+            "selectedVacationOption": selectedVacationOption ?? "",
+            "selectedDietPreference": selectedDietPreference ?? "",
+            "selectedMeetWillingness": selectedMeetWillingness ?? "",
+            "selectedInterests": Array(selectedInterests)
+        ]
+
+        // 將資料寫入到 users 集合中的特定用戶文件
+        print("Attempting to write to Firestore")
+        db.collection("users").document(userID).setData(userData) { error in
+            if let error = error {
+                print("Failed to save user profile to Firestore: \(error.localizedDescription)")
+                
+                // Log additional error details if available
+                if let nsError = error as NSError? {
+                    print("Error code: \(nsError.code)")
+                    print("Error domain: \(nsError.domain)")
+                    print("Error user info: \(nsError.userInfo)")
+                }
+            } else {
+                print("User profile saved successfully to Firestore.")
+            }
+        }
     }
     
     // 刪除 Firebase Storage 中的照片
