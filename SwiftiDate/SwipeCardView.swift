@@ -288,19 +288,148 @@ struct SwipeCard: View {
                 
                 Spacer()
                 
-                // 顯示用戶名稱與年齡
-                Text("\(user.name), \(user.age)")
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                
-                HStack {
-                    Image(systemName: "checkmark.seal.fill")
-                        .foregroundColor(.blue)
-                    Text("\(user.zodiac) · \(user.location) · \(user.height) cm")
+                VStack {
+                    Spacer()
+                    
+                    // 顯示用戶名稱與年齡
+                    Text("\(user.name), \(user.age)")
+                        .font(.title)
+                        .fontWeight(.bold)
                         .foregroundColor(.white)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    // 顯示用戶的標籤
+                    HStack(spacing: 10) {
+                        // 星座標籤
+                        HStack(spacing: 5) {
+                            Image(systemName: "bolt.circle.fill") // 替換為合適的星座圖示
+                            Text(user.zodiac)
+                        }
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(Color.gray.opacity(0.8))
+                        .foregroundColor(.white)
+                        .clipShape(Capsule())
+
+                        // 地點標籤
+                        HStack(spacing: 5) {
+                            Image(systemName: "location.fill")
+                            Text(user.location)
+                        }
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(Color.gray.opacity(0.8))
+                        .foregroundColor(.white)
+                        .clipShape(Capsule())
+
+                        // 身高標籤
+                        HStack(spacing: 5) {
+                            Image(systemName: "ruler")
+                            Text("\(user.height) cm")
+                        }
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(Color.gray.opacity(0.8))
+                        .foregroundColor(.white)
+                        .clipShape(Capsule())
+                    }
+                    .font(.subheadline)
+                    .frame(maxWidth: .infinity, alignment: .leading) // 讓標籤靠左對齊
+                    
+                    // 底部五個按鈕
+                    HStack {
+                        Button(action: {
+                            // Undo action
+                        }) {
+                            ZStack {
+                                // 圓形背景
+                                Circle()
+                                    .fill(Color.gray.opacity(0.8))
+                                    .frame(width: 50, height: 50) // 設定圓的大小
+                                
+                                VStack {
+                                    Image(systemName: "arrow.uturn.backward")
+                                        .font(.system(size: 24))
+                                        .foregroundColor(.yellow)
+                                }
+                            }
+                        }
+                        
+                        Spacer() // 按鈕之間的彈性間距
+                        
+                        // Dislike button
+                        Button(action: {
+                            // Dislike action
+                        }) {
+                            ZStack {
+                                // 圓角矩形背景
+                                RoundedRectangle(cornerRadius: 30)
+                                    .fill(Color.gray.opacity(0.8))
+                                    .frame(width: 70, height: 50) // 設定矩形的大小
+                                
+                                Image(systemName: "xmark")
+                                    .font(.system(size: 24, weight: .bold)) // 設定字體大小和粗體
+                                    .foregroundColor(.white)
+                            }
+                        }
+                        
+                        Spacer() // 按鈕之間的彈性間距
+
+                        Button(action: {
+                            // Message action
+                        }) {
+                            ZStack {
+                                // 圓形背景
+                                Circle()
+                                    .fill(Color.gray.opacity(0.8))
+                                    .frame(width: 50, height: 50) // 設定圓的大小
+                                
+                                VStack {
+                                    Image(systemName: "message.fill")
+                                        .font(.system(size: 24))
+                                        .foregroundColor(.gold)
+                                }
+                            }
+                        }
+                        
+                        Spacer() // 按鈕之間的彈性間距
+
+                        // Dislike button
+                        Button(action: {
+                            // Dislike action
+                        }) {
+                            ZStack {
+                                // 圓角矩形背景
+                                RoundedRectangle(cornerRadius: 30)
+                                    .fill(Color.gray.opacity(0.8))
+                                    .frame(width: 70, height: 50) // 設定矩形的大小
+                                
+                                Image(systemName: "heart.fill")
+                                    .font(.system(size: 24, weight: .bold)) // 設定字體大小和粗體
+                                    .foregroundColor(.green)
+                            }
+                        }
+                        
+                        Spacer() // 按鈕之間的彈性間距
+
+                        Button(action: {
+                            // Special feature action
+                        }) {
+                            ZStack {
+                                // 圓形背景
+                                Circle()
+                                    .fill(Color.gray.opacity(0.8))
+                                    .frame(width: 50, height: 50) // 設定圓的大小
+                                
+                                VStack {
+                                    Image(systemName: "star.fill")
+                                        .font(.system(size: 24))
+                                        .foregroundColor(.blue)
+                                }
+                            }
+                        }
+                    }
                 }
-                .font(.subheadline)
             }
             .padding()
         }
