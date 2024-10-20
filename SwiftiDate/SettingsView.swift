@@ -284,13 +284,13 @@ struct SettingsView: View {
                                     .foregroundColor(.gray)
                             }
                             
-                            HStack {
-                                Text("MBTI測驗")
-                                    .padding(.vertical, 10)
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(.gray)
-                            }
+//                            HStack {
+//                                Text("MBTI測驗")
+//                                    .padding(.vertical, 10)
+//                                Spacer()
+//                                Image(systemName: "chevron.right")
+//                                    .foregroundColor(.gray)
+//                            }
                         }
                         
                         Section {
