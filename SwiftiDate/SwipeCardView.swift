@@ -32,6 +32,9 @@ struct SwipeCardView: View {
         User(id: "userID_3", name: "小明", age: 22, zodiac: "天秤座", location: "台北市", height: 180, photos: [
             "userID_3_photo1", "userID_3_photo2"
         ]),
+        User(id: "userID_4", name: "小花", age: 25, zodiac: "獅子座", location: "新竹市", height: 165, photos: [
+            "userID_4_photo1", "userID_4_photo2", "userID_4_photo3"
+        ])
         // Add more users here
     ]
     @State private var currentIndex = 0
