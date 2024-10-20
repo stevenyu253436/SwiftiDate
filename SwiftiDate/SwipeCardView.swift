@@ -28,10 +28,10 @@ struct SwipeCardView: View {
     // List of users and current index
     @State private var users: [User] = [
         User(id: "userID_2", name: "後照鏡被偷", age: 20, zodiac: "雙魚座", location: "桃園市", height: 172, photos: [
-            "userID_2_photo1", "userID_2_photo2", "userID_2_photo3", "userID_2_photo4", "userID_2_photo5", "userID_2_photo6"
+            "userID_2_photo1", "userID_2_photo2"
         ]),
         User(id: "userID_3", name: "小明", age: 22, zodiac: "天秤座", location: "台北市", height: 180, photos: [
-            "userID_3_photo1", "userID_3_photo2"
+            "userID_3_photo1", "userID_3_photo2", "userID_3_photo3", "userID_3_photo4", "userID_3_photo5", "userID_3_photo6"
         ]),
         User(id: "userID_4", name: "小花", age: 25, zodiac: "獅子座", location: "新竹市", height: 165, photos: [
             "userID_4_photo1", "userID_4_photo2", "userID_4_photo3"
@@ -87,54 +87,46 @@ struct SwipeCardView: View {
                 // 動態圓圈動畫頁面
                 CircleExpansionView()
             } else {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 25)
-                        .fill(Color.white)
-                        .shadow(radius: 5)
+                // 從後往前顯示卡片
+                ForEach(Array(users[currentIndex..<min(currentIndex + 3, users.count)]).reversed(), id: \.id) { user in
+                    let index = users.firstIndex(where: { $0.id == user.id }) ?? 0
+                    let isCurrentCard = index == currentIndex
+                    let yOffset = CGFloat(index - currentIndex) * 10
+                    let rotationAngle = isCurrentCard ? Double(offset.width / 10) : 0
+                    let zIndexValue = Double(users.count - index)
+                    let scaleValue = isCurrentCard ? 1.0 : 0.95
+                    let xOffset = isCurrentCard ? offset.width : 0
 
-                    VStack {
-                        TabView {
-                            ForEach(users[currentIndex].photos, id: \.self) { photo in
-                                Image(photo)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 300, height: 400)
-                                    .clipShape(RoundedRectangle(cornerRadius: 25))
-                                    .padding()
-                            }
-                        }
-                        .tabViewStyle(PageTabViewStyle())
-                        .frame(height: 420)
-
-                        Text("\(users[currentIndex].name), \(users[currentIndex].age)")
-                            .font(.title)
-                            .fontWeight(.bold)
-
-                        Text("\(users[currentIndex].zodiac) · \(users[currentIndex].location) · \(users[currentIndex].height) cm")
-                            .foregroundColor(.gray)
-                    }
-                    .padding()
+                    SwipeCard(user: user)
+                        .offset(x: xOffset, y: yOffset)
+                        .scaleEffect(scaleValue)
+                        .rotationEffect(.degrees(rotationAngle))
+                        .gesture(
+                            isCurrentCard ? DragGesture()
+                                .onChanged { gesture in
+                                    withAnimation(nil) {
+                                        self.offset = gesture.translation
+                                    }
+                                }
+                                .onEnded { _ in
+                                    withAnimation(nil) {
+                                        if self.offset.width > 120 {
+                                            // Like gesture (右滑)
+                                            handleSwipe(rightSwipe: true)
+                                        } else if self.offset.width < -150 {
+                                            // Dislike gesture (左滑)
+                                            handleSwipe(rightSwipe: false)
+                                        } else {
+                                            // 如果滑動不夠，重置偏移
+                                            self.offset = .zero
+                                        }
+                                    }
+                                }
+                            : nil
+                        )
+                        .zIndex(zIndexValue) // 控制卡片的顯示層級
+                        .animation(nil, value: offset) // 禁止不必要的動畫
                 }
-                .frame(width: 350, height: 500)
-                .offset(offset)
-                .gesture(
-                    DragGesture()
-                        .onChanged { gesture in
-                            self.offset = gesture.translation
-                        }
-                        .onEnded { _ in
-                            if self.offset.width > 100 {
-                                // Like gesture (right swipe)
-                                handleSwipe(rightSwipe: true)
-                            } else if self.offset.width < -100 {
-                                // Dislike gesture (left swipe)
-                                handleSwipe(rightSwipe: false)
-                            } else {
-                                // Reset position if not swiped enough
-                                self.offset = .zero
-                            }
-                        }
-                )
             }
         }
     }
@@ -252,6 +244,67 @@ struct SwipeCardView: View {
                 Spacer()
             }
         }
+    }
+}
+
+// 單個卡片的顯示
+struct SwipeCard: View {
+    var user: User
+    @State private var currentPhotoIndex = 0 // 用來追蹤目前顯示的照片索引
+    @EnvironmentObject var userSettings: UserSettings
+
+    var body: some View {
+        ZStack {
+            // 照片預覽界面
+            if user.photos.indices.contains(currentPhotoIndex) {
+                Image(user.photos[currentPhotoIndex])
+                    .resizable()
+                    .scaledToFill()
+                    .frame(maxWidth: UIScreen.main.bounds.width - 20, maxHeight: .infinity)
+                    .clipShape(RoundedRectangle(cornerRadius: 25))
+                    .overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.white, lineWidth: 4))
+                    .edgesIgnoringSafeArea(.top)
+            } else {
+                // 顯示佔位符或錯誤圖像
+                Image(systemName: "exclamationmark.triangle.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100)
+                    .foregroundColor(.gray)
+            }
+            
+            VStack(alignment: .leading, spacing: 5) {
+                HStack(spacing: 5) {
+                    ForEach(0..<user.photos.count) { index in
+                        RoundedRectangle(cornerRadius: 4)
+                            .frame(width: 40, height: 8)
+                            .foregroundColor(index == currentPhotoIndex ? .white : .gray)
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .center)
+                .padding(.vertical, 8)
+                .padding(.horizontal)
+                .cornerRadius(10)
+                
+                Spacer()
+                
+                // 顯示用戶名稱與年齡
+                Text("\(user.name), \(user.age)")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                
+                HStack {
+                    Image(systemName: "checkmark.seal.fill")
+                        .foregroundColor(.blue)
+                    Text("\(user.zodiac) · \(user.location) · \(user.height) cm")
+                        .foregroundColor(.white)
+                }
+                .font(.subheadline)
+            }
+            .padding()
+        }
+        .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height - 200)
     }
 }
 

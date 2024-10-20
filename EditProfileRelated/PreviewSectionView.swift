@@ -25,7 +25,7 @@ struct PreviewSectionView: View {
                 Image(uiImage: image)
                     .resizable()
                     .scaledToFill()
-                    .frame(maxWidth: 420, maxHeight: .infinity)
+                    .frame(maxWidth: UIScreen.main.bounds.width - 20, maxHeight: .infinity)
                     .clipShape(RoundedRectangle(cornerRadius: 25))
                     .overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.white, lineWidth: 4))
                     .edgesIgnoringSafeArea(.top)
@@ -102,5 +102,20 @@ struct PreviewSectionView: View {
                 }
             }
         }
+    }
+}
+
+struct PreviewSectionView_Previews: PreviewProvider {
+    static var previews: some View {
+        // 提供一些範例數據來展示預覽
+        PreviewSectionView(
+            photos: .constant(["photo1", "photo2", "photo3", "photo4", "photo5", "photo6"]),
+            currentPhotoIndex: .constant(0),
+            aboutMe: "能見面左右滑謝謝🙏\n一起吃日料吧🍣\n抽水煙也可以💨",
+            selectedZodiac: "巨蟹座",
+            selectedJob: "自由接案者"
+        )
+        .environmentObject(UserSettings()) // 傳入 environmentObject
+        .previewDevice("iPhone 15 Pro Max")
     }
 }
