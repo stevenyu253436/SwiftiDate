@@ -34,6 +34,12 @@ struct QRCodeScannerView: UIViewControllerRepresentable {
         @objc func dismissScanner() {
             parent.dismissView()
         }
+        
+        // Function to handle the "顯示行動條碼" button action
+        @objc func showBarcode() {
+            // Handle the action to show the barcode
+            print("顯示行動條碼按鈕被點擊")
+        }
     }
 
     func makeCoordinator() -> Coordinator {
@@ -127,6 +133,27 @@ struct QRCodeScannerView: UIViewControllerRepresentable {
         instructionLabel.frame = CGRect(x: 0, y: scanFrame.minY - 40, width: viewController.view.bounds.width, height: 30) // Position it just above the scan frame
         viewController.view.addSubview(instructionLabel)
         
+        // Add the "顯示行動條碼" button with icon below the scan frame
+        let actionButton = UIButton(type: .system)
+        let imageAttachment = NSTextAttachment()
+
+        // 將 qrcode 圖標設置為白色
+        if let qrCodeImage = UIImage(systemName: "qrcode")?.withTintColor(.white, renderingMode: .alwaysOriginal) {
+            imageAttachment.image = qrCodeImage
+        }
+
+        let fullString = NSMutableAttributedString()
+        fullString.append(NSAttributedString(attachment: imageAttachment))
+        fullString.append(NSAttributedString(string: " 顯示行動條碼"))
+        
+        actionButton.setAttributedTitle(fullString, for: .normal)
+        actionButton.setTitleColor(.white, for: .normal)
+        actionButton.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        actionButton.layer.cornerRadius = 15
+        actionButton.frame = CGRect(x: (viewController.view.bounds.width - 200) / 2, y: scanFrame.maxY + 20, width: 200, height: 40)
+        actionButton.addTarget(context.coordinator, action: #selector(Coordinator.showBarcode), for: .touchUpInside)
+        viewController.view.addSubview(actionButton)
+
         return viewController
     }
 
