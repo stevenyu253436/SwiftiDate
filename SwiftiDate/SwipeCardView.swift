@@ -23,6 +23,7 @@ struct SwipeCardView: View {
     @State private var showCircleAnimation = false
     @State private var showPrivacySettings = false // 控制隱私設置頁面的顯示
     @EnvironmentObject var userSettings: UserSettings
+    @State private var showWelcomePopup = false // 初始值為 true，代表剛登入時顯示彈出視窗
 
     // List of users and current index
     @State private var users: [User] = [
@@ -66,6 +67,11 @@ struct SwipeCardView: View {
                     }
                 }
                 Spacer()
+            }
+            
+            // 顯示彈出視窗
+            if showWelcomePopup {
+                welcomePopupView
             }
         }
         .edgesIgnoringSafeArea(.all) // 保證圖標能貼近螢幕邊緣
@@ -191,6 +197,61 @@ struct SwipeCardView: View {
             Spacer()
         }
         .padding()
+    }
+    
+    var welcomePopupView: some View {
+        ZStack {
+            // 半透明背景，覆蓋全屏
+            Color.black.opacity(0.5)
+                .edgesIgnoringSafeArea(.all)
+
+            VStack {
+                Spacer()
+                ZStack {
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(Color.white)
+                        .frame(width: 300, height: 400)
+                        .shadow(radius: 10)
+                    
+                    VStack {
+                        Image(systemName: "person.fill.checkmark")
+                            .font(.system(size: 80))
+                            .foregroundColor(.green)
+                            .padding(.top, 40)
+                        
+                        Text("你喜歡什麼樣類型的？")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .padding(.top, 20)
+                        
+                        Text("我們會根據你的左滑和右滑了解你喜歡的類型，為你推薦更優質的用戶。")
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.gray)
+                            .padding(.horizontal, 20)
+                            .padding(.top, 10)
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            showWelcomePopup = false // 點擊按鈕時關閉彈出視窗
+                        }) {
+                            Text("知道了，開始吧！")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(Color.green)
+                                .cornerRadius(10)
+                                .padding(.horizontal, 40)
+                                .padding(.bottom, 20)
+                        }
+                    }
+                    .padding()
+                }
+                .frame(width: 300, height: 400)
+                Spacer()
+            }
+        }
     }
 }
 
