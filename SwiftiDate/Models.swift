@@ -8,7 +8,7 @@
 import Foundation
 
 // Define a structure for user match data
-struct UserMatch: Identifiable {
+struct UserMatch: Identifiable, Codable { // 添加 Codable
     let id = UUID()
     let name: String
     let imageName: String // Use image names stored in Assets
@@ -25,7 +25,7 @@ struct Message: Identifiable, Codable {
 
 // 聊天模型
 struct Chat: Identifiable, Codable {
-    let id = UUID()
+    let id: UUID
     let name: String
     let time: String
     let unreadCount: Int

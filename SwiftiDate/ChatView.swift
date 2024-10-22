@@ -339,7 +339,17 @@ struct ChatView: View {
             }
             .navigationTitle("聊天") // Ensure this is applied to the VStack
             .onAppear {
-                readDataFromFirebase() // Call function here
+                if chatDataString.isEmpty || chatMessagesString.isEmpty {
+                    // 如果本地的 chatDataString 或 chatMessagesString 為空，就從 Firebase 加載
+                    print("Loading data from Firebase as local storage is empty")
+                    readDataFromFirebase()
+                } else {
+                    // 如果本地有儲存的數據，從本地載入
+                    loadUserMatchesFromAppStorage()
+                    loadChatDataFromAppStorage()
+                    loadChatMessagesFromAppStorage()
+                    print("Loaded data from local storage")
+                }
             }
             .fullScreenCover(isPresented: $showTurboView) {
                 // Pass the selectedTab to TurboView
@@ -350,6 +360,40 @@ struct ChatView: View {
             .sheet(isPresented: $showTurboPurchaseView) {
                 TurboPurchaseView() // Present TurboPurchaseView when showTurboPurchaseView is true
             }
+        }
+    }
+    
+    // 從 AppStorage 載入 userMatches
+    private func loadUserMatchesFromAppStorage() {
+        guard !userMatchesString.isEmpty else {
+            print("No user matches found in AppStorage")
+            return
+        }
+        
+        do {
+            let decoder = JSONDecoder()
+            if let data = userMatchesString.data(using: .utf8) {
+                userMatches = try decoder.decode([UserMatch].self, from: data)
+            }
+        } catch {
+            print("Failed to decode userMatches: \(error)")
+        }
+    }
+    
+    // 從 AppStorage 載入 chatData
+    private func loadChatDataFromAppStorage() {
+        guard !chatDataString.isEmpty else {
+            print("No chat data found in AppStorage")
+            return
+        }
+        
+        do {
+            let decoder = JSONDecoder()
+            if let data = chatDataString.data(using: .utf8) {
+                chatData = try decoder.decode([Chat].self, from: data)
+            }
+        } catch {
+            print("Failed to decode chatData: \(error)")
         }
     }
 
