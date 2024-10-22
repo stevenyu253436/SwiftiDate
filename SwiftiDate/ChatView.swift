@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Firebase
 
 struct ChatView: View {
     @State private var selectedChat: Chat? = nil // State variable to handle navigation
@@ -81,6 +82,70 @@ struct ChatView: View {
                 Message(id: UUID(), text: "我喜歡旅遊、追劇、吃日料，偶爾小酌，你平常喜歡做什麼？", isSender: true, time: "09/20 15:03", isCompliment: false)
             ]
         ])
+        
+        // 將資料寫入 Firebase
+//        writeDataToFirebase()
+    }
+    
+    func writeDataToFirebase() {
+        let ref = Database.database(url: "https://swiftidate-cdff0-default-rtdb.asia-southeast1.firebasedatabase.app").reference()
+        let userId = "userID_1"
+
+        // 寫入 userMatches
+        var userMatchesDict: [[String: Any]] = []
+        for match in userMatches {
+            userMatchesDict.append([
+                "name": match.name,
+                "imageName": match.imageName
+            ])
+        }
+        ref.child("users").child(userId).child("userMatches").setValue(userMatchesDict) { error, _ in
+            if let error = error {
+                print("Failed to write userMatches: \(error.localizedDescription)")
+            } else {
+                print("Successfully wrote userMatches")
+            }
+        }
+        
+        // 寫入 chatData
+        var chatDataDict: [[String: Any]] = []
+        for chat in chatData {
+            chatDataDict.append([
+                "name": chat.name,
+                "time": chat.time,
+                "unreadCount": chat.unreadCount
+            ])
+        }
+        ref.child("users").child(userId).child("chats").setValue(chatDataDict) { error, _ in
+            if let error = error {
+                print("Failed to write chats: \(error.localizedDescription)")
+            } else {
+                print("Successfully wrote chats")
+            }
+        }
+        
+        // 寫入 chatMessages
+        var chatMessagesDict: [String: [[String: Any]]] = [:]
+        for (chatId, messages) in chatMessages {
+            var messagesArray: [[String: Any]] = []
+            for message in messages {
+                messagesArray.append([
+                    "id": message.id.uuidString,
+                    "text": message.text,
+                    "isSender": message.isSender,
+                    "time": message.time,
+                    "isCompliment": message.isCompliment
+                ])
+            }
+            chatMessagesDict[chatId.uuidString] = messagesArray
+        }
+        ref.child("users").child(userId).child("chatMessages").setValue(chatMessagesDict) { error, _ in
+            if let error = error {
+                print("Failed to write chatMessages: \(error.localizedDescription)")
+            } else {
+                print("Successfully wrote chatMessages")
+            }
+        }
     }
     
     var body: some View {
