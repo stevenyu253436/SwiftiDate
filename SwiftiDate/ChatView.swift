@@ -47,7 +47,12 @@ struct ChatView: View {
             
             do {
                 let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
-                let userMatches = try JSONDecoder().decode([UserMatch].self, from: jsonData)
+                var userMatches = try JSONDecoder().decode([UserMatch].self, from: jsonData)
+                
+                // 將 userMatches 倒序排序
+                userMatches.reverse()
+                
+                // 更新 self.userMatches 並存儲到本地
                 self.userMatches = userMatches
                 self.saveUserMatchesToAppStorage()
             } catch {
@@ -64,8 +69,19 @@ struct ChatView: View {
             
             do {
                 let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
-                let chatData = try JSONDecoder().decode([Chat].self, from: jsonData)
-                self.chatData = chatData            
+                var chatData = try JSONDecoder().decode([Chat].self, from: jsonData)
+
+                // 確保 chatData 至少有兩個元素
+                if chatData.count > 1 {
+                    // 保留第一個元素
+                    let firstChat = [chatData[0]]
+                    // 倒序排列剩下的元素
+                    let reversedChats = chatData[1...].reversed()
+                    // 合併結果
+                    chatData = firstChat + reversedChats
+                }
+
+                self.chatData = chatData
                 self.saveChatDataToAppStorage()
             } catch {
                 print("Failed to decode chats: \(error)")
