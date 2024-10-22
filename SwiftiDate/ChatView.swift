@@ -127,7 +127,6 @@ struct ChatView: View {
                 let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
                 let chatData = try JSONDecoder().decode([Chat].self, from: jsonData)
                 self.chatData = chatData            
-                print("Chat data successfully loaded: \(self.chatData)") // Print chatData here
                 self.saveChatDataToAppStorage()
             } catch {
                 print("Failed to decode chats: \(error)")
@@ -144,7 +143,6 @@ struct ChatView: View {
             var chatMessages: [UUID: [Message]] = [:]
             do {
                 for (key, messagesArray) in value {
-                    print("Processing chat ID: \(key)")
                     guard let chatId = UUID(uuidString: key) else {
                         print("Invalid UUID: \(key)")
                         continue
@@ -158,7 +156,6 @@ struct ChatView: View {
                 // Update the state on the main thread
                 DispatchQueue.main.async {
                     self.chatMessages = chatMessages
-                    print("Chat messages successfully loaded on main thread: \(self.chatMessages)")
                     self.saveChatMessagesToAppStorage()
                 }
                 
