@@ -34,67 +34,6 @@ struct ChatView: View {
         self._contentSelectedTab = contentSelectedTab
     }
     
-    func writeDataToFirebase() {
-        let ref = Database.database(url: "https://swiftidate-cdff0-default-rtdb.asia-southeast1.firebasedatabase.app").reference()
-        let userId = "userID_1"
-
-        // 寫入 userMatches
-        var userMatchesDict: [[String: Any]] = []
-        for match in userMatches {
-            userMatchesDict.append([
-                "name": match.name,
-                "imageName": match.imageName
-            ])
-        }
-        ref.child("users").child(userId).child("userMatches").setValue(userMatchesDict) { error, _ in
-            if let error = error {
-                print("Failed to write userMatches: \(error.localizedDescription)")
-            } else {
-                print("Successfully wrote userMatches")
-            }
-        }
-        
-        // 寫入 chatData
-        var chatDataDict: [[String: Any]] = []
-        for chat in chatData {
-            chatDataDict.append([
-                "name": chat.name,
-                "time": chat.time,
-                "unreadCount": chat.unreadCount
-            ])
-        }
-        ref.child("users").child(userId).child("chats").setValue(chatDataDict) { error, _ in
-            if let error = error {
-                print("Failed to write chats: \(error.localizedDescription)")
-            } else {
-                print("Successfully wrote chats")
-            }
-        }
-        
-        // 寫入 chatMessages
-        var chatMessagesDict: [String: [[String: Any]]] = [:]
-        for (chatId, messages) in chatMessages {
-            var messagesArray: [[String: Any]] = []
-            for message in messages {
-                messagesArray.append([
-                    "id": message.id.uuidString,
-                    "text": message.text,
-                    "isSender": message.isSender,
-                    "time": message.time,
-                    "isCompliment": message.isCompliment
-                ])
-            }
-            chatMessagesDict[chatId.uuidString] = messagesArray
-        }
-        ref.child("users").child(userId).child("chatMessages").setValue(chatMessagesDict) { error, _ in
-            if let error = error {
-                print("Failed to write chatMessages: \(error.localizedDescription)")
-            } else {
-                print("Successfully wrote chatMessages")
-            }
-        }
-    }
-    
     func readDataFromFirebase() {
         let ref = Database.database(url: "https://swiftidate-cdff0-default-rtdb.asia-southeast1.firebasedatabase.app").reference()
         let userId = userSettings.globalUserID
