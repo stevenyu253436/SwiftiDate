@@ -10,6 +10,9 @@ import SwiftUI
 import Firebase
 
 struct ChatView: View {
+    @EnvironmentObject var userSettings: UserSettings
+    // 使用 userSettings.globalUserID 來取得 globalUserID
+
     @State private var selectedChat: Chat? = nil // State variable to handle navigation
     @AppStorage("userMatchesStorage") private var userMatchesString: String = "" // 使用 AppStorage 儲存 JSON 字符串
     @AppStorage("chatDataStorage") private var chatDataString: String = "" // 使用 AppStorage 儲存 JSON 字符串
@@ -29,62 +32,6 @@ struct ChatView: View {
 
     init(contentSelectedTab: Binding<Int>) {
         self._contentSelectedTab = contentSelectedTab
-        
-        // 初始化 userMatches
-        _userMatches = State(initialValue: [
-            UserMatch(name: "詐騙集團", imageName: "user1"),
-            UserMatch(name: "ซูก้า", imageName: "user2"),
-            UserMatch(name: "賣米當卡", imageName: "user3")
-        ])
-        
-        // 初始化 chatData
-        _chatData = State(initialValue: [
-            Chat(name: "SwiftiDate", time: "09:15", unreadCount: 0),
-            Chat(name: "霏", time: "09:15", unreadCount: 0),
-            Chat(name: "Claire", time: "09:15", unreadCount: 0),
-            Chat(name: "Laiiiiiiii", time: "09/21", unreadCount: 0),
-            Chat(name: "嫣兒", time: "09/20", unreadCount: 0),
-            Chat(name: "兔兔", time: "09/20", unreadCount: 0),
-            Chat(name: "心心", time: "09/15", unreadCount: 1)
-        ])
-
-        // 初始化 chatMessages，確保初始化之後再進行設置
-        _chatMessages = State(initialValue: [
-            chatData[0].id: [ // SwiftiDate messages for InteractiveContentView
-                Message(id: UUID(), text: "😝6秒前有127人透過<戀人卡>完成了配對！", isSender: false, time: "09/15", isCompliment: false),
-                Message(id: UUID(), text: "❤️ @玩玩，來找到真正適合自己的配對！", isSender: false, time: "09/15", isCompliment: false),
-            ],
-            chatData[1].id: [
-                Message(id: UUID(), text: "你感覺起來很有氣質～是在做什麼的呢？ 😊", isSender: true, time: "09/20 15:03", isCompliment: false),
-            ],
-            chatData[2].id: [
-                Message(id: UUID(), text: "嘿嘿！分享一首你最近在聽的歌吧～", isSender: true, time: "09/20 15:03", isCompliment: false),
-            ],
-            chatData[3].id: [
-                Message(id: UUID(), text: "嗨～ 你有在這上面遇到什麼有趣的人嗎？", isSender: true, time: "09/12 15:53", isCompliment: false),
-                Message(id: UUID(), text: "你要夠有趣的哈哈哈", isSender: false, time: "09/16 02:09", isCompliment: false),
-                Message(id: UUID(), text: "我也不知道耶~", isSender: true, time: "09/20 15:03", isCompliment: false),
-                Message(id: UUID(), text: "我喜歡旅遊、追劇、吃日料 ，偶爾小酌，妳平常喜歡做什麼？", isSender: true, time: "09/20 15:03", isCompliment: false),
-                Message(id: UUID(), text: "還是像我一樣有趣的哈哈哈", isSender: true, time: "09/20 15:03", isCompliment: false),
-                Message(id: UUID(), text: "跳舞跟唱歌", isSender: false, time: "09/21 01:50", isCompliment: false),
-                Message(id: UUID(), text: "😂", isSender: false, time: "09/21 01:50", isCompliment: false),
-                Message(id: UUID(), text: "吃美食跟看劇", isSender: false, time: "09/21 01:50", isCompliment: false)
-            ],
-            chatData[4].id: [
-                Message(id: UUID(), text: "她希望可以先聊天，再見面～", isSender: false, time: "09/13 22:44", isCompliment: false),
-                Message(id: UUID(), text: "妳感覺起來很有氣質～", isSender: true, time: "09/20 15:03", isCompliment: true),
-                Message(id: UUID(), text: "謝謝", isSender: false, time: "09/20 15:03", isCompliment: false),
-                Message(id: UUID(), text: "你感覺起來很有氣質～是在做什麼的呢？ 😊", isSender: true, time: "09/20 15:03", isCompliment: false)
-            ],
-            chatData[5].id: [
-                Message(id: UUID(), text: "你感覺起來很有氣質～是在做什麼的呢？ 😊", isSender: true, time: "09/20 15:03", isCompliment: true),
-                Message(id: UUID(), text: "我已通過你的好友請求，我們可以開始聊天啦～", isSender: false, time: "09/19 14:10", isCompliment: false),
-                Message(id: UUID(), text: "我喜歡旅遊、追劇、吃日料，偶爾小酌，你平常喜歡做什麼？", isSender: true, time: "09/20 15:03", isCompliment: false)
-            ]
-        ])
-        
-        // 將資料寫入 Firebase
-//        writeDataToFirebase()
     }
     
     func writeDataToFirebase() {
@@ -145,6 +92,112 @@ struct ChatView: View {
             } else {
                 print("Successfully wrote chatMessages")
             }
+        }
+    }
+    
+    func readDataFromFirebase() {
+        let ref = Database.database(url: "https://swiftidate-cdff0-default-rtdb.asia-southeast1.firebasedatabase.app").reference()
+        let userId = userSettings.globalUserID
+
+        // 讀取 userMatches
+        ref.child("users").child(userId).child("userMatches").observeSingleEvent(of: .value) { snapshot in
+            guard let value = snapshot.value as? [[String: Any]] else {
+                print("Failed to decode userMatches data")
+                return
+            }
+            
+            do {
+                let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
+                let userMatches = try JSONDecoder().decode([UserMatch].self, from: jsonData)
+                self.userMatches = userMatches
+                self.saveUserMatchesToAppStorage()
+            } catch {
+                print("Failed to decode userMatches: \(error)")
+            }
+        }
+
+        // 讀取 chatData
+        ref.child("users").child(userId).child("chats").observeSingleEvent(of: .value) { snapshot in
+            guard let value = snapshot.value as? [[String: Any]] else {
+                print("Failed to decode chats data")
+                return
+            }
+            
+            do {
+                let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
+                let chatData = try JSONDecoder().decode([Chat].self, from: jsonData)
+                self.chatData = chatData            
+                print("Chat data successfully loaded: \(self.chatData)") // Print chatData here
+                self.saveChatDataToAppStorage()
+            } catch {
+                print("Failed to decode chats: \(error)")
+            }
+        }
+
+        // 讀取 chatMessages
+        ref.child("users").child(userId).child("chatMessages").observeSingleEvent(of: .value) { snapshot in
+            guard let value = snapshot.value as? [String: [[String: Any]]] else {
+                print("Failed to decode chatMessages data")
+                return
+            }
+            
+            var chatMessages: [UUID: [Message]] = [:]
+            do {
+                for (key, messagesArray) in value {
+                    print("Processing chat ID: \(key)")
+                    guard let chatId = UUID(uuidString: key) else {
+                        print("Invalid UUID: \(key)")
+                        continue
+                    }
+                    
+                    let jsonData = try JSONSerialization.data(withJSONObject: messagesArray, options: [])
+                    let messages = try JSONDecoder().decode([Message].self, from: jsonData)
+                    chatMessages[chatId] = messages
+                }
+                
+                // Update the state on the main thread
+                DispatchQueue.main.async {
+                    self.chatMessages = chatMessages
+                    print("Chat messages successfully loaded on main thread: \(self.chatMessages)")
+                    self.saveChatMessagesToAppStorage()
+                }
+                
+            } catch {
+                print("Failed to decode chatMessages: \(error)")
+            }
+        }
+    }
+
+    // 將 userMatches 編碼為 JSON 字符串並存入 AppStorage
+    private func saveUserMatchesToAppStorage() {
+        do {
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(userMatches)
+            userMatchesString = String(data: data, encoding: .utf8) ?? ""
+        } catch {
+            print("Failed to encode userMatches: \(error)")
+        }
+    }
+
+    // 將 chatData 編碼為 JSON 字符串並存入 AppStorage
+    private func saveChatDataToAppStorage() {
+        do {
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(chatData)
+            chatDataString = String(data: data, encoding: .utf8) ?? ""
+        } catch {
+            print("Failed to encode chatData: \(error)")
+        }
+    }
+
+    // 將 chatMessages 編碼為 JSON 字符串並存入 AppStorage
+    private func saveChatMessagesToAppStorage() {
+        do {
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(chatMessages)
+            chatMessagesString = String(data: data, encoding: .utf8) ?? ""
+        } catch {
+            print("Failed to encode chatMessages: \(error)")
         }
     }
     
@@ -278,6 +331,9 @@ struct ChatView: View {
                                                 .tint(.green)
                                             }
                                     }
+                                } else {
+                                    // 如果 messages 不存在，显示 chat.id 作为调试信息
+                                    Text(chat.id.uuidString)
                                 }
                             }
                         }
@@ -285,6 +341,9 @@ struct ChatView: View {
                 }
             }
             .navigationTitle("聊天") // Ensure this is applied to the VStack
+            .onAppear {
+                readDataFromFirebase() // Call function here
+            }
             .fullScreenCover(isPresented: $showTurboView) {
                 // Pass the selectedTab to TurboView
                 TurboView(contentSelectedTab: $contentSelectedTab, turboSelectedTab: $selectedTurboTab, showBackButton: true, onBack: {
@@ -294,17 +353,6 @@ struct ChatView: View {
             .sheet(isPresented: $showTurboPurchaseView) {
                 TurboPurchaseView() // Present TurboPurchaseView when showTurboPurchaseView is true
             }
-        }
-    }
-    
-    // 將 chatMessages 編碼為 JSON 字符串並存入 AppStorage
-    private func saveChatMessagesToAppStorage() {
-        do {
-            let encoder = JSONEncoder()
-            let data = try encoder.encode(chatMessages)
-            chatMessagesString = String(data: data, encoding: .utf8) ?? ""
-        } catch {
-            print("Failed to encode chatMessages: \(error)")
         }
     }
 
@@ -337,5 +385,6 @@ struct ChatView_Previews: PreviewProvider {
     
     static var previews: some View {
         ChatView(contentSelectedTab: $contentSelectedTab) // Pass the binding to the contentSelectedTab
+            .environmentObject(UserSettings()) // 注入 UserSettings
     }
 }
