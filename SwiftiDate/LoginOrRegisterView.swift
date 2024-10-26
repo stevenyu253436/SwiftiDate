@@ -67,7 +67,7 @@ struct LoginOrRegisterView: View {
                 .padding(.bottom, 20)
             }
             .background(
-                LinearGradient(gradient: Gradient(colors: [Color.white.opacity(0.5), Color.blue.opacity(0.5)]),
+                LinearGradient(gradient: Gradient(colors: [Color.white.opacity(0.5), Color.blue]),
                                startPoint: .top,
                                endPoint: .bottom)
                     .edgesIgnoringSafeArea(.all)
