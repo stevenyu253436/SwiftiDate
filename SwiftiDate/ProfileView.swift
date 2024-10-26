@@ -24,7 +24,6 @@ struct ProfileView: View {
     @State private var isShowingEditProfileView = false // State to show EditProfileView
     @State private var showSettingsView = false // State variable to control Settings View presentation
     @State private var showSafetyCenterView = false // 控制 SafetyCenterView 的顯示
-    @State private var photos: [String] = [] // Local state variable for photos
     
     // Local debug variable for Supreme status
     @State private var isSupreme = false // Modify this to test different scenarios
@@ -41,7 +40,7 @@ struct ProfileView: View {
                         // 头像及基本信息
                         ProfileHeaderView(
                             isShowingEditProfileView: $isShowingEditProfileView,
-                            photos: $photos
+                            photos: $userSettings.photos // 傳遞綁定的照片屬性
                         )
                         
                         // 统计信息
@@ -57,7 +56,7 @@ struct ProfileView: View {
                             // 成就进度条
                             VerifiedProfileProgressView(userRankPercentage: userRankPercentage, isShowingInfoPopup: $isShowingInfoPopup)
                         } else {
-                            UnverifiedProfilePlaceholderView(photos: photos)
+                            UnverifiedProfilePlaceholderView(photos: userSettings.photos) // 使用 userSettings.photos
                         }
                         
                         // Turbo, Crush, 讚美
@@ -108,8 +107,8 @@ struct ProfileView: View {
         if !userSettings.loadedPhotosString.isEmpty {
             print("Loaded cached photos from AppStorage: \(userSettings.loadedPhotosString)")
             // 直接將快取的照片名稱分割成陣列並賦值給 photos
-            self.photos = userSettings.loadedPhotosString.components(separatedBy: ",")
-            print("Photos loaded from cache: \(self.photos)")
+            userSettings.photos = userSettings.loadedPhotosString.components(separatedBy: ",")
+            print("Photos loaded from cache: \(userSettings.photos)")
         } else {
             print("No cached photos found in AppStorage, fetching from Firebase.")
             fetchPhotosFromFirebase()
@@ -119,35 +118,80 @@ struct ProfileView: View {
     // Fetch photos from Firebase Storage
     func fetchPhotosFromFirebase() {
         print("Fetching photos from Firebase started")
-        photos.removeAll() // Clear existing photos before fetching
+        userSettings.photos.removeAll() // Clear existing photos before fetching
         
         let storage = Storage.storage()
         let userID = userSettings.globalUserID // Access user ID from UserSettings
         let storageRef = storage.reference().child("user_photos/\(userID)")
         
-        storageRef.listAll { (result, error) in
+        storageRef.listAll { (listResult, error) in
             if let error = error {
                 print("Error fetching photos: \(error)")
                 return
             }
             
-            // Safely unwrap the result
-            guard let result = result else {
+            // Safely unwrap the listResult
+            guard let listResult = listResult else {
                 print("Failed to fetch the result")
                 return
             }
-            
+
             var fetchedPhotoURLs: [(url: String, photoNumber: Int)] = []
             var downloadedPhotos: [(url: String, imageName: String)] = [] // Temporary array to store downloaded photos
-
-            for item in result.items {
-                item.downloadURL { (url, error) in
-                    if let error = error {
-                        print("Error getting download URL: \(error)")
-                        return
-                    }
-                    
-                    if let url = url {
+            var processedItemCount = 0 // Track the number of processed items
+            
+            for item in listResult.items {
+//                 註解：以前的代碼可以編譯通過，但是在新的 Firebase SDK 或 Swift 編譯器更新之後，
+//                 回調函式的參數型別或 API 使用方式發生了變更，導致舊的寫法不再適用。
+//                 現在需要使用 Result<URL, Error> 來處理下載 URL 的結果。
+//                item.downloadURL { (url, error) in
+//                    if let error = error {
+//                        print("Error getting download URL: \(error)")
+//                        return
+//                    }
+//                    
+//                    if let url = url {
+//                        let urlString = url.absoluteString
+//                        
+//                        // Extract the number from the photo name
+//                        if let photoNumber = extractPhotoNumber(from: urlString) {
+//                            fetchedPhotoURLs.append((urlString, photoNumber))
+//                        }
+//                        
+//                        // Once all URLs are fetched, sort by photo number
+//                        if fetchedPhotoURLs.count == result.items.count {
+//                            fetchedPhotoURLs.sort { $0.photoNumber < $1.photoNumber }
+//                            
+//                            // Download each photo and save it to local storage
+//                            for (urlString, _) in fetchedPhotoURLs {
+//                                downloadAndSavePhoto(from: urlString) { imageName in
+//                                    if let imageName = imageName {
+//                                        downloadedPhotos.append((url: urlString, imageName: imageName))
+//                                    }
+//                                    
+//                                    // If all photos are downloaded, update the photos array
+//                                    if downloadedPhotos.count == fetchedPhotoURLs.count {
+//                                        // Sort the downloaded photos according to fetchedPhotoURLs order
+//                                        downloadedPhotos.sort { lhs, rhs in
+//                                            fetchedPhotoURLs.firstIndex(where: { $0.url == lhs.url })! < fetchedPhotoURLs.firstIndex(where: { $0.url == rhs.url })!
+//                                        }
+//                                        
+//                                        DispatchQueue.main.async {
+//                                            // Update the photos array and AppStorage
+//                                            userSettings.photos = downloadedPhotos.map { $0.imageName }
+//                                            userSettings.loadedPhotosString = userSettings.photos.joined(separator: ",")
+//                                            print("Updated photos array after download: \(self.photos)")
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+                
+                item.downloadURL { result in
+                    switch result {
+                    case .success(let url):
                         let urlString = url.absoluteString
                         
                         // Extract the number from the photo name
@@ -156,7 +200,7 @@ struct ProfileView: View {
                         }
                         
                         // Once all URLs are fetched, sort by photo number
-                        if fetchedPhotoURLs.count == result.items.count {
+                        if processedItemCount == listResult.items.count {
                             fetchedPhotoURLs.sort { $0.photoNumber < $1.photoNumber }
                             
                             // Download each photo and save it to local storage
@@ -175,14 +219,16 @@ struct ProfileView: View {
                                         
                                         DispatchQueue.main.async {
                                             // Update the photos array and AppStorage
-                                            self.photos = downloadedPhotos.map { $0.imageName }
-                                            userSettings.loadedPhotosString = self.photos.joined(separator: ",")
-                                            print("Updated photos array after download: \(self.photos)")
+                                            userSettings.photos = downloadedPhotos.map { $0.imageName }
+                                            userSettings.loadedPhotosString = userSettings.photos.joined(separator: ",")
+                                            print("Updated photos array after download: \(userSettings.photos)")
                                         }
                                     }
                                 }
                             }
                         }
+                    case .failure(let error):
+                        print("Error getting download URL: \(error)")
                     }
                 }
             }
@@ -238,8 +284,8 @@ struct ProfileView: View {
     func addImageToPhotos(image: UIImage) {
         let imageName = UUID().uuidString
         PhotoUtility.saveImageToLocalStorage(image: image, withName: imageName)
-        photos.append(imageName)
-        userSettings.loadedPhotosString = photos.joined(separator: ",")
+        userSettings.photos.append(imageName)
+        userSettings.loadedPhotosString = userSettings.photos.joined(separator: ",")
     }
 }
 
