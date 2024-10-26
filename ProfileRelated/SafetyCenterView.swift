@@ -344,6 +344,7 @@ struct SafetyCenterView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             SafetyCenterView(showSafetyCenterView: .constant(true)) // 使用 .constant 提供綁定的預覽值
+                .environmentObject(UserSettings()) // 加入 UserSettings 的環境物件
         }
     }
 }

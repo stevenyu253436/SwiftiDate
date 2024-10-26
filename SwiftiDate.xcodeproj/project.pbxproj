@@ -441,9 +441,32 @@
 			path = HelpViews;
 			sourceTree = "<group>";
 		};
+		D039FC562CCD074A0082D2F3 /* SettingsRelated */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SettingsRelated;
+			sourceTree = "<group>";
+		};
+		D039FC572CCD08160082D2F3 /* SafetyRelated */ = {
+			isa = PBXGroup;
+			children = (
+				D09587BC2CB77F5200BCD04B /* SafetyTestView.swift */,
+				D09587C22CB7C0A900BCD04B /* SafetyTipsView.swift */,
+				D09587C42CB7C73100BCD04B /* RealNameVerificationView.swift */,
+				D09587C62CB7CB5100BCD04B /* ReportConditionsView.swift */,
+				D09587C82CB7CDB800BCD04B /* HowToReportView.swift */,
+				D09587CA2CB7D19B00BCD04B /* ReportAftermathView.swift */,
+				D09587CC2CB7D5C800BCD04B /* MeetingGuideView.swift */,
+			);
+			path = SafetyRelated;
+			sourceTree = "<group>";
+		};
 		D0445C222C71B3800059D522 = {
 			isa = PBXGroup;
 			children = (
+				D039FC572CCD08160082D2F3 /* SafetyRelated */,
+				D039FC562CCD074A0082D2F3 /* SettingsRelated */,
 				D0472D392CCC6CDA0047FE10 /* LoginOrRegister */,
 				D051EF2F2CC033AC004563A3 /* ProfileRelated */,
 				D017F4FA2CAFF46F00C71D18 /* HelpViews */,
@@ -507,16 +530,7 @@
 				D017F4F32CAF77D900C71D18 /* MessageBubbleView.swift */,
 				D017F4F52CAFBFF700C71D18 /* LoginOrRegisterView.swift */,
 				D09587B82CB6552100BCD04B /* ChatGPTView.swift */,
-				D09587BA2CB7558600BCD04B /* SafetyCenterView.swift */,
-				D09587BC2CB77F5200BCD04B /* SafetyTestView.swift */,
-				D09587BE2CB7899D00BCD04B /* SafetyQuizView.swift */,
 				D09587C02CB7B17E00BCD04B /* ResultsView.swift */,
-				D09587C22CB7C0A900BCD04B /* SafetyTipsView.swift */,
-				D09587C42CB7C73100BCD04B /* RealNameVerificationView.swift */,
-				D09587C62CB7CB5100BCD04B /* ReportConditionsView.swift */,
-				D09587C82CB7CDB800BCD04B /* HowToReportView.swift */,
-				D09587CA2CB7D19B00BCD04B /* ReportAftermathView.swift */,
-				D09587CC2CB7D5C800BCD04B /* MeetingGuideView.swift */,
 				D09587CE2CB7E44400BCD04B /* CircleExpansionView.swift */,
 				D09587D02CB8623C00BCD04B /* LoginView.swift */,
 				D09587D32CB8BDEA00BCD04B /* PrivacySettingsView.swift */,
@@ -526,6 +540,7 @@
 				D04938792CBF0A6F00754E46 /* Models.swift */,
 				D051EF2B2CC02C33004563A3 /* PhotoUtility.swift */,
 				D04729E92CC1F999007C33EC /* Color.swift */,
+				D09587BE2CB7899D00BCD04B /* SafetyQuizView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -572,6 +587,7 @@
 				D04729E52CC1DA82007C33EC /* PremiumDetailsView.swift */,
 				D04729C52CC03D55007C33EC /* ProfileHeaderView.swift */,
 				D04729D52CC09749007C33EC /* ProfileImageView.swift */,
+				D09587BA2CB7558600BCD04B /* SafetyCenterView.swift */,
 				D04729DB2CC0BDC4007C33EC /* ServiceSectionContainer.swift */,
 				D04729C32CC03C4D007C33EC /* StatisticsSectionView.swift */,
 				D04729EB2CC1FB16007C33EC /* SubscriptionScrollView.swift */,
