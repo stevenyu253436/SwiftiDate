@@ -177,7 +177,6 @@ struct SwiftiDateApp: App {
                         .environmentObject(appState)
                 }
             }
-            .environmentObject(userSettings) // Inject UserSettings into the environment
         }
     }
 }

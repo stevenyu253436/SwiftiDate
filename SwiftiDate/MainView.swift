@@ -9,7 +9,8 @@ import Foundation
 import SwiftUI
 
 struct MainView: View {
-    @EnvironmentObject var userSettings: UserSettings // 引入 UserSettings 來獲取 globalUserGender
+    @EnvironmentObject var userSettings: UserSettings
+
     @State private var selectedTab: Int = 0 // Add this to track the selected tab
     @State private var selectedTurboTab: Int = 0 // Add this to track the selected tab for TurboView
     
@@ -48,6 +49,7 @@ struct MainView: View {
             
             NavigationView {
                 ProfileView(contentSelectedTab: $selectedTab) // Pass the binding variable
+                    .environmentObject(userSettings) // 確保傳遞 userSettings
             }
                 .tabItem {
                     Image(systemName: "person.fill")

@@ -10,14 +10,14 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var userSettings: UserSettings
-
+    
     var body: some View {
         if appState.isLoggedIn {
-            MainView() // 主應用界面
-                .environmentObject(UserSettings())
+            MainView()
+                .environmentObject(userSettings)
         } else {
-            LoginView() // 登入界面
-                .environmentObject(appState) // 傳遞 appState
+            LoginView()
+                .environmentObject(appState)
         }
     }
 }

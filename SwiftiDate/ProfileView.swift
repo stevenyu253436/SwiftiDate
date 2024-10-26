@@ -76,6 +76,7 @@ struct ProfileView: View {
                         
                         ServiceSectionContainer(isSupreme: .constant(userSettings.isSupremeUser))
                     }
+                    .environmentObject(userSettings)
                 }
                 .onAppear {
                     loadPhotosFromAppStorage()
@@ -129,18 +130,18 @@ struct ProfileView: View {
                 print("Error fetching photos: \(error)")
                 return
             }
-            
+                        
             // Safely unwrap the listResult
             guard let listResult = listResult else {
                 print("Failed to fetch the result")
                 return
             }
-
+            
             var fetchedPhotoURLs: [(url: String, photoNumber: Int)] = []
             var downloadedPhotos: [(url: String, imageName: String)] = [] // Temporary array to store downloaded photos
             var processedItemCount = 0 // Track the number of processed items
             
-            for item in listResult.items {
+            for (index, item) in listResult.items.enumerated() {
 //                 註解：以前的代碼可以編譯通過，但是在新的 Firebase SDK 或 Swift 編譯器更新之後，
 //                 回調函式的參數型別或 API 使用方式發生了變更，導致舊的寫法不再適用。
 //                 現在需要使用 Result<URL, Error> 來處理下載 URL 的結果。
@@ -188,8 +189,12 @@ struct ProfileView: View {
 //                        }
 //                    }
 //                }
+                print("Processing item \(index + 1) of \(listResult.items.count): \(item.name)")
                 
                 item.downloadURL { result in
+                    processedItemCount += 1
+                    print("Download URL callback for item \(item.name), result: \(result)")
+                    
                     switch result {
                     case .success(let url):
                         let urlString = url.absoluteString
