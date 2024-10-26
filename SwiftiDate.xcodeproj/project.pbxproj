@@ -469,6 +469,16 @@
 			path = SafetyRelated;
 			sourceTree = "<group>";
 		};
+		D039FC582CCD0AAC0082D2F3 /* PurchasesView */ = {
+			isa = PBXGroup;
+			children = (
+				D018AD5C2C9E6581005A14B9 /* TurboPurchaseView.swift */,
+				D018AD5E2C9E6976005A14B9 /* CrushPurchaseView.swift */,
+				D018AD602C9E6ACF005A14B9 /* PraisePurchaseView.swift */,
+			);
+			path = PurchasesView;
+			sourceTree = "<group>";
+		};
 		D0445C222C71B3800059D522 = {
 			isa = PBXGroup;
 			children = (
@@ -514,9 +524,6 @@
 				D0445C642C72388D0059D522 /* FlowStack.swift */,
 				D0445C682C723AE80059D522 /* FlowLayout.swift */,
 				D018AD5A2C9E57DF005A14B9 /* UserGuideView.swift */,
-				D018AD5C2C9E6581005A14B9 /* TurboPurchaseView.swift */,
-				D018AD5E2C9E6976005A14B9 /* CrushPurchaseView.swift */,
-				D018AD602C9E6ACF005A14B9 /* PraisePurchaseView.swift */,
 				D018AD622C9E87F6005A14B9 /* ChatView.swift */,
 				D018AD952C9EEA82005A14B9 /* AsyncImageView.swift */,
 				D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */,
@@ -581,6 +588,7 @@
 		D051EF2F2CC033AC004563A3 /* ProfileRelated */ = {
 			isa = PBXGroup;
 			children = (
+				D039FC582CCD0AAC0082D2F3 /* PurchasesView */,
 				D051EF302CC033C5004563A3 /* AchievementSectionView.swift */,
 				D04729DD2CC11320007C33EC /* InfoPopupView.swift */,
 				D04729E32CC13221007C33EC /* PremiumCardTabView.swift */,
