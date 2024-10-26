@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 struct MainView: View {
+    @EnvironmentObject var appState: AppState
     @EnvironmentObject var userSettings: UserSettings
 
     @State private var selectedTab: Int = 0 // Add this to track the selected tab
@@ -50,6 +51,7 @@ struct MainView: View {
             NavigationView {
                 ProfileView(contentSelectedTab: $selectedTab) // Pass the binding variable
                     .environmentObject(userSettings) // 確保傳遞 userSettings
+                    .environmentObject(appState) // 傳遞 appState
             }
                 .tabItem {
                     Image(systemName: "person.fill")
@@ -63,5 +65,6 @@ struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
             .environmentObject(UserSettings())
+            .environmentObject(AppState()) // 加入 AppState
     }
 }

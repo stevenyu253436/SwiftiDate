@@ -14,6 +14,7 @@ struct ContentView: View {
     var body: some View {
         if appState.isLoggedIn {
             MainView()
+                .environmentObject(appState) // 傳遞 appState
                 .environmentObject(userSettings)
         } else {
             LoginView()

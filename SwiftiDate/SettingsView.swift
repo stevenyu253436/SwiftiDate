@@ -10,6 +10,7 @@ import SwiftUI
 import MessageUI
 
 struct SettingsView: View {
+    @EnvironmentObject var appState: AppState // 確保可以訪問 AppState
     @EnvironmentObject var userSettings: UserSettings // 使用 EnvironmentObject 來獲取 global 變數
     @Binding var showSettingsView: Bool // Binding variable to control the view dismissal
     @State private var isQRCodeScannerView = false
@@ -308,8 +309,8 @@ struct SettingsView: View {
                                     title: Text("一旦登出，你的登入資料將被清除"),
                                     primaryButton: .default(Text("取消")),
                                     secondaryButton: .destructive(Text("確定"), action: {
-                                        // 清除或登出操作
-                                        print("User logged out")
+                                        // 更新登錄狀態
+                                        appState.isLoggedIn = false // 切換到未登錄狀態
                                     })
                                 )
                             }

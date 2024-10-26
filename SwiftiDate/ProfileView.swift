@@ -10,6 +10,7 @@ import SwiftUI
 import FirebaseStorage
 
 struct ProfileView: View {
+    @EnvironmentObject var appState: AppState
     @EnvironmentObject var userSettings: UserSettings // 使用 EnvironmentObject 存取 UserSettings
     
     @State private var userRankPercentage: Double = 25.4
@@ -31,6 +32,7 @@ struct ProfileView: View {
     var body: some View {
         if showSettingsView {
             SettingsView(showSettingsView: $showSettingsView) // Pass the binding to the SettingsView
+                .environmentObject(appState) // 傳遞 AppState
         } else if showSafetyCenterView {
             SafetyCenterView(showSafetyCenterView: $showSafetyCenterView) // 如果全局变量为 true，则显示 SafetyCenterView
         } else {
@@ -332,6 +334,7 @@ struct ProfileView_Previews: PreviewProvider {
         NavigationView {
             ProfileView(contentSelectedTab: $mockSelectedTab) // Pass the binding for preview
                 .environmentObject(UserSettings()) // Add a mock EnvironmentObject for UserSettings
+                .environmentObject(AppState()) // 加入 AppState
         }
     }
 }
