@@ -11,11 +11,20 @@ import AuthenticationServices
 
 struct LoginView: View {
     @State private var authorizationController: ASAuthorizationController?
-    @State private var showExistingUserPopup = true // 控制彈框顯示
-    @State private var existingUserName: String = "" // 儲存已存在的用戶名稱
-
     @EnvironmentObject var userSettings: UserSettings // 使用 @EnvironmentObject 來訪問 UserSettings
     
+    private var showExistingUserPopup: Binding<Bool> {
+        Binding<Bool>(
+            get: { !userSettings.globalPhoneNumber.isEmpty },
+            set: { newValue in
+                // 如果需要手動更新 globalPhoneNumber，可以在這裡處理
+                if !newValue {
+                    userSettings.globalPhoneNumber = "" // 清除手機號碼
+                }
+            }
+        )
+    }
+
     var body: some View {
         ZStack {
             // 背景顏色
@@ -108,7 +117,7 @@ struct LoginView: View {
             }
             
             // 彈框顯示部分
-            if showExistingUserPopup {
+            if showExistingUserPopup.wrappedValue {
                 Color.black.opacity(0.4).ignoresSafeArea() // 背景透明遮罩
 
                 VStack(spacing: 20) {
@@ -118,15 +127,15 @@ struct LoginView: View {
                         .clipShape(Circle()) // 讓圖片變成圓形
                         .overlay(Circle().stroke(Color.white, lineWidth: 4)) // 加上白色的圓形邊框
                     
-                    Text(existingUserName)
+                    Text(userSettings.globalUserName)
                         .font(.subheadline)
                         .padding(.horizontal)
                         .multilineTextAlignment(.center)
                     
                     Button(action: {
                         // 確定以此帳號登入
-                        print("繼續使用帳號 \(existingUserName)")
-                        showExistingUserPopup = false
+                        print("繼續使用帳號 \(userSettings.globalUserName)")
+                        showExistingUserPopup.wrappedValue = false
                     }) {
                         Text("以此帳號登入")
                             .foregroundColor(.white)
@@ -139,7 +148,7 @@ struct LoginView: View {
                         // 更換帳號並清除所有已存資料
                         clearUserState()
                         print("換個帳號")
-                        showExistingUserPopup = false
+                        showExistingUserPopup.wrappedValue = false
                     }) {
                         Text("換個帳號")
                             .foregroundColor(.gray)
@@ -184,11 +193,6 @@ struct LoginView: View {
         let defaults = UserDefaults.standard
         userSettings.globalPhoneNumber = defaults.string(forKey: "phoneNumber") ?? "未設定"
         userSettings.globalUserName = defaults.string(forKey: "userName") ?? "未設定"
-
-        if !userSettings.globalUserName.isEmpty {
-            existingUserName = userSettings.globalUserName
-            showExistingUserPopup = true // 如果有已存的帳號數據則顯示彈框
-        }
         
         if let genderValue = defaults.string(forKey: "userGender"), let gender = Gender(rawValue: genderValue) {
             userSettings.globalUserGender = gender // Correctly set the Gender enum

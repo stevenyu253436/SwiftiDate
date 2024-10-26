@@ -161,6 +161,7 @@ struct SwiftiDateApp: App {
     // register app delegate for Firebase setup
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
+    @StateObject private var appState = AppState()
     @StateObject var userSettings = UserSettings() // Initialize UserSettings as a state object
     
     var body: some Scene {
@@ -168,8 +169,12 @@ struct SwiftiDateApp: App {
             NavigationView {
                 if userSettings.globalPhoneNumber.isEmpty { // Access globalPhoneNumber through userSettings
                     LoginOrRegisterView()
+                        .environmentObject(userSettings)
+                        .environmentObject(appState)
                 } else {
                     ContentView()
+                        .environmentObject(userSettings)
+                        .environmentObject(appState)
                 }
             }
             .environmentObject(userSettings) // Inject UserSettings into the environment

@@ -13,6 +13,7 @@ struct PhoneNumberEntryView: View {
     @State private var isShowingCountryCodePicker = false
     @State private var selectedCountryCode: String = "+886" // 預設為台灣國碼
     @State private var phoneNumber: String = ""
+    @State private var showAlert = false // 控制顯示警告視窗的變數
 
     var body: some View {
         VStack {
@@ -105,6 +106,16 @@ struct PhoneNumberEntryView: View {
             }
             .padding(.horizontal)
             .padding(.bottom)
+            .alert(isPresented: $showAlert) {
+                Alert(
+                    title: Text("請驗證你的手機號碼：\n\(selectedCountryCode) \(phoneNumber)"),
+                    message: Text("我們需要驗證 \(selectedCountryCode) \(phoneNumber) 是你的手機號碼"),
+                    primaryButton: .default(Text("確定"), action: {
+                        // 確定按鈕的行為
+                    }),
+                    secondaryButton: .cancel(Text("取消"))
+                )
+            }
         }
         .background(Color.white.edgesIgnoringSafeArea(.all))
         .fullScreenCover(isPresented: $isShowingCountryCodePicker) {

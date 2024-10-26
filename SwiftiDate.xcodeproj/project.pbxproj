@@ -94,6 +94,7 @@
 		D04729EA2CC1F999007C33EC /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04729E92CC1F999007C33EC /* Color.swift */; };
 		D04729EC2CC1FB16007C33EC /* SubscriptionScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04729EB2CC1FB16007C33EC /* SubscriptionScrollView.swift */; };
 		D0472D382CCC65CF0047FE10 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D0472D372CCC65CE0047FE10 /* GoogleService-Info.plist */; };
+		D0472D3D2CCC7F600047FE10 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0472D3C2CCC7F600047FE10 /* MainView.swift */; };
 		D04938782CBF0A4700754E46 /* ChatRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04938772CBF0A4600754E46 /* ChatRow.swift */; };
 		D049387A2CBF0A6F00754E46 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04938792CBF0A6F00754E46 /* Models.swift */; };
 		D049387C2CBF465300754E46 /* EducationAndWorkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D049387B2CBF465300754E46 /* EducationAndWorkView.swift */; };
@@ -249,6 +250,7 @@
 		D04729E92CC1F999007C33EC /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		D04729EB2CC1FB16007C33EC /* SubscriptionScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionScrollView.swift; sourceTree = "<group>"; };
 		D0472D372CCC65CE0047FE10 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D0472D3C2CCC7F600047FE10 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		D04938772CBF0A4600754E46 /* ChatRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRow.swift; sourceTree = "<group>"; };
 		D04938792CBF0A6F00754E46 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		D049387B2CBF465300754E46 /* EducationAndWorkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EducationAndWorkView.swift; sourceTree = "<group>"; };
@@ -471,6 +473,7 @@
 				D0472D372CCC65CE0047FE10 /* GoogleService-Info.plist */,
 				D0445C2E2C71B3800059D522 /* SwiftiDateApp.swift */,
 				D0445C302C71B3800059D522 /* ContentView.swift */,
+				D0472D3C2CCC7F600047FE10 /* MainView.swift */,
 				D0445C322C71B3820059D522 /* Assets.xcassets */,
 				D0445C342C71B3820059D522 /* Preview Content */,
 				D0445C582C71BFE70059D522 /* SwipeCardView.swift */,
@@ -779,6 +782,7 @@
 				D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */,
 				D0445C712C72F7870059D522 /* JobInputView.swift in Sources */,
 				D0DDDB502CA1A01200A78A87 /* HowToEnableNotificationsView.swift in Sources */,
+				D0472D3D2CCC7F600047FE10 /* MainView.swift in Sources */,
 				D04729CE2CC08BD7007C33EC /* AboutMeSection.swift in Sources */,
 				D09588FC2CBDEF3B00BCD04B /* GlobalVariables.swift in Sources */,
 				D0DDDB202CA13C5E00A78A87 /* WhoLikedMeView.swift in Sources */,
