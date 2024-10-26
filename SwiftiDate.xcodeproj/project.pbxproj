@@ -444,6 +444,13 @@
 		D039FC562CCD074A0082D2F3 /* SettingsRelated */ = {
 			isa = PBXGroup;
 			children = (
+				D017F4ED2CAEBC8700C71D18 /* QRCodeScannerView.swift */,
+				D017F4EF2CAECC5100C71D18 /* PersonalInfoView.swift */,
+				D0DDDB172CA11E5000A78A87 /* HelpView.swift */,
+				D0DDDB512CA251C500A78A87 /* CommunityGuidelinesView.swift */,
+				D0DDDB532CA25B4D00A78A87 /* PrivacyPolicyView.swift */,
+				D0DDDB552CA29B1100A78A87 /* TermsOfServiceView.swift */,
+				D0DDDB572CA4ECD200A78A87 /* DataManagementView.swift */,
 			);
 			path = SettingsRelated;
 			sourceTree = "<group>";
@@ -519,13 +526,6 @@
 				D0DDDB0C2CA07A2400A78A87 /* FeaturedCardView.swift */,
 				D0DDDB0E2CA0E65F00A78A87 /* LocationManager.swift */,
 				D0DDDB132CA10EAD00A78A87 /* SettingsView.swift */,
-				D0DDDB172CA11E5000A78A87 /* HelpView.swift */,
-				D0DDDB512CA251C500A78A87 /* CommunityGuidelinesView.swift */,
-				D0DDDB532CA25B4D00A78A87 /* PrivacyPolicyView.swift */,
-				D0DDDB552CA29B1100A78A87 /* TermsOfServiceView.swift */,
-				D0DDDB572CA4ECD200A78A87 /* DataManagementView.swift */,
-				D017F4ED2CAEBC8700C71D18 /* QRCodeScannerView.swift */,
-				D017F4EF2CAECC5100C71D18 /* PersonalInfoView.swift */,
 				D017F4F12CAF73AC00C71D18 /* GlobalVariables.swift */,
 				D017F4F32CAF77D900C71D18 /* MessageBubbleView.swift */,
 				D017F4F52CAFBFF700C71D18 /* LoginOrRegisterView.swift */,
