@@ -98,52 +98,28 @@ struct SafetyCenterView: View {
                 }
                 .padding(.bottom, 20)
                 
-                VStack(alignment: .leading, content: {
-                    SafetyOptionView(
-                        icon: "lightbulb.fill",
-                        title: "安全意識小測驗",
-                        subtitle: "測測看你的交友安全意識",
-                        backgroundColor: Color(red: 240/255, green: 250/255, blue: 255/255),
-                        iconColor: .blue
-                    ) {
-                        showSafetyTestView = true
-                    }
-                })
+                SafetyOptionView(
+                    icon: "lightbulb.fill",
+                    title: "安全意識小測驗",
+                    subtitle: "測測看你的交友安全意識",
+                    backgroundColor: Color(red: 240/255, green: 250/255, blue: 255/255),
+                    iconColor: .blue
+                ) {
+                    showSafetyTestView = true
+                }
                 .padding(.bottom, 10)
                 
-                VStack(alignment: .leading, content: {
-                    Text("安全須知")
-                        .font(.headline)
-                        .foregroundColor(.black) // Title text color
-                        .padding(.leading) // Add leading padding to align with the rest of the content
-
-                    HStack {
-                        // Image for the icon on the left
-                        Image(systemName: "bell.fill")
-                            .resizable()
-                            .frame(width: 50, height: 50) // Adjust the size of the icon
-                            .foregroundColor(.pink) // Change color of the icon
-
-                        Text("溫馨提醒")
-                            .font(.subheadline)
-                            .foregroundColor(.gray) // Subtitle text color
-
-                        Spacer() // Pushes everything to the left
-
-                        Image(systemName: "chevron.right")
-                            .foregroundColor(.pink) // Arrow color
-                            .padding(.trailing, 10)
-                    }
-                    .padding(25) // Padding around the HStack content
-                    .background(Color(red: 255/255, green: 240/255, blue: 240/255)) // Light pink background color
-                    .cornerRadius(15) // Rounded corners
-                    .shadow(radius: 1) // Add a slight shadow for depth
-                    .padding(.horizontal, 16) // Add padding from the left and right screen edges
-                    .onTapGesture {
+                SafetyOptionView(
+                    icon: "bell.fill",
+                    title: "安全須知",
+                    subtitle: "溫馨提醒",
+                    backgroundColor: Color(red: 255/255, green: 240/255, blue: 240/255),
+                    iconColor: .pink,
+                    action: {
                         showSafetyTipsView = true // 點擊後顯示安全提示視圖
                     }
-                })
-                .padding(.bottom, 10) // Add bottom padding to the entire VStack
+                )
+                .padding(.bottom, 10)
                 
 //                    NavigationLink(destination: Text("反詐騙中心")) {
 //                        VStack(alignment: .leading, content: {
@@ -178,40 +154,17 @@ struct SafetyCenterView: View {
 //                        .padding(.bottom, 10) // Add bottom padding to the entire VStack
 //                    }
                 
-                VStack(alignment: .leading, content: {
-                    Text("安全及認證")
-                        .font(.headline)
-                        .foregroundColor(.black) // Title text color
-                        .padding(.leading) // Add leading padding to align with the rest of the content
-
-                    HStack {
-                        // Image for the icon on the left
-                        Image(systemName: "checkmark.seal.fill")
-                            .resizable()
-                            .frame(width: 50, height: 50) // Adjust the size of the icon
-                            .foregroundColor(.blue) // Change color of the icon
-                        
-                        Text("真人認證")
-                            .font(.subheadline)
-                            .foregroundColor(.gray) // Subtitle text color
-
-                        Spacer() // Pushes everything to the left
-
-                        Image(systemName: "chevron.right")
-                            .foregroundColor(.gray) // Arrow color
-                            .padding(.trailing, 10)
+                SafetyOptionView(
+                    icon: "checkmark.seal.fill",
+                    title: "安全及認證",
+                    subtitle: "真人認證",
+                    backgroundColor: Color(red: 240/255, green: 250/255, blue: 255/255),
+                    iconColor: .blue,
+                    action: {
+                        showRealNameVerificationView = true // 點擊後顯示真人認證畫面
                     }
-                    .padding(25) // Padding around the HStack content
-                    .background(Color(red: 240/255, green: 250/255, blue: 255/255)) // Light blue background color
-                    .cornerRadius(15) // Rounded corners
-                    .shadow(radius: 1) // Add a slight shadow for depth
-                    .padding(.horizontal, 16) // Add padding from the left and right screen edges
-                    .onTapGesture {
-                        // 點擊後顯示真人認證畫面
-                        showRealNameVerificationView = true
-                    }
-                })
-                .padding(.bottom, 10) // Add bottom padding to the entire VStack
+                )
+                .padding(.bottom, 10)
                 
                 VStack {
                     // 檢舉
@@ -287,37 +240,17 @@ struct SafetyCenterView: View {
                 Spacer()
                 
                 // "相約見面" Section
-                VStack(alignment: .leading) {
-                    Text("相約見面")
-                        .font(.headline)
-                        .foregroundColor(.black)
-                        .padding(.leading)
-
-                    HStack {
-                        Image(systemName: "person.2.fill")
-                            .resizable()
-                            .frame(width: 50, height: 50)
-                            .foregroundColor(.cyan)
-
-                        Text("相約見面")
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
-
-                        Spacer()
-
-                        Image(systemName: "chevron.right")
-                            .foregroundColor(.gray)
-                            .padding(.trailing, 10)
-                    }
-                    .padding(25)
-                    .background(Color(red: 255/255, green: 240/255, blue: 240/255))
-                    .cornerRadius(15)
-                    .shadow(radius: 1)
-                    .padding(.horizontal, 16)
-                    .onTapGesture {
+                SafetyOptionView(
+                    icon: "person.2.fill",
+                    title: "相約見面",
+                    subtitle: "相約見面",
+                    backgroundColor: Color(red: 255/255, green: 240/255, blue: 240/255),
+                    iconColor: .cyan,
+                    action: {
                         showMeetingGuideView = true // Navigate to "相約見面" view
                     }
-                }
+                )
+                .padding(.bottom, 10)
             }
         }
     }
