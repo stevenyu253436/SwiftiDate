@@ -10,6 +10,7 @@ import SwiftUI
 
 struct SafetyCenterView: View {
     @Binding var showSafetyCenterView: Bool // 透過 Binding 傳入是否顯示 SafetyCenterView 的狀態
+    @Binding var photos: [String] // 新增 photos 的 Binding
     @State private var showSafetyTestView = false
     @State private var showSafetyTipsView = false // 新增控制安全提示顯示的 state
     @State private var showRealNameVerificationView = false // 控制是否顯示真人認證的畫面
@@ -89,12 +90,23 @@ struct SafetyCenterView: View {
 
                     Spacer()
 
-                    Image("photo1") // Use your actual image name here
-                        .resizable()
-                        .frame(width: 100, height: 133)
-                        .clipShape(Circle()) // Make it circular
-                        .overlay(Circle().stroke(Color.white, lineWidth: 2)) // Optional white border
-                        .padding(.trailing) // Add padding to separate the image from the text
+                    if let photoName = userSettings.photos.first, let image = PhotoUtility.loadImageFromLocalStorage(named: photoName) {
+                        Image(uiImage: image)
+                            .resizable()
+                            .frame(width: 100, height: 133)
+                            .clipShape(Circle())
+                            .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                            .padding(.trailing)
+                    } else {
+                        // Default placeholder image
+                        Image(systemName: "person.crop.circle.fill")
+                            .resizable()
+                            .frame(width: 100, height: 133)
+                            .foregroundColor(.gray)
+                            .clipShape(Circle())
+                            .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                            .padding(.trailing)
+                    }
                 }
                 .padding(.bottom, 20)
                 
@@ -291,9 +303,11 @@ struct SafetyOptionView: View {
 }
 
 struct SafetyCenterView_Previews: PreviewProvider {
+    @State static var mockPhotos = ["photo1", "photo2"] // 假設的照片名稱陣列
+    
     static var previews: some View {
         NavigationView {
-            SafetyCenterView(showSafetyCenterView: .constant(true)) // 使用 .constant 提供綁定的預覽值
+            SafetyCenterView(showSafetyCenterView: .constant(true), photos: $mockPhotos) // 傳入 photos 的綁定變數
                 .environmentObject(UserSettings()) // 加入 UserSettings 的環境物件
         }
     }

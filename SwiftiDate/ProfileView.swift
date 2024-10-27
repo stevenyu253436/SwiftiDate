@@ -34,7 +34,8 @@ struct ProfileView: View {
             SettingsView(showSettingsView: $showSettingsView) // Pass the binding to the SettingsView
                 .environmentObject(appState) // 傳遞 AppState
         } else if showSafetyCenterView {
-            SafetyCenterView(showSafetyCenterView: $showSafetyCenterView) // 如果全局变量为 true，则显示 SafetyCenterView
+            SafetyCenterView(showSafetyCenterView: $showSafetyCenterView, photos: $userSettings.photos) // 如果全局变量为 true，则显示 SafetyCenterView
+                .environmentObject(userSettings)
         } else {
             ZStack {
                 ScrollView {
