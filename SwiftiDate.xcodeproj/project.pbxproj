@@ -459,6 +459,8 @@
 			isa = PBXGroup;
 			children = (
 				D09587BC2CB77F5200BCD04B /* SafetyTestView.swift */,
+				D09587BE2CB7899D00BCD04B /* SafetyQuizView.swift */,
+				D09587C02CB7B17E00BCD04B /* ResultsView.swift */,
 				D09587C22CB7C0A900BCD04B /* SafetyTipsView.swift */,
 				D09587C42CB7C73100BCD04B /* RealNameVerificationView.swift */,
 				D09587C62CB7CB5100BCD04B /* ReportConditionsView.swift */,
@@ -536,7 +538,6 @@
 				D017F4F32CAF77D900C71D18 /* MessageBubbleView.swift */,
 				D017F4F52CAFBFF700C71D18 /* LoginOrRegisterView.swift */,
 				D09587B82CB6552100BCD04B /* ChatGPTView.swift */,
-				D09587C02CB7B17E00BCD04B /* ResultsView.swift */,
 				D09587CE2CB7E44400BCD04B /* CircleExpansionView.swift */,
 				D09587D02CB8623C00BCD04B /* LoginView.swift */,
 				D09587D32CB8BDEA00BCD04B /* PrivacySettingsView.swift */,
@@ -546,7 +547,6 @@
 				D04938792CBF0A6F00754E46 /* Models.swift */,
 				D051EF2B2CC02C33004563A3 /* PhotoUtility.swift */,
 				D04729E92CC1F999007C33EC /* Color.swift */,
-				D09587BE2CB7899D00BCD04B /* SafetyQuizView.swift */,
 				D0DDDB132CA10EAD00A78A87 /* SettingsView.swift */,
 			);
 			path = SwiftiDate;

@@ -95,6 +95,9 @@ struct SafetyQuizView: View {
                             // Check if the selected option is correct and increment the score
                             if selectedOption == questions[currentQuestionIndex].correctAnswer {
                                 score += 1 // Increment score
+                                print("Debug: Correct answer selected. Current score: \(score)")
+                            } else {
+                                print("Debug: Incorrect answer. Selected option: \(selectedOption), Correct answer: \(questions[currentQuestionIndex].correctAnswer)")
                             }
                             
                             triggerExplanation()
