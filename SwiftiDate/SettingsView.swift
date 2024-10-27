@@ -51,240 +51,132 @@ struct SettingsView: View {
             } else if isDataManagementView {
                 DataManagementView(isDataManagementView: $isDataManagementView)
             } else {
-                VStack {
-                    ZStack {
-                        // 中間的標題
-                        HStack {
-                            Spacer() // Push title to the center
-                            
-                            Text("設定")
-                                .font(.headline)
-                                .fontWeight(.bold)
-                            
-                            Spacer() // Keep title centered by adding another spacer
+                mainSettingsView
+            }
+            
+            if showUpdatePopup { updatePopup }
+        }
+        .alert(isPresented: $isShowingLogoutAlert) { logoutAlert }
+        .alert(isPresented: $isShowingCustomerServiceAlert) { mailSetupAlert }
+    }
+    
+    var mainSettingsView: some View {
+        VStack {
+            ZStack {
+                // 中間的標題
+                HStack {
+                    Spacer() // Push title to the center
+                    
+                    Text("設定")
+                        .font(.headline)
+                        .fontWeight(.bold)
+                    
+                    Spacer() // Keep title centered by adding another spacer
+                }
+                .padding() // Overall padding for the HStack
+                
+                // 左上角的返回按鈕
+                HStack {
+                    Button(action: {
+                        // 當按下返回按鈕時關閉 SafetyCenterView
+                        showSettingsView = false
+                    }) {
+                        Image(systemName: "chevron.left")
+                            .foregroundColor(.gray) // 設置按鈕顏色
+                    }
+                    .padding(.leading) // 添加內邊距以確保按鈕不會緊貼邊緣
+                    
+                    Spacer() // This will push the button to the left
+                }
+            }
+            
+            Divider()
+            
+            // Settings content
+            List {
+                Section {
+                    SettingsOptionView(
+                        icon: "qrcode.viewfinder",
+                        text: "掃碼",
+                        color: .purple, // 設定圖標的顏色
+                        action: {
+                            isQRCodeScannerView = true // 切換到 QR Code 掃描器
                         }
-                        .padding() // Overall padding for the HStack
-                        
-                        // 左上角的返回按鈕
-                        HStack {
-                            Button(action: {
-                                // 當按下返回按鈕時關閉 SafetyCenterView
-                                showSettingsView = false
-                            }) {
-                                Image(systemName: "chevron.left")
-                                    .foregroundColor(.gray) // 設置按鈕顏色
-                            }
-                            .padding(.leading) // 添加內邊距以確保按鈕不會緊貼邊緣
-                            
-                            Spacer() // This will push the button to the left
+                    )
+                    
+                    HStack {
+                        Image(systemName: "crown.fill")
+                            .foregroundColor(.orange)
+                        Text("恢復購買")
+                        Spacer()
+                    }
+                    .padding(.vertical, 10) // Adjust this value to increase the height
+                    
+                    HStack {
+                        Image(systemName: "crown")
+                            .foregroundColor(.brown)
+                        Text("開啟 SwiftiDate Supreme 會員標誌")
+                        Spacer()
+                        Toggle("", isOn: .constant(true))
+                            .labelsHidden()
+                    }
+                    .padding(.vertical, 10) // Adjust this value to increase the height
+                    
+                    SettingsOptionView(
+                        icon: "envelope.fill",
+                        text: "邀請好友一起玩SwiftiDate",
+                        color: .pink, // Apply the pink color to the icon
+                        action: {
+                            // 定義按鈕的操作，例如分享功能
+                        }
+                    )
+                    
+                    SettingsOptionView(
+                        icon: "crown.fill",
+                        text: "兌換會員",
+                        color: .pink, // Set the custom color for the icon
+                        action: {
+                            // 定義按鈕的操作
+                        }
+                    )
+                    
+                    SettingsOptionView(
+                        icon: "person.fill",
+                        text: "個人資料",
+                        color: .cyan, // Set the custom color for the icon
+                        action: {
+                            isPersonalInfoView = true // Navigate to Personal Info View
+                        }
+                    )
+                }
+                
+                Section {
+                    SettingsOptionView(text: "客服") { checkIfMailIsSetup() }
+                    // 使用 .sheet 呈現 MailComposeView
+                    .sheet(isPresented: $isShowingMailComposer) {
+                        if let mailData = mailData {
+                            MailComposeView(data: mailData)
                         }
                     }
+
+                    SettingsOptionView(text: "幫助") { isHelpView = true }
+
+                    SettingsOptionView(text: "語言") {}
+
+                    SettingsOptionView(text: "社區規範") { isCommunityGuidelinesView = true }
+
+                    SettingsOptionView(text: "隱私權政策") { isPrivacyPolicyView = true }
+
+                    SettingsOptionView(text: "服務協議") { isTermsOfServiceView = true }
+
+                    SettingsOptionView(text: "數據管理") { isDataManagementView = true }
                     
-                    Divider()
+                    SettingsOptionView(text: "資料恢復") {}
+
+                    SettingsOptionView(text: "檢查版本更新") { showUpdatePopup = true }
                     
-                    // Settings content
-                    List {
-                        Section {
-                            Button(action: {
-                                isQRCodeScannerView = true // Navigate to QR Code Scanner
-                            }) {
-                                HStack {
-                                    Image(systemName: "qrcode.viewfinder")
-                                        .foregroundColor(.purple)
-                                    Text("掃碼")
-                                        .foregroundColor(.black) // Keep the text color unchanged when the button is tapped
-                                    Spacer()
-                                    Image(systemName: "chevron.right")
-                                        .foregroundColor(.gray) // Optional: Set the color of the chevron
-                                }
-                                .padding(.vertical, 10)
-                                .background(Color.clear) // 加上透明背景
-                            }
-                            
-                            HStack {
-                                Image(systemName: "crown.fill")
-                                    .foregroundColor(.orange)
-                                Text("恢復購買")
-                                Spacer()
-                            }
-                            .padding(.vertical, 10) // Adjust this value to increase the height
-                            
-                            HStack {
-                                Image(systemName: "crown")
-                                    .foregroundColor(.brown)
-                                Text("開啟 SwiftiDate Supreme 會員標誌")
-                                Spacer()
-                                Toggle("", isOn: .constant(true))
-                                    .labelsHidden()
-                            }
-                            .padding(.vertical, 10) // Adjust this value to increase the height
-                            
-                            HStack {
-                                Image(systemName: "envelope.fill")
-                                    .foregroundColor(.pink)
-                                Text("邀請好友一起玩SwiftiDate")
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(.gray) // Optional: Set the color of the chevron
-                            }
-                            .padding(.vertical, 10) // Adjust this value to increase the height
-                            
-                            HStack {
-                                Image(systemName: "crown.fill")
-                                    .foregroundColor(.pink)
-                                Text("兌換會員")
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(.gray) // Optional: Set the color of the chevron
-                            }
-                            .padding(.vertical, 10) // Adjust this value to increase the height
-                            
-                            Button(action: {
-                                isPersonalInfoView = true // Navigate to Personal Info View
-                            }) {
-                                HStack {
-                                    Image(systemName: "person.fill")
-                                        .foregroundColor(.cyan)
-                                    Text("個人資料")
-                                        .foregroundColor(.black) // Keep the text color unchanged when the button is tapped
-                                    Spacer()
-                                    Image(systemName: "chevron.right")
-                                        .foregroundColor(.gray)
-                                }
-                                .padding(.vertical, 10)
-                                .background(Color.clear)
-                            }
-                        }
-                        
-                        Section {
-                            Button(action: {
-                                checkIfMailIsSetup()
-                            }) {
-                                HStack {
-                                    Text("客服")
-                                        .foregroundColor(.black) // 確保字體顏色為黑色
-                                        .padding(.vertical, 10) // Adjust this value to increase the height
-                                    Spacer()
-                                    Image(systemName: "chevron.right")
-                                        .foregroundColor(.gray) // Optional: Set the color of the chevron
-                                }
-                            }
-                            .alert(isPresented: $isShowingCustomerServiceAlert) {
-                                Alert(
-                                    title: Text("請設置郵箱"),
-                                    message: Text("需要設置郵箱才可以發送反饋給我們"),
-                                    primaryButton: .default(Text("去設置"), action: {
-                                        // 跳轉到郵箱設置頁面
-                                        if let url = URL(string: "App-Prefs:root=MAIL") {
-                                            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                                        }
-                                    }),
-                                    secondaryButton: .cancel(Text("不用了"))
-                                )
-                            }
-
-                            Button(action: {
-                                isHelpView = true // Show HelpView
-                            }) {
-                                HStack {
-                                    Text("幫助")
-                                        .padding(.vertical, 10)
-                                    Spacer()
-                                    Image(systemName: "chevron.right")
-                                        .foregroundColor(.gray)
-                                }
-                                .foregroundColor(.black) // Keep the text color unchanged when the button is tapped
-                            }
-                            
-                            HStack {
-                                Text("語言")
-                                    .padding(.vertical, 10)
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(.gray)
-                            }
-
-                            Button(action: {
-                                isCommunityGuidelinesView = true
-                            }) {
-                                HStack {
-                                    Text("社區規範")
-                                        .padding(.vertical, 10)
-                                    Spacer()
-                                    Image(systemName: "chevron.right")
-                                        .foregroundColor(.gray)
-                                }
-                                .foregroundColor(.black) // Keep the text color unchanged when the button is tapped
-                            }
-
-                            Button(action: {
-                                isPrivacyPolicyView = true // Show PrivacyPolicyView
-                            }) {
-                                HStack {
-                                    Text("隱私權政策")
-                                        .padding(.vertical, 10)
-                                    Spacer()
-                                    Image(systemName: "chevron.right")
-                                        .foregroundColor(.gray)
-                                }
-                                .foregroundColor(.black) // Keep the text color unchanged when the button is tapped
-                            }
-
-                            Button(action: {
-                                isTermsOfServiceView = true // Show TermsOfServiceView
-                            }) {
-                                HStack {
-                                    Text("服務協議")
-                                        .padding(.vertical, 10)
-                                    Spacer()
-                                    Image(systemName: "chevron.right")
-                                        .foregroundColor(.gray)
-                                }
-                            }
-                            .foregroundColor(.black) // Keep the text color unchanged when the button is tapped
-
-                            Button(action: {
-                                isDataManagementView = true // Navigate to DataManagementView
-                            }) {
-                                HStack {
-                                    Text("數據管理")
-                                        .padding(.vertical, 10)
-                                    Spacer()
-                                    Image(systemName: "chevron.right")
-                                        .foregroundColor(.gray)
-                                }
-                                .foregroundColor(.black) // Maintain text color
-                            }
-
-                            HStack {
-                                Text("資料恢復")
-                                    .padding(.vertical, 10)
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(.gray)
-                            }
-
-                            Button(action: {
-                                showUpdatePopup = true // Show the update popup when tapped
-                            }) {
-                                HStack {
-                                    Text("檢查版本更新")
-                                        .padding(.vertical, 10)
-                                    Spacer()
-                                    Image(systemName: "chevron.right")
-                                        .foregroundColor(.gray)
-                                }
-                                .foregroundColor(.black) // Keep the text color unchanged when the button is tapped
-                            }
-                            
-                            HStack {
-                                Text("戀愛性格測驗")
-                                    .padding(.vertical, 10)
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(.gray)
-                            }
-                            
+                    SettingsOptionView(text: "戀愛性格測驗") {}
+                    
 //                            HStack {
 //                                Text("MBTI測驗")
 //                                    .padding(.vertical, 10)
@@ -292,97 +184,113 @@ struct SettingsView: View {
 //                                Image(systemName: "chevron.right")
 //                                    .foregroundColor(.gray)
 //                            }
-                        }
-                        
-                        Section {
-                            Button(action: {
-                                isShowingLogoutAlert = true // Show the alert when tapped
-                            }) {
-                                Text("登出")
-                                    .padding(.vertical, 10) // Adjust this value to increase the height
-                                    .frame(maxWidth: .infinity, alignment: .leading) // Extend Text to the full width
-                                    .background(Color.white) // Make sure the background is set to white
-                                    .foregroundColor(.red) // Set the text color to red
-                            }
-                            .alert(isPresented: $isShowingLogoutAlert) {
-                                Alert(
-                                    title: Text("一旦登出，你的登入資料將被清除"),
-                                    primaryButton: .default(Text("取消")),
-                                    secondaryButton: .destructive(Text("確定"), action: {
-                                        // 更新登錄狀態
-                                        appState.isLoggedIn = false // 切換到未登錄狀態
-                                    })
-                                )
-                            }
-                        }
-                        
-                        Section {
-                            Text("關閉帳號")
-                                .padding(.vertical, 10) // Adjust this value to increase the height
-                                .frame(maxWidth: .infinity, alignment: .leading) // Extend Text to the full width
-                                .background(Color.white) // Make sure the background is set to white
-                        }
+                }
+                
+                Section {
+                    Button(action: {
+                        isShowingLogoutAlert = true // Show the alert when tapped
+                    }) {
+                        Text("登出")
+                            .padding(.vertical, 10) // Adjust this value to increase the height
+                            .frame(maxWidth: .infinity, alignment: .leading) // Extend Text to the full width
+                            .background(Color.white) // Make sure the background is set to white
+                            .foregroundColor(.red) // Set the text color to red
                     }
                 }
-            }
-            
-            if showUpdatePopup {
-                // Custom Popup View
-                ZStack {
-                    Color.black.opacity(0.4)
-                        .edgesIgnoringSafeArea(.all)
-                    
-                    VStack(spacing: 20) {
-                        // Add a close button in the top-right corner
-                        HStack {
-                            Spacer() // Push the X button to the right
-                            Button(action: {
-                                showUpdatePopup = false // Close the popup when "X" is tapped
-                            }) {
-                                Image(systemName: "xmark")
-                                    .resizable()
-                                    .frame(width: 18, height: 18)
-                                    .foregroundColor(.gray)
-                                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 20)) // Adjust padding values
-                            }
-                        }
-                        
-                        // Image (Add your custom image here)
-                        Image(systemName: "rocket.fill")
-                            .resizable()
-                            .frame(width: 100, height: 100)
-                            .padding(.top, 20)
-                        
-                        Text("目前已經是最新版本")
-                            .font(.headline)
-                            .padding(.horizontal, 20)
-                        
-                        Text("超多免費的新功能，輕鬆脫單無負擔，快來體驗全新 SwiftiDate 吧～")
-                            .font(.subheadline)
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal, 20)
-                        
-                        Button(action: {
-                            showUpdatePopup = false // Close the popup when "好的" button is tapped
-                        }) {
-                            Text("好的")
-                                .foregroundColor(.white)
-                                .frame(width: 200, height: 40)
-                                .background(Color.green)
-                                .cornerRadius(20)
-                        }
-                        .padding(.bottom, 20)
-                    }
-                    .frame(width: 300, height: 400)
-                    .background(Color.white)
-                    .cornerRadius(20)
-                    .shadow(radius: 10)
+                
+                Section {
+                    Text("關閉帳號")
+                        .padding(.vertical, 10) // Adjust this value to increase the height
+                        .frame(maxWidth: .infinity, alignment: .leading) // Extend Text to the full width
+                        .background(Color.white) // Make sure the background is set to white
                 }
             }
         }
     }
     
+    // Alert for logout confirmation
+    var logoutAlert: Alert {
+        Alert(
+            title: Text("一旦登出，你的登入資料將被清除"),
+            primaryButton: .default(Text("取消")),
+            secondaryButton: .destructive(Text("確定"), action: {
+                // 更新登錄狀態
+                appState.isLoggedIn = false // 切換到未登錄狀態
+            })
+        )
+    }
+    
+    // Popup for updates
+    var updatePopup: some View {
+        // Custom Popup View
+        ZStack {
+            Color.black.opacity(0.4)
+                .edgesIgnoringSafeArea(.all)
+            
+            VStack(spacing: 20) {
+                // Add a close button in the top-right corner
+                HStack {
+                    Spacer() // Push the X button to the right
+                    Button(action: {
+                        showUpdatePopup = false // Close the popup when "X" is tapped
+                    }) {
+                        Image(systemName: "xmark")
+                            .resizable()
+                            .frame(width: 18, height: 18)
+                            .foregroundColor(.gray)
+                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 20)) // Adjust padding values
+                    }
+                }
+                
+                // Image (Add your custom image here)
+                Image(systemName: "rocket.fill")
+                    .resizable()
+                    .frame(width: 100, height: 100)
+                    .padding(.top, 20)
+                
+                Text("目前已經是最新版本")
+                    .font(.headline)
+                    .padding(.horizontal, 20)
+                
+                Text("超多免費的新功能，輕鬆脫單無負擔，快來體驗全新 SwiftiDate 吧～")
+                    .font(.subheadline)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 20)
+                
+                Button(action: {
+                    showUpdatePopup = false // Close the popup when "好的" button is tapped
+                }) {
+                    Text("好的")
+                        .foregroundColor(.white)
+                        .frame(width: 200, height: 40)
+                        .background(Color.green)
+                        .cornerRadius(20)
+                }
+                .padding(.bottom, 20)
+            }
+            .frame(width: 300, height: 400)
+            .background(Color.white)
+            .cornerRadius(20)
+            .shadow(radius: 10)
+        }
+    }
+    
     // No need for saveUserState as @AppStorage handles persistence
+
+    // Alert for mail setup
+    var mailSetupAlert: Alert {
+        Alert(
+            title: Text("請設置郵箱"),
+            message: Text("需要設置郵箱才可以發送反饋給我們"),
+            primaryButton: .default(Text("去設置"), action: {
+                // 跳轉到郵箱設置頁面
+                if let url = URL(string: "App-Prefs:root=MAIL") {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            }),
+            secondaryButton: .cancel(Text("不用了"))
+        )
+    }
     
     // 檢查是否有設置郵箱帳戶
     func checkIfMailIsSetup() {
@@ -392,8 +300,20 @@ struct SettingsView: View {
             isShowingMailComposer = true // 顯示郵件撰寫頁面
         } else {
             // 未設置郵箱，顯示提醒框
+            print("Debug: MFMailComposeViewController 無法發送郵件，請確認郵件帳戶設置是否正確。")
             isShowingCustomerServiceAlert = true
         }
+    }
+    
+    // Handle scanned QR code
+    func handleScannedCode(scannedCode: String) {
+        print("Scanned QR Code: \(scannedCode)")
+        dismissCurrentView()
+    }
+    
+    // Dismiss the current view
+    func dismissCurrentView() {
+        isQRCodeScannerView = false // Dismiss the scanner when the back button is tapped
     }
 }
 
@@ -434,6 +354,28 @@ struct MailData {
     var subject: String
     var recipients: [String]
     var messageBody: String
+}
+
+// Define reusable setting option component
+struct SettingsOptionView: View {
+    var icon: String? = nil
+    var text: String
+    var color: Color = .purple // New color property with default value
+    var action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            HStack {
+                if let icon = icon {
+                    Image(systemName: icon).foregroundColor(color) // Apply color to icon
+                }
+                Text(text).foregroundColor(.black)
+                Spacer()
+                Image(systemName: "chevron.right").foregroundColor(.gray)
+            }
+            .padding(.vertical, 10)
+        }
+    }
 }
 
 struct SettingsView_Previews: PreviewProvider {

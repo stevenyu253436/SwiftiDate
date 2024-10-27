@@ -532,7 +532,6 @@
 				D0DDDB0A2CA07A0D00A78A87 /* TurboView.swift */,
 				D0DDDB0C2CA07A2400A78A87 /* FeaturedCardView.swift */,
 				D0DDDB0E2CA0E65F00A78A87 /* LocationManager.swift */,
-				D0DDDB132CA10EAD00A78A87 /* SettingsView.swift */,
 				D017F4F12CAF73AC00C71D18 /* GlobalVariables.swift */,
 				D017F4F32CAF77D900C71D18 /* MessageBubbleView.swift */,
 				D017F4F52CAFBFF700C71D18 /* LoginOrRegisterView.swift */,
@@ -548,6 +547,7 @@
 				D051EF2B2CC02C33004563A3 /* PhotoUtility.swift */,
 				D04729E92CC1F999007C33EC /* Color.swift */,
 				D09587BE2CB7899D00BCD04B /* SafetyQuizView.swift */,
+				D0DDDB132CA10EAD00A78A87 /* SettingsView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
