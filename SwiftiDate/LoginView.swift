@@ -121,12 +121,23 @@ struct LoginView: View {
                 Color.black.opacity(0.4).ignoresSafeArea() // 背景透明遮罩
 
                 VStack(spacing: 20) {
-                    Image("photo1")
-                        .resizable()
-                        .frame(width: 120, height: 120)
-                        .clipShape(Circle()) // 讓圖片變成圓形
-                        .overlay(Circle().stroke(Color.white, lineWidth: 4)) // 加上白色的圓形邊框
-                    
+                    if let photoName = userSettings.photos.first,
+                       let image = PhotoUtility.loadImageFromLocalStorage(named: photoName) {
+                        Image(uiImage: image)
+                            .resizable()
+                            .frame(width: 120, height: 120)
+                            .clipShape(Circle())
+                            .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                    } else {
+                        // Default placeholder image
+                        Image(systemName: "person.crop.circle.fill")
+                            .resizable()
+                            .frame(width: 120, height: 120)
+                            .foregroundColor(.gray)
+                            .clipShape(Circle())
+                            .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                    }
+
                     Text(userSettings.globalUserName)
                         .font(.subheadline)
                         .padding(.horizontal)
