@@ -42,6 +42,7 @@
 		D018AD902C9ED5D4005A14B9 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = D018AD8F2C9ED5D4005A14B9 /* FirebaseStorageCombine-Community */; settings = {ATTRIBUTES = (Required, ); }; };
 		D018AD922C9ED5D4005A14B9 /* FirebaseVertexAI-Preview in Frameworks */ = {isa = PBXBuildFile; productRef = D018AD912C9ED5D4005A14B9 /* FirebaseVertexAI-Preview */; };
 		D018AD962C9EEA83005A14B9 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D018AD952C9EEA82005A14B9 /* AsyncImageView.swift */; };
+		D039FC5B2CD230060082D2F3 /* PersonalityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D039FC5A2CD230050082D2F3 /* PersonalityView.swift */; };
 		D0445C2F2C71B3800059D522 /* SwiftiDateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0445C2E2C71B3800059D522 /* SwiftiDateApp.swift */; };
 		D0445C312C71B3800059D522 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0445C302C71B3800059D522 /* ContentView.swift */; };
 		D0445C332C71B3820059D522 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0445C322C71B3820059D522 /* Assets.xcassets */; };
@@ -195,6 +196,7 @@
 		D018AD622C9E87F6005A14B9 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		D018AD952C9EEA82005A14B9 /* AsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
 		D018AD972C9F1A0F005A14B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D039FC5A2CD230050082D2F3 /* PersonalityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalityView.swift; sourceTree = "<group>"; };
 		D0445C2B2C71B3800059D522 /* SwiftiDate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftiDate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0445C2E2C71B3800059D522 /* SwiftiDateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftiDateApp.swift; sourceTree = "<group>"; };
 		D0445C302C71B3800059D522 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -548,6 +550,7 @@
 				D051EF2B2CC02C33004563A3 /* PhotoUtility.swift */,
 				D04729E92CC1F999007C33EC /* Color.swift */,
 				D0DDDB132CA10EAD00A78A87 /* SettingsView.swift */,
+				D039FC5A2CD230050082D2F3 /* PersonalityView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -803,6 +806,7 @@
 				D051EF272CBF50CB004563A3 /* LifestyleView.swift in Sources */,
 				D0445C752C73B4EF0059D522 /* LanguageSelectionView.swift in Sources */,
 				D09587C12CB7B17E00BCD04B /* ResultsView.swift in Sources */,
+				D039FC5B2CD230060082D2F3 /* PersonalityView.swift in Sources */,
 				D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */,
 				D0445C712C72F7870059D522 /* JobInputView.swift in Sources */,
 				D0DDDB502CA1A01200A78A87 /* HowToEnableNotificationsView.swift in Sources */,
