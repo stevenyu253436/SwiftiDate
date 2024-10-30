@@ -23,10 +23,18 @@ struct ContentView: View {
         } else {
             LoginView()
                 .environmentObject(appState)
+                .environmentObject(userSettings)
                 .onAppear {
                     loadPhotosFromAppStorage()
                 }
         }
+        
+//        MainView()
+//            .environmentObject(appState) // 傳遞 appState
+//            .environmentObject(userSettings)
+//            .onAppear {
+//                loadPhotosFromAppStorage()
+//            }
     }
     
     // 加載照片

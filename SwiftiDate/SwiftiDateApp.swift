@@ -167,15 +167,32 @@ struct SwiftiDateApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                if userSettings.globalPhoneNumber.isEmpty { // Access globalPhoneNumber through userSettings
-                    LoginOrRegisterView()
-                        .environmentObject(userSettings)
-                        .environmentObject(appState)
-                } else {
+                if !userSettings.globalPhoneNumber.isEmpty { // 改為檢查非空
                     ContentView()
                         .environmentObject(userSettings)
                         .environmentObject(appState)
+                } else {
+                    LoginOrRegisterView()
+                        .environmentObject(userSettings)
+                        .environmentObject(appState)
                 }
+            }
+            .onAppear {
+                userSettings.globalPhoneNumber = "0972516868"
+                userSettings.globalUserName = "玩玩"
+                userSettings.storedGender = Gender.male.rawValue
+                userSettings.globalIsUserVerified = true
+                userSettings.globalSelectedGender = "女生"
+                userSettings.globalUserBirthday = "1999/07/02"
+                userSettings.globalUserID = "userID_1"
+                userSettings.globalLikesMeCount = 0
+                userSettings.globalLikeCount = 0
+                userSettings.isPremiumUser = true
+                userSettings.isSupremeUser = true
+                userSettings.globalTurboCount = 1
+                userSettings.globalCrushCount = 10000
+                userSettings.globalPraiseCount = 10000
+                userSettings.isProfilePhotoVerified = true
             }
         }
     }

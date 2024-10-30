@@ -11,6 +11,7 @@ import AuthenticationServices
 
 struct LoginView: View {
     @State private var authorizationController: ASAuthorizationController?
+    @EnvironmentObject var appState: AppState // 使用 @EnvironmentObject 來訪問 AppState
     @EnvironmentObject var userSettings: UserSettings // 使用 @EnvironmentObject 來訪問 UserSettings
     
     private var showExistingUserPopup: Binding<Bool> {
@@ -146,7 +147,12 @@ struct LoginView: View {
                     Button(action: {
                         // 確定以此帳號登入
                         print("繼續使用帳號 \(userSettings.globalUserName)")
-                        showExistingUserPopup.wrappedValue = false
+                        print("Debug - globalPhoneNumber: \(userSettings.globalPhoneNumber)") // Debug globalPhoneNumber
+                        
+                        appState.isLoggedIn = true // 更新登入狀態
+//                        userSettings.objectWillChange.send() // Notify SwiftUI of changes in userSettings
+
+//                        showExistingUserPopup.wrappedValue = false
                     }) {
                         Text("以此帳號登入")
                             .foregroundColor(.white)
@@ -173,10 +179,10 @@ struct LoginView: View {
                 .padding(.horizontal, 20)
             }
         }
-        .onAppear {
-            // 在 LoginView 出現時加載用戶狀態
-            loadUserState()
-        }
+//        .onAppear {
+//            // 在 LoginView 出現時加載用戶狀態
+//            loadUserState()
+//        }
     }
     
     // 處理 Apple ID 登入結果
@@ -203,7 +209,10 @@ struct LoginView: View {
     func loadUserState() {
         let defaults = UserDefaults.standard
         userSettings.globalPhoneNumber = defaults.string(forKey: "phoneNumber") ?? "未設定"
+        print("Debug - globalPhoneNumber 加載為: \(userSettings.globalPhoneNumber)") // Debug phoneNumber
+        
         userSettings.globalUserName = defaults.string(forKey: "userName") ?? "未設定"
+        print("Debug - globalUserName 加載為: \(userSettings.globalUserName)") // Debug userName
         
         if let genderValue = defaults.string(forKey: "userGender"), let gender = Gender(rawValue: genderValue) {
             userSettings.globalUserGender = gender // Correctly set the Gender enum
@@ -246,5 +255,6 @@ struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
             .environmentObject(UserSettings()) // Provide the environment object for UserSettings
+            .environmentObject(AppState()) // 提供 AppState 的環境物件
     }
 }
