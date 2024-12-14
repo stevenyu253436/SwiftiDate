@@ -240,7 +240,7 @@ struct LoginView: View {
         // 清除全局變數
         userSettings.globalPhoneNumber = ""
         userSettings.globalUserName = ""
-        userSettings.storedGender = Gender.male.rawValue // Use storedGender for reset
+        userSettings.storedGender = Gender.male // Use storedGender for reset
         userSettings.globalIsUserVerified = false
         userSettings.globalTurboCount = 0
         userSettings.globalCrushCount = 0
