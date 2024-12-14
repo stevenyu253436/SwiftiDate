@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 import SwiftUI
 
 // 自定義 UIViewRepresentable 組件

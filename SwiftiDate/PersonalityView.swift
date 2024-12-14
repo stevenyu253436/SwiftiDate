@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 import SwiftUI
 
 // 定義一個資料模型來包含每個 MBTI 的數據
