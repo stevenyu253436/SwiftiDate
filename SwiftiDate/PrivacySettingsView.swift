@@ -303,5 +303,6 @@ struct RangeSlider: View {
 struct PrivacySettingsView_Previews: PreviewProvider {
     static var previews: some View {
         PrivacySettingsView()
+            .environmentObject(UserSettings()) // 注入 UserSettings
     }
 }
