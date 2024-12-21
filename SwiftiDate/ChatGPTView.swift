@@ -17,8 +17,8 @@ struct TextViewRepresentable: UIViewRepresentable {
         let textView = UITextView()
         textView.isEditable = false // 禁止編輯
         textView.isSelectable = true // 啟用選取功能
-        textView.backgroundColor = .clear // 背景設置為透明
-        textView.isScrollEnabled = false  // 防止自動滾動
+        textView.backgroundColor = UIColor.green.withAlphaComponent(0.1) // 背景設置為透明
+        textView.isScrollEnabled = true  // 防止自動滾動
         textView.font = UIFont.systemFont(ofSize: 17) // 設置字體
         return textView
     }
@@ -54,13 +54,20 @@ struct ChatGPTView: View {
                     .background(Color.gray.opacity(0.1))
                     .cornerRadius(10)
                     .padding(.horizontal)
+                    .textSelection(.enabled) // by bryan_u.6_developer
                 }
                 
-                Text(chatGPTResponse)  // 顯示 ChatGPT 的建議回應
-                    .padding()
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(Color.green.opacity(0.1))
+//                Text(chatGPTResponse)  // 顯示 ChatGPT 的建議回應
+//                    .padding()
+//                    .frame(maxWidth: .infinity, alignment: .leading)
+//                    .background(Color.green.opacity(0.1))
+//                    .cornerRadius(10)
+//                    .textSelection(.enabled) // by bryan_u.6_developer
+
+                TextViewRepresentable(text: chatGPTResponse)
+                    .frame(maxWidth: .infinity, minHeight: 150) // 設置最大寬度和最小高度
                     .cornerRadius(10)
+                    .padding()
             }
             .frame(height: 300)
             .border(Color.gray, width: 1)
