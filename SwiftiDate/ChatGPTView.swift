@@ -72,7 +72,8 @@ struct ChatGPTView: View {
             .frame(height: 300)
             .border(Color.gray, width: 1)
 
-            TextField("輸入您的訊息...", text: $userInput)
+            TextField("輸入您的訊息...", text: $userInput, axis: .vertical) // by bryan_u.6_developer
+                .frame(minHeight: 30)
                 .padding()
                 .background(Color.gray.opacity(0.2))
                 .cornerRadius(10)
@@ -96,6 +97,7 @@ struct ChatGPTView: View {
             .padding()
         }
         .padding()
+        .ignoresSafeArea(.keyboard) // 忽略键盘的安全区域
     }
     
     // 與 OpenAI API 進行交互的函數
