@@ -7,6 +7,8 @@
 
 import Foundation
 import SwiftUI
+import PhotosUI // by bryan_u.6_developer
+import UIKit
 
 struct ChatDetailView: View {
     @EnvironmentObject var userSettings: UserSettings // 使用 EnvironmentObject 存取 UserSettings
